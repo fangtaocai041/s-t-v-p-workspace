@@ -1,0 +1,78 @@
+# ═══════════════════════════════════════════════════════════════
+# VERSION.yaml — 单源真相 (Single Source of Truth)
+# ═══════════════════════════════════════════════════════════════
+# 所有项目版本在此定义。运行 sync_versions.py 自动同步到:
+#   - 每个项目的 README.md / README.zh.md
+#   - docs/五项目进化全量图谱.md / .html
+#   - 各项目 config/agent.yaml
+#
+# 版本号规则:
+#   X.Y.Z:
+#     X = 巨大迭代 (哲学突破: TAO, WUXING 级)
+#     Y = 功能新增 (新模块, 新模式)
+#     Z = 修复 (bug fix, 文档更新)
+
+workspace:
+  version: "v5.2"
+  date: "2026-06-08"
+  name: "s-t-v-p-workspace"
+
+projects:
+  meso-cosmos-agent:
+    version: "v2.0.0"
+    date: "2026-06-08"
+    commit: "f9d5424"
+    role: "T (Transition)"
+    element: "火"
+    wuxing: "升腾·驱动"
+    tao: "中·协调 — 三角形成"
+
+  cognitive-search-engine:
+    version: "v5.3.0"
+    date: "2026-06-08"
+    commit: "1edc857"
+    role: "V (Validation)"
+    element: "木"
+    wuxing: "生长·扩展"
+    tao: "阴·验证 — 收敛批判"
+
+  fish-ecology-assistant:
+    version: "v6.3.0"
+    date: "2026-06-08"
+    commit: "7578914"
+    role: "S (State)"
+    element: "土"
+    wuxing: "承载·化育"
+    tao: "阳·知识 — 外展扩展"
+
+  porpoise-agent:
+    version: "v4.3.0"
+    date: "2026-06-08"
+    commit: "05e5b99"
+    role: "P₁ (Porpoise)"
+    element: "金"
+    wuxing: "收敛·肃降"
+    tao: "万物·江豚 — 三角衍生"
+
+  coilia-agent:
+    version: "v1.2.0"
+    date: "2026-06-08"
+    commit: "e1f18a5"
+    role: "P₂ (Coilia)"
+    element: "水"
+    wuxing: "流动·润下"
+    tao: "万物·刀鲚 — 三角衍生"
+
+# ═══════════════════════════════════════════════════════════
+# 全量图谱自动填充字段
+# ═══════════════════════════════════════════════════════════
+evolution_doc:
+  latest_version: "v5.2"
+  latest_date: "2026-06-08"
+  chapters: 15
+  philosophy_layers:
+    - "☯️ TAO (道) — 一生二·二生三·三生万物"
+    - "🔥 WUXING (五行) — 木火土金水·相生相克"
+    - "⚡ DeepSeek — MoE·KV·CSA/HCA·Satisficing"
+    - "🎓 Scholar — Rule of Three·Simon·NOAA"
+    - "🦋 Chaos — Rössler·Logistic·EntropyGuard"
