@@ -28,7 +28,7 @@ def main():
         f"fish {proj['fish-ecology-assistant']['version']} / "
         f"porpoise {proj['porpoise-agent']['version']} / "
         f"coilia {proj['coilia-agent']['version']} / "
-        f"meso-cosmos {proj['meso-cosmos-agent']['version']}"
+        f"eon-core {proj['eon-core']['version']}"
     )
     print(f"\n═══ 版本同步: {ver_str} ═══")
 

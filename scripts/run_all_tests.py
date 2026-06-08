@@ -20,11 +20,11 @@ from typing import Callable
 
 WORKSPACE = Path(__file__).resolve().parent.parent
 PROJECTS = {
+    "eon-core (Kernel)": WORKSPACE / "eon-core",
     "cognitive (V)": WORKSPACE / "cognitive-search-engine",
     "fish (S)": WORKSPACE / "fish-ecology-assistant",
     "porpoise (P₁)": WORKSPACE / "porpoise-agent",
     "coilia (P₂)": WORKSPACE / "coilia-agent",
-    "meso-cosmos (T)": WORKSPACE / "meso-cosmos-agent",
 }
 
 @dataclass

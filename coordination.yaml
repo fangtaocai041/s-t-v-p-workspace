@@ -1,25 +1,14 @@
 # ============================================================
-# S-T-V 三角协调配置 — Unified Coordination Config
 # ============================================================
-# 路径: D:\Reasonix\coordination.yaml
-# 所有三个项目共享此文件。
+# eon-workspace 四项目协调配置 (v7.1)
+# ============================================================
+# S (State):      fish-ecology-assistant  — 知识供给 (V0)
+# V (Validation): cognitive-search-engine — 验证引擎 (V1)
+# P₁ (Porpoise):  porpoise-agent          — 江豚专研 (V2)
+# P₂ (Coilia):    coilia-agent            — 刀鲚专研 (V3)
 #
-# ═══════════════════════════════════════════════════════════════
-# S-T-V-P 四体架构 (v5.0 — meso-cosmos-agent 独立)
-# ═══════════════════════════════════════════════════════════════
-# S (State):      fish-ecology-assistant  — 知识供给
-# T (Transition): meso-cosmos-agent       — 核心执行层 (6-phase pipeline)
-# V (Validation): cognitive-search-engine — 验证引擎
-# P₁ (Porpoise):  porpoise-agent          — 江豚专研 (刘凯课题组)
-# P₂ (Coilia):    coilia-agent            — 刀鲚专研 (刘凯课题组, 与P₁平级)
-#
-# meso-cosmos-agent 从 porpoise 中提取了通用协调层（orchestrator + D₃模块），
-# porpoise-agent 回归江豚垂直领域专家角色。
-#
-# 🧠 Meso-Cosmos Agent (v4.0): workspace-level coordination
-#    Macro(BDI意图) → Meso(跨项目协调) → Micro(项目执行)
-#    Config: D:\Reasonix\config\meso_agent.yaml
-#    Skill:  D:\Reasonix\skills\meso-orchestrator.md
+# eon-core 通过 project_loader 协调全部 5 个项目。
+# meso-cosmos-agent 已删除 (v7.1)。P₁/P₂ 为同级平行项目。
 
 coordination:
   version: "4.0.0"
@@ -31,35 +20,40 @@ coordination:
     - "v3.2.0 (2026-06-07): Cross-project evolution engine propagation — +evolution.yaml (porpoise + fish), +component_registry.yaml (porpoise), +self-evolve skill (porpoise + fish). All three projects now have self-evolution capability."
     - "v3.1.0 (2026-06-07): Full cross-project co-evolution pass — all READMEs (EN+ZH) synced with Linked Projects sections, agent.version badges on all 3 projects, cognitive agent.yaml +shared section, fish + porpoise WEAKNESSES.md refreshed, porpoise zh README v3→v4.1"
 
-  # ===== Meso-Cosmos Agent (Workspace Level) =====
-  meso_cosmos:
+  # ===== eon-core (Unified Kernel — replaces meso-cosmos) =====
+  eon_core:
     enabled: true
-    config: "D:\\Reasonix\\config\\meso_agent.yaml"
-    skill: "D:\\Reasonix\\skills\\meso-orchestrator.md"
-    architecture: "Macro(BDI意图) → Meso(跨项目协调) → Micro(项目执行)"
-    description: "统一入口 — 解析研究问题 → 路由到 S-T-V 项目 → 协调管线执行 → 交叉验证 → 进化反馈"
+    config: "eon-core/config/taiji.yaml"
+    architecture: "10-layer concentric: OriginKernel → EventBus → DAG topology → Samsara karma"
+    description: "统一内核 — OriginKernel 路由 → EventBus 事件分发 → Samsara 六道状态管理 → SphereGateway API"
     pipeline:
-      - { phase: 0, name: "UNDERSTAND", layer: "Macro-BDI", action: "解析问题 → 识别领域 → 形成意图" }
-      - { phase: 1, name: "ROUTE", layer: "Meso-Coordination", action: "路由到 S/T/V 项目 → 资源分配" }
-      - { phase: 2, name: "EXECUTE", layer: "Micro-Execution", action: "委派到项目 agent → 并行监控" }
-      - { phase: 3, name: "VALIDATE", layer: "Cross-Verification", action: "权威评分 → 三角验证 → 矛盾检测" }
-      - { phase: 4, name: "SYNTHESIZE", layer: "Merge", action: "多项目结果合并 → 统一报告" }
-      - { phase: 5, name: "EVOLVE", layer: "Feedback", action: "评估 → 触发跨项目进化" }
+      - { phase: 0, name: "RECEIVE", action: "SphereGateway → 认证/限流/协议转换" }
+      - { phase: 1, name: "ROUTE", action: "OriginKernel.route_event() → DAG topology → target vertex" }
+      - { phase: 2, name: "EXECUTE", action: "Vertex → project_loader → adapter.search()" }
+      - { phase: 3, name: "KARMA", action: "KarmaEngine → evaluate → SamsaraRing → reincarnation" }
+      - { phase: 4, name: "MONITOR", action: "WuXing → sheng/ke cycles → health_pulse 5s" }
+      - { phase: 5, name: "RESPOND", action: "SphereGateway → protocol conversion → user" }
 
-  # ===== S-T-V 三角 =====
-  stv_triangle:
+  # ===== 四项目注册 =====
+  projects:
     state:
       project: "fish-ecology-assistant"
-      role: "知识库, 数据供给, 矛盾分析"
-      exports: ["stats-assistant", "research-analyst", "phd-proposal-writer", "ima-smart-search"]
-    transition:
-      project: "meso-cosmos-agent"
-      role: "6-phase 管线执行, 跨项目路由, 自愈监控"
-      exports: ["meso-orchestrator", "evolution-executor", "health-check"]
-      config: "D:\\Reasonix\\meso-cosmos-agent\\config\\coordination.yaml"
+      role: "V0 — 知识供给 (11引擎 + 28 skills)"
+      adapter: "src/adapter.py → FishEcologyAdapter"
+      exports: ["species_knowledge", "credibility_scoring", "delegate_protocol"]
+    validate:
+      project: "cognitive-search-engine"
+      role: "V1 — 验证引擎 (BDI+ReAct+graph)"
+      adapter: "src/adapter.py → CognitiveSearchAdapter"
+      exports: ["species_search", "graph_traversal", "multi_model_debate"]
     porpoise:
       project: "porpoise-agent"
-      role: "江豚专研: 声学分析, 栖息地建模, 种群评估"
+      role: "V2 — 江豚领域专家 (P₁)"
+      adapter: "src/adapter.py → PorpoiseAdapter"
+    coilia:
+      project: "coilia-agent"
+      role: "V3 — 刀鲚领域专家 (P₂, 同级项目)"
+      adapter: "src/adapter.py → CoiliaAdapter"
       exports: ["detect-clicks", "estimate-abundance", "assess-threats", "search-literature"]
     value:
       project: "cognitive-search-engine"
@@ -241,3 +235,61 @@ coordination:
       direction: "bi-directional"
       shared_metrics: ["verification_pass_rate", "contradiction_resolution_rate", "false_positive_rate"]
       log_format: "JSONL (shared across all three projects)"
+
+# ═══════════════════════════════════════════════════════════════
+# v7.0 — Unified project_loader + Adapter Architecture
+# ═══════════════════════════════════════════════════════════════
+# Replaces scattered DirectLoader spec_from_file_location calls
+# with a single workspace-level entry point.
+#
+# Usage:
+#   from scripts.project_loader import get_fish, get_cognitive, get_porpoise, get_coilia
+#   adapter = get_fish()
+#   result = adapter.search("Ochetobius elongatus")
+#
+# Each project exposes an adapter implementing IProjectAdapter:
+#   - search(query, **kwargs) → dict
+#   - health() → dict
+#   - info() → dict
+
+project_loader:
+  version: "1.0.0"
+  entry: "scripts/project_loader.py"
+  protocol: "IProjectAdapter (search/health/info)"
+  cache: "module-level per-project"
+
+  adapters:
+    V0_fish:
+      project: "fish-ecology-assistant"
+      adapter_file: "src/adapter.py"
+      orchestrator_file: "src/orchestrator.py"
+      factory: "get_fish() → FishEcologyAdapter"
+      capabilities: [species_search, credibility_scoring, delegate_protocol]
+
+    V1_cognitive:
+      project: "cognitive-search-engine"
+      adapter_file: "src/adapter.py"
+      factory: "get_cognitive() → CognitiveSearchAdapter"
+      capabilities: [search, graph_lookup, verify_claims, variant_generation]
+
+    V2_porpoise:
+      project: "porpoise-agent"
+      adapter_file: "src/adapter.py"
+      factory: "get_porpoise() → PorpoiseAdapter"
+      capabilities: [acoustic_analysis, population_modeling, habitat_assessment]
+
+    V3_coilia:
+      project: "coilia-agent"
+      adapter_file: "src/adapter.py"
+      factory: "get_coilia() → CoiliaAdapter"
+      capabilities: [otolith_analysis, migration_path, resource_assessment]
+
+  consumers:
+    - "eon-core/src/vertices/ (all 4 vertices)"
+    - "meso-cosmos-agent/src/pipeline/orchestrator.py (_call_via_loader)"
+
+  migration_status:
+    meso_cosmos: "DONE — _call_cognitive/_call_coilia/_call_porpoise replaced by _call_via_loader"
+    porpoise_internal: "KEPT — internal DirectLoader for cognitive as tool-level call"
+    coilia_internal: "KEPT — internal DirectLoader for cognitive as tool-level call"
+    fish: "NEW — first Python entry point for previously skill-only project"

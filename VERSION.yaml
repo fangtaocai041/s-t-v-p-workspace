@@ -1,78 +1,122 @@
 # ═══════════════════════════════════════════════════════════════
-# VERSION.yaml — 单源真相 (Single Source of Truth)
+# VERSION.yaml v7.0 — TaijiTetrahedron-Samsara unified version
+# ==============================================================
+# Single Source of Truth for all projects in the workspace.
+# Run scripts/sync_versions.py to auto-sync to README, docs, etc.
 # ═══════════════════════════════════════════════════════════════
-# 所有项目版本在此定义。运行 sync_versions.py 自动同步到:
-#   - 每个项目的 README.md / README.zh.md
-#   - docs/五项目进化全量图谱.md / .html
-#   - 各项目 config/agent.yaml
-#
-# 版本号规则:
-#   X.Y.Z:
-#     X = 巨大迭代 (哲学突破: TAO, WUXING 级)
-#     Y = 功能新增 (新模块, 新模式)
-#     Z = 修复 (bug fix, 文档更新)
 
 workspace:
-  version: "v5.2"
+  version: "v7.2.0"
   date: "2026-06-08"
-  name: "s-t-v-p-workspace"
+  name: "eon-workspace"
+  code: "Eon-Taiji-v7.2"
+  architecture: "五项目十层同心: eon-core + fish(S) + cognitive(V) + porpoise(P₁) + coilia(P₂)"
+  total_projects: 5
+  layers: 10
+  total_modules: 44
+  total_tendrils: 12
+  total_karma_rules: 12
 
 projects:
-  meso-cosmos-agent:
-    version: "v2.0.0"
+  eon-core:
+    version: "v7.2.0"
     date: "2026-06-08"
-    commit: "f9d5424"
-    role: "T (Transition)"
-    element: "火"
-    wuxing: "升腾·驱动"
-    tao: "中·协调 — 三角形成"
+    role: "UNIFIED_KERNEL"
+    element: "ALL"
+    wuxing: "十层同心"
+    tao: "太极·两仪·四象·八卦·三角体·五行·六道·圆球体·触须"
+    description: "10-layer concentric dynamic architecture unifying 4 projects via project_loader adapters"
+    path: "eon-core/"
+    github: "https://github.com/fangtaocai041/eon-core"
+    adapters: ["V0→fish", "V1→cognitive", "V2→porpoise", "V3→coilia"]
 
   cognitive-search-engine:
     version: "v5.3.0"
     date: "2026-06-08"
-    commit: "1edc857"
-    role: "V (Validation)"
+    role: "V (Validation) → V1 (VerifyVertex)"
     element: "木"
     wuxing: "生长·扩展"
-    tao: "阴·验证 — 收敛批判"
+    tao: "阴·验证 → 太阴·老阴"
+    status: "MIGRATED — gRPC service at port 50052"
+    adapter: "src/adapter.py → CognitiveSearchAdapter"
+    path: "cognitive-search-engine/"
 
   fish-ecology-assistant:
     version: "v6.3.0"
     date: "2026-06-08"
-    commit: "7578914"
-    role: "S (State)"
+    role: "S (State) → V0 (SupplyVertex)"
     element: "土"
     wuxing: "承载·化育"
-    tao: "阳·知识 — 外展扩展"
+    tao: "阳·知识 → 太阳·老阳"
+    status: "MIGRATED — gRPC service at port 50051"
+    adapter: "src/adapter.py → FishEcologyAdapter (NEW)"
+    path: "fish-ecology-assistant/"
 
   porpoise-agent:
     version: "v4.3.0"
     date: "2026-06-08"
-    commit: "05e5b99"
-    role: "P₁ (Porpoise)"
+    role: "P₁ (Porpoise) → V2 (DomainVertexP1)"
     element: "金"
     wuxing: "收敛·肃降"
-    tao: "万物·江豚 — 三角衍生"
+    tao: "万物·江豚 → 少阴"
+    status: "ACTIVE — gRPC service at port 50053 (V2)"
+    adapter: "src/adapter.py → PorpoiseAdapter"
+    path: "porpoise-agent/"
 
   coilia-agent:
     version: "v1.2.0"
     date: "2026-06-08"
-    commit: "e1f18a5"
-    role: "P₂ (Coilia)"
+    role: "P₂ (Coilia) → V3 (DomainVertexP2)"
     element: "水"
     wuxing: "流动·润下"
-    tao: "万物·刀鲚 — 三角衍生"
+    tao: "万物·刀鲚 → 少阳"
+    status: "ACTIVE — gRPC service at port 50054 (V3, 同级项目)"
+    adapter: "src/adapter.py → CoiliaAdapter"
+    path: "coilia-agent/"
 
-# ═══════════════════════════════════════════════════════════
-# 全量图谱自动填充字段
-# ═══════════════════════════════════════════════════════════
-evolution_doc:
-  latest_version: "v5.2"
-  latest_date: "2026-06-08"
-  chapters: 15
-  philosophy_layers:
-    - "☯️ TAO (道) — 一生二·二生三·三生万物"
-    - "🔥 WUXING (五行) — 木火土金水·相生相克"
-    - "⚡ DeepSeek — MoE·KV·CSA/HCA·Satisficing"
-    - "🎓 Scholar — Rule of Three·Simon·NOAA"
-    - "🦋 Chaos — Rössler·Logistic·EntropyGuard"
+# ═══════════════════════════════════════════════════════════════
+# Runtime Invariants (verified at bootstrap + each cycle)
+# ═══════════════════════════════════════════════════════════════
+invariants:
+  - id: "INV-001"
+    name: "Topology DAG"
+    check: "nx.is_directed_acyclic_graph(self.topology)"
+    enforced_at: "bootstrap + reconfigure"
+  - id: "INV-002"
+    name: "Yang-verify isolation"
+    check: "YangPole.verify() raises RuntimeError"
+    enforced_at: "mypy strict + runtime"
+  - id: "INV-003"
+    name: "Yin-expand isolation"
+    check: "YinPole.expand() raises RuntimeError"
+    enforced_at: "mypy strict + runtime"
+  - id: "INV-004"
+    name: "EventBus isolation"
+    check: "No direct vertex-to-vertex import"
+    enforced_at: "import linter + code review"
+  - id: "INV-005"
+    name: "Spectral gap"
+    check: "lambda2 >= 0.1 * baseline_lambda2"
+    enforced_at: "reconfigure + health_pulse"
+  - id: "INV-006"
+    name: "DEVA fairness"
+    check: "deva_count <= 0.25 * total_agents"
+    enforced_at: "KarmaCourt.audit_fairness()"
+  - id: "INV-007"
+    name: "NARAKA self-healing"
+    check: "NARAKA agents auto-reincarnate after cooldown"
+    enforced_at: "SamsaraRing.run_karma_cycle()"
+  - id: "INV-008"
+    name: "Reincarnation atomicity"
+    check: "7-step protocol with snapshot rollback"
+    enforced_at: "ReincarnationProtocol.execute()"
+
+# ═══════════════════════════════════════════════════════════════
+# Runtime Cycle Schedule
+# ═══════════════════════════════════════════════════════════════
+runtime_cycles:
+  health_pulse: { interval_s: 5,  component: "OriginKernel.health_pulse" }
+  wuxing_flow:  { interval_s: 15, component: "WuXingFlowEngine.run_cycle" }
+  karma_cycle:  { interval_s: 60, component: "SamsaraRing.run_karma_cycle" }
+  tendril_health: { interval_s: 30, component: "TendrilManager.health_cycle" }
+  chaos_disturb: { interval_queries: 100, component: "ChaosEngine.step" }
