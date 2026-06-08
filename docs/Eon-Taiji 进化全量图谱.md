@@ -778,10 +778,42 @@ P₁(江豚)、P₂(刀鲚)、P₃(中华鲟)... Pₙ(任意物种)
 
 | 版本 | 日期 | 变更 |
 |------|------|------|
+| **v7.3** | 2026-06-09 | 🗄️ 活系统数据库目录 (61库/8领域/4层级/自进化) + 图谱路由器 |
 | **v7.2** | 2026-06-08 | 🆕 Eon-Taiji 十层同心统一内核 + 六道轮回 + 5项目精简 |
 | **v5.2** | 2026-06-08 | ☯️ TAO 架构哲学 + 🔥 五行相生相克 |
 | **v5.2** | 2026-06-08 | 三层智能优化 + 混沌增强 + 自我评价矩阵 |
 | **v5.2** | 2026-06-08 | S-T-V → S-T-V-P₁-P₂ · 新增 meso-cosmos + coilia |
 | **v4.0** | 2026-06-07 | 三项目进化 · 8个版本转折点 · S-T-V 刚性三角形 |
 
-> **最新**: v7.2.0 · 2026-06-08 · cognitive v5.3.0 / fish v6.3.0 / porpoise v4.3.0 / coilia v1.2.0 / eon-core v7.2.0
+> **最新**: v7.3.0 · 2026-06-09 · cognitive v5.4.0 / eon-core v7.2.0
+
+---
+
+## 🗄️ v7.3: 活系统数据库目录 — 从"拍脑袋选库"到"图谱路由+自进化"
+
+> **cognitive-search-engine v5.4.0** — 新增 `catalog_loader.py` (870行) + `database_catalog.yaml` (61库/8领域/4层级)
+
+### 核心突破
+
+| 能力 | 之前 | v7.3 |
+|------|------|------|
+| 数据库选择 | 手动指定 | `graph_route(query)` 加权拓扑路由 |
+| 搜索策略 | 全量并行 | `progressive_route()` 综合入口→可展开专业库 |
+| 领域匹配 | 布尔触发词 | `score_domains()` 计数归一化 + context_rules 重加权 |
+| 意图检测 | 无 | `detect_intent()` → 文献/数据/学位论文/全量 |
+| 数据库健康 | 无感知 | `health_aware=True` → 触手健康降权 ×0.2 |
+| 权重更新 | 手工调 | `apply_feedback()` ≥3样本自动 ±0.02~0.05 |
+| 新领域发现 | 人工定义 | `emerge_domains()` 从搜索行为涌现 |
+| 分类学搜索 | 一层 | `taxonomic_unfold()` L1(物种)→L2(属)→L3(科)→L4(中文) |
+
+### 四层架构
+
+```
+意图层: detect_intent(q) → {文献|数据|学位论文|全量}
+  ↓
+路由层: score_domains → graph_route(topology+tendril) → progressive_route(tiers)
+  ↓
+控制层: should_continue_phase(SM-2 retreat) + taxonomic_unfold
+  ↓
+生长层: record_search_result → apply_feedback → emerge_domains
+```
