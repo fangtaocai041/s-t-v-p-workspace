@@ -42,5 +42,10 @@ research_plan.pdf
 # Runtime logs
 logs/*.log
 
+# Cherry Studio MCP config
+cherry-studio-mcp-*.json
+# Corrupted console artifacts
+nul)
+
 # Truncated results cache
 .reasonix/truncated-results/

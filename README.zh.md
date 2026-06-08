@@ -36,7 +36,7 @@ python eon-core/src/main.py --config eon-core/config/taiji.yaml route "长江江
 | [cognitive-search-engine](cognitive-search-engine/) | v5.3.0 | V1 | [fangtaocai041/cognitive-search-engine](https://github.com/fangtaocai041/cognitive-search-engine) |
 | [fish-ecology-assistant](fish-ecology-assistant/) | v6.3.0 | V0 | [fangtaocai041/fish-ecology-assistant](https://github.com/fangtaocai041/fish-ecology-assistant) |
 | [porpoise-agent](porpoise-agent/) | v4.3.0 | V2 | [fangtaocai041/porpoise-agent](https://github.com/fangtaocai041/porpoise-agent) |
-| [coilia-agent](coilia-agent/) | v1.3.0 | V3 | [fangtaocai041/coilia-agent](https://github.com/fangtaocai041/coilia-agent) |
+| [coilia-agent](coilia-agent/) | v1.2.0 | V3 | [fangtaocai041/coilia-agent](https://github.com/fangtaocai041/coilia-agent) |
 
 ## 文档
 
