@@ -49,3 +49,12 @@ nul)
 
 # Truncated results cache
 .reasonix/truncated-results/
+
+# Dryad / data download artifacts
+dryad_*.zip
+dryad_*.md
+download_dryad.py
+.playwright-mcp/
+
+# Test artifacts
+logs/catalog_feedback.jsonl
