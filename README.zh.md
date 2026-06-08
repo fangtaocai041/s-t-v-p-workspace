@@ -1,5 +1,5 @@
 <p align="center">
-  🇨🇳 <a href="README.zh.md">中文</a>
+  🇬🇧 <a href="README.md">English</a>
 </p>
 
 # eon-workspace
