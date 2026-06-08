@@ -1,7 +1,11 @@
 # ============================================================
 # ============================================================
-# eon-workspace 四项目协调配置 (v7.1)
+# eon-workspace 五项目协调配置 (v7.2)
 # ============================================================
+# ${WORKSPACE_ROOT} = workspace root (this file's parent)
+# All paths below are relative to ${WORKSPACE_ROOT} unless noted.
+# ============================================================
+# ☯️  eon-core                  — 统一内核 (10-layer)
 # S (State):      fish-ecology-assistant  — 知识供给 (V0)
 # V (Validation): cognitive-search-engine — 验证引擎 (V1)
 # P₁ (Porpoise):  porpoise-agent          — 江豚专研 (V2)
@@ -12,7 +16,7 @@
 
 coordination:
   version: "4.0.0"
-  root: "D:\\Reasonix"
+  root: "${WORKSPACE_ROOT}"
   last_sync: "2026-06-07"
   changelog:
     - "v3.2.0 (2026-06-07): Cross-project evolution engine propagation — +evolution.yaml (porpoise + fish), +component_registry.yaml (porpoise), +self-evolve skill (porpoise + fish). All three projects now have self-evolution capability."
@@ -59,7 +63,7 @@ coordination:
       project: "cognitive-search-engine"
       role: "认知搜索, 图谱进化, 变体生成"
       exports: ["graph-search-engine", "cognitive-species-search", "self-evolve"]
-      engine_path: "D:\\Reasonix\\cognitive-search-engine\\"
+      engine_path: "${WORKSPACE_ROOT}/cognitive-search-engine/"
       loader: "importlib (DirectLoader, 零 MCP 进程)"
 
   # ===== 求同: 共享协议 =====
@@ -168,7 +172,7 @@ coordination:
       category: "cognitive"
       requires_api_key: false
       loader: "DirectLoader (importlib)"
-      engine_path: "D:\\Reasonix\\cognitive-search-engine\\"
+      engine_path: "${WORKSPACE_ROOT}/cognitive-search-engine/"
       tools: ["csearch_species","csearch_graph","csearch_add_paper"]
       priority: 0
       primary: false
@@ -181,8 +185,8 @@ coordination:
 
   # ===== 图谱数据源 =====
   knowledge_graph:
-    primary: "D:\\Reasonix\\cognitive-search-engine\\config\\species_graph.yaml"
-    variants: "D:\\Reasonix\\fish-ecology-assistant\\config\\species_variants.yaml"
+    primary: "${WORKSPACE_ROOT}/cognitive-search-engine/config/species_graph.yaml"
+    variants: "${WORKSPACE_ROOT}/fish-ecology-assistant/config/species_variants.yaml"
     note: "species_variants.yaml 待合并入 species_graph.yaml。变体生成逻辑在 cognitive-search-engine/src/variant_generator.py"
 
   # ===== 并行策略 (统一) =====
@@ -210,7 +214,7 @@ coordination:
   # ===== 进化机制 (v3.2 升级：三项目均有自进化) =====
   evolution:
     cognitive_engine:
-      path: "D:\\Reasonix\\cognitive-search-engine\\"
+      path: "${WORKSPACE_ROOT}/cognitive-search-engine/"
       loader: "importlib"
       update_model: "auto"           # engine 代码更新 → 下次 import 自动生效
       evolution_file: "cognitive-search-engine/config/evolution.yaml"
@@ -224,12 +228,12 @@ coordination:
       self_evolve_skill: "porpoise-agent/src/skills/self-evolve/SKILL.md"
       component_registry: "porpoise-agent/config/component_registry.yaml"
     graph:
-      path: "D:\\Reasonix\\cognitive-search-engine\\config\\species_graph.yaml"
+      path: "${WORKSPACE_ROOT}/cognitive-search-engine/config/species_graph.yaml"
       writeback: "auto"              # 搜索完成后自动回写图谱
       shared_across: ["fish", "porpoise", "cognitive"]
     rules:
       spread: "manual"              # 规则跨项目同步需手动 commit
-      coordination: "this file (D:\\Reasonix\\coordination.yaml)"
+      coordination: "this file (${WORKSPACE_ROOT}/coordination.yaml)"
     cross_feedback:
       enabled: true
       direction: "bi-directional"

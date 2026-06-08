@@ -15,16 +15,16 @@ coilia-agent/               ← V3 刀鲚专研 (P₂)
 scripts/project_loader.py   ← 统一 DirectLoader
 ```
 
-## 快速开始
+## Quick Start
 
 ```bash
-# 集成测试
+# Integration test (all 5 projects)
 python scripts/test_workspace.py
 
-# eon-core 健康检查
+# eon-core health check
 python eon-core/src/main.py --config eon-core/config/taiji.yaml health
 
-# eon-core 路由测试
+# eon-core route test (query: Yangtze finless porpoise population recovery)
 python eon-core/src/main.py --config eon-core/config/taiji.yaml route "长江江豚种群恢复"
 ```
 
