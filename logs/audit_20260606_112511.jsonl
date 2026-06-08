@@ -1,0 +1,8 @@
+{"timestamp": "2026-06-06T11:25:11.129703", "session_id": "20260606_112511", "event_type": "session_start", "data": {"question": "test question"}}
+{"timestamp": "2026-06-06T11:25:11.130289", "session_id": "20260606_112511", "event_type": "phase_routed", "data": {"question": "test question", "phase": "literature_review"}}
+{"timestamp": "2026-06-06T11:25:11.130784", "session_id": "20260606_112511", "event_type": "phase_start", "data": {"phase": "literature_review"}}
+{"timestamp": "2026-06-06T11:25:11.131096", "session_id": "20260606_112511", "event_type": "phase_skipped_noninteractive", "data": {"phase": "data_analysis"}}
+{"timestamp": "2026-06-06T11:25:11.131707", "session_id": "20260606_112511", "event_type": "phase_skipped_noninteractive", "data": {"phase": "field_survey"}}
+{"timestamp": "2026-06-06T11:25:11.134461", "session_id": "20260606_112511", "event_type": "phase_skipped_noninteractive", "data": {"phase": "conservation_assessment"}}
+{"timestamp": "2026-06-06T11:25:11.134764", "session_id": "20260606_112511", "event_type": "phase_skipped_noninteractive", "data": {"phase": "report_generation"}}
+{"timestamp": "2026-06-06T11:25:11.134965", "session_id": "20260606_112511", "event_type": "session_end", "data": {"status": "completed"}}

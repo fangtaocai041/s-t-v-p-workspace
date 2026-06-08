@@ -1,0 +1,4 @@
+{"timestamp": "2026-06-06T11:20:01.138304", "session_id": "20260606_112001", "event_type": "session_start", "data": {"question": "test acoustic analysis"}}
+{"timestamp": "2026-06-06T11:20:01.139071", "session_id": "20260606_112001", "event_type": "phase_routed", "data": {"question": "test acoustic analysis", "phase": "data_analysis"}}
+{"timestamp": "2026-06-06T11:20:01.139998", "session_id": "20260606_112001", "event_type": "phase_start", "data": {"phase": "data_analysis"}}
+{"timestamp": "2026-06-06T11:20:01.140646", "session_id": "20260606_112001", "event_type": "human_approval_requested", "data": {"phase": "field_survey", "phase_label": "野外调查"}}

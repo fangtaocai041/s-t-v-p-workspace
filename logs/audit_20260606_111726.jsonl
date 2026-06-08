@@ -1,0 +1,1 @@
+{"timestamp": "2026-06-06T11:17:26.414146", "session_id": "20260606_111726", "event_type": "emergence_signal", "data": {"pattern": "click 中心频率偏移至105kHz", "sources": ["Wang 2020", "Li 2021", "Zhang 2022"], "source_count": 3, "potential_explanation": "", "confidence": "low", "timestamp": "2026-06-06T11:17:26.410860"}}

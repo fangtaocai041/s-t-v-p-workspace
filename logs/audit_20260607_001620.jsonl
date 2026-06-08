@@ -1,0 +1,21 @@
+{"timestamp": "2026-06-07T00:16:20.925219", "session_id": "20260607_001620", "event_type": "emergence_signal", "data": {"pattern": "New click type detected", "sources": ["source_0", "source_1", "source_2"], "source_count": 3, "potential_explanation": "", "confidence": "low", "timestamp": "2026-06-07T00:16:20.925205"}}
+{"timestamp": "2026-06-07T00:16:20.926765", "session_id": "20260607_001620", "event_type": "emergence_signal", "data": {"pattern": "Habitat shift", "sources": ["source_0", "source_1", "source_2", "source_3", "source_4"], "source_count": 5, "potential_explanation": "", "confidence": "high", "timestamp": "2026-06-07T00:16:20.926757"}}
+{"timestamp": "2026-06-07T00:16:20.954559", "session_id": "20260607_001620", "event_type": "contradiction_gate", "data": {"type": "antagonistic", "gate": "BLOCK"}}
+{"timestamp": "2026-06-07T00:16:20.955814", "session_id": "20260607_001620", "event_type": "contradiction_gate", "data": {"type": "non_antagonistic", "gate": "PASS_WITH_NOTE"}}
+{"timestamp": "2026-06-07T00:16:20.956490", "session_id": "20260607_001620", "event_type": "contradiction_gate", "data": {"type": "structural", "gate": "PASS"}}
+{"timestamp": "2026-06-07T00:16:20.957186", "session_id": "20260607_001620", "event_type": "contradiction_gate", "data": {"type": "phasic", "gate": "PASS"}}
+{"timestamp": "2026-06-07T00:16:20.958462", "session_id": "20260607_001620", "event_type": "dead_end_detected", "data": {"phase": "literature_review", "signals": ["S1: unresolved_antagonistic"]}}
+{"timestamp": "2026-06-07T00:16:20.959259", "session_id": "20260607_001620", "event_type": "dead_end_detected", "data": {"phase": "literature_review", "signals": ["S3: repeated_cycle(x3)"]}}
+{"timestamp": "2026-06-07T00:16:20.961293", "session_id": "20260607_001620", "event_type": "unverifiable_claim", "data": {"claim": "unsupported claim"}}
+{"timestamp": "2026-06-07T00:16:20.962537", "session_id": "20260607_001620", "event_type": "phase_start", "data": {"phase": "literature_review"}}
+{"timestamp": "2026-06-07T00:16:20.962800", "session_id": "20260607_001620", "event_type": "skill_delegated", "data": {"skill": "search-literature", "params_keys": ["query", "max_papers", "sources"]}}
+{"timestamp": "2026-06-07T00:16:20.962950", "session_id": "20260607_001620", "event_type": "phase_start", "data": {"phase": "data_analysis"}}
+{"timestamp": "2026-06-07T00:16:20.963081", "session_id": "20260607_001620", "event_type": "skill_delegated", "data": {"skill": "detect-clicks", "params_keys": ["query", "methods"]}}
+{"timestamp": "2026-06-07T00:16:20.963195", "session_id": "20260607_001620", "event_type": "phase_start", "data": {"phase": "conservation_assessment"}}
+{"timestamp": "2026-06-07T00:16:20.963309", "session_id": "20260607_001620", "event_type": "skill_delegated", "data": {"skill": "assess-threats", "params_keys": ["query", "framework"]}}
+{"timestamp": "2026-06-07T00:16:20.963412", "session_id": "20260607_001620", "event_type": "phase_start", "data": {"phase": "report_generation"}}
+{"timestamp": "2026-06-07T00:16:20.963521", "session_id": "20260607_001620", "event_type": "skill_delegated", "data": {"skill": "generate-report", "params_keys": ["findings", "contradiction"]}}
+{"timestamp": "2026-06-07T00:16:20.964950", "session_id": "20260607_001620", "event_type": "phase_start", "data": {"phase": "field_survey"}}
+{"timestamp": "2026-06-07T00:16:20.965186", "session_id": "20260607_001620", "event_type": "skill_delegated", "data": {"skill": "plan-survey", "params_keys": ["query", "require_approval"]}}
+{"timestamp": "2026-06-07T00:16:20.966898", "session_id": "20260607_001620", "event_type": "session_error", "data": {"error": "empty_question"}}
+{"timestamp": "2026-06-07T00:16:20.968781", "session_id": "20260607_001620", "event_type": "session_error", "data": {"error": "empty_question"}}

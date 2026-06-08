@@ -1,0 +1,43 @@
+# Workspace-level files only — 5 projects are separate repos
+/cognitive-search-engine/
+/fish-ecology-assistant/
+/porpoise-agent/
+/coilia-agent/
+/meso-cosmos-agent/
+
+# Personal test files
+*.mp4
+make_video.py
+/node_modules/
+/dist/
+*.egg-info/
+__pycache__/
+*.pyc
+
+# Node
+node.exe
+package-lock.json
+package.json
+
+# OCR test files
+*.js
+*.traineddata
+*.jpg
+
+# Binary
+uninstall.exe
+reasonix-desktop.exe
+fix-tokenizer.bat
+start-reasonix.bat
+
+# Security
+.env
+CREDENTIALS.*.yaml
+
+# Personal
+.reasonix/
+add-defender-exclusion.ps1
+research_plan.pdf
+
+# Truncated results cache
+.reasonix/truncated-results/

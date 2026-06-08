@@ -1,0 +1,8 @@
+{"timestamp": "2026-06-07T00:06:40.587202", "session_id": "20260607_000640", "event_type": "emergence_signal", "data": {"pattern": "New click type detected", "sources": ["source_0", "source_1", "source_2"], "source_count": 3, "potential_explanation": "", "confidence": "low", "timestamp": "2026-06-07T00:06:40.587187"}}
+{"timestamp": "2026-06-07T00:06:40.588042", "session_id": "20260607_000640", "event_type": "emergence_signal", "data": {"pattern": "Habitat shift", "sources": ["source_0", "source_1", "source_2", "source_3", "source_4"], "source_count": 5, "potential_explanation": "", "confidence": "high", "timestamp": "2026-06-07T00:06:40.588034"}}
+{"timestamp": "2026-06-07T00:06:40.591968", "session_id": "20260607_000640", "event_type": "contradiction_gate", "data": {"type": "antagonistic", "gate": "BLOCK"}}
+{"timestamp": "2026-06-07T00:06:40.592783", "session_id": "20260607_000640", "event_type": "contradiction_gate", "data": {"type": "non_antagonistic", "gate": "PASS_WITH_NOTE"}}
+{"timestamp": "2026-06-07T00:06:40.593403", "session_id": "20260607_000640", "event_type": "contradiction_gate", "data": {"type": "structural", "gate": "PASS"}}
+{"timestamp": "2026-06-07T00:06:40.594032", "session_id": "20260607_000640", "event_type": "contradiction_gate", "data": {"type": "phasic", "gate": "PASS"}}
+{"timestamp": "2026-06-07T00:06:40.595095", "session_id": "20260607_000640", "event_type": "dead_end_detected", "data": {"phase": "literature_review", "signals": ["S1: unresolved_antagonistic"]}}
+{"timestamp": "2026-06-07T00:06:40.595778", "session_id": "20260607_000640", "event_type": "dead_end_detected", "data": {"phase": "literature_review", "signals": ["S3: repeated_cycle(x3)"]}}
