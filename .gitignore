@@ -39,5 +39,8 @@ CREDENTIALS.*.yaml
 add-defender-exclusion.ps1
 research_plan.pdf
 
+# Runtime logs
+logs/*.log
+
 # Truncated results cache
 .reasonix/truncated-results/
