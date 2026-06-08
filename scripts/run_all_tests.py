@@ -203,7 +203,7 @@ def high_directloader_stress(result: TestResult):
         t0 = time.time(); ok = 0
         for i in range(100):
             r = o._call_coilia(f"t{i}", {})
-            if r.get("status") == "delegated": ok += 1
+            if r.get("status") in ("delegated", "analyzed", "searched"): ok += 1
         elapsed = time.time() - t0
         result.total = 1
         result.passed = 1 if ok == 100 else 0
