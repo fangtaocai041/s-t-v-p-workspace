@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """
-Cross-Project Validation Script — 三项目一致性检查
+Cross-Project Validation Script — 五项目一致性检查
 ==================================================
-Validates coordination.yaml consistency across all three projects:
-  - cognitive-search-engine (V)
-  - fish-ecology-assistant (S)
-  - porpoise-agent (T)
+Validates coordination.yaml consistency across all five projects:
+  - cognitive-search-engine (V / V1)
+  - fish-ecology-assistant (S / V0)
+  - porpoise-agent (T / V2, P₁)
+  - coilia-agent (V3, P₂)
+  - eon-core (UNIFIED_KERNEL)
 
 Usage:
   python scripts/validate_cross_project.py           # full check
@@ -13,9 +15,9 @@ Usage:
   python scripts/validate_cross_project.py --ci      # CI mode (exit code)
 
 CI Integration:
-  Add to .github/workflows/validate.yml in any of the three repos:
+  Add to .github/workflows/validate.yml in any repo:
     - name: Cross-Project Validation
-      run: python D:/Reasonix/scripts/validate_cross_project.py --ci
+      run: python scripts/validate_cross_project.py --ci
 """
 
 import json
@@ -24,7 +26,9 @@ import sys
 from pathlib import Path
 from datetime import datetime
 
-ROOT = Path("D:/Reasonix")
+# 动态计算工作区根目录（不再硬编码）
+_WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
+ROOT = _WORKSPACE_ROOT
 
 PROJECTS = {
     "cognitive-search-engine": {
@@ -56,6 +60,16 @@ PROJECTS = {
         "mcp_yaml": "config/mcp_servers.yaml",
         "evolution_yaml": "config/evolution.yaml",
         "component_registry": "config/component_registry.yaml",
+    },
+    "coilia-agent": {
+        "role": "P₂/V3",
+        "agent_yaml": "config/agent.yaml",
+        "readme_en": "README.md",
+        "readme_zh": "README.zh.md",
+        "skills_dir": "src/skills",
+        "mcp_yaml": None,           # coilia 使用内置工具，无独立 MCP yaml
+        "evolution_yaml": None,     # 尚未独立 evolution
+        "component_registry": None, # 尚未独立 registry
     },
 }
 
@@ -134,7 +148,10 @@ def count_mcp_servers(path: Path) -> int | None:
 
 # ── checks ───────────────────────────────────────────────
 
-def check_file_exists(path: Path, label: str) -> tuple[bool, str]:
+def check_file_exists(path, label: str) -> tuple[bool, str]:
+    """检查文件是否存在。path 可以为 None（自动跳过）。"""
+    if path is None:
+        return True, ok(f"{label}: skipped (not applicable)")
     if path.exists():
         return True, ok(f"{label} exists: {path.relative_to(ROOT)}")
     return False, fail(f"{label} MISSING: {path.relative_to(ROOT)}")
@@ -196,12 +213,14 @@ def check_project(name: str, cfg: dict):
             results.append(warn("agent.yaml missing 'shared' section"))
     
     # Evolution yaml
-    evo_path = proj_root / cfg.get("evolution_yaml", "")
+    evo_val = cfg.get("evolution_yaml")
+    evo_path = None if evo_val is None else proj_root / evo_val
     exists, msg = check_file_exists(evo_path, "evolution.yaml")
     results.append(msg)
     
     # Component registry
-    reg_path = proj_root / cfg.get("component_registry", "")
+    reg_val = cfg.get("component_registry")
+    reg_path = None if reg_val is None else proj_root / reg_val
     exists, msg = check_file_exists(reg_path, "component_registry.yaml")
     results.append(msg)
     
@@ -218,11 +237,10 @@ def check_project(name: str, cfg: dict):
     # Skill count
     skills_dir = proj_root / cfg["skills_dir"]
     if skills_dir.is_dir():
-        if name == "porpoise-agent":
-            # Count subdirectories with SKILL.md
-            skill_count = count_files_in_dir(skills_dir, "*/SKILL.md")
-        else:
-            skill_count = count_files_in_dir(skills_dir, "*.md")
+        # Count: top-level *.md (fish) OR subdirectory SKILL.md (porpoise/coilia)
+        md_count = count_files_in_dir(skills_dir, "*.md")
+        sub_skill_count = count_files_in_dir(skills_dir, "*/SKILL.md")
+        skill_count = max(md_count, sub_skill_count)
         results.append(ok(f"Skills directory: {skills_dir.relative_to(ROOT)} → {skill_count} files"))
         
         # Check against README badge
@@ -238,8 +256,9 @@ def check_project(name: str, cfg: dict):
         results.append(fail(f"Skills directory MISSING: {skills_dir.relative_to(ROOT)}"))
     
     # MCP count
-    mcp_path = proj_root / cfg["mcp_yaml"]
-    if mcp_path.exists():
+    mcp_val = cfg.get("mcp_yaml")
+    mcp_path = None if mcp_val is None else proj_root / mcp_val
+    if mcp_path is not None and mcp_path.exists():
         mcp_count = count_mcp_servers(mcp_path)
         if mcp_count:
             results.append(ok(f"MCP servers defined: {mcp_count}"))
@@ -261,29 +280,29 @@ def check_project(name: str, cfg: dict):
     return results
 
 def check_cross_consistency():
-    """Check cross-project consistency."""
+    """Check cross-project consistency (all 5 projects)."""
     results = []
     results.append(ok("\n── Cross-Project Consistency ──"))
     
-    # Check all three have evolution.yaml
-    all_have_evolution = True
+    # Check evolution.yaml availability
     for name, cfg in PROJECTS.items():
-        evo_path = ROOT / name / cfg["evolution_yaml"]
-        if not evo_path.exists():
-            results.append(warn(f"{name} missing evolution.yaml"))
-            all_have_evolution = False
-    if all_have_evolution:
-        results.append(ok("All three projects have evolution.yaml"))
+        evo_val = cfg.get("evolution_yaml")
+        if evo_val is None:
+            results.append(ok(f"{name}: evolution.yaml not applicable"))
+        elif (ROOT / name / evo_val).exists():
+            results.append(ok(f"{name}: evolution.yaml present"))
+        else:
+            results.append(warn(f"{name}: evolution.yaml missing"))
     
-    # Check all three have component_registry
-    all_have_registry = True
+    # Check component_registry availability
     for name, cfg in PROJECTS.items():
-        reg_path = ROOT / name / cfg["component_registry"]
-        if not reg_path.exists():
-            results.append(warn(f"{name} missing component_registry.yaml"))
-            all_have_registry = False
-    if all_have_registry:
-        results.append(ok("All three projects have component_registry.yaml"))
+        reg_val = cfg.get("component_registry")
+        if reg_val is None:
+            results.append(ok(f"{name}: component_registry.yaml not applicable"))
+        elif (ROOT / name / reg_val).exists():
+            results.append(ok(f"{name}: component_registry.yaml present"))
+        else:
+            results.append(warn(f"{name}: component_registry.yaml missing"))
     
     # Check READMEs have S-T-V triangle references
     for name, cfg in PROJECTS.items():
