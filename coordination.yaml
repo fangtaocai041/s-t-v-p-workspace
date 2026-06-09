@@ -61,6 +61,11 @@ coordination:
       role: "P₂ 万物衍生·刀鲚"
       adapter: "src/adapter.py → CoiliaAdapter"
       exports: ["detect-clicks", "estimate-abundance", "assess-threats", "search-literature"]
+    culter:
+      project: "culter-agent"
+      role: "P₃ 万物衍生·鲌类"
+      adapter: "src/adapter.py → CulterAdapter"
+      exports: ["age-growth-modeling", "resource-assessment", "habitat-suitability", "search-literature"]
     conflict:
       project: "conflict-arbiter"
       role: "冲突仲裁层"
@@ -287,6 +292,12 @@ project_loader:
       factory: "get_coilia() → CoiliaAdapter"
       capabilities: [otolith_analysis, migration_path, resource_assessment]
 
+    culter:
+      project: "culter-agent"
+      adapter_file: "src/adapter.py"
+      factory: "get_culter() → CulterAdapter"
+      capabilities: [genome_assembly, comparative_genomics, phylogeography, population_genetics, age_growth_modeling, stable_isotope_ecology, trophic_niche_MixSIAR, sympatric_coexistence, resource_assessment, habitat_suitability]
+
   consumers:
     - "eon-core/src/vertices/ (fish/cognitive/porpoise/coilia 顶点适配器)"
 
@@ -318,6 +329,10 @@ pathways:
       function: "search_species(genus: str, species: str) → SearchResult"
       one_liner: "BDI+ReAct 多源认知搜索 + OCR变体 + 图谱遍历"
       entry: "get_cognitive()"
+    culter:
+      function: "assess_culter_species(species: str, context: str) → SpeciesAssessment"
+      one_liner: "年龄与生长建模 + 资源评估 + 栖息地适宜性"
+      entry: "get_culter()"
     porpoise:
       function: "analyze_contradiction(question: str) → ContradictionRoute"
       one_liner: "矛盾驱动路由 + 涌现检测 + 自愈监控"
@@ -348,8 +363,8 @@ pathways:
     P3_cognitive_to_domain:
       name: "文献结果→领域分析"
       source: "cognitive (三角·V1)"
-      target: "porpoise (P₁) | coilia (P₂)"
-      transform: "search() → analyze_contradiction() | assess_species()"
+      target: "porpoise (P₁) | coilia (P₂) | culter (P₃)"
+      transform: "search() → analyze_contradiction() | assess_species() | assess_culter_species()"
       status: "active"
     P4_health_to_karma:
       name: "健康状态→业力评估"
@@ -358,8 +373,8 @@ pathways:
       transform: "health() → evaluate_karma()"
       status: "active"
     P5_all_to_conflict:
-      name: "任意项目→冲突检测"
-      source: "fish (三角·V0) | cognitive (三角·V1) | porpoise (P₁) | coilia (P₂)"
+      name: "万物→冲突检测"
+      source: "fish (三角·V0) | cognitive (三角·V1) | porpoise (P₁) | coilia (P₂) | culter (P₃) | Pₙ"
       target: "conflict (C/V4)"
       transform: "any_output() → detect_conflicts()"
       status: "active"

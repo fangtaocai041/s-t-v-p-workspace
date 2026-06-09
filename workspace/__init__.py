@@ -45,12 +45,21 @@ for _proj in [
     "fish-ecology-assistant",
     "porpoise-agent",
     "coilia-agent",
+    "culter-agent",
     "conflict-arbiter",
 ]:
     _proj_path = str(_WORKSPACE_ROOT / _proj)
     if _proj_path in sys.path:
         sys.path.remove(_proj_path)
     sys.path.insert(0, _proj_path)
+
+# 修复: 项目路径插入后会把 scripts/ 挤到后面，
+# 而 cognitive-search-engine/scripts/ 会遮蔽工作区 scripts/project_loader.py，
+# 故重新将 scripts 插入到最前
+_scripts_path = str(_WORKSPACE_ROOT / "scripts")
+if _scripts_path in sys.path:
+    sys.path.remove(_scripts_path)
+sys.path.insert(0, _scripts_path)
 
 # 预加载 cognitive 核心模块，避免其他项目的 src/ 遮蔽
 # 使用 importlib 直接加载，并注册到 sys.modules（dataclass 依赖此注册）
@@ -70,7 +79,7 @@ def _preload_cognitive_module(rel_path: str, module_name: str):
 # 必须先加载 src.__init__ — 否则 Python 的包解析器找不到正确的 src 包
 _preload_cognitive_module("src/__init__.py", "src")
 _cognitive_unified = _preload_cognitive_module("src/unified_search.py", "src.unified_search")
-_cognitive_coordinator = _preload_cognitive_module("src/search_coordinator.py", "src.search_coordinator")
+# 注: search_coordinator.py 已重命名为 search_streaming.py，变量未使用故不再预加载
 
 if _cognitive_unified is not None:
     _coordinated_search = _cognitive_unified.coordinated_search
@@ -124,6 +133,63 @@ sys.meta_path.insert(0, _SmartSrcRouter())
 
 
 # ═══════════════════════════════════════════════════════
+# coordination.yaml 配置加载 — 权威路由表
+# ═══════════════════════════════════════════════════════
+
+_coordination_config: Dict[str, Any] = {}
+
+
+def _load_coordination() -> Dict[str, Any]:
+    """加载 coordination.yaml 作为配置权威。
+
+    在 workspace 首次 import 时自动执行。
+    返回完整的 coordination 配置 dict。
+    """
+    global _coordination_config
+    if _coordination_config:
+        return _coordination_config
+
+    coord_path = _WORKSPACE_ROOT / "coordination.yaml"
+    if not coord_path.is_file():
+        _coordination_config = {"_loaded": False, "_error": "coordination.yaml not found"}
+        return _coordination_config
+
+    try:
+        import yaml
+        with open(coord_path, encoding="utf-8") as f:
+            raw = yaml.safe_load(f)
+        coordination = raw.get("coordination", raw)
+
+        # 提取关键路由表
+        # NOTE: pathways 是 coordination.yaml 的顶层键，不在 coordination 块内
+        _pathways_block = raw.get("pathways", {})
+        _lines = _pathways_block.get("lines", {})
+        _workflows = _pathways_block.get("workflows", {})
+
+        _coordination_config = {
+            "_loaded": True,
+            "version": coordination.get("version", "0.0.0"),
+            "eon_core_mode": coordination.get("eon_core", {}).get("mode", "passive_config"),
+            "search_engine_registry": coordination.get("search_engine_registry", {}),
+            "pathways": _lines,
+            "workflows": _workflows,
+            "taxonomy_feedback": (
+                "active"
+                if _lines.get("P7_taxonomy_feedback", {}).get("status") == "active"
+                else "inactive"
+            ),
+        }
+    except Exception as e:
+        _coordination_config = {"_loaded": False, "_error": str(e)}
+
+    return _coordination_config
+
+
+# 模块加载时自动读取
+_load_coordination()
+
+
+# ═══════════════════════════════════════════════════════
 # 懒加载适配器 (首次调用时才加载对应项目)
 # ═══════════════════════════════════════════════════════
 
@@ -136,7 +202,7 @@ def _get_adapter(project_key: str):
         return _adapters[project_key]
 
     from scripts.project_loader import (
-        get_cognitive, get_fish, get_porpoise, get_coilia, get_conflict,
+        get_cognitive, get_fish, get_porpoise, get_coilia, get_culter, get_conflict,
     )
 
     loaders = {
@@ -144,6 +210,7 @@ def _get_adapter(project_key: str):
         "fish": get_fish,
         "porpoise": get_porpoise,
         "coilia": get_coilia,
+        "culter": get_culter,
         "conflict": get_conflict,
     }
 
@@ -213,6 +280,21 @@ def search_species(
                 result.mode = "http_fallback"
         except Exception:
             pass
+
+    # ── P7 通路: 分类变更 → fish 知识库回写 ──
+    _config = _load_coordination()
+    if _config.get("taxonomy_feedback") == "active":
+        tw = getattr(result, "taxonomy_warning", None)
+        if tw and tw.get("action_required"):
+            try:
+                fish = _get_adapter("fish")
+                if hasattr(fish, "update_taxonomy"):
+                    fish.update_taxonomy(
+                        species_name=getattr(result, "scientific_name", name),
+                        discrepancy=tw,
+                    )
+            except Exception:
+                pass  # feedback is best-effort, never block the search result
 
     return result
 
@@ -356,6 +438,7 @@ def health_check() -> Dict[str, Any]:
         ("fish", "fish-ecology-assistant"),
         ("porpoise", "porpoise-agent"),
         ("coilia", "coilia-agent"),
+        ("culter", "culter-agent"),
         ("conflict", "conflict-arbiter"),
     ]:
         try:

@@ -12,7 +12,8 @@
   万物 (All)   = 从三角派生的领域专精模板 (P₁江豚 P₂刀鲚 ...Pₙ)
 
   三角形内通路: P1(fish↔cognitive) P4(health→eon-core)
-  派生通路:     P3(cognitive→P₁/P₂) — 三角赋能领域专精
+  派生通路:     P3(cognitive→P₁/P₂/P₃) — 三角赋能领域专精
+  万物归仲裁:   P5(万物→conflict) P6(conflict→user) — 冲突仲裁
 
 用法:
   from scripts.pathway_contracts import PATHWAYS, verify_pathway
@@ -86,11 +87,18 @@ CORES: Dict[str, CoreCompetency] = {
         one_liner="刀鲚专精 — 耳石微化学 (三角派生模板 P₂)",
         entry_point="scripts.project_loader.get_coilia()",
     ),
+    "culter": CoreCompetency(
+        project="culter-agent", vertex="P₃",
+        function_name="assess_culter_species",
+        signature="assess_culter_species(species, context) → SpeciesAssessment",
+        one_liner="鲌类专精 — 年龄生长 + 资源评估 (三角派生模板 P₃)",
+        entry_point="scripts.project_loader.get_culter()",
+    ),
 }
 
 
 # ═══════════════════════════════════════════════════════════════
-# 线 (Lines) — 4 条数据流通路
+# 线 (Lines) — 6 条数据流通路
 # ═══════════════════════════════════════════════════════════════
 
 class PathwayStatus(str, Enum):
@@ -121,7 +129,7 @@ class PathwayContract:
     status: PathwayStatus = PathwayStatus.ACTIVE
 
 
-# 四条通路定义
+# 六条通路定义
 PATHWAYS: Dict[str, PathwayContract] = {
     # ═══ 通路 1: 物种查询 → 文献搜索 ═══
     "P1_fish_to_cognitive": PathwayContract(
@@ -152,6 +160,7 @@ PATHWAYS: Dict[str, PathwayContract] = {
         target="fish-ecology-assistant (S/V0)",
         source_call="CognitiveSearchAdapter.search() → dict { papers: [...] }",
         target_call="FishEcologyAdapter.score_credibility(papers: List[dict]) → List[dict]",
+        status=PathwayStatus.DEFINED,
         data_flow="SearchResult.papers → FishEcologyAdapter.score_credibility() → scored_papers",
         transform="""
             INPUT  papers: List[dict]  (from cognitive.search)
@@ -204,12 +213,62 @@ PATHWAYS: Dict[str, PathwayContract] = {
                 ELIF karma.realm == DEVA THEN boost(vertex, token_mul=1.5)
         """,
         verify_condition="karma.realm IN [DEVA, HUMAN, ASURA, ANIMAL, PRETA, NARAKA]",
+        status=PathwayStatus.ACTIVE,
+    ),
+
+    # ═══ 通路 5: 任意项目输出 → 冲突仲裁 ═══
+    "P5_all_to_conflict": PathwayContract(
+        pathway_id="P5",
+        name="万物→冲突检测",
+        source="fish (三角·V0) | cognitive (三角·V1) | porpoise (P₁) | coilia (P₂) | culter (P₃) | Pₙ",
+        target="conflict-arbiter (C/V4)",
+        source_call="adapter.search() → dict { recommendations, scores }",
+        target_call="ConflictArbiterAdapter.assess_conflict(sources: List[dict]) → ConflictReport",
+        data_flow="multiple adapter outputs → ConflictArbiter.assess_conflict() → unified verdict",
+        transform="""
+            INPUT  sources: List[dict]  (from 三角 + 万物: fish/cognitive/porpoise/coilia/culter/Pₙ)
+            STEP 1 weights = assign_credibility_weights(sources)
+            STEP 2 conflicts = detect_disagreements(sources, threshold=0.3)
+            STEP 3 IF len(conflicts) == 0 THEN
+                    verdict = sources[argmax(weights)]
+                  ELSE
+                    verdict = weighted_arbitration(sources, weights, conflicts)
+                    IF consensus < 0.5 THEN trigger_circuit_breaker()
+            RETURN verdict
+        """,
+        verify_condition="verdict.confidence >= 0 AND verdict.confidence <= 1.0",
+        note="多对一通路: 任一项目输出均可路由到冲突仲裁",
+        status=PathwayStatus.DEFINED,
+    ),
+
+    # ═══ 通路 6: 仲裁结果 → 用户输出 ═══
+    "P6_conflict_to_user": PathwayContract(
+        pathway_id="P6",
+        name="仲裁结果→裁决输出",
+        source="conflict-arbiter (C/V4)",
+        target="user",
+        source_call="ConflictArbiterAdapter.assess_conflict() → ConflictReport",
+        target_call="user-facing render (CLI | API response | Markdown)",
+        data_flow="ConflictReport → report_render() → user",
+        transform="""
+            INPUT  report: ConflictReport (from conflict-arbiter)
+            STEP 1 IF report.circuit_broken THEN
+                    output = render_emergency(report, template='circuit_break')
+                  ELIF report.consensus >= 0.8 THEN
+                    output = render_consensus(report, template='strong')
+                  ELSE
+                    output = render_disagreement(report, template='balanced')
+            STEP 2 output.metadata = { source_count, consensus, arbitration_version }
+            RETURN output
+        """,
+        verify_condition="output.metadata.source_count > 0 AND output.metadata.consensus >= 0",
+        status=PathwayStatus.DEFINED,
     ),
 }
 
 
 # ═══════════════════════════════════════════════════════════════
-# 面 (Surfaces) — 2 个多项目工作流
+# 面 (Surfaces) — 3 个多项目工作流
 # ═══════════════════════════════════════════════════════════════
 
 @dataclass
@@ -229,6 +288,15 @@ class WorkflowContract:
 
 
 WORKFLOWS: Dict[str, WorkflowContract] = {
+    "WF_C_conflict_arbitration": WorkflowContract(
+        workflow_id="WF_C",
+        name="跨源冲突仲裁",
+        description="多源保护推荐 → 冲突检测 → 加权仲裁 → 裁决输出",
+        pathway_sequence=["P5_all_to_conflict", "P6_conflict_to_user"],
+        entry_condition="multiple sources disagree on protection recommendation",
+        exit_criteria="consensus reached OR circuit_breaker tripped",
+        token_budget=20000,
+    ),
     "WF_A_full_stack_search": WorkflowContract(
         workflow_id="WF_A",
         name="全栈物种搜索",
