@@ -661,10 +661,45 @@
 </section>
 
 <!-- ================================================================== -->
+<!-- 〇、完整执行链路: 道→一→二→三角体→四象→八卦→五行→六道→输出 -->
+<!-- ================================================================== -->
+<section>
+  <h2>☯️ 〇、完整执行链路: 道→一→二→三角体→四象→八卦→五行→六道→输出</h2>
+
+  <pre class="diagram">
+道 (操作者: Reasonix / 用户)
+ │  给出指令: "搜索鳤的文献并评估保护状态"
+ ▼
+一 (指令工程化: parse_query → StructuredIntent)
+ ▼
+二 (太极·阴阳两面: YangPole.expand + YinPole.verify)
+ ▼
+三角体 (eon-core OriginKernel: route_event → VertexChain [V0→V1→V2])
+ │  ├─ V0 ☀️太阳 fish:     lookup_species → SpeciesProfile
+ │  ├─ V1 🌙太阴 cognitive: search_species → SearchResult + traverse_graph
+ │  └─ V2 🌤️少阴 porpoise:  analyze_contradiction → Route
+ │       ├─ ☰乾 MetaSearch   ├─ ☲离 GraphTraverse
+ │       ├─ ☱兑 ChineseGW     └─ ☳震 MultiDebate
+ │       ├─ ☴巽 Acoustic(闲置)
+ │       └─ ☵坎 Population(闲置)
+ ▼
+五行 (后台流转监控): 🪵木 🔥火 🪨土 ⚔️金 💧水
+ ▼
+六道 (业力评估): ☸️DEVA 🧘HUMAN ⚔️ASURA 🐂ANIMAL 👻PRETA 🔥NARAKA
+ ▼
+输出 (SphereGateway 融合返回 → 道)</pre>
+
+  <div class="callout info">
+    <div class="callout title">📐 执行流程工程规范</div>
+    完整规范: <code>docs/EXECUTION_FLOW.md</code> — 每层的输入/输出契约、运行规则、实际代码映射
+  </div>
+</section>
+
+<!-- ================================================================== -->
 <!-- 一、六大进化主线 -->
 <!-- ================================================================== -->
 <section>
-  <h2>📜 一、六大进化主线（三项目共通）</h2>
+  <h2>📜 一、六大进化主线</h2>
 
   <pre class="diagram">
 哲学原则 ──→ 形式逻辑 ──→ WHEN→THEN 规则 ──→ agent.yaml ──→ orchestrator.py
