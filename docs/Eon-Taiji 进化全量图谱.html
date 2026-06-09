@@ -600,8 +600,8 @@
 <header class="hero">
   <h1>🧬 Eon-Taiji 进化全量图谱 — 道→一→二→三→万物</h1>
   <p class="subtitle">
-    道生一·一生二·二生三·三生万物：五项目活系统协同进化<br>
-    三角形: fish(S/V0) + cognitive(V/V1) + eon-core(Coord)  |  万物: P₁(江豚) P₂(刀鲚) ...Pₙ
+    核心: 道→一(IProjectAdapter)→二(YinYang)→三(fish+cognitive+eon-core)<br>
+    万物从三演化: 四象·八卦·五行·六道·P₁P₂...Pₙ
   </p>
   <div class="badges">
     <span class="badge time">⏱ 多轮迭代 · 55项验证全通过</span>
@@ -664,30 +664,25 @@
 <!-- 〇、完整执行链路: 道→一→二→三角体→四象→八卦→五行→六道→输出 -->
 <!-- ================================================================== -->
 <section>
-  <h2>☯️ 〇、完整执行链路: 道→一→二→三角体→四象→八卦→五行→六道→输出</h2>
+  <h2>☯️ 〇、核心: 道→一→二→三 (万物从三演化)</h2>
 
   <pre class="diagram">
 道 (操作者: Reasonix / 用户)
  │  给出指令: "搜索鳤的文献并评估保护状态"
  ▼
-一 (指令工程化: parse_query → StructuredIntent)
+一 (IProjectAdapter — 统一接口: search / health / info)
  ▼
-二 (太极·阴阳两面: YangPole.expand + YinPole.verify)
+二 (YinYang: YangPole.expand + YinPole.verify — 对立统一)
  ▼
-三角体 (eon-core OriginKernel: route_event → VertexChain [V0→V1→V2])
- │  ├─ V0 ☀️太阳 fish:     lookup_species → SpeciesProfile
- │  ├─ V1 🌙太阴 cognitive: search_species → SearchResult + traverse_graph
- │  └─ V2 🌤️少阴 porpoise:  analyze_contradiction → Route
- │       ├─ ☰乾 MetaSearch   ├─ ☲离 GraphTraverse
- │       ├─ ☱兑 ChineseGW     └─ ☳震 MultiDebate
- │       ├─ ☴巽 Acoustic(闲置)
- │       └─ ☵坎 Population(闲置)
- ▼
-五行 (后台流转监控): 🪵木 🔥火 🪨土 ⚔️金 💧水
- ▼
-六道 (业力评估): ☸️DEVA 🧘HUMAN ⚔️ASURA 🐂ANIMAL 👻PRETA 🔥NARAKA
- ▼
-输出 (SphereGateway 融合返回 → 道)</pre>
+三 (三角闭环: fish(S/V0) + cognitive(V/V1) + eon-core(Coord))
+ │   P1: fish→cognitive    P2: cognitive→fish    P4: health→karma
+ │
+ └─ 万物 (从三演化的一切)
+      ├─ 四象: V0☀️ V1🌙 V2🌤️ V3🌦️ (顶点分发)
+      ├─ 八卦: ☰☱☲☳☴☵☶☷ (8子模块)
+      ├─ 五行: 🪵🔥🪨⚔️💧 (流转监控)
+      ├─ 六道: ☸️🧘⚔️🐂👻🔥 (业力轮回)
+      └─ Pₙ:  P₁江豚 P₂刀鲚 ...  (领域专精模板)</pre>
 
   <div class="callout info">
     <div class="callout title">📐 执行流程工程规范</div>

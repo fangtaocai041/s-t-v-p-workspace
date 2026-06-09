@@ -5,12 +5,12 @@
 # ${WORKSPACE_ROOT} = workspace root (this file's parent)
 # All paths below are relative to ${WORKSPACE_ROOT} unless noted.
 # ============================================================
-# 道→一→二→三→万物 (v7.4 修正)
-#   道 (Tao)    = eon-core OriginKernel — 万物之源
-#   一 (One)    = IProjectAdapter 统一接口
-#   二 (Two)    = fish(知识) + cognitive(搜索) — 对立统一
-#   三 (Three)  = fish + cognitive + eon-core — 三角闭环
-#   万物 (All)  = P₁ P₂ ... Pₙ — 三角派生的可复制领域模板
+# 道→一→二→三→万物 (v7.4 最终版)
+#   道 (Tao)    = 操作者 — 万物之源
+#   一 (One)    = IProjectAdapter — 统一接口 (道生一)
+#   二 (Two)    = YinYang — 对立统一 (一生二)
+#   三 (Three)  = fish+cognitive+eon-core — 三角闭环 (二生三)
+#   万物 (All)  = 四象·八卦·五行·六道·Pₙ — 从三演化 (三生万物)
 # ============================================================
 # ☯️  eon-core                  — 统一内核 (10-layer)
 # S (State):      fish-ecology-assistant  — 知识供给 (V0)
