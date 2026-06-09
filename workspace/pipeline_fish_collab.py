@@ -5,7 +5,7 @@ pipeline_fish_collab.py — f项目自主运行 → 多项目协作管线
 调用链:
   Phase 1: fish-ecology-assistant (自主运行) → 物种知识库查询
   Phase 2: cognitive-search-engine      → 文献搜索
-  Phase 3: conflict-arbiter             → 保护等级冲突仲裁
+  Phase 3: conflict_verdict (来自 lookup_species, 不重复计算)
   Phase 4: porpoise-agent / coilia-agent → 领域评估
   Phase 5: 全栈汇总
 
@@ -136,47 +136,37 @@ def run_fish_pipeline(
         result["phases"]["2_cognitive"] = {"status": "skipped"}
 
     # ══════════════════════════════════════════
-    # Phase 3: 协同 — 冲突仲裁
+    # Phase 3: 冲突裁决 (已由 lookup_species 内置计算)
     # ══════════════════════════════════════════
     if enable_conflict:
-        _log(f"\n▸ Phase 3/5: {_phase_tag('3', 'conflict-arbiter')} 协同")
-        _log("  └─ 保护等级冲突仲裁...")
-
-        # 从 Phase 1 结果提取保护等级，构建多源冲突检测输入
+        _log(f"
+▸ Phase 3/5: {_phase_tag('3', 'conflict-arbiter')} 协同")
+        _log("  └─ 冲突裁决 (已内嵌在 lookup_species 中)...")
         phase3_start = time.time()
         try:
-            sources = _build_conflict_sources(profile if isinstance(profile, dict) else {})
-            # 如果 KB 无显式保护等级，从 category 自动推导
-            if not sources:
-                fake_sources = _fallback_conflict_sources(
-                    profile if isinstance(profile, dict) else {}
-                )
-                if fake_sources:
-                    sources = fake_sources
-                    _log(f"     ℹ️ 从分类 '{profile.get('category','?')}' 自动推导保护等级")
-
-            if sources:
-                conflict_result = assess_conflict(species_name, sources=sources, region="china")
-                result["phases"]["3_conflict"] = conflict_result
+            # 从 Phase 1 结果读取已计算的 conflict_verdict
+            p1 = result.get("phases", {}).get("1_fish", {})
+            cv = p1.get("conflict_verdict", {})
+            if cv:
+                result["phases"]["3_conflict"] = {
+                    "conflict_level": cv.get("conflict_level"),
+                    "consensus": cv.get("consensus"),
+                    "verdict": cv.get("verdict"),
+                    "source": "lookup_species (内嵌)",
+                }
                 elapsed = time.time() - phase3_start
-
-                cl = conflict_result.get("conflict_level", "?")
-                verdict = conflict_result.get("verdict", "?")
-                score = conflict_result.get("consensus", {}).get("score", "?")
-                _log(f"     ✓ 仲裁完成 — 冲突等级 {cl}/3")
-                _log(f"       加权得分: {score}/100")
-                _log(f"       裁决: {_clean_verdict(verdict)}")
+                cl = cv.get("conflict_level", "?")
+                _log(f"     ✓ 裁决: {cv.get('verdict','')}")
                 _log(f"     ⏱ {elapsed:.2f}s")
             else:
                 _log(f"     ⚠️ 无保护等级数据，跳过仲裁")
                 result["phases"]["3_conflict"] = {"status": "skipped", "reason": "无保护等级数据"}
         except Exception as exc:
-            _log(f"     ❌ 冲突仲裁失败: {exc}")
+            _log(f"     ❌ 读取冲突裁决失败: {exc}")
             result["phases"]["3_conflict"] = {"status": "error", "error": str(exc)}
     else:
         result["phases"]["3_conflict"] = {"status": "skipped"}
-
-    # ══════════════════════════════════════════
+# ══════════════════════════════════════════
     # Phase 4: 协同 — 领域评估
     # ══════════════════════════════════════════
     if enable_assessment:
