@@ -317,11 +317,14 @@ def _validate_p1(output: dict) -> Tuple[bool, str]:
 
 # ── 通路 P2: 搜索结果→可信度评分 ──
 
-def _p2_step1_score(search_result: dict) -> dict:
+def _p2_step1_score(search_result) -> dict:
     """Step 1: 通过 fish 适配器对论文进行可信度评分。"""
     fish = _load_adapter("fish")
-    papers = search_result.get("papers", search_result.get("phase_results", {}))
-    # fish adapter 的 search 方法可以处理评分
+    # 处理多种输入类型
+    if isinstance(search_result, dict):
+        papers = search_result.get("papers", search_result.get("phase_results", {}))
+    else:
+        papers = {"query": str(search_result)}
     result = fish.search("score_credibility", papers=papers)
     return result
 

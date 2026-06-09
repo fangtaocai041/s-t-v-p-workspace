@@ -89,7 +89,9 @@ def low_health(result: TestResult):
     """五项目健康检查 (通过 verify_standalone)."""
     code, out = _run([sys.executable, str(WORKSPACE / "scripts" / "verify_standalone.py")])
     result.total = 5
-    result.passed = out.count("✅") - 1  # 减去标题行
+    # 统计包含 "✅" 和项目名的行
+    count = sum(1 for line in out.split("\n") if "✅" in line and "(" in line)
+    result.passed = min(count, 5)
     result.failed = 5 - result.passed
 
 # ═══════════════════════════════════════════════════════════

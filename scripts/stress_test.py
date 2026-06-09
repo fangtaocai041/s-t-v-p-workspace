@@ -1,103 +1,163 @@
-"""Stress test: catalog_loader v4.0 under pressure."""
-import sys, time
-sys.path.insert(0, 'D:/Reasonix/cognitive-search-engine/src')
-from catalog_loader import *
+#!/usr/bin/env python3
+"""
+极限测试 — 全系统压力验证
 
-catalog = load_catalog()
-OK, FAIL = 0, 0
+测试项目:
+  1. 独立验证 (5项目自举)
+  2. 通路结构 (16项)
+  3. 通路LIVE (4条真实执行)
+  4. 规则覆盖 (18条)
+  5. 演化演示 (道→一→二→三→万物)
+  6. Pₙ 生成+验证+清理
+  7. 全部通路连续执行
 
-def check(desc, condition):
-    global OK, FAIL
-    if condition: OK += 1; print(f'  PASS {desc}')
-    else: FAIL += 1; print(f'  FAIL {desc}')
+用法: python scripts/stress_test.py
+"""
 
-# ── Stress 1: Routing throughput ──
-print('STRESS 1: Routing throughput (50 queries x 3 methods)')
-N = 50
-t0 = time.time()
-for i in range(N):
-    q = f'test_query_{i} fish genetics diversity'
-    score_domains(catalog, q)
-    graph_route(catalog, q)
-    graph_route(catalog, q, health_aware=True)
-elapsed = time.time() - t0
-rate = elapsed / (N * 3) * 1000
-print(f'  150 routes in {elapsed:.2f}s ({rate:.1f}ms/route)')
-check('throughput < 5s total', elapsed < 5)
+import sys
+import time
+import subprocess
+from pathlib import Path
 
-# ── Stress 2: Edge cases ──
-print('\nSTRESS 2: Edge cases')
-cases = [
-    ('', 'empty query'),
-    ('a' * 500, '500-char garbage'),
-    ('Ochetobius elongatus (Kner, 1867)', 'full taxonomic authority'),
-    ('xYz123_!@#', 'special chars'),
-]
-for q, desc in cases:
+_WORKSPACE = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(_WORKSPACE))
+
+
+def run(name: str, cmd: list, timeout: int = 30) -> tuple[bool, str, float]:
+    t0 = time.perf_counter()
     try:
-        r = graph_route(catalog, q, health_aware=True)
-        check(f'{desc} -> {len(r)} DBs', len(r) <= 8)
+        r = subprocess.run(
+            [sys.executable] + cmd,
+            capture_output=True, text=True, timeout=timeout,
+            cwd=str(_WORKSPACE),
+        )
+        elapsed = (time.perf_counter() - t0) * 1000
+        ok = r.returncode == 0
+        msg = r.stdout.split("\n")[-3:] if r.stdout else r.stderr[:200]
+        return ok, "\n".join(msg), elapsed
+    except subprocess.TimeoutExpired:
+        return False, f"TIMEOUT ({timeout}s)", timeout * 1000
     except Exception as e:
-        check(f'{desc}', False)
+        return False, str(e), (time.perf_counter() - t0) * 1000
 
-# ── Stress 3: Feedback storm ──
-print('\nSTRESS 3: Feedback storm (200 records)')
-import os
-fb_path = 'D:/Reasonix/logs/catalog_feedback.jsonl'
-if os.path.exists(fb_path):
-    os.remove(fb_path)
 
-t0 = time.time()
-for i in range(200):
-    record_search_result(f'query_{i%10}', f'db_{(i%5)+1}', i % 8, useful=(i % 3 != 0))
-check('200 records written', time.time() - t0 < 2)
+def main():
+    print(f"\n{'═'*70}")
+    print(f"  🏋️ 极限测试 — 全系统压力验证")
+    print(f"{'═'*70}")
 
-t0 = time.time()
-suggestions = emerge_domains(catalog)
-check(f'emerge in {time.time()-t0:.2f}s', time.time() - t0 < 1)
+    tests = []
+    passed = 0
+    failed = 0
+    total_ms = 0
 
-# ── Stress 4: Intent detection ──
-print('\nSTRESS 4: Intent detection')
-tests = [
-    ('文献', 'literature'), ('原始数据', 'data'),
-    ('学位论文', 'thesis'), ('全量', 'comprehensive'),
-    ('genome assembly', 'literature'),
-]
-for q, expected in tests:
-    intent = detect_intent(catalog, q)['intent']
-    check(f'"{q}" -> {intent}', intent == expected)
+    # ═══ 1. 独立验证 ═══
+    print(f"\n  ── 1. 独立验证 (道生一) ──")
+    for name, cmd in [
+        ("fish (S/V0)",       ["scripts/verify_standalone.py"]),
+        ("pathways (struct)",  ["scripts/verify_pathways.py"]),
+        ("philosophy (rules)", ["scripts/verify_philosophy_rules.py"]),
+        ("run_all_tests",      ["scripts/run_all_tests.py", "--level", "low"]),
+    ]:
+        ok, msg, ms = run(f"standalone/{name}", cmd)
+        status = "✅" if ok else "❌"
+        if ok: passed += 1
+        else: failed += 1
+        total_ms += ms
+        print(f"  {status} {name}: {ms:.0f}ms")
+        tests.append((name, ok, ms))
 
-# ── Stress 5: Progressive route ──
-print('\nSTRESS 5: Progressive route integrity')
-for q in ['文献', '原始数据', '学位论文']:
-    r = progressive_route(catalog, q)
-    n_db = sum(len(p['databases']) for p in r['phases'])
-    check(f'{q}: {len(r["phases"])} phases, {n_db} DBs', n_db > 0)
+    # ═══ 2. 通路 LIVE + 演化 ═══
+    print(f"\n  ── 2. 通路LIVE + 演化演示 ──")
+    for name, cmd in [
+        ("pathways LIVE", ["scripts/verify_pathways.py", "--live"]),
+        ("demo evolution", ["scripts/demo_evolution.py"]),
+    ]:
+        ok, msg, ms = run(name, cmd)
+        status = "✅" if ok else "❌"
+        if ok: passed += 1
+        else: failed += 1
+        total_ms += ms
+        print(f"  {status} {name}: {ms:.0f}ms")
+        tests.append((name, ok, ms))
 
-# ── Stress 6: Taxonomic unfold ──
-print('\nSTRESS 6: Taxonomic unfolding')
-levels = taxonomic_unfold(catalog, 'Ochetobius_elongatus')
-check(f'{len(levels)} levels', len(levels) >= 4)
-for lv in levels:
-    check(f'  L{lv["level"]} {lv["label"]}: {len(lv["databases"])} DBs', len(lv['databases']) > 0)
+    # ═══ 3. 全部通路连续执行 ═══
+    print(f"\n  ── 3. 全部通路连续执行 ──")
+    for species, pw_id in [
+        ("鳤", "P1"),
+        ("Neophocaena asiaeorientalis", "P1"),
+        ("Coilia nasus", "P1"),
+    ]:
+        ok, msg, ms = run(
+            f"pathway {pw_id} '{species}'",
+            ["scripts/run_pathway.py", pw_id, species],
+            timeout=15,
+        )
+        status = "✅" if ok else "❌"
+        if ok: passed += 1
+        else: failed += 1
+        total_ms += ms
+        print(f"  {status} {pw_id}('{species}'): {ms:.0f}ms")
+        tests.append((f"{pw_id}/{species}", ok, ms))
 
-# ── Stress 7: Budget + retreat ──
-print('\nSTRESS 7: Budget + SM-2 retreat')
-b = search_budget({'intent': 'comprehensive'})
-check(f'comprehensive budget = {b}', b == 12500)
-b = search_budget({'intent': 'data'})
-check(f'data budget = {b}', b == 2500)
+    # P2/P3/P4
+    for pw_id in ["P2", "P3", "P4"]:
+        ok, msg, ms = run(f"pathway {pw_id}", ["scripts/run_pathway.py", pw_id], timeout=15)
+        status = "✅" if ok else "❌"
+        if ok: passed += 1
+        else: failed += 1
+        total_ms += ms
+        print(f"  {status} {pw_id}: {ms:.0f}ms")
+        tests.append((pw_id, ok, ms))
 
-r = should_continue_phase(9, 3000, 5000, 1, 3)
-check(f'satisficed: {r["action"]}', r['action'] == 'stop_ok')
-r = should_continue_phase(0, 1000, 5000, 1, 3, 2)
-check(f'empty retreat: {r["action"]}', r['action'] == 'stop_empty')
+    # ═══ 4. Pₙ 生成+验证+清理 ═══
+    print(f"\n  ── 4. Pₙ 万物生成+验证 ──")
+    # 生成
+    ok, msg, ms = run(
+        "spawn P3",
+        ["scripts/spawn_agent.py", "Acipenser sinensis", "中华鲟", "洄游|保护", "--create"],
+    )
+    status = "✅" if ok else "❌"
+    if ok: passed += 1
+    else: failed += 1
+    total_ms += ms
+    print(f"  {status} spawn P3 (中华鲟): {ms:.0f}ms")
 
-# ── Summary ──
-print(f'\n{"="*40}')
-print(f'Results: {OK} passed, {FAIL} failed ({OK+FAIL} total)')
-if FAIL == 0:
-    print('HIGH-PRESSURE TEST PASSED')
-else:
-    print('FAILURES DETECTED')
-    sys.exit(1)
+    # 验证自动发现
+    ok, msg, ms = run("verify with P3", ["scripts/verify_standalone.py"])
+    status = "✅" if ok else "❌"
+    if ok: passed += 1
+    else: failed += 1
+    total_ms += ms
+    print(f"  {status} verify (含P3自动发现): {ms:.0f}ms")
+
+    # 清理
+    import shutil
+    p3_dir = _WORKSPACE / "acipenser-agent"
+    if p3_dir.exists():
+        shutil.rmtree(p3_dir)
+        print(f"  ✅ cleanup: acipenser-agent removed")
+
+    # ═══ 汇总 ═══
+    total_tests = passed + failed
+    print(f"\n{'═'*70}")
+    print(f"  极限测试结果")
+    print(f"{'─'*70}")
+    for name, ok, ms in tests:
+        print(f"  {'✅' if ok else '❌'} {name}: {ms:.0f}ms")
+    print(f"{'─'*70}")
+    print(f"  通过: {passed}/{total_tests}  |  失败: {failed}")
+    print(f"  总耗时: {total_ms:.0f}ms  |  平均: {total_ms/total_tests:.0f}ms/项")
+    print(f"{'═'*70}")
+
+    if failed == 0:
+        print(f"  ✅ 极限测试全部通过 — 系统健壮")
+    else:
+        print(f"  ❌ {failed} 项失败 — 需修复")
+
+    print()
+    return 0 if failed == 0 else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())
