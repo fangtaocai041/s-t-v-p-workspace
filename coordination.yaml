@@ -1,6 +1,6 @@
 # ============================================================
 # ============================================================
-# eon-workspace 五项目协调配置 (v7.3)
+# eon-workspace 五项目协调配置 (v7.4)
 # ============================================================
 # ${WORKSPACE_ROOT} = workspace root (this file's parent)
 # All paths below are relative to ${WORKSPACE_ROOT} unless noted.
@@ -24,9 +24,9 @@
 # meso-cosmos-agent 已删除 (v7.1)。P₁/P₂ 为同级平行项目。
 
 coordination:
-  version: "4.0.0"
+  version: "4.1.0"
   root: "${WORKSPACE_ROOT}"
-  last_sync: "2026-06-07"
+  last_sync: "2026-06-09"
   changelog:
     - "v3.2.0 (2026-06-07): Cross-project evolution engine propagation — +evolution.yaml (porpoise + fish), +component_registry.yaml (porpoise), +self-evolve skill (porpoise + fish). All three projects now have self-evolution capability."
     - "v4.0.0 (2026-06-07): Meso-Cosmos Agent — workspace-level coordination layer. +config/meso_agent.yaml, +skills/meso-orchestrator.md. Macro(BDI)→Meso(Route)→Micro(Execute) across all 3 S-T-V projects."
