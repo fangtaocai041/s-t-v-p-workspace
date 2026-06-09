@@ -13,10 +13,11 @@ workspace — 五项目统一入口 (Package)
     lookup_species(name)          → fish-ecology-assistant    知识库查询
     assess_conservation(name)     → porpoise-agent            保护评估 (江豚)
     assess_species(name, context) → coilia-agent              洄游评估 (刀鲚)
-    health_check()                → 全部 4 项目              全栈健康检查
+    assess_conflict(name, ...)    → conflict-arbiter          冲突仲裁 (火 🟥)
+    health_check()                → 全部 5 项目              全栈健康检查
 
 架构:
-    道 (操作者) → 一 (workspace package) → 二 (project_loader) → 三 (4项目) → 万物
+    道 (操作者) → 一 (workspace package) → 二 (project_loader) → 三 (5项目) → 万物
 """
 
 from __future__ import annotations
@@ -44,6 +45,7 @@ for _proj in [
     "fish-ecology-assistant",
     "porpoise-agent",
     "coilia-agent",
+    "conflict-arbiter",
 ]:
     _proj_path = str(_WORKSPACE_ROOT / _proj)
     if _proj_path in sys.path:
@@ -134,7 +136,7 @@ def _get_adapter(project_key: str):
         return _adapters[project_key]
 
     from scripts.project_loader import (
-        get_cognitive, get_fish, get_porpoise, get_coilia,
+        get_cognitive, get_fish, get_porpoise, get_coilia, get_conflict,
     )
 
     loaders = {
@@ -142,6 +144,7 @@ def _get_adapter(project_key: str):
         "fish": get_fish,
         "porpoise": get_porpoise,
         "coilia": get_coilia,
+        "conflict": get_conflict,
     }
 
     loader = loaders.get(project_key)
@@ -252,11 +255,61 @@ def assess_species(name: str, context: str = "conservation") -> Dict[str, Any]:
     return coilia.search(name, context=context)
 
 
+def assess_conflict(
+    species_name: str,
+    sources: Optional[List[Dict[str, Any]]] = None,
+    claims: Optional[List[Dict[str, Any]]] = None,
+    region: str = "china",
+) -> Dict[str, Any]:
+    """
+    assess_conflict(species_name, sources=..., claims=..., region="china") → dict
+
+    热点冲突仲裁 — 委托给 conflict-arbiter (V4, 火 🟥)。
+
+    检测多源保护推荐冲突 + 可信度加权仲裁 + 熔断。
+
+    region="china": 中国保护等级为权威 (chinese_red_list weight=100)
+    region="global": 常规加权仲裁
+
+    用法:
+      # 多源保护等级冲突
+      sources = [
+        {"source": "iucn", "iucn": "CR"},
+        {"source": "chinese_red_list", "protection_level": "国家二级"},
+        {"source": "provincial_protection", "protection_level": "省级重点"},
+      ]
+      result = assess_conflict("鳤", sources=sources)
+      print(result["verdict"])
+
+      # 文献声明冲突（带时空信息）
+      claims = [
+        {"claim": "种群下降30%", "source": "peer_reviewed_literature",
+         "weight": 75, "value": 30,
+         "time_period": {"start": 2005, "end": 2010}, "region": "长江中游"},
+        {"claim": "种群稳定", "source": "survey_report",
+         "weight": 60, "value": 5,
+         "time_period": {"start": 2020, "end": 2025}, "region": "长江下游"},
+      ]
+      result = assess_conflict("鳤", claims=claims)
+      # → verdict: "🟢 不同时空数据，不构成冲突。"
+      
+      # 无时空信息的声明（兼容旧格式）:
+      result = assess_conflict("鳤", claims=old_claims)
+    """
+    conflict = _get_adapter("conflict")
+    return conflict.search(
+        species_name,
+        sources=sources or [],
+        claims=claims or [],
+        region=region,
+    )
+
+
 def health_check() -> Dict[str, Any]:
     """
     health_check() → dict
 
-    全项目健康检查 — 检查全部 4 个项目的状态。
+    全项目健康检查 — 检查全部 5 个项目的状态。
     """
     results = {}
     for key, name in [
@@ -264,6 +317,7 @@ def health_check() -> Dict[str, Any]:
         ("fish", "fish-ecology-assistant"),
         ("porpoise", "porpoise-agent"),
         ("coilia", "coilia-agent"),
+        ("conflict", "conflict-arbiter"),
     ]:
         try:
             adapter = _get_adapter(key)
@@ -320,3 +374,45 @@ lookup = lookup_species          # 知识库查询
 assess = assess_conservation     # 保护评估
 health = health_check            # 健康检查
 full = full_stack_search         # 全栈搜索
+conflict = assess_conflict       # 冲突仲裁 (火 🟥)
+
+
+# ═══════════════════════════════════════════════════════
+# f项目自主运行 → 多项目协作管线
+# ═══════════════════════════════════════════════════════
+
+def run_fish_pipeline(
+    species_name: str,
+    enable_literature: bool = True,
+    enable_conflict: bool = True,
+    enable_assessment: bool = False,
+    verbose: bool = True,
+) -> Dict[str, Any]:
+    """
+    run_fish_pipeline(species_name) → dict
+
+    f项目自主运行 → 多项目协作管线。
+    f项目 (fish-ecology-assistant) 先自主运行，再将结果传给其他项目协同。
+
+    Phase 1 → f项目 知识库查询 (自主运行)
+    Phase 2 → 木 文献搜索
+    Phase 3 → 火 冲突仲裁
+    Phase 4 → 金/水 领域评估
+    Phase 5 → 汇总
+
+    用法:
+      from workspace import run_fish_pipeline
+      result = run_fish_pipeline("鳤")
+      print(result["summary"])
+
+      # 全量模式 (含领域评估):
+      result = run_fish_pipeline("鳤", enable_assessment=True)
+    """
+    from workspace.pipeline_fish_collab import run_fish_pipeline as _pipeline
+    return _pipeline(
+        species_name=species_name,
+        enable_literature=enable_literature,
+        enable_conflict=enable_conflict,
+        enable_assessment=enable_assessment,
+        verbose=verbose,
+    )

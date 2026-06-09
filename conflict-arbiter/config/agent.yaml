@@ -1,0 +1,42 @@
+# conflict-arbiter — 冲突仲裁者 (火 🟥)
+# 热点冲突分析：不同数据源对同一物种的保护推荐冲突时做熔断/仲裁
+
+agent:
+  name: "Conflict Arbiter"
+  version: "1.0.0"
+  element: "火 🟥"
+  role: "C (Conflict) → V4 (ArbitrateVertex)"
+  description: "多源保护推荐冲突检测 + 可信度加权仲裁 + 熔断逻辑"
+  lab: "Jianghan University"
+  architecture_ref: "docs/ARCHITECTURE.md"
+
+arbiter:
+  # 仲裁信任阈值
+  trust_thresholds:
+    high: 80      # ≥80: 直接采纳
+    medium: 60    # 60-79: 加权仲裁
+    low: 40       # 40-59: 标记冲突, 需人工复核
+    reject: 40    # <40: 熔断, 拒绝采纳
+  
+  # 数据源权重 (百分制)
+  source_weights:
+    iucn: 90
+    cites: 90
+    chinese_red_list: 80
+    provincial_protection: 70
+    peer_reviewed_literature: 75
+    survey_report: 60
+    news_media: 30
+    citizen_science: 20
+  
+  # 熔断规则
+  circuit_breaker:
+    max_conflict_level: 3     # 冲突等级 ≥3 时熔断
+    min_sources_for_consensus: 3  # 至少3源一致才认定共识
+  
+  # 冲突等级定义
+  conflict_levels:
+    0: "完全一致"
+    1: "轻微差异 (可忽略)"
+    2: "显著差异 (需加权仲裁)"
+    3: "严重对立 (熔断 → 人工复核)"
