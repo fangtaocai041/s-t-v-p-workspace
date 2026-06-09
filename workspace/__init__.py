@@ -222,10 +222,49 @@ def lookup_species(name: str) -> Dict[str, Any]:
     lookup_species(name) → dict
 
     物种知识库查询 — 委托给 fish-ecology-assistant (V0)。
-    返回物种档案: 保护等级/分布/分类/已知文献等。
+    返回物种档案: 保护等级/分布/分类/已知文献/冲突裁决等。
+
+    自动执行: 如果知识库中有保护等级数据，自动调用 conflict-arbiter
+    进行中国优先的冲突检测，结果存入 conflict_verdict。
     """
     fish = _get_adapter("fish")
-    return fish.search(name, mode="lookup")
+    result = fish.search(name, mode="lookup")
+
+    # 自动冲突仲裁: 如果有保护等级数据
+    try:
+        sd = result.get("species_data", {}) or {}
+        sources = _build_lookup_sources(sd)
+        if len(sources) >= 2:
+            conflict = _get_adapter("conflict")
+            verdict = conflict.search(
+                name,
+                sources=sources,
+                region="china",
+            )
+            result["conflict_verdict"] = {
+                "conflict_level": verdict.get("conflict_level"),
+                "consensus": verdict.get("consensus"),
+                "verdict": verdict.get("verdict"),
+            }
+    except Exception:
+        pass
+
+    return result
+
+
+def _build_lookup_sources(sd: dict) -> list:
+    """从 lookup_species 的 species_data 中提取保护等级构建冲突来源。"""
+    sources = []
+    iucn = sd.get("iucn", sd.get("iucn_status", ""))
+    if iucn:
+        sources.append({"source": "iucn", "iucn": iucn})
+    prot = sd.get("protection_level", "")
+    if prot:
+        sources.append({"source": "chinese_red_list", "protection_level": prot})
+    cons = sd.get("conservation", "")
+    if cons and cons not in ("", "无"):
+        sources.append({"source": "provincial_protection", "protection_level": cons})
+    return sources
 
 
 def assess_conservation(name: str, context: str = "") -> Dict[str, Any]:
