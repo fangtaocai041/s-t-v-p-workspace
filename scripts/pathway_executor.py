@@ -90,6 +90,16 @@ class ExecutionTrace:
             if detail.get("sources"):
                 lines.append(f"  ── 搜索源 ──")
                 lines.append(f"    {', '.join(detail['sources'][:6])}")
+        # 层追踪: 道→一→二→三→万物
+        if self.is_valid:
+            lines.append(f"  ── 层追踪 ──")
+            lines.append(f"  道(操作者) → 一(IProjectAdapter) → 二(fish+cognitive)")
+            if self.pathway_id.startswith("P1") or self.pathway_id.startswith("P2"):
+                lines.append(f"  → 三(三角闭环)")
+            elif self.pathway_id.startswith("P3"):
+                lines.append(f"  → 三(三角闭环) → 万物(派生赋能)")
+            elif self.pathway_id.startswith("P4"):
+                lines.append(f"  → 三(三角闭环) → 万物(六道业力)")
         lines.append(f"──────────────────────────────────────────")
         if self.validate_message:
             lines.append(f"  验证: {self.validate_message}")
@@ -163,13 +173,17 @@ class PathwayExecutor:
                 function_name=getattr(step.fn, "__name__", str(step.fn)),
             )
 
-            # 输入摘要
+            # 输入摘要 (优先显示 _display 富信息)
             try:
                 if isinstance(step_input, str):
                     step_trace.input_summary = step_input[:100]
                 elif isinstance(step_input, dict):
-                    keys = list(step_input.keys())[:5]
-                    step_trace.input_summary = f"dict({', '.join(keys)})"
+                    display = step_input.get("_display") or step_input.get("scientific_name") or step_input.get("query")
+                    if display:
+                        step_trace.input_summary = str(display)[:100]
+                    else:
+                        keys = [k for k in step_input.keys() if not k.startswith("_")][:4]
+                        step_trace.input_summary = f"dict({', '.join(keys)})"
                 elif step_input is not None:
                     step_trace.input_summary = str(type(step_input).__name__)
             except Exception:
@@ -321,17 +335,23 @@ def _validate_p2(output: dict) -> Tuple[bool, str]:
 
 # ── 通路 P3: 文献结果→领域分析 ──
 
-def _p3_route(search_result: dict) -> str:
+def _p3_route(search_result) -> str:
     """路由: 根据物种判断使用 porpoise 还是 coilia。"""
-    species = search_result.get("species", "")
-    if isinstance(species, dict):
-        genus = species.get("genus", "").lower()
+    # 处理多种输入类型
+    if isinstance(search_result, str):
+        text = search_result.lower()
+    elif isinstance(search_result, dict):
+        species = search_result.get("species", search_result.get("_species", ""))
+        if isinstance(species, dict):
+            text = str(species.get("genus", species.get("scientific_name", ""))).lower()
+        else:
+            text = str(species).lower()
     else:
-        genus = str(species).lower()
+        text = str(search_result).lower()
 
-    if "neophocaena" in genus or "porpoise" in genus or "江豚" in genus:
+    if "neophocaena" in text or "porpoise" in text or "江豚" in text:
         return "porpoise"
-    elif "coilia" in genus or "刀鲚" in genus or "鲚" in genus:
+    elif "coilia" in text or "刀鲚" in text or "鲚" in text:
         return "coilia"
     else:
         return "porpoise"  # 默认走 porpoise
