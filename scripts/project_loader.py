@@ -24,7 +24,6 @@ import importlib.util
 import logging
 import os
 import sys
-from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any, Dict, Optional
 
@@ -35,6 +34,11 @@ logger = logging.getLogger(__name__)
 # ═══════════════════════════════════════════════════════════════
 
 _WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
+
+# Ensure workspace root is on sys.path so adapters can import
+# shared modules like scripts.adapter_protocol
+if str(_WORKSPACE_ROOT) not in sys.path:
+    sys.path.insert(0, str(_WORKSPACE_ROOT))
 
 
 def _resolve_project(project_name: str) -> Optional[Path]:
@@ -50,35 +54,10 @@ def _resolve_project(project_name: str) -> Optional[Path]:
 
 
 # ═══════════════════════════════════════════════════════════════
-# IProjectAdapter — standard interface all projects implement
+# IProjectAdapter — imported from shared protocol module
 # ═══════════════════════════════════════════════════════════════
 
-
-class IProjectAdapter(ABC):
-    """Standard interface that every project's adapter must implement.
-
-    Each of the 4 domain projects exposes an adapter that:
-      - search(query, **kwargs) → dict    (execute a search/query)
-      - health() → dict                    (return health status)
-      - info() → dict                      (return version + capabilities)
-    """
-
-    project_name: str = ""
-
-    @abstractmethod
-    def search(self, query: str, **kwargs) -> Dict[str, Any]:
-        """Execute a domain-specific search or query."""
-        ...
-
-    @abstractmethod
-    def health(self) -> Dict[str, Any]:
-        """Return health status."""
-        ...
-
-    @abstractmethod
-    def info(self) -> Dict[str, Any]:
-        """Return version + capability information."""
-        ...
+from scripts.adapter_protocol import IProjectAdapter
 
 
 # ═══════════════════════════════════════════════════════════════

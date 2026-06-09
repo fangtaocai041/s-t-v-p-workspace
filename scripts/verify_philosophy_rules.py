@@ -58,7 +58,7 @@ RULES = {
     "WF-1": {
         "name": "资源分配权重",
         "config": ["contradiction_analysis.contradiction_levels.*.budget_share"],
-        "code": ["meso-cosmos-agent/src/pipeline/orchestrator.py: budget_share"],
+        "code": ["porpoise-agent/src/agent/orchestrator.py: budget_multiplier"],
     },
     "WF-2": {
         "name": "独立研究路径",
@@ -98,12 +98,13 @@ RULES = {
     "DS-1": {
         "name": "熵预算",
         "config": ["pipeline.stages[].activation"],
-        "code": ["meso-cosmos-agent/src/pipeline/search_optimizer.py: CognitiveBudget"],
+        "code": ["eon-core/src/evolution/search_optimizer.py: CognitiveBudget"],
     },
     "DS-2": {
         "name": "稀疏激活",
         "config": ["pipeline.stages[].activation"],
-        "code": ["meso-cosmos-agent/src/pipeline/search_optimizer.py: MoEGate"],
+        "skill": ["karpathy-guard"],
+        "note": "MoE routing by karpathy-guard skill; stage activation gated by orchestrator",
     },
     "DS-3": {
         "name": "差分验证",
@@ -112,7 +113,7 @@ RULES = {
     },
     "DS-4": {
         "name": "信息增益路由",
-        "code": ["meso-cosmos-agent/src/pipeline/search_optimizer.py: EntropyGuide"],
+        "code": ["eon-core/src/evolution/search_optimizer.py: EntropyGuide"],
     },
 }
 

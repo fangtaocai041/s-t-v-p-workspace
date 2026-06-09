@@ -1,9 +1,16 @@
 # ============================================================
 # ============================================================
-# eon-workspace 五项目协调配置 (v7.2)
+# eon-workspace 五项目协调配置 (v7.3)
 # ============================================================
 # ${WORKSPACE_ROOT} = workspace root (this file's parent)
 # All paths below are relative to ${WORKSPACE_ROOT} unless noted.
+# ============================================================
+# 道→一→二→三→万物 (v7.4 修正)
+#   道 (Tao)    = eon-core OriginKernel — 万物之源
+#   一 (One)    = IProjectAdapter 统一接口
+#   二 (Two)    = fish(知识) + cognitive(搜索) — 对立统一
+#   三 (Three)  = fish + cognitive + eon-core — 三角闭环
+#   万物 (All)  = P₁ P₂ ... Pₙ — 三角派生的可复制领域模板
 # ============================================================
 # ☯️  eon-core                  — 统一内核 (10-layer)
 # S (State):      fish-ecology-assistant  — 知识供给 (V0)
@@ -12,6 +19,8 @@
 # P₂ (Coilia):    coilia-agent            — 刀鲚专研 (V3)
 #
 # eon-core 通过 project_loader 协调全部 5 个项目。
+# 通路定义: scripts/pathway_contracts.py
+# 通路验证: scripts/verify_pathways.py
 # meso-cosmos-agent 已删除 (v7.1)。P₁/P₂ 为同级平行项目。
 
 coordination:
@@ -79,20 +88,20 @@ coordination:
     fish:
       runtime: "Reasonix Agent + Markdown Skills"
       skill_dir: ".reasonix/skills"
-      skill_count: 25
-      mcp_count: 22
+      skill_count: 28
+      mcp_count: 21
       pipeline_type: "explicit_stages"
     porpoise:
       runtime: "Python orchestrator + importlib"
       skill_dir: "src/skills"
-      skill_count: 16
-      mcp_count: 16
+      skill_count: 18
+      mcp_count: 17
       pipeline_type: "orchestrator"
     cognitive:
       runtime: "Python importlib (被调用)"
       skill_dir: "skills"
-      skill_count: 3
-      mcp_count: 0
+      skill_count: 5
+      mcp_count: 7
       pipeline_type: "rule_engine"
 
   # ===== 跨项目委托协议 =====
@@ -186,8 +195,8 @@ coordination:
   # ===== 图谱数据源 =====
   knowledge_graph:
     primary: "${WORKSPACE_ROOT}/cognitive-search-engine/config/species_graph.yaml"
-    variants: "${WORKSPACE_ROOT}/fish-ecology-assistant/config/species_variants.yaml"
-    note: "species_variants.yaml 待合并入 species_graph.yaml。变体生成逻辑在 cognitive-search-engine/src/variant_generator.py"
+    variants: "${WORKSPACE_ROOT}/cognitive-search-engine/src/variant_generator.py"
+    note: "OCR变体由 variant_generator.py 运行时生成，不再需要静态 YAML 文件"
 
   # ===== 并行策略 (统一) =====
   parallelism:
@@ -290,10 +299,86 @@ project_loader:
 
   consumers:
     - "eon-core/src/vertices/ (all 4 vertices)"
-    - "meso-cosmos-agent/src/pipeline/orchestrator.py (_call_via_loader)"
 
   migration_status:
     meso_cosmos: "DONE — _call_cognitive/_call_coilia/_call_porpoise replaced by _call_via_loader"
     porpoise_internal: "KEPT — internal DirectLoader for cognitive as tool-level call"
     coilia_internal: "KEPT — internal DirectLoader for cognitive as tool-level call"
     fish: "NEW — first Python entry point for previously skill-only project"
+
+# ═══════════════════════════════════════════════════════════════
+# v7.3 — 点→线→面→体 通路架构
+# ═══════════════════════════════════════════════════════════════
+# 工程语言化五项目连接。每条通路有精确的函数签名和数据转换规则。
+# 完整定义: scripts/pathway_contracts.py
+# 端到端验证: scripts/verify_pathways.py
+
+pathways:
+  # ── 点: 5 核心专精 ──
+  cores:
+    fish:
+      function: "lookup_species(name: str) → SpeciesProfile"
+      one_liner: "长江 443 种鱼类知识库查询 + 可信度评分"
+      entry: "get_fish()"
+    cognitive:
+      function: "search_species(genus: str, species: str) → SearchResult"
+      one_liner: "BDI+ReAct 多源认知搜索 + OCR变体 + 图谱遍历"
+      entry: "get_cognitive()"
+    porpoise:
+      function: "analyze_contradiction(question: str) → ContradictionRoute"
+      one_liner: "矛盾驱动路由 + 涌现检测 + 自愈监控"
+      entry: "get_porpoise()"
+    coilia:
+      function: "assess_species(species: str, context: str) → SpeciesAssessment"
+      one_liner: "耳石微化学 + 洄游生态 + 资源评估"
+      entry: "get_coilia()"
+    eon_core:
+      function: "route_event(event: Event) → VertexChain"
+      one_liner: "DAG 拓扑路由 + 六道轮回业力 + 谱间隙验证"
+      entry: "OriginKernel.route_event()"
+
+  # ── 线: 4 数据流通路 ──
+  lines:
+    P1_fish_to_cognitive:
+      name: "物种名→文献搜索"
+      source: "fish (S/V0)"
+      target: "cognitive (V/V1)"
+      transform: "lookup_species() → search_species()"
+      status: "active"
+    P2_cognitive_to_fish:
+      name: "搜索结果→可信度评分"
+      source: "cognitive (V/V1)"
+      target: "fish (S/V0)"
+      transform: "search() → score_credibility()"
+      status: "active"
+    P3_cognitive_to_domain:
+      name: "文献结果→领域分析"
+      source: "cognitive (V/V1)"
+      target: "porpoise (P₁/V2) | coilia (P₂/V3)"
+      transform: "search() → analyze_contradiction() | assess_species()"
+      status: "active"
+    P4_health_to_karma:
+      name: "健康状态→业力评估"
+      source: "porpoise (P₁/V2)"
+      target: "eon-core (Samsara Ring)"
+      transform: "health() → evaluate_karma()"
+      status: "active"
+
+  # ── 面: 2 多项目工作流 ──
+  workflows:
+    WF_A_full_stack_search:
+      name: "全栈物种搜索"
+      sequence: [P1_fish_to_cognitive, P2_cognitive_to_fish]
+      trigger: "user asks about a specific species"
+    WF_B_domain_conservation:
+      name: "领域保护评估"
+      sequence: [P1_fish_to_cognitive, P3_cognitive_to_domain, P4_health_to_karma]
+      trigger: "user asks about conservation/threat/assessment"
+
+  # ── 体: 1 闭合反馈环 ──
+  volume:
+    name: "eon-core Samsara 闭合反馈环"
+    layers: 10
+    vertices: [V0, V1, V2, V3]
+    karma_states: [DEVA, HUMAN, ASURA, ANIMAL, PRETA, NARAKA]
+    invariants: 7
