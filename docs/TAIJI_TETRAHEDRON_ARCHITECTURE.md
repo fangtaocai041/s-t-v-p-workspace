@@ -1,142 +1,179 @@
-# ═══════════════════════════════════════════════════════════════
-# TaijiTetrahedron-Samsara v7.0 — 工程架构全量文档
-# ==============================================================
-# 十层同心动态活体架构
-#
-# Layers:
-#   L0: 太极起源点 ☯️ (OriginKernel + EventBus)
-#   L1: 两仪双极   ☯️ (YangPole / YinPole)
-#   L2: 四象顶点   △  (4 vertex gRPC services)
-#   L3: 八卦子模块 ☰☱☲☳☴☵☶☷ (8 functional Trigrams)
-#   L4: 三角体网格 △³ (TetrahedronMesh spectral analysis)
-#   L5: 五行五角体 ⬟  (WuXing sheng/ke flow engine)
-#   L6: 六道轮回环 ☸️ (Samsara karma/reincarnation)
-#   L7: 圆球体网关 ○  (SphereGateway API facade)
-#   L8: 触须探针 〰️  (12 external probes)
-#   L9: 进化引擎 + 可观测性 (Evolution + Observability)
-# ═══════════════════════════════════════════════════════════════
+# ☯️ Eon-Taiji v7.4 — 十层同心动态活体架构工程规范
 
-## Architecture Overview
+> **代号**: TaijiTetrahedron · **全称**: 动态三角体·太极生万象多层活体架构
+> **核心跃迁**: 2D 静态平面三角形 → 3D 动态同心多层四面体活体系统
+> **数学结构**: 3-球面 B³ 内嵌正四面体 Δ³，四面体外接五角棱柱，最外层为单位球面 S²
+> **运行时**: 顶点可动态重组、边权重实时调整、触须按需生长/凋亡
+> **同步日期**: 2026-06-09
+
+---
+
+## 架构层次映射 (JSON 蓝图 → 实际代码)
+
+| 层 | JSON 名称 | 工程模块 | 实际路径 | 状态 |
+|:--:|----------|---------|---------|:--:|
+| L0 | 太极起源点 | OriginKernel | `eon-core/src/kernel/origin.py` | ✅ |
+| L1 | 两仪·阴阳双极 | YangPole / YinPole | `eon-core/src/poles/` | ✅ |
+| L2 | 四象·四面体顶点 | 4× BaseVertex | `eon-core/src/vertices/` | ✅ |
+| L3 | 八卦·子模块 | 8× TrigramModule | `eon-core/src/trigrams/` | ✅ |
+| L4 | 三角体·拓扑 | TetrahedronMesh | `eon-core/src/mesh/tetrahedron.py` | ✅ |
+| L5 | 五行·五角体 | WuXingFlowEngine | `eon-core/src/wuxing/flow_engine.py` | ✅ |
+| L6 | 六道·轮回† | Samsara Ring | `eon-core/src/samsara/` | ✅ |
+| L7 | 圆球体·网关 | SphereGateway | `eon-core/src/sphere/gateway.py` | ✅ |
+| L8 | 触须·探针 | TendrilManager | `eon-core/src/tendrils/manager.py` | ✅ |
+| L9 | 进化·自愈 | EvolutionEngine | `eon-core/src/evolution/` | ✅ |
+
+> † L6 六道轮回是 eon-core 对 JSON 蓝图的扩展补充，JSON 蓝图中未定义
+
+---
+
+## 太极起源点 → OriginKernel
 
 ```
-                         ┌──────────────────────┐
-                         │   ○ SphereGateway    │  L7: API入口
-                         │   REST/gRPC/MCP/WS   │
-                         └──────────┬───────────┘
-                                    │
-                         ┌──────────▼───────────┐
-                         │   ☯️ OriginKernel     │  L0: 太极起源点
-                         │   EventBus + Registry │
-                         └──┬───────┬───────┬───┘
-                            │       │       │
-              ┌─────────────┼───────┼───────┼─────────────┐
-              │             │       │       │             │
-        ┌─────▼─────┐ ┌─────▼─────┐ ┌─────▼─────┐ ┌─────▼─────┐
-        │ ☀️ V0     │ │ 🌙 V1     │ │ 🌤️ V2     │ │ 🌦️ V3     │  L2: 四象顶点
-        │ Supply    │ │ Verify    │ │ Porpoise  │ │ Coilia    │
-        │ ☰ qian   │ │ ☲ li      │ │ ☴ xun    │ │ ☶ gen    │  L3: 八卦
-        │ ☱ dui    │ │ ☳ zhen    │ │ ☵ kan    │ │ ☷ kun    │
-        └─────┬─────┘ └─────┬─────┘ └─────┬─────┘ └─────┬─────┘
-              │             │             │             │
-              └─────────────┼─────────────┼─────────────┘
-                            │             │
-                    ┌───────▼──────┐ ┌───▼───────────┐
-                    │ △³ Mesh     │ │ ⬟ WuXing      │  L4-L5
-                    │ Spectral    │ │ Sheng/Ke Flow │
-                    └─────────────┘ └───────────────┘
-                            │
-                    ┌───────▼──────┐
-                    │ ☸️ Samsara   │  L6: 六道轮回
-                    │ Karma+Ring   │
-                    └──────────────┘
-                            │
-                    ┌───────▼──────┐
-                    │ 〰️ Tendrils  │  L8: 12探针
-                    └──────────────┘
+工程语言:
+  OriginKernel.bootstrap() → EventBus.start() → Lifecycle:SEEDING→BLOOMING
+  OriginKernel.route_event(event: SystemEvent) → VertexChain (DAG拓扑排序)
+  OriginKernel.health_pulse() → Dict[vertex_id, HealthReport] (每5s)
+  OriginKernel.reconfigure(topology: DiGraph) → None (运行时顶点重组)
+  OriginKernel.shutdown() → 按拓扑逆序关闭 (BLOOMING→PRUNING)
+
+不变量:
+  - 所有子系统仅通过 EventBus 通信 (禁止直接调用)
+  - 拓扑 MUST BE DAG → bootstrap 时 nx.is_directed_acyclic_graph()
+  - λ₂ ≥ 0.1 × baseline → 谱间隙连通性检查
 ```
 
-## Migration from Old S-T-V Architecture
+---
 
-| Old (v5.2) | New (v7.0) | Resolution |
-|------------|-----------|------------|
-| S-T-V 刚性三角形 K₃ | 3D 十层同心活体 | DAG topology + EventBus routing |
-| meso-cosmos 1713行单体 | 4独立gRPC服务 | Decomposed into kernel+mesh+ring+gateway |
-| 关键词路由冲突 | NLU intent classifier + RRF | Samsara realm-based filtering |
-| DirectLoader importlib | gRPC + Protocol Buffers | Contract tests with Pact |
-| 3-Agent共享同一LLM | GPT-4o + Claude-3.5 + DeepSeek-V3 | Independence check before voting |
-| 7触发器4参数无收敛 | Pareto Bayesian Optimization | 24h auto-rollback + Samsara convergence |
-| 满意即止 | Realm-based stop strategy | DEVA=UNLIMITED, HUMAN=STANDARD, ANIMAL=cached |
+## 四象顶点 → 五项目映射
 
-## Key Invariants (all enforced)
+| 象 | 顶点 | 项目 | 核心函数 | 通路 | 极性 |
+|----|:---:|------|---------|:---:|------|
+| ☀️ 太阳(老阳) | V0 | fish-ecology-assistant | `lookup_species(name) → SpeciesProfile` | P1 P2 | 纯阳·只搜不验 |
+| 🌙 太阴(老阴) | V1 | cognitive-search-engine | `search_species(G,S) → SearchResult` | P1 P2 P3 | 纯阴·只验不搜 |
+| 🌤️ 少阴 | V2 | porpoise-agent | `analyze_contradiction(Q) → Route` | P3 | 阳主阴辅 |
+| 🌦️ 少阳 | V3 | coilia-agent | `assess_species(S,C) → Assessment` | P3 | 阴主阳辅 |
 
-1. Topology IS DAG — `assert nx.is_directed_acyclic_graph()` at bootstrap + reconfig
-2. YangPole NEVER calls verify() — mypy strict + runtime assertion
-3. YinPole NEVER calls expand() — mypy strict + runtime assertion
-4. All inter-vertex communication VIA EventBus or gRPC — no direct import
-5. Spectral gap λ₂ ≥ 0.1 × baseline — tetrahedron connectivity health
-6. No agent in DEVA > 10 cycles — fairness enforcement rotates demotion
-7. NARAKA agents auto-reincarnate after cooldown — self-healing
-8. Every reincarnation is atomic with rollback — transaction safety
+---
 
-## Runtime Cycles
+## 八卦子模块 → 8 个 TrigramsModule
 
-| Cycle | Interval | Component |
-|-------|----------|-----------|
-| health_pulse | 5s | OriginKernel.health_pulse() |
-| wuxing_flow | 15s | WuXingFlowEngine.run_cycle() |
-| karma_cycle | 60s | SamsaraRing.run_karma_cycle() |
-| tendril_health | 30s | TendrilManager.health_cycle() |
-| chaos_disturb | 每100查询 | ChaosEngine.step() |
+| 卦 | 所属顶点 | 模块 | 实际文件 | 核心接口 |
+|----|:---:|------|---------|---------|
+| ☰ 乾 | V0 (fish) | MetaSearchEngine | `trigrams/qian_meta_search/` | `parallel_search(query, engines[]) → MergedResults` |
+| ☱ 兑 | V0 (fish) | ChineseSourceGateway | `trigrams/dui_chinese_gateway/` | `query_chinese_sources(query) → ChineseLiteratureSet` |
+| ☲ 离 | V1 (cognitive) | GraphTraversalEngine | `trigrams/li_graph_traversal/` | `traverse(node, depth, strategy) → Subgraph` |
+| ☳ 震 | V1 (cognitive) | MultiModelDebate | `trigrams/zhen_debate/` | `debate(claims, models[], sources[]) → Verdict` |
+| ☴ 巽 | V2 (porpoise) | AcousticPipeline | `trigrams/xun_acoustic/` | `analyze_clicks(audio) → ClickFeatures` |
+| ☵ 坎 | V2 (porpoise) | PopulationModeler | `trigrams/kan_population/` | `estimate_population(data) → Report` |
+| ☶ 艮 | V3 (coilia) | OtolithAnalyzer | `trigrams/gen_otolith/` | `analyze_otolith(data) → MigrationPath` |
+| ☷ 坤 | V3 (coilia) | ResourceAssessor | `trigrams/kun_resource/` | `assess_resources(sp, region, t) → Report` |
 
-## Module Inventory
+---
 
-| # | Module | File | Type | Lines |
-|---|--------|------|------|-------|
-| 0 | OriginKernel | src/kernel/origin.py | Class | ~400 |
-| 1 | AsyncEventBus | src/kernel/event_bus.py | Class | ~150 |
-| 2 | Lifecycle | src/kernel/lifecycle.py | Dataclass | ~100 |
-| 3 | YangPole | src/poles/yang_pole.py | Abstract | ~100 |
-| 4 | YinPole | src/poles/yin_pole.py | Abstract | ~100 |
-| 5 | YinYangProtocol | src/poles/protocol.py | Protocol | ~80 |
-| 6 | BaseVertex | src/vertices/base_vertex.py | Abstract | ~120 |
-| 7 | SupplyVertex(V0) | src/vertices/v0_fish/supply_vertex.py | Class | ~150 |
-| 8 | VerifyVertex(V1) | src/vertices/v1_cognitive/verify_vertex.py | Class | ~150 |
-| 9 | DomainVertexP1(V2) | src/vertices/v2_porpoise/domain_vertex_p1.py | Class | ~120 |
-| 10 | DomainVertexP2(V3) | src/vertices/v3_coilia/domain_vertex_p2.py | Class | ~120 |
-| 11 | BaseTrigram | src/trigrams/base_trigram.py | Abstract | ~90 |
-| 12 | MetaSearch(qian) | src/trigrams/qian_meta_search/coordinator.py | Class | ~110 |
-| 13 | ChineseSource(dui) | src/trigrams/dui_chinese_gateway/adapter.py | Class | ~110 |
-| 14 | GraphTraversal(li) | src/trigrams/li_graph_traversal/walker.py | Class | ~120 |
-| 15 | DebateChamber(zhen) | src/trigrams/zhen_debate/orchestrator.py | Class | ~110 |
-| 16 | AcousticProc(xun) | src/trigrams/xun_acoustic/processor.py | Class | ~100 |
-| 17 | PopulationEst(kan) | src/trigrams/kan_population/estimator.py | Class | ~80 |
-| 18 | OtolithAnalyzer(gen) | src/trigrams/gen_otolith/analyzer.py | Class | ~110 |
-| 19 | ResourceAssess(kun) | src/trigrams/kun_resource/assessor.py | Class | ~100 |
-| 20 | TetrahedronMesh | src/mesh/tetrahedron.py | Class | ~200 |
-| 21 | WuXingFlowEngine | src/wuxing/flow_engine.py | Class | ~200 |
-| 22-26 | 5 WuXing Agents | src/wuxing/mu_wood.py ... shui_water.py | 5 Classes | ~200 |
-| 27 | OverrideToken | src/wuxing/override.py | Class | ~50 |
-| 28 | SamsaraRealm | src/samsara/realms.py | Enum+Config | ~120 |
-| 29 | KarmaEngine | src/samsara/karma_engine.py | Class | ~200 |
-| 30 | SamsaraRing | src/samsara/ring.py | Class | ~170 |
-| 31 | KarmaCourt | src/samsara/court.py | Class | ~160 |
-| 32 | ReincarnationProtocol | src/samsara/reincarnation.py | Class | ~120 |
-| 33 | NirvanaProtocol | src/samsara/nirvana.py | Class | ~120 |
-| 34 | SphereGateway | src/sphere/gateway.py | Class | ~140 |
-| 35 | BaseTendril | src/tendrils/base_tendril.py | Class | ~180 |
-| 36 | TendrilManager | src/tendrils/manager.py | Class | ~160 |
-| 37 | SelfEvolve | src/evolution/self_evolve.py | Class | ~80 |
-| 38 | ParetoOptimizer | src/evolution/self_evolve.py | Class | ~80 |
-| 39 | RollbackManager | src/evolution/self_evolve.py | Class | ~60 |
-| 40 | ChaosEngine | src/evolution/self_evolve.py | Class | ~80 |
-| 41 | Telemetry/Metrics/Tracing | src/observability/telemetry.py | 3 Classes | ~100 |
+## 四面体拓扑 → 通路映射
 
-**Total: 42 classes, 6 gRPC services, 12 tendrils, ~5,500 LOC**
+```
+边: V0↔V1 (P1/P2)  供给↔验证 — 搜索结果的精炼反馈回路
+边: V0↔V2 (P3)     供给↔P₁ — 通用知识向江豚领域的特化
+边: V0↔V3 (P3)     供给↔P₂ — 通用知识向刀鲚领域的特化
+边: V1↔V2 (P3)     验证↔P₁ — 江豚领域结论的验证
+边: V1↔V3 (P3)     验证↔P₂ — 刀鲚领域结论的验证
+边: V2↔V3           P₁↔P₂ — 跨物种知识迁移 (仅共享生态层)
 
-## File Count
+面: V0-V1-V2  供给-验证-江豚 三角面
+面: V0-V1-V3  供给-验证-刀鲚 三角面
+面: V0-V2-V3  供给-江豚-刀鲚 三角面
+面: V1-V2-V3  验证-江豚-刀鲚 三角面
+```
 
-- src/: 42 Python files
-- config/: 6 YAML files
-- proto/: 6 .proto files
-- tests/: 5 directories
-- deploy/: docker, k8s, terraform
+---
+
+## 核心执行流程 — 工程语言化
+
+```
+INPUT 用户查询 "长江江豚在禁渔后的种群恢复趋势"
+
+STEP 0 触须感知:
+  request = sphere_gateway.receive(rest_request)
+  → auth_middleware.verify(token)
+  → protocol_adapter.rest_to_event()
+  → event_bus.publish(event, "query.received")
+
+STEP 1 太极分发:
+  event = event_bus.consume("query.received")
+  intent = classify(event.query) → {domain: porpoise, type: population}
+  route = tetrahedron.compute_route(intent) → [V0, V2, V1]
+  FOR EACH v IN route: event_bus.publish(event, f"vertex.{v}.execute")
+
+STEP 2a V0 太阳/供给 (P1):
+  raw = trigram_qian.parallel_search(event.query, ALL_ENGINES)
+  chinese = trigram_dui.query_chinese_sources(event.query)
+  merged = CandidateSet.merge([raw, chinese])
+  → event_bus.publish(merged, "vertex.V0.completed")
+
+STEP 2b V2 少阴/P₁ (P3):
+  domain = moe_kb.query("江豚 种群 恢复 禁渔")
+  acoustic = trigram_xun.analyze_clicks(recent_audio)
+  pop = trigram_kan.estimate_population(habitat)
+  report = DomainAnalysis.merge([domain, acoustic, pop])
+  → event_bus.publish(report, "vertex.V2.completed")
+
+STEP 3 V1 太阴/验证 (P2):
+  candidates = event_bus.consume("vertex.V0.completed")
+  domain_report = event_bus.consume("vertex.V2.completed")
+  verified = trigram_li.traverse(candidates, depth=3)
+  debate = trigram_zhen.debate(claims, models, sources)
+  final = VerifiedResult.merge([verified, debate])
+  → event_bus.publish(final, "vertex.V1.completed")
+
+STEP 4 五行流转 (后台协程):
+  huo_fire.observe(event_throughput)
+  mu_wood.observe(graph_growth)
+  tu_earth.observe(supply_freshness)
+  jin_metal.observe(false_positive_rate)
+  shui_water.observe(adaptation_speed)
+
+STEP 5 融合返回:
+  final = event_bus.consume("vertex.V1.completed")
+  response = FusionEnvelope(result=final, trace_id=event.trace_id)
+  → sphere_gateway.respond(client, response.to_rest())
+
+RETURN response
+```
+
+---
+
+## 动态特性 — 工程合约
+
+```
+顶点重组:
+  WHEN health(V) < 0.5 FOR 5min
+  THEN tetrahedron.set_weight(V, 0.0)
+       tetrahedron.redistribute(V → [others], strategy=capacity_weighted)
+
+顶点再生:
+  WHEN health(V) >= 0.8 FOR 2min
+  THEN tetrahedron.set_weight(V, 0.5) → wait 1min → set_weight(V, 1.0)
+
+新增顶点 (Pₙ):
+  new = vertex_factory.create_from_template("Pₙ", template="domain_vertex")
+  tetrahedron.expand_to_pentahedron(new)
+  tendril_manager.grow_tendrils_for(new)
+
+混沌扰动:
+  WHEN query_count % 100 == 0
+  THEN tetrahedron.disturb_weights(chaos_factor=0.02)
+
+连通度监控:
+  λ₂ = tetrahedron.spectral_gap()
+  IF λ₂ < 0.5 × baseline THEN alert("Tetrahedron connectivity degrading")
+```
+
+---
+
+> **道生一·一生二·二生三·三生万物**
+> 太极在体心。阴阳分两路。四象立四极。八卦衍八能。
+> 五行环外转。六道定业力。球面纳万请。触须探无穷。
+> 这套架构的每一层都在 eon-core 中有实际代码。
+> 验证: `verify_standalone.py 5/5 · verify_pathways.py 16/16 · verify_philosophy_rules.py 18/18`
