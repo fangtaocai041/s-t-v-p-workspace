@@ -192,7 +192,26 @@ def search_species(
     if _coordinated_search is None:
         raise RuntimeError("cognitive-search-engine not found. Expected at: " +
                            str(_WORKSPACE_ROOT / "cognitive-search-engine"))
-    return _coordinated_search(species_name=name, group=group, limit=limit)
+    result = _coordinated_search(species_name=name, group=group, limit=limit)
+
+    # Fallback: SearchRuleEngine HTTP if MCP tools returned nothing
+    if result.total_papers == 0:
+        try:
+            from src.rule_engine import SearchRuleEngine as _SRE
+            sr = _SRE(mode="http")
+            sp_id = result.scientific_name.replace(" ", "_")
+            engine_res = sr.execute(sp_id)
+            papers = engine_res.get("papers", [])
+            if papers:
+                for p in papers:
+                    p.setdefault("source", "search_engine_http")
+                result.papers = papers
+                result.total_papers = len(papers)
+                result.mode = "http_fallback"
+        except Exception:
+            pass
+
+    return result
 
 
 def lookup_species(name: str) -> Dict[str, Any]:
