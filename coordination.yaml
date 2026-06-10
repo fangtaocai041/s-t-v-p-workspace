@@ -4,8 +4,8 @@
 # 路径: D:/Reasonix/coordination.yaml
 # 唯一协调配置 — 所有7个项目由此文件统一管理。
 #
-# 三角核心: fish-ecology-assistant (知识) + cognitive-search-engine (验证) + eon-core (协调)
-# 万物衍生: porpoise-agent (P₁江豚) + coilia-agent (P₂刀鲚) + culter-agent (P₃鲌类) + conflict-arbiter (火仲裁)
+# 道(eon-core) → S(fish知识) + T(cognitive验证) → 万物(P₁porpoise江豚 + P₂coilia刀鲚 + P₃culter鲌类 + Cconflict仲裁)
+# 
 #
 # 🧠 Meso-Cosmos Agent (v5.0): workspace-level coordination
 #    Macro(BDI意图) → Meso(跨项目协调) → Micro(项目执行)

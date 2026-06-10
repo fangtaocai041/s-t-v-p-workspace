@@ -18,8 +18,8 @@ projects:
   eon-core:
     version: "v8.1.0"
     date: "2026-06-10"
-    role: "三角核心·协调内核"
-    description: "轻量协调内核: OriginKernel + project_loader → workspace → 6项目路由。精简: 删除僵尸代码(vertices/trigrams/samsara/wuxing/observability/evolution)"
+    role: "道(协调内核)"
+    description: "轻量协调内核: OriginKernel + project_loader → workspace → 7项目路由。道→S(fish)+T(cognitive)→万物(P₁porpoise+P₂coilia+P₃culter+Cconflict)"
     path: "eon-core/"
     adapter: "src/adapter.py → EonCoreAdapter"
     adapters: ["fish", "cognitive", "porpoise", "coilia", "culter", "conflict"]
@@ -27,7 +27,7 @@ projects:
   cognitive-search-engine:
     version: "v5.6.0"
     date: "2026-06-10"
-    role: "三角核心·搜索验证"
+    role: "T(三角·搜索验证)"
     note: "species_graph 172 papers, lit-search v3.1 集成"
     adapter: "src/adapter.py → CognitiveSearchAdapter"
     path: "cognitive-search-engine/"
@@ -35,7 +35,7 @@ projects:
   fish-ecology-assistant:
     version: "v6.4.0"
     date: "2026-06-10"
-    role: "三角核心·知识供给"
+    role: "S(三角·知识供给)"
     note: "lit-search v3.1, species_graph 33物种172论文, self_evolve, kb_to_graph_sync"
     adapter: "src/adapter.py → FishEcologyAdapter"
     path: "fish-ecology-assistant/"
@@ -43,28 +43,28 @@ projects:
   porpoise-agent:
     version: "v4.3.0"
     date: "2026-06-08"
-    role: "P₁ 万物衍生·江豚"
+    role: "P₁(万物·江豚)"
     adapter: "src/adapter.py → PorpoiseAdapter"
     path: "porpoise-agent/"
 
   coilia-agent:
     version: "v1.2.0"
     date: "2026-06-08"
-    role: "P₂ 万物衍生·刀鲚"
+    role: "P₂(万物·刀鲚)"
     adapter: "src/adapter.py → CoiliaAdapter"
     path: "coilia-agent/"
 
   culter-agent:
     version: "v2.0.0"
     date: "2026-07-11"
-    role: "P₃ 万物衍生·鲌类"
+    role: "P₃(万物·鲌类)"
     adapter: "src/adapter.py → CulterAdapter"
     path: "culter-agent/"
 
   conflict-arbiter:
     version: "v1.0.0"
     date: "2026-07-11"
-    role: "冲突仲裁层 (火🟥)"
+    role: "C(万物·冲突仲裁)"
     adapter: "src/adapter.py → ConflictArbiterAdapter"
     path: "conflict-arbiter/"
 
