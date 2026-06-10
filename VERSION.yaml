@@ -16,10 +16,10 @@ workspace:
 
 projects:
   eon-core:
-    version: "v8.0.0"
-    date: "2026-07-11"
+    version: "v8.1.0"
+    date: "2026-06-10"
     role: "三角核心·协调内核"
-    description: "OriginKernel + EventBus + 顶点框架 + 八卦子模块 + WuXing + Samsara"
+    description: "轻量协调内核: OriginKernel + project_loader → workspace → 6项目路由。精简: 删除僵尸代码(vertices/trigrams/samsara/wuxing/observability/evolution)"
     path: "eon-core/"
     adapter: "src/adapter.py → EonCoreAdapter"
     adapters: ["fish", "cognitive", "porpoise", "coilia", "culter", "conflict"]
