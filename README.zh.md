@@ -1,49 +1,67 @@
 <p align="center">
-  ðŸ‡¬ðŸ‡§ <a href="README.md">English</a>
+  ”9”2”9“7 <a href="README.md">English</a>
 </p>
 
 # eon-workspace
 
-> **Eon-Taiji v7.2 â€” äº”é¡¹ç›®åå±‚åŒå¿ƒåŠ¨æ€æ´»ä½“æž¶æž„**
+> **ÈýÉúÍòÎï v8.1 ¡ª ÆßÏîÄ¿Í³Ò»**
+> Èý½ÇºËÐÄ: fish + cognitive + eon-core (±Õ»·, arity=3)
+> ÍòÎïÑÜÉú: P6®9(porpoise) ¡¤ P6¯0(coilia) ¡¤ P6¯1(culter) ¡¤ C(conflict) (¿ª·Å, arity¡Ý0)
 
 ```
-eon-core/                   â† â˜¯ï¸ ç»Ÿä¸€å†…æ ¸ (åå±‚)
-fish-ecology-assistant/     â† V0 çŸ¥è¯†ä¾›ç»™ (S)
-cognitive-search-engine/    â† V1 éªŒè¯å¼•æ“Ž (V)
-porpoise-agent/             â† V2 æ±Ÿè±šä¸“ç ” (Pâ‚)
-coilia-agent/               â† V3 åˆ€é²šä¸“ç ” (Pâ‚‚)
-scripts/project_loader.py   â† ç»Ÿä¸€ DirectLoader
+eon-core/                   ¡ú 7§1„1‚5 Ð­µ÷ÄÚºË [Èý½ÇºËÐÄ]
+fish-ecology-assistant/     ¡ú Èý½Ç V0: ÖªÊ¶¹©¸ø
+cognitive-search-engine/    ¡ú Èý½Ç V1: ËÑË÷ÑéÖ¤
+porpoise-agent/             ¡ú ÑÜÉú P6®9: ½­ëà×¨ÑÐ
+coilia-agent/               ¡ú ÑÜÉú P6¯0: µ¶öÝ×¨ÑÐ
+culter-agent/               ¡ú ÑÜÉú P6¯1: ÷ˆÀà×¨ÑÐ
+conflict-arbiter/           ¡ú ÑÜÉú C:  ³åÍ»ÖÙ²Ã
+scripts/project_loader.py   ¡ú Í³Ò» DirectLoader (7 ÊÊÅäÆ÷)
+scripts/coordinator.py      ¡ú Í³Ò»Ð­µ÷Æ÷ (6 Í¨Â·)
+scripts/quality_gate.py     ¡ú ÖÊ¿Ø¹Ø¿¨ (5 ¹Ø)
 ```
 
-## å¿«é€Ÿå¼€å§‹
+## ¿ìËÙ¿ªÊ¼
 
 ```bash
-# é›†æˆæµ‹è¯•
-python scripts/test_workspace.py
+# ÖÊ¿ØÑéÖ¤ ¡ª 7 ÏîÄ¿ 5 ¹ØÈ«¼ì
+python scripts/quality_gate.py
 
-# eon-core å¥åº·æ£€æŸ¥
-python eon-core/src/main.py --config eon-core/config/taiji.yaml health
+# ¼ÓÔØÈ«²¿ÊÊÅäÆ÷ (7/7)
+python -c "from scripts.project_loader import get_all_adapters; print({k:type(v).__name__ for k,v in get_all_adapters().items()})"
 
-# eon-core è·¯ç”±æµ‹è¯•
-python eon-core/src/main.py --config eon-core/config/taiji.yaml route "é•¿æ±Ÿæ±Ÿè±šç§ç¾¤æ¢å¤"
+# È«Õ»½¡¿µ¼ì²é (7/7)
+python -c "from scripts.coordinator import coordinator; [print(f'{p}: {coordinator.health(p)[\"status\"]}') for p in ['eon','fish','cognitive','porpoise','coilia','culter','conflict']]"
 ```
 
-## é¡¹ç›®
+## ÏîÄ¿
 
-| é¡¹ç›® | ç‰ˆæœ¬ | é¡¶ç‚¹ | GitHub |
-|------|------|:----:|--------|
-| [eon-core](eon-core/) | v7.2.0 | â˜¯ï¸ å†…æ ¸ | [fangtaocai041/eon-core](https://github.com/fangtaocai041/eon-core) |
-| [cognitive-search-engine](cognitive-search-engine/) | v5.3.0 | V1 | [fangtaocai041/cognitive-search-engine](https://github.com/fangtaocai041/cognitive-search-engine) |
-| [fish-ecology-assistant](fish-ecology-assistant/) | v6.3.0 | V0 | [fangtaocai041/fish-ecology-assistant](https://github.com/fangtaocai041/fish-ecology-assistant) |
-| [porpoise-agent](porpoise-agent/) | v4.3.0 | V2 | [fangtaocai041/porpoise-agent](https://github.com/fangtaocai041/porpoise-agent) |
-| [coilia-agent](coilia-agent/) | v1.2.0 | V3 | [fangtaocai041/coilia-agent](https://github.com/fangtaocai041/coilia-agent) |
+| ÏîÄ¿ | °æ±¾ | ¼Ü¹¹²ã | ½ÇÉ« | ÊÊÅäÆ÷ |
+|------|:----:|:-----:|------|--------|
+| [eon-core](eon-core/) | v8.0.0 | TriangleCore | Ð­µ÷ÄÚºË (T) | `EonCoreAdapter` |
+| [cognitive-search-engine](cognitive-search-engine/) | v5.5.0 | TriangleCore | ËÑË÷ÑéÖ¤ V1 | `CognitiveSearchAdapter` |
+| [fish-ecology-assistant](fish-ecology-assistant/) | v6.3.0 | TriangleCore | ÖªÊ¶¹©¸ø V0 | `FishEcologyAdapter` |
+| [porpoise-agent](porpoise-agent/) | v4.3.0 | Derived P6®9 | ½­ëà×¨ÑÐ | `PorpoiseAdapter` |
+| [coilia-agent](coilia-agent/) | v1.2.0 | Derived P6¯0 | µ¶öÝ×¨ÑÐ | `CoiliaAdapter` |
+| [culter-agent](culter-agent/) | v2.0.0 | Derived P6¯1 | ÷ˆÀà×¨ÑÐ | `CulterAdapter` |
+| [conflict-arbiter](conflict-arbiter/) | v1.0.0 | Derived C | ³åÍ»ÖÙ²Ã | `ConflictArbiterAdapter` |
 
-## æ–‡æ¡£
+## ¼Ü¹¹
 
-| æ–‡æ¡£ | è¯´æ˜Ž |
+```
+µÀ (ÓÃ»§) ¡ú Ò» (IProjectAdapter) ¡ú ¶þ (ÒõÑôÁ½¼«)
+¡ú Èý½Ç (fish + cognitive + eon-core) ¡ú ÍòÎï (P6®9 P6¯0 P6¯1 ... C)
+```
+
+**6 ÌõÊý¾ÝÍ¨Â·**: P1(fish¡úcognitive) ¡¤ P2(cognitive¡úfish) ¡¤ P3(cognitive¡údomain) ¡¤ P4(health¡úkarma) ¡¤ P5(all¡úconflict) ¡¤ P6(conflict¡úuser)
+
+## ÎÄµµ
+
+| ÎÄµµ | ËµÃ÷ |
 |------|------|
-| [Eon-Taiji è¿›åŒ–å…¨é‡å›¾è°±](docs/Eon-Taiji%20è¿›åŒ–å…¨é‡å›¾è°±.md) | å®Œæ•´è¿›åŒ–åŽ†å² |
-| [é¡¹ç›®å…³ç³»æ–‡æ¡£](docs/PROJECT_RELATIONSHIPS.md) | äº”é¡¹ç›®åŒ…å«/è°ƒç”¨å…³ç³» |
-| [TAIJI æž¶æž„æ–‡æ¡£](docs/TAIJI_TETRAHEDRON_ARCHITECTURE.md) | åå±‚æž¶æž„è¯¦è§£ |
-| [VERSION.yaml](VERSION.yaml) | å•æºç‰ˆæœ¬çœŸç›¸ |
-| [coordination.yaml](coordination.yaml) | åè°ƒé…ç½® |
+| [SANSHENG_WANWU.md](docs/SANSHENG_WANWU.md) | Î¨Ò»¼Ü¹¹¹æ·¶ |
+| [ARCHITECTURE_OVERVIEW.md](docs/ARCHITECTURE_OVERVIEW.md) | ¸÷Ä£¿éÖ°Ôð |
+| [PROJECT_RELATIONSHIPS.md](docs/PROJECT_RELATIONSHIPS.md) | ÏîÄ¿¼äÍ¨Â· |
+| [EXECUTION_FLOW.md](docs/EXECUTION_FLOW.md) | ÔËÐÐÊ±Ö´ÐÐÁ÷ |
+| [VERSION.yaml](VERSION.yaml) | µ¥Ô´°æ±¾ÕæÏà |
+| [coordination.yaml](coordination.yaml) | Í³Ò»Ð­µ÷ÅäÖÃ |

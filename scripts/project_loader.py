@@ -1,15 +1,16 @@
-"""project_loader — 六项目统一 DirectLoader.
+"""project_loader — 七项目统一 DirectLoader.
 
 Replaces scattered spec_from_file_location calls across meso-cosmos,
 porpoise, and coilia with a single, version-aware loading interface.
 
 Usage:
-  from scripts.project_loader import get_cognitive, get_porpoise, get_coilia, get_fish
+  from scripts.project_loader import get_cognitive, get_porpoise, get_coilia, get_fish, get_eon
 
   cog = get_cognitive()    # → CognitiveSearchAdapter
   por = get_porpoise()     # → PorpoiseAdapter
   coi = get_coilia()       # → CoiliaAdapter
   fish = get_fish()        # → FishEcologyAdapter
+  eon = get_eon()          # → EonCoreAdapter
 
 Design:
   - Single importlib cache per project (module loaded once, reused)
@@ -98,7 +99,9 @@ def _load_adapter(project_name: str, adapter_rel_path: str, class_name: str) -> 
     sys.path.insert(0, proj_str)
 
     try:
-        module_name = f"{project_name.replace('-', '_')}.adapter"
+        # Use "src.adapter" as module name so relative imports
+        # (from .orchestrator) resolve correctly against the src/ package.
+        module_name = "src.adapter"
         spec = importlib.util.spec_from_file_location(module_name, str(adapter_file))
         if spec is None or spec.loader is None:
             return None
@@ -144,7 +147,7 @@ def get_cognitive() -> Optional[IProjectAdapter]:
 
 
 def get_porpoise() -> Optional[IProjectAdapter]:
-    """Load porpoise-agent (V2 — 江豚领域).
+    """Load porpoise-agent (P₁ — 江豚领域专研, 衍生自三角).
 
     Adapter: porpoise-agent/src/adapter.py → PorpoiseAdapter
     """
@@ -152,11 +155,19 @@ def get_porpoise() -> Optional[IProjectAdapter]:
 
 
 def get_coilia() -> Optional[IProjectAdapter]:
-    """Load coilia-agent (V3 — 刀鲚领域, P₂ 同级项目).
+    """Load coilia-agent (P₂ — 刀鲚领域专研, 衍生自三角).
 
     Adapter: coilia-agent/src/adapter.py → CoiliaAdapter
     """
     return _load_adapter("coilia-agent", "src/adapter.py", "CoiliaAdapter")
+
+
+def get_culter() -> Optional[IProjectAdapter]:
+    """Load culter-agent (P₃ — 鲌类领域专研, 衍生自三角).
+
+    Adapter: culter-agent/src/adapter.py → CulterAdapter
+    """
+    return _load_adapter("culter-agent", "src/adapter.py", "CulterAdapter")
 
 
 def get_fish() -> Optional[IProjectAdapter]:
@@ -167,13 +178,32 @@ def get_fish() -> Optional[IProjectAdapter]:
     return _load_adapter("fish-ecology-assistant", "src/adapter.py", "FishEcologyAdapter")
 
 
+def get_eon() -> Optional[IProjectAdapter]:
+    """Load eon-core (三角·协调内核).
+
+    Adapter: eon-core/src/adapter.py → EonCoreAdapter
+    """
+    return _load_adapter("eon-core", "src/adapter.py", "EonCoreAdapter")
+
+
+def get_conflict() -> Optional[IProjectAdapter]:
+    """Load conflict-arbiter (V4 — 冲突仲裁, 火 🟥).
+
+    Adapter: conflict-arbiter/src/adapter.py → ConflictArbiterAdapter
+    """
+    return _load_adapter("conflict-arbiter", "src/adapter.py", "ConflictArbiterAdapter")
+
+
 def get_all_adapters() -> Dict[str, Optional[IProjectAdapter]]:
-    """Load all 4 adapters at once."""
+    """Load all 7 adapters at once."""
     return {
+        "T_eon_core": get_eon(),
         "V0_fish": get_fish(),
         "V1_cognitive": get_cognitive(),
-        "V2_porpoise": get_porpoise(),
-        "V3_coilia": get_coilia(),
+        "P1_porpoise": get_porpoise(),
+        "P2_coilia": get_coilia(),
+        "P3_culter": get_culter(),
+        "C_conflict": get_conflict(),
     }
 
 

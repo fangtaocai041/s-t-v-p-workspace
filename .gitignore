@@ -14,20 +14,20 @@ make_video.py
 __pycache__/
 *.pyc
 
-# Node
-node.exe
+# Node (moved to bin/)
+/bin/node.exe
 package-lock.json
 package.json
 
-# OCR test files
-*.js
-*.traineddata
-*.jpg
+# OCR test files (moved to ocr/)
+/ocr/*.js
+/ocr/*.traineddata
+/ocr/*.jpg
 
-# Binary
-uninstall.exe
-reasonix-desktop.exe
-fix-tokenizer.bat
+# Binary / scripts (moved to bin/)
+/bin/uninstall.exe
+/bin/reasonix-desktop.exe
+/bin/fix-tokenizer.bat
 start-reasonix.bat
 
 # Security
@@ -36,7 +36,7 @@ CREDENTIALS.*.yaml
 
 # Personal
 .reasonix/
-add-defender-exclusion.ps1
+/bin/add-defender-exclusion.ps1
 research_plan.pdf
 
 # Runtime logs
@@ -44,16 +44,15 @@ logs/*.log
 
 # Cherry Studio MCP config
 cherry-studio-mcp-*.json
-# Corrupted console artifacts
-nul)
+# (cleaned up — nul) deleted)
 
 # Truncated results cache
 .reasonix/truncated-results/
 
-# Dryad / data download artifacts
-dryad_*.zip
-dryad_*.md
-download_dryad.py
+# Dryad / data download artifacts (moved to data/)
+/data/dryad_*.zip
+/data/dryad_*.md
+/data/download_dryad.py
 .playwright-mcp/
 
 # Test artifacts

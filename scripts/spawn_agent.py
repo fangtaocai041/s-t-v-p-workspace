@@ -22,13 +22,14 @@ _WORKSPACE = Path(__file__).resolve().parent.parent
 TEMPLATE = """# 🐟 {icon} {agent_name} — {chinese_name}专研 (P{n})
 
 > **物种**: {chinese_name} (*{scientific_name}*){research_note}
-> **角色**: P{n} — S-T-V-P₁-P₂ 五体架构中的{chinese_name}专研层 (三角派生模板)
+> **角色**: P{n} — 三生万物 v8 架构中的{chinese_name}专研层 (三角派生模板)
 > **协调**: eon-core (三角形内核)
+> **同级项目**: P₁(porpoise) · P₂(coilia) · P₃(culter) · C(conflict)
 
 ## 🔺 架构角色: P{n} / V{n}
 
 > 从三角形 (fish+cognitive+eon-core) 派生的领域专精模板。
-> 与 P₁(江豚) P₂(刀鲚) 同级，共享 5阶段管线 + DirectLoader 搜索。
+> 与 P₁(江豚) P₂(刀鲚) P₃(鲌类) 同级，通过 coordinator 统一调度。
 
 ## 核心研究方向
 
@@ -116,7 +117,7 @@ def main():
     info = parse_species(scientific_name, chinese_name, domains)
     
     # 分配 Pₙ 编号 (P₁=porpoise, P₂=coilia, 下一个=P₃)
-    known_p = ["porpoise-agent", "coilia-agent"]
+    known_p = ["porpoise-agent", "coilia-agent", "culter-agent"]
     existing = [d for d in _WORKSPACE.glob("*-agent") if d.name not in known_p]
     n = len(known_p) + len(existing) + 1  # P₃, P₄, ...
     
@@ -158,7 +159,8 @@ def main():
     print(f"  万物: P{n} 模板生成 — {chinese_name} (*{scientific_name}*)")
     print(f"{'═'*60}")
     print(f"\n  三角派生: fish+cognitive+eon-core → P{n}")
-    print(f"  模板来源:  P₁(porpoise) / P₂(coilia)")
+    print(f"  模板来源:  P₁(porpoise) / P₂(coilia) / P₃(culter)")
+    print(f"  架构版本:  三生万物 v8.1 (7项目统一)")
     print(f"  项目目录:  {project_dir}/")
     print(f"  技能数:    3 (search-literature, analyze-{info['domain']}, assess-{info['domain']})")
     print(f"\n{'─'*60}")
@@ -179,8 +181,7 @@ def main():
         f"src/skills/analyze-{info['domain']}/SKILL.md",
         f"src/skills/assess-{info['domain']}/SKILL.md",
         "config/agent.yaml",
-        "config/tao.yaml",
-        "config/wuxing.yaml",
+        "config/agent.yaml",  # tao.yaml/wuxing.yaml 已删除 — 三生万物精简
     ]
 
     print(f"\n{'─'*60}")

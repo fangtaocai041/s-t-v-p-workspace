@@ -1,49 +1,67 @@
 <p align="center">
-  🇨🇳 <a href="README.zh.md">中文</a>
+  �9�8�9�9 <a href="README.zh.md">����</a>
 </p>
 
 # eon-workspace
 
-> **Eon-Taiji v7.2 — 五项目十层同心动态活体架构**
+> **�������� v8.1 �� Seven Projects Unified**
+> Triangle Core: fish + cognitive + eon-core (sealed, arity=3)
+> Derived: P�6�9(porpoise) �� P�6�0(coilia) �� P�6�1(culter) �� C(conflict) (open, arity��0)
 
 ```
-eon-core/                   ← ☯️ 统一内核 (十层)
-fish-ecology-assistant/     ← V0 知识供给 (S)
-cognitive-search-engine/    ← V1 验证引擎 (V)
-porpoise-agent/             ← V2 江豚专研 (P₁)
-coilia-agent/               ← V3 刀鲚专研 (P₂)
-scripts/project_loader.py   ← 统一 DirectLoader
+eon-core/                   �� �7�1�1�5 Coordination kernel [Triangle Core]
+fish-ecology-assistant/     �� Triangle V0: Knowledge supply
+cognitive-search-engine/    �� Triangle V1: Validation engine
+porpoise-agent/             �� Derived P�6�9: Porpoise domain
+coilia-agent/               �� Derived P�6�0: Coilia domain
+culter-agent/               �� Derived P�6�1: Culter domain
+conflict-arbiter/           �� Derived C:  Conflict arbitration
+scripts/project_loader.py   �� Unified DirectLoader (7 adapters)
+scripts/coordinator.py      �� Unified coordinator (6 pathways)
+scripts/quality_gate.py     �� Quality gate (5 checks)
 ```
 
 ## Quick Start
 
 ```bash
-# Integration test (all 5 projects)
-python scripts/test_workspace.py
+# Quality gate �� validate all 7 projects (5/5 gates)
+python scripts/quality_gate.py
 
-# eon-core health check
-python eon-core/src/main.py --config eon-core/config/taiji.yaml health
+# Load all adapters (7/7)
+python -c "from scripts.project_loader import get_all_adapters; print({k:type(v).__name__ for k,v in get_all_adapters().items()})"
 
-# eon-core route test (query: Yangtze finless porpoise population recovery)
-python eon-core/src/main.py --config eon-core/config/taiji.yaml route "长江江豚种群恢复"
+# Full health check (7/7)
+python -c "from scripts.coordinator import coordinator; [print(f'{p}: {coordinator.health(p)[\"status\"]}') for p in ['eon','fish','cognitive','porpoise','coilia','culter','conflict']]"
 ```
 
-## 项目
+## Projects
 
-| 项目 | 版本 | 顶点 | GitHub |
-|------|------|:----:|--------|
-| [eon-core](eon-core/) | v7.2.0 | ☯️ 内核 | [fangtaocai041/eon-core](https://github.com/fangtaocai041/eon-core) |
-| [cognitive-search-engine](cognitive-search-engine/) | v5.3.0 | V1 | [fangtaocai041/cognitive-search-engine](https://github.com/fangtaocai041/cognitive-search-engine) |
-| [fish-ecology-assistant](fish-ecology-assistant/) | v6.3.0 | V0 | [fangtaocai041/fish-ecology-assistant](https://github.com/fangtaocai041/fish-ecology-assistant) |
-| [porpoise-agent](porpoise-agent/) | v4.3.0 | V2 | [fangtaocai041/porpoise-agent](https://github.com/fangtaocai041/porpoise-agent) |
-| [coilia-agent](coilia-agent/) | v1.2.0 | V3 | [fangtaocai041/coilia-agent](https://github.com/fangtaocai041/coilia-agent) |
+| Project | Version | Layer | Role | Adapter |
+|---------|:------:|:-----:|------|---------|
+| [eon-core](eon-core/) | v8.0.0 | TriangleCore | Coordinator (T) | `EonCoreAdapter` |
+| [cognitive-search-engine](cognitive-search-engine/) | v5.5.0 | TriangleCore | Validation V1 | `CognitiveSearchAdapter` |
+| [fish-ecology-assistant](fish-ecology-assistant/) | v6.3.0 | TriangleCore | Knowledge V0 | `FishEcologyAdapter` |
+| [porpoise-agent](porpoise-agent/) | v4.3.0 | Derived P�6�9 | Porpoise specialist | `PorpoiseAdapter` |
+| [coilia-agent](coilia-agent/) | v1.2.0 | Derived P�6�0 | Coilia specialist | `CoiliaAdapter` |
+| [culter-agent](culter-agent/) | v2.0.0 | Derived P�6�1 | Culter specialist | `CulterAdapter` |
+| [conflict-arbiter](conflict-arbiter/) | v1.0.0 | Derived C | Conflict arbitration | `ConflictArbiterAdapter` |
 
-## 文档
+## Architecture
 
-| 文档 | 说明 |
-|------|------|
-| [Eon-Taiji 进化全量图谱](docs/Eon-Taiji%20进化全量图谱.md) | 完整进化历史 |
-| [项目关系文档](docs/PROJECT_RELATIONSHIPS.md) | 五项目包含/调用关系 |
-| [TAIJI 架构文档](docs/TAIJI_TETRAHEDRON_ARCHITECTURE.md) | 十层架构详解 |
-| [VERSION.yaml](VERSION.yaml) | 单源版本真相 |
-| [coordination.yaml](coordination.yaml) | 协调配置 |
+```
+�� (User) �� һ (IProjectAdapter) �� �� (YinYang Poles)
+�� ���� (fish + cognitive + eon-core) �� ���� (P�6�9 P�6�0 P�6�1 ... C)
+```
+
+**6 Data Pathways**: P1(fish��cognitive) �� P2(cognitive��fish) �� P3(cognitive��domain) �� P4(health��karma) �� P5(all��conflict) �� P6(conflict��user)
+
+## Documentation
+
+| Document | Description |
+|----------|-------------|
+| [SANSHENG_WANWU.md](docs/SANSHENG_WANWU.md) | Architecture specification (canonical) |
+| [ARCHITECTURE_OVERVIEW.md](docs/ARCHITECTURE_OVERVIEW.md) | Module responsibilities |
+| [PROJECT_RELATIONSHIPS.md](docs/PROJECT_RELATIONSHIPS.md) | Cross-project pathways |
+| [EXECUTION_FLOW.md](docs/EXECUTION_FLOW.md) | Runtime execution flow |
+| [VERSION.yaml](VERSION.yaml) | Single source of truth for versions |
+| [coordination.yaml](coordination.yaml) | Unified coordination config |

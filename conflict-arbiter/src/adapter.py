@@ -1,8 +1,8 @@
-"""ConflictArbiterAdapter — conflict-arbiter (C/V4, 火 🟥).
+"""ConflictArbiterAdapter — conflict-arbiter (冲突仲裁).
 
-【核心专精】assess_conflict(sources: list) → ConflictReport
+核心专精: assess_conflict(sources: list) → ConflictReport
     多源保护推荐冲突检测 + 可信度加权仲裁 + 熔断
-    → 通路 P5(fish→conflict) P6(cognitive→conflict) P7(porpoise→conflict) P8(coilia→conflict)
+    通路: P5(any→conflict) P6(conflict→user)
 
 Usable as a cross-project arbitration layer — any project's output
 can be routed here for consistency checking before finalizing a
@@ -88,8 +88,7 @@ class ConflictArbiterAdapter(IProjectAdapter):
             return self._arbiter.info()
         return {
             "project": self.project_name,
-            "role": "V4_ArbitrateVertex (C-Conflict)",
-            "element": "火 🟥",
+            "role": "冲突仲裁层",
             "capabilities": ["conflict_detection", "weighted_arbitration", "circuit_breaker"],
         }
 

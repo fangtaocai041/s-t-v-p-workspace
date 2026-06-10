@@ -1,417 +1,94 @@
 # ============================================================
+# 三角核心协调配置 — Unified Coordination Config
 # ============================================================
-# eon-workspace — Project Coordination Config (v7.3)
-# ============================================================
+# 路径: D:/Reasonix/coordination.yaml
+# 唯一协调配置 — 所有7个项目由此文件统一管理。
 #
-# ─── 三生万物: 三角核心(sealed 3) + 万物衍生(open ≥0) ───
+# 三角核心: fish-ecology-assistant (知识) + cognitive-search-engine (验证) + eon-core (协调)
+# 万物衍生: porpoise-agent (P₁江豚) + coilia-agent (P₂刀鲚) + culter-agent (P₃鲌类) + conflict-arbiter (火仲裁)
 #
-# TriangleCore: fish-ecology-assistant / cognitive-search-engine / eon-core
-#   - 三角必须完整，缺一不可运行
-#   - fish↔cognitive 双向通路，eon-core 协调全生命周期
-#
-# DerivedProjects: porpoise-agent(P₁) / coilia-agent(P₂) / spawn_agent(Pₙ)
-#   - 三角可不依赖万物独立运行
-#   - 万物依赖三角的知识供给(fish)和搜索验证(cognitive)
-#
-# eon-core 双重身份:
-#   (1) 三角核心协调者 (OriginKernel, EventBus)
-#   (2) 万物基础设施宿主 (VertexAdapter/Trigrams/WuXing/Samsara)
-#
-# ============================================================
-# 通路定义: scripts/pathway_contracts.py
-# 通路验证: scripts/verify_pathways.py
-# project_loader: scripts/project_loader.py
+# 🧠 Meso-Cosmos Agent (v5.0): workspace-level coordination
+#    Macro(BDI意图) → Meso(跨项目协调) → Micro(项目执行)
+#    Config: D:/Reasonix/config\meso_agent.yaml
+#    Skill:  D:/Reasonix/skills\meso-orchestrator.md
 
 coordination:
-  version: "4.3.0"
-  root: "${WORKSPACE_ROOT}"
-  last_sync: "2026-06-09"
+  version: "5.0.0"
+  root: "D:\\Reasonix"
+  last_sync: "2026-07-11"
   changelog:
-    - "v4.3.0 (2026-06-09): #1 eon-core模式声明(gRPC可选非默认) + #6 P7_taxonomy_feedback通路(c→f分类变更自动回写) + WF_D_taxonomy_sync工作流"
-    - "v4.2.0 (2026-06-09): 架构修正 — V2/V3→P₁/P₂ 派生项目; 去重cognitive注册; 补P5/P6通路合约; FishEcologyAdapter 加 score_credibility() 落地通路"
+    - "v5.0.0 (2026-07-11): Unified all 7 projects. +culter-agent (P₃), +conflict-arbiter to derived_projects. Removed duplicate coordination.yaml (3 copies), meso_agent.yaml (2 copies). Removed deprecated workspace.py. coordinator.py now routes to all 6 adapters."
+    - "v4.2.1 (2026-07-11): Europe PMC integration — NCBI 500 failover."
+    - "v4.2.0 (2026-07-11): Search engine expansion 12→19 engines."
+    - "v4.2.1 (2026-07-11): Europe PMC integration — NCBI 500 failover. +search_europe_pmc provider, rule_engine PubMed→Europe PMC auto-fallback, meso_agent volume estimation dual-source (NCBI + Europe PMC). 20 engines total."
+    - "v4.2.0 (2026-07-11): Search engine expansion 12→19 engines. +5 Chinese academic engines (baidu_scholar/cnki_web/wanfang_web/cas_web/chinese_sweep), +2 preprint engines (biorxiv_api/researchgate_web). ENGINE_GROUPS expanded: chinese 3→7, full 7→9, +preprint group. Native HTTP providers in parallel_search.py."
+    - "v4.1.0 (2026-07-11): Exclusive search gateway — cognitive-search-engine declared as the sole external search entry point for the entire workspace. +search_gateway section in coordination.yaml, +.reasonix/config.yaml, +agent.yaml gateway role."
     - "v3.2.0 (2026-06-07): Cross-project evolution engine propagation — +evolution.yaml (porpoise + fish), +component_registry.yaml (porpoise), +self-evolve skill (porpoise + fish). All three projects now have self-evolution capability."
     - "v4.0.0 (2026-06-07): Meso-Cosmos Agent — workspace-level coordination layer. +config/meso_agent.yaml, +skills/meso-orchestrator.md. Macro(BDI)→Meso(Route)→Micro(Execute) across all 3 S-T-V projects."
     - "v3.2.0 (2026-06-07): Cross-project evolution engine propagation — +evolution.yaml (porpoise + fish), +component_registry.yaml (porpoise), +self-evolve skill (porpoise + fish). All three projects now have self-evolution capability."
     - "v3.1.0 (2026-06-07): Full cross-project co-evolution pass — all READMEs (EN+ZH) synced with Linked Projects sections, agent.version badges on all 3 projects, cognitive agent.yaml +shared section, fish + porpoise WEAKNESSES.md refreshed, porpoise zh README v3→v4.1"
 
-  # ===== eon-core (Unified Kernel — replaces meso-cosmos) =====
-  eon_core:
+  # ===== Meso-Cosmos Agent (Workspace Level) =====
+  meso_cosmos:
     enabled: true
-    mode: "passive_config"           # passive_config=仅协调配置; active=EventBus+完整内核
-    # 配置在 eon-core/config/taiji.yaml 中维护
+    config: "D:\\Reasonix\\config\\meso_agent.yaml"
+    skill: "D:\\Reasonix\\skills\\meso-orchestrator.md"
+    architecture: "Macro(BDI意图) → Meso(跨项目协调) → Micro(项目执行)"
+    description: "统一入口 — 解析研究问题 → 路由到三角+万物(7项目) → 协调管线执行 → 交叉验证 → 进化反馈"
+    pipeline:
+      - { phase: 0, name: "UNDERSTAND", layer: "Macro-BDI", action: "解析问题 → 识别领域 → 形成意图" }
+      - { phase: 1, name: "ROUTE", layer: "Meso-Coordination", action: "路由到 S/T/V 项目 → 资源分配" }
+      - { phase: 2, name: "EXECUTE", layer: "Micro-Execution", action: "委派到项目 agent → 并行监控" }
+      - { phase: 3, name: "VALIDATE", layer: "Cross-Verification", action: "权威评分 → 三角验证 → 矛盾检测" }
+      - { phase: 4, name: "SYNTHESIZE", layer: "Merge", action: "多项目结果合并 → 统一报告" }
+      - { phase: 5, name: "EVOLVE", layer: "Feedback", action: "评估 → 触发跨项目进化" }
 
-  # ===== 五项目注册 (三角 + 衍生) =====
-  projects:
-    fish:
+  # ===== S-T-V 三角 =====
+  # ===== 三角闭环 (Triangle Core) =====
+  # 道生一 → 一生二 → 二生三 → 三生万物
+  # 一: 太极(命令入口)  二: 阴阳(S↔V对立)  三: 三角闭环(缺一不可)
+  # 三角 = fish(知识) + cognitive(验证) + eon-core(协调)
+  # 万物: P₁(porpoise) P₂(coilia) ... 从三角衍生，三角不依赖万物
+  triangle_core:
+    fish_knowledge:
       project: "fish-ecology-assistant"
-      role: "三角核心·知识供给 (11引擎 + 28 skills)"
-      adapter: "src/adapter.py → FishEcologyAdapter"
-      exports: ["species_knowledge", "credibility_scoring", "delegate_protocol"]
-    cognitive:
-      project: "cognitive-search-engine"
-      role: "三角核心·搜索验证 (BDI+ReAct+graph)"
-      adapter: "src/adapter.py → CognitiveSearchAdapter"
-      exports: ["species_search", "graph_traversal", "multi_model_debate"]
-    porpoise:
-      project: "porpoise-agent"
-      role: "P₁ 万物衍生·江豚"
-      adapter: "src/adapter.py → PorpoiseAdapter"
-    coilia:
-      project: "coilia-agent"
-      role: "P₂ 万物衍生·刀鲚"
-      adapter: "src/adapter.py → CoiliaAdapter"
-      exports: ["detect-clicks", "estimate-abundance", "assess-threats", "search-literature"]
-    culter:
-      project: "culter-agent"
-      role: "P₃ 万物衍生·鲌类"
-      adapter: "src/adapter.py → CulterAdapter"
-      exports: ["age-growth-modeling", "resource-assessment", "habitat-suitability", "search-literature"]
-    conflict:
-      project: "conflict-arbiter"
-      role: "冲突仲裁层"
-      adapter: "src/adapter.py → ConflictArbiterAdapter"
-      exports: ["assess-conflict", "weighted-arbitration", "circuit-breaker"]
-
-  # ===== 共享协议 =====
-  shared:
-    verification: { min_sources_core_claim: 3, max_iterations: 3 }
-    contradiction: { budget_multiplier: 2.5, transformation_threshold: 5 }
-    preflight: "read config/agent.yaml before all Skills"
-
-  # ===== 存异: 项目特定 =====
-  project_specific:
-    fish:
-      runtime: "Reasonix Agent + Markdown Skills"
-      skill_dir: ".reasonix/skills"
-      skill_count: 28
-      mcp_count: 21
-      pipeline_type: "explicit_stages"
-    porpoise:
-      runtime: "Python orchestrator + importlib"
-      skill_dir: "src/skills"
-      skill_count: 18
-      mcp_count: 17
-      pipeline_type: "orchestrator"
-    cognitive:
-      runtime: "Python importlib (被调用)"
-      skill_dir: "skills"
-      skill_count: 5
-      mcp_count: 7
-      pipeline_type: "rule_engine"
-
-  # ===== 跨项目委托协议 =====
-  cross_delegation:
-    enabled: true
-    protocol: "DELEGATE to {project}: skill={name} context={...}"
-    fish_exports: ["stats-assistant","research-analyst","phd-proposal-writer","ima-smart-search"]
-    porpoise_exports: ["detect-clicks","estimate-abundance","assess-threats","search-literature"]
-    cognitive_exports: ["graph-search-engine","cognitive-species-search","parallel-search"]
-
-  # ===== 搜索引擎注册表 (v3.0 统一) =====
-  search_engine_registry:
-    scholar:
-      category: "academic"
-      mcp_server: "scholar"
-      tools: ["scholar_search_literature_graph","scholar_search_google_scholar_key_words"]
-      priority: 1
-      primary: true
-    article:
-      category: "academic"
-      mcp_server: "article"
-      tools: ["article_search_literature","article_get_article_details","article_get_references"]
-      priority: 2
-    scholarly:
-      category: "academic"
-      mcp_server: "scholarly"
-      tools: ["scholarly_search"]
-      priority: 3
-    baidu_scholar:
-      category: "chinese_academic"
-      mcp_server: "reasonix_builtin"
-      tools: ["web_search"]
-      strategy: "site:xueshu.baidu.com"
-      language: "zh"
-      priority: 4
-    cnki:
-      category: "chinese_academic"
-      mcp_server: "reasonix_builtin"
-      tools: ["web_search"]
-      strategy: "site:cnki.net"
-      language: "zh"
-      priority: 5
-    wanfang:
-      category: "chinese_academic"
-      mcp_server: "reasonix_builtin"
-      tools: ["web_search"]
-      strategy: "site:wanfangdata.com.cn"
-      language: "zh"
-      priority: 6
-    cas:
-      category: "chinese_academic"
-      mcp_server: "reasonix_builtin"
-      tools: ["web_search"]
-      strategy: "site:cas.cn OR site:ihb.ac.cn"
-      language: "zh"
-      priority: 7
-    ncbi:
-      category: "academic"
-      mcp_server: "ncbi"
-      tools: ["ncbi_ncbi_esearch","ncbi_ncbi_esummary","ncbi_ncbi_efetch"]
-      priority: 8
-    tavily:
-      category: "web"
-      requires_api_key: true
-      env_var: "TAVILY_API_KEY"
-      mcp_server: "tavily"
-      tools: ["tavily_search","tavily_extract"]
-      priority: 9
-    exa:
-      category: "web"
-      requires_api_key: true
-      env_var: "EXA_API_KEY"
-      mcp_server: "exa"
-      tools: ["exa_web_search"]
-      priority: 10
-    cognitive_search:
-      category: "cognitive"
-      requires_api_key: false
-      loader: "DirectLoader (importlib)"
-      engine_path: "${WORKSPACE_ROOT}/cognitive-search-engine/"
-      tools: ["csearch_species","csearch_graph","csearch_add_paper"]
-      priority: 0
-      primary: false
-      note: "专用认知搜索 — 引擎更新自动生效，零 MCP 开销"
-    web_search:
-      category: "builtin"
-      mcp_server: "reasonix_builtin"
-      tools: ["web_search","web_fetch"]
-      priority: 11
-
-  # ===== 图谱数据源 =====
-  knowledge_graph:
-    primary: "${WORKSPACE_ROOT}/cognitive-search-engine/config/species_graph.yaml"
-    variants: "${WORKSPACE_ROOT}/cognitive-search-engine/src/variant_generator.py"
-    note: "OCR变体由 variant_generator.py 运行时生成，不再需要静态 YAML 文件"
-
-  # ===== 并行策略 (统一) =====
-  parallelism:
-    search_engines:
-      max_concurrent: 11
-      strategy: "fan_out"
-    domain_skills:
-      max_concurrent: 3
-      strategy: "independent"
-    cross_project:
-      max_concurrent: 2
-      strategy: "fan_out"
-
-  # ===== 激活顺序 (统一) =====
-  activation_order:
-    - { stage: 0, name: "PREFLIGHT", rule: null }
-    - { stage: 1, name: "Contradiction Analysis", rule: "CP-1,CP-2" }
-    - { stage: 2, name: "Cognitive Search", rule: "DS-1,DS-2" }
-    - { stage: 3, name: "Domain Execution", rule: null, parallel: true }
-    - { stage: 4, name: "Verification", rule: "FB-1,FB-2" }
-    - { stage: 5, name: "Graph Update", rule: "MO-2" }
-    - { stage: 6, name: "Review + Adapt", rule: "MO-1,MO-2,DS-1..4" }
-
-  # ===== 进化机制 (v3.2 升级：三项目均有自进化) =====
-  evolution:
+      role: "三角 V0 — 多物种知识库: 文献管理, 数据供给, 矛盾分析"
+      layer: "State/Knowledge"
+      exports: ["stats-assistant", "research-analyst", "phd-proposal-writer", "ima-smart-search"]
     cognitive_engine:
-      path: "${WORKSPACE_ROOT}/cognitive-search-engine/"
-      loader: "importlib"
-      update_model: "auto"           # engine 代码更新 → 下次 import 自动生效
-      evolution_file: "cognitive-search-engine/config/evolution.yaml"
-      self_evolve_skill: "cognitive-search-engine/skills/self-evolve.md"
-    fish:
-      evolution_file: "fish-ecology-assistant/config/evolution.yaml"
-      self_evolve_skill: "fish-ecology-assistant/.reasonix/skills/self-evolve.md"
-      component_registry: "fish-ecology-assistant/config/component_registry.yaml"
-    porpoise:
-      evolution_file: "porpoise-agent/config/evolution.yaml"
-      self_evolve_skill: "porpoise-agent/src/skills/self-evolve/SKILL.md"
-      component_registry: "porpoise-agent/config/component_registry.yaml"
-    graph:
-      path: "${WORKSPACE_ROOT}/cognitive-search-engine/config/species_graph.yaml"
-      writeback: "auto"              # 搜索完成后自动回写图谱
-      shared_across: ["fish", "porpoise", "cognitive"]
-    rules:
-      spread: "manual"              # 规则跨项目同步需手动 commit
-      coordination: "this file (${WORKSPACE_ROOT}/coordination.yaml)"
-    cross_feedback:
-      enabled: true
-      direction: "bi-directional"
-      shared_metrics: ["verification_pass_rate", "contradiction_resolution_rate", "false_positive_rate"]
-      log_format: "JSONL (shared across all three projects)"
-
-# ═══════════════════════════════════════════════════════════════
-# v7.0 — Unified project_loader + Adapter Architecture
-# ═══════════════════════════════════════════════════════════════
-# Replaces scattered DirectLoader spec_from_file_location calls
-# with a single workspace-level entry point.
-#
-# Usage:
-#   from scripts.project_loader import get_fish, get_cognitive, get_porpoise, get_coilia
-#   adapter = get_fish()
-#   result = adapter.search("Ochetobius elongatus")
-#
-# Each project exposes an adapter implementing IProjectAdapter:
-#   - search(query, **kwargs) → dict
-#   - health() → dict
-#   - info() → dict
-
-project_loader:
-  version: "1.0.0"
-  entry: "scripts/project_loader.py"
-  protocol: "IProjectAdapter (search/health/info)"
-  cache: "module-level per-project"
-
-  adapters:
-    fish:
-      project: "fish-ecology-assistant"
-      adapter_file: "src/adapter.py"
-      orchestrator_file: "src/orchestrator.py"
-      factory: "get_fish() → FishEcologyAdapter"
-      capabilities: [species_search, credibility_scoring, delegate_protocol]
-
-    cognitive:
       project: "cognitive-search-engine"
-      adapter_file: "src/adapter.py"
-      factory: "get_cognitive() → CognitiveSearchAdapter"
-      capabilities: [search, graph_lookup, verify_claims, variant_generation]
+      role: "三角 V1 — 21引擎认知搜索: 图谱进化, 变体生成, 可信度验证"
+      layer: "Validation"
+      exports: ["graph-search-engine", "cognitive-species-search", "self-evolve"]
+      engine_path: "cognitive-search-engine"
+      loader: "importlib (DirectLoader, 零 MCP 进程)"
+    coordinator:
+      project: "eon-core"
+      role: "三角协调器 — EventBus, DAG路由, 四顶点拓扑"
+      layer: "Coordination"
+      repo: "https://github.com/fangtaocai041/eon-core"
 
+  # ===== 衍生项目 (万物) =====
+  # 从三角闭环派生，依赖三角提供知识和搜索能力
+  derived_projects:
     porpoise:
+      id: "P₁"
       project: "porpoise-agent"
-      adapter_file: "src/adapter.py"
-      factory: "get_porpoise() → PorpoiseAdapter"
-      capabilities: [acoustic_analysis, population_modeling, habitat_assessment]
-
+      role: "江豚(Neophocaena phocaenoides)专属智能体 — 种群监测, 威胁评估, 野外调查"
+      depends_on: ["fish_knowledge", "cognitive_engine"]
     coilia:
+      id: "P₂"
       project: "coilia-agent"
-      adapter_file: "src/adapter.py"
-      factory: "get_coilia() → CoiliaAdapter"
-      capabilities: [otolith_analysis, migration_path, resource_assessment]
-
+      role: "刀鲚(Coilia nasus)专属智能体 — 耳石微化学, 洄游生态, 资源评估"
+      depends_on: ["fish_knowledge", "cognitive_engine"]
     culter:
+      id: "P₃"
       project: "culter-agent"
-      adapter_file: "src/adapter.py"
-      factory: "get_culter() → CulterAdapter"
-      capabilities: [genome_assembly, comparative_genomics, phylogeography, population_genetics, age_growth_modeling, stable_isotope_ecology, trophic_niche_MixSIAR, sympatric_coexistence, resource_assessment, habitat_suitability]
+      role: "鲌类(Culter/Chanodichthys)专属智能体 — 基因组学, 年龄生长, 同位素营养生态位, 同域共存, 资源评估"
+      depends_on: ["fish_knowledge", "cognitive_engine"]
+    conflict_arbiter:
+      id: "C"
+      project: "conflict-arbiter"
+      role: "冲突仲裁层 (火🟥) — 多源保护推荐冲突检测, 可信度加权仲裁, 熔断, 中国物种区域策略"
+      depends_on: ["fish_knowledge", "cognitive_engine"]
 
-  consumers:
-    - "eon-core/src/vertices/ (fish/cognitive/porpoise/coilia 顶点适配器)"
-
-  migration_status:
-    meso_cosmos: "DONE — _call_cognitive/_call_coilia/_call_porpoise replaced by _call_via_loader"
-    porpoise_internal: "KEPT — internal DirectLoader for cognitive as tool-level call"
-    coilia_internal: "KEPT — internal DirectLoader for cognitive as tool-level call"
-    fish: "NEW — first Python entry point for previously skill-only project"
-
-# ═══════════════════════════════════════════════════════════════
-# v7.3 — 点→线→面→体 通路架构
-# ═══════════════════════════════════════════════════════════════
-# 工程语言化五项目连接。每条通路有精确的函数签名和数据转换规则。
-# 完整定义: scripts/pathway_contracts.py
-# 端到端验证: scripts/verify_pathways.py
-
-pathways:
-  # ── 点: 6 核心专精 ──
-  cores:
-    conflict:
-      function: "assess_conflict(species: str, sources: list) → ConflictReport"
-      one_liner: "多源保护推荐冲突检测 + 可信度加权仲裁 + 熔断逻辑"
-      entry: "get_conflict()"
-    fish:
-      function: "lookup_species(name: str) → SpeciesProfile"
-      one_liner: "长江 443 种鱼类知识库查询 + 可信度评分"
-      entry: "get_fish()"
-    cognitive:
-      function: "search_species(genus: str, species: str) → SearchResult"
-      one_liner: "BDI+ReAct 多源认知搜索 + OCR变体 + 图谱遍历"
-      entry: "get_cognitive()"
-    culter:
-      function: "assess_culter_species(species: str, context: str) → SpeciesAssessment"
-      one_liner: "年龄与生长建模 + 资源评估 + 栖息地适宜性"
-      entry: "get_culter()"
-    porpoise:
-      function: "analyze_contradiction(question: str) → ContradictionRoute"
-      one_liner: "矛盾驱动路由 + 涌现检测 + 自愈监控"
-      entry: "get_porpoise()"
-    coilia:
-      function: "assess_species(species: str, context: str) → SpeciesAssessment"
-      one_liner: "耳石微化学 + 洄游生态 + 资源评估"
-      entry: "get_coilia()"
-    eon_core:
-      function: "route_event(event: Event) → VertexChain"
-      one_liner: "DAG 拓扑路由 + 六道轮回业力 + 谱间隙验证"
-      entry: "OriginKernel.route_event()"
-
-  # ── 线: 4 数据流通路 ──
-  lines:
-    P1_fish_to_cognitive:
-      name: "物种名→文献搜索"
-      source: "fish (S/V0)"
-      target: "cognitive (V/V1)"
-      transform: "lookup_species() → search_species()"
-      status: "active"
-    P2_cognitive_to_fish:
-      name: "搜索结果→可信度评分"
-      source: "cognitive (V/V1)"
-      target: "fish (S/V0)"
-      transform: "search() → score_credibility()"
-      status: "active"
-    P3_cognitive_to_domain:
-      name: "文献结果→领域分析"
-      source: "cognitive (三角·V1)"
-      target: "porpoise (P₁) | coilia (P₂) | culter (P₃)"
-      transform: "search() → analyze_contradiction() | assess_species() | assess_culter_species()"
-      status: "active"
-    P4_health_to_karma:
-      name: "健康状态→业力评估"
-      source: "porpoise (P₁)"
-      target: "eon-core (Samsara Ring)"
-      transform: "health() → evaluate_karma()"
-      status: "active"
-    P5_all_to_conflict:
-      name: "万物→冲突检测"
-      source: "fish (三角·V0) | cognitive (三角·V1) | porpoise (P₁) | coilia (P₂) | culter (P₃) | Pₙ"
-      target: "conflict (C/V4)"
-      transform: "any_output() → detect_conflicts()"
-      status: "active"
-    P6_conflict_to_user:
-      name: "仲裁结果→裁决输出"
-      source: "conflict (C/V4)"
-      target: "user"
-      transform: "verdict() → consensus_report()"
-      status: "active"
-    P7_taxonomy_feedback:
-      name: "分类变更→知识库回写"
-      source: "cognitive (三角·V1)"
-      target: "fish (三角·V0)"
-      transform: "detect_taxonomy_discrepancy() → update_taxonomy()"
-      note: "WHEN c搜索发现科/属/种分类变更 THEN 自动写回f知识库 taxonomy_log"
-      status: "active"
-
-  # ── 面: 4 多项目工作流 ──
-  workflows:
-    WF_A_full_stack_search:
-      name: "全栈物种搜索"
-      sequence: [P1_fish_to_cognitive, P2_cognitive_to_fish]
-      trigger: "user asks about a specific species"
-    WF_B_domain_conservation:
-      name: "领域保护评估"
-      sequence: [P1_fish_to_cognitive, P3_cognitive_to_domain, P4_health_to_karma]
-      trigger: "user asks about conservation/threat/assessment"
-    WF_C_conflict_arbitration:
-      name: "跨源冲突仲裁"
-      sequence: [P5_all_to_conflict, P6_conflict_to_user]
-      trigger: "multiple sources disagree on protection recommendation"
-    WF_D_taxonomy_sync:
-      name: "分类变更自动同步"
-      sequence: [P1_fish_to_cognitive, P7_taxonomy_feedback]
-      trigger: "search detects family/genus/species name discrepancy between c and f projects"
-
-  # ── 体: 闭合反馈环 ──
-  volume:
-    name: "eon-core 闭合反馈环 (Samsara)"
-    note: "三角核心内闭环: P1(查→搜) P2(搜→评) P4(健康→业力)"

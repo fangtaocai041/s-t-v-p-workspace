@@ -1,141 +1,102 @@
-# 🗂️ 五项目包含关系 — 消除混乱
+# 🗂️ 项目关系 — 谁是谁
 
-> **关键**: 项目(代码目录) ≠ 角色(架构层次)。同一套代码，不同视角的映射不同。
-> **同步**: 2026-06-09
+> **核心**: 项目(目录) ≠ 角色(架构)。同一套代码，两种身份。
+> **同步**: 2026-06-09 · 三生万物精简版
 
 ---
 
-## 视角一: 代码目录 (文件系统 — 平级)
+## 一、文件系统布局 (5个项目平级)
 
 ```
-D:\Reasonix\                     ← workspace 根目录
-  ├── eon-core/                  ← 项目之一 (内核基础设施代码)
-  ├── fish-ecology-assistant/    ← 项目之一 (知识供给代码)
-  ├── cognitive-search-engine/   ← 项目之一 (搜索验证代码)
-  ├── porpoise-agent/            ← 项目之一 (江豚专研代码)
-  └── coilia-agent/              ← 项目之一 (刀鲚专研代码)
-
-5个项目在文件系统上是平级的。
-每个项目有自己的 config/ src/ skills/ docs/。
+<workspace>/
+  ├── eon-core/                  ─ 内核基础设施
+  ├── fish-ecology-assistant/    ─ 鱼类知识供给
+  ├── cognitive-search-engine/   ─ 搜索验证引擎
+  ├── porpoise-agent/            ─ 江豚专研 (P₁)
+  └── coilia-agent/              ─ 刀鲚专研 (P₂)
 ```
 
 ---
 
-## 视角二: 架构角色 (道→一→二→三→万物)
+## 二、架构角色 (两层: 三角核心 + 万物衍生)
+
+### 三角核心 (sealed_set, arity=3) — 缺一不可
+
+| 项目 | 角色 | 接口 | 核心函数 |
+|------|------|------|---------|
+| **fish-ecology-assistant** | 知识供给 (S/V0) | SpeciesKnowledgeProvider | `lookup_species(name)` |
+| **cognitive-search-engine** | 搜索验证 (V/V1) | LiteratureValidator | `search_species(genus, species)` |
+| **eon-core** | 协调内核 | OriginKernel | `route_event(event)` |
+
+**不变量**: 三项目必须同时存在。缺失任意一个 → 系统不可运行。
+
+### 万物衍生 (open_set, arity≥0) — 可无限扩展
+
+| 实例 | 项目 | 目标物种 | 核心函数 |
+|------|------|---------|---------|
+| P₁ | porpoise-agent | Neophocaena asiaeorientalis (长江江豚) | `analyze_contradiction(question)` |
+| P₂ | coilia-agent | Coilia nasus (刀鲚) | `assess_species(species, context)` |
+| Pₙ | `spawn_agent.py` 生成 | 任意物种 | 模板生成 |
+
+**不变量**: 三角核心可以脱离万物独立运行。万物依赖三角的知识供给和搜索验证。
+
+---
+
+## 三、eon-core 的双重身份
 
 ```
-道 (操作者)              ← 不是项目。是 Reasonix/用户。
- │
-一 (IProjectAdapter)     ← 不是项目。是接口契约 scripts/adapter_protocol.py。
- │                        5个项目都实现了它。
- │
-二 (YinYang)             ← 不是独立项目。代码在 eon-core/src/poles/。
- │                        YangPole(扩张) + YinPole(验证)。
- │
-三 (三角闭环)            ← 3个项目的协同:
- │   fish-ecology-assistant    (S/V0 — 知识供给)
- │   cognitive-search-engine   (V/V1 — 验证引擎)
- │   eon-core                  (Coordinator — 协调内核)
- │
- └─ 万物 (从三演化)      ← 包含:
-     ├─ porpoise-agent         (P₁/V2 — 江豚专研, 独立项目)
-     ├─ coilia-agent           (P₂/V3 — 刀鲚专研, 独立项目)
-     ├─ Pₙ                     (spawn_agent 生成的任何新项目)
-     ├─ 四象 (V0 V1 V2 V3)     (代码在 eon-core/src/vertices/)
-     ├─ 八卦 (8 trigrams)      (代码在 eon-core/src/trigrams/)
-     ├─ 五行 (5 elements)      (代码在 eon-core/src/wuxing/)
-     └─ 六道 (6 realms)        (代码在 eon-core/src/samsara/)
+eon-core AS 项目目录:       eon-core AS 架构角色:
+─────────────────────      ──────────────────────
+eon-core/                  (1) 三角核心.协调者
+  src/kernel/origin.py       → EventBus, DAG路由, 生命周期
+  src/poles/                 → YangPole(扩张) + YinPole(收敛)
+  src/vertices/              → 4个顶点适配器 (代理各项目)
+                            (2) 万物.基础设施宿主
+  src/trigrams/              → 8个功能子模块
+  src/wuxing/                → 健康监控
+  src/samsara/               → 业力评估
+  src/mesh/                  → 四面体拓扑
+  src/sphere/                → API网关
+  src/tendrils/              → 外部探针
+  src/evolution/             → 自进化
+
+一份代码, 两个身份:
+  1) 三角核心的协调者 (OriginKernel, EventBus)
+  2) 万物的基础设施宿主 (顶点/子模块/监控/评估)
 ```
 
 ---
 
-## 视角三: eon-core 的双重身份 (这是混乱的根源)
+## 四、7 条数据流通路
 
-```
-eon-core 作为「项目」:          eon-core 作为「架构角色」:
-─────────────────────          ─────────────────────────
-D:\Reasonix\eon-core\           三角闭环的协调内核
-├── src/kernel/origin.py        管理 EventBus, DAG路由, 生命周期
-├── src/poles/                  实现阴阳双极 (二)
-├── src/vertices/               实现四象顶点分发 (万物)
-├── src/trigrams/               实现八卦子模块 (万物)
-├── src/wuxing/                 实现五行流转 (万物)
-├── src/samsara/                实现六道轮回 (万物)
-├── src/mesh/                   实现四面体拓扑 (万物)
-├── src/sphere/                 实现球体网关 (万物)
-├── src/tendrils/               实现触须探针 (万物)
-└── src/evolution/              实现进化引擎 (万物)
-
-一个项目，承载了两层架构:
-  1) 作为「三」的协调内核 (OriginKernel, EventBus)
-  2) 作为「万物」的基础设施 (四象八卦五行六道)
-```
+| ID | 路径 | 转换 | 触发 |
+|----|------|------|------|
+| P1 | fish → cognitive | `lookup_species()` → `search_species()` | 用户查物种 |
+| P2 | cognitive → fish | `search()` → `score_credibility()` | 搜索完成 |
+| P3 | cognitive → porpoise/coilia | `search()` → domain analysis | 需要领域上下文 |
+| P4 | porpoise → eon-core | `health()` → `evaluate_karma()` | 健康脉冲(60s) |
+| P5 | any → conflict | `output()` → `detect_conflicts()` | 多源不一致 |
+| P6 | conflict → user | `verdict()` → `consensus_report()` | 仲裁完成 |
+| P7 | cognitive → fish | taxonomy_discrepancy() → update_taxonomy() | 分类变更 |
 
 ---
 
-## 视角四: 每个架构层在哪个项目哪个文件中
+## 五、一句话消除混乱
 
 ```
-层      架构概念        所在项目          实际文件
-──      ────────        ────────          ────────
-道      操作者          不是项目           Reasonix/用户
-一      统一接口         workspace         scripts/adapter_protocol.py
-二      阳·扩张         eon-core           src/poles/yang_pole.py
-二      阴·验证         eon-core           src/poles/yin_pole.py
-三      S/知识供给      fish-ecology      src/adapter.py (lookup_species)
-三      V/验证引擎      cognitive          src/adapter.py (search_species)
-三      Coordinator     eon-core           src/kernel/origin.py
+Q: eon-core 和另外 4 个项目是什么关系？
+A: 文件系统层面: 平级。架构层面: eon-core 是三角核心的协调者 + 万物的基础设施宿主。
 
-万物    四象 V0         eon-core           src/vertices/v0_fish/
-万物    四象 V1         eon-core           src/vertices/v1_cognitive/
-万物    四象 V2         eon-core           src/vertices/v2_porpoise/
-万物    四象 V3         eon-core           src/vertices/v3_coilia/
-万物    八卦 ☰☱        eon-core           src/trigrams/qian_*/ dui_*/
-万物    八卦 ☲☳        eon-core           src/trigrams/li_*/ zhen_*/
-万物    八卦 ☴☵        eon-core           src/trigrams/xun_*/ kan_*/
-万物    八卦 ☶☷        eon-core           src/trigrams/gen_*/ kun_*/
-万物    五行 🪵🔥🪨⚔️💧  eon-core           src/wuxing/
-万物    六道 ☸️🧘⚔️🐂👻🔥 eon-core           src/samsara/
-万物    P₁(江豚)        porpoise-agent    src/agent/orchestrator.py
-万物    P₂(刀鲚)        coilia-agent      src/agent/orchestrator.py
-万物    Pₙ(模板)        spawn_agent.py    scripts/spawn_agent.py
-```
+Q: porpoise 和 coilia 属于三角核心还是万物？
+A: 万物。它们是三角核心派生的物种专研项目。三角核心 = [fish, cognitive, eon-core]。
 
----
+Q: 三角核心必须存在吗？
+A: 必须。缺任意一个顶点，系统不可运行。万物可以没有，三角不能缺。
 
-## 视角五: 通路 (数据流 — 谁调谁)
+Q: 顶点适配器 (vertices/) 和八卦子模块 (trigrams/) 在哪里？
+A: 全部在 eon-core/src/ 下。它们是 eon-core 的内部基础设施。
 
-```
-P1: fish-ecology ──lookup_species──→ cognitive-search-engine
-    项目A 调用 项目B 的 search()。数据: 物种名 → 搜索查询。
-
-P2: cognitive ──search_result──→ fish-ecology
-    项目B 返回结果给项目A。数据: 论文列表 → 可信度评分。
-
-P3: cognitive ──search_result──→ porpoise / coilia
-    项目B 赋能项目C/D。数据: 文献 → 领域分析。
-
-P4: 所有项目 ──health()──→ eon-core
-    所有适配器报告健康 → eon-core Samsara 业力评估。
-```
-
----
-
-## 一句话消除混乱
-
-```
-Q: eon-core 和其他4个项目是什么关系？
-A: 代码上平级。架构上 eon-core 既是「三」的协调内核,
-   又是「万物」(四象八卦五行六道) 的代码载体。
-
-Q: 四象八卦五行六道在哪个项目里？
-A: 全部在 eon-core/src/ 下。它们是 eon-core 的内部模块。
-
-Q: porpoise/coilia 是「万物」还是「三」？
-A: 是「万物」。它们是从三角派生的独立项目。
-   三角只需要 fish + cognitive + eon-core 即可运行。
-
-Q: spawn_agent 生成的 Pₙ 放在哪？
-A: workspace 根目录下的新项目目录 (如 acipenser-agent/)。
-   与 porpoise-agent/ coilia-agent/ 平级。
+Q: Pₙ 新项目在哪里生成？
+A: 在 workspace 根目录 <species>-agent/，与 porpoise-agent/ 和 coilia-agent/ 同级。
+   spawn_agent.py 一键生成。
 ```

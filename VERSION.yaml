@@ -1,81 +1,73 @@
 # ═══════════════════════════════════════════════════════════════
-# VERSION.yaml v7.0 — TaijiTetrahedron-Samsara unified version
+# VERSION.yaml v7.3 — 三生万物版本号
 # ==============================================================
 # Single Source of Truth for all projects in the workspace.
 # Run scripts/sync_versions.py to auto-sync to README, docs, etc.
 # ═══════════════════════════════════════════════════════════════
 
 workspace:
-  version: "v7.2.0"
-  date: "2026-06-08"
+  version: "v8.0.0"
+  date: "2026-07-11"
   name: "eon-workspace"
-  code: "Eon-Taiji-v7.2"
-  architecture: "五项目十层同心: eon-core + fish(S) + cognitive(V) + porpoise(P₁) + coilia(P₂)"
-  total_projects: 5
-  layers: 10
-  total_modules: 44
-  total_tendrils: 12
-  total_karma_rules: 12
+  code: "sansheng-wanwu-v2"
+  architecture: "三生万物 v8: 三角核心(fish+cognitive+eon-core) + 万物衍生(porpoise+coilia+culter) + 冲突仲裁(conflict)"
+  total_projects: 7
+  total_modules: 52
 
 projects:
   eon-core:
-    version: "v7.2.0"
-    date: "2026-06-08"
-    role: "UNIFIED_KERNEL"
-    element: "ALL"
-    wuxing: "十层同心"
-    tao: "太极·两仪·四象·八卦·三角体·五行·六道·圆球体·触须"
-    description: "10-layer concentric dynamic architecture unifying 4 projects via project_loader adapters"
+    version: "v8.0.0"
+    date: "2026-07-11"
+    role: "三角核心·协调内核"
+    description: "OriginKernel + EventBus + 顶点框架 + 八卦子模块 + WuXing + Samsara"
     path: "eon-core/"
-    github: "https://github.com/fangtaocai041/eon-core"
-    adapters: ["V0→fish", "V1→cognitive", "V2→porpoise", "V3→coilia"]
+    adapter: "src/adapter.py → EonCoreAdapter"
+    adapters: ["fish", "cognitive", "porpoise", "coilia", "culter", "conflict"]
 
   cognitive-search-engine:
-    version: "v5.3.0"
-    date: "2026-06-08"
-    role: "V (Validation) → V1 (VerifyVertex)"
-    element: "木"
-    wuxing: "生长·扩展"
-    tao: "阴·验证 → 太阴·老阴"
-    status: "MIGRATED — gRPC service at port 50052"
+    version: "v5.5.0"
+    date: "2026-06-09"
+    role: "三角核心·搜索验证"
     adapter: "src/adapter.py → CognitiveSearchAdapter"
     path: "cognitive-search-engine/"
 
   fish-ecology-assistant:
     version: "v6.3.0"
     date: "2026-06-08"
-    role: "S (State) → V0 (SupplyVertex)"
-    element: "土"
-    wuxing: "承载·化育"
-    tao: "阳·知识 → 太阳·老阳"
-    status: "MIGRATED — gRPC service at port 50051"
-    adapter: "src/adapter.py → FishEcologyAdapter (NEW)"
+    role: "三角核心·知识供给"
+    adapter: "src/adapter.py → FishEcologyAdapter"
     path: "fish-ecology-assistant/"
 
   porpoise-agent:
     version: "v4.3.0"
     date: "2026-06-08"
-    role: "P₁ (Porpoise) → V2 (DomainVertexP1)"
-    element: "金"
-    wuxing: "收敛·肃降"
-    tao: "万物·江豚 → 少阴"
-    status: "ACTIVE — gRPC service at port 50053 (V2)"
+    role: "P₁ 万物衍生·江豚"
     adapter: "src/adapter.py → PorpoiseAdapter"
     path: "porpoise-agent/"
 
   coilia-agent:
     version: "v1.2.0"
     date: "2026-06-08"
-    role: "P₂ (Coilia) → V3 (DomainVertexP2)"
-    element: "水"
-    wuxing: "流动·润下"
-    tao: "万物·刀鲚 → 少阳"
-    status: "ACTIVE — gRPC service at port 50054 (V3, 同级项目)"
+    role: "P₂ 万物衍生·刀鲚"
     adapter: "src/adapter.py → CoiliaAdapter"
     path: "coilia-agent/"
 
+  culter-agent:
+    version: "v2.0.0"
+    date: "2026-07-11"
+    role: "P₃ 万物衍生·鲌类"
+    adapter: "src/adapter.py → CulterAdapter"
+    path: "culter-agent/"
+
+  conflict-arbiter:
+    version: "v1.0.0"
+    date: "2026-07-11"
+    role: "冲突仲裁层 (火🟥)"
+    adapter: "src/adapter.py → ConflictArbiterAdapter"
+    path: "conflict-arbiter/"
+
 # ═══════════════════════════════════════════════════════════════
-# Runtime Invariants (verified at bootstrap + each cycle)
+# Runtime Invariants
 # ═══════════════════════════════════════════════════════════════
 invariants:
   - id: "INV-001"
