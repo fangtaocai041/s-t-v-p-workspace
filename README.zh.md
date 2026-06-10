@@ -4,14 +4,20 @@
 
 # eon-workspace
 
-> **三生万物 v8.1 — 六项目统一工作空间**
+> **三生万物 v8.2 — 六项目统一工作空间 + 物种全景分析管线**
 > 道(eon-core) → S(fish知识) + T(cognitive验证) → 万物(P₁porpoise江豚 + P₂coilia刀鲚 + P₃culter鲌类)
 
 ## 快速开始
 
 ```bash
+# 物种全景分析 (管线 Phase 0-5)
+python workspace/scripts/run_full_analysis.py "珠星三块鱼" "Tribolodon brandti"
+
 # 物种搜索
 python eon-core/src/main.py search "珠星三块鱼"
+
+# 运行测试集 (38项)
+python workspace/scripts/test_pipeline.py
 
 # 三角验证评分
 python fish-ecology-assistant/scripts/run_lit_search.py "珠星三块鱼"

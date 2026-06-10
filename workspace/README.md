@@ -1,4 +1,6 @@
-# 三生万物 五项目工作空间
+# 三生万物 五项目工作空间 (v8.2)
+
+> **物种全景分析管线 — Phase 0:画像 → 1:统计 → 2:趋势 → 3:空白 → 4:涌现 → 5:假说**
 
 ## 架构概览
 
@@ -35,11 +37,26 @@
 # 从 .reasonix 目录调用（等效）
 /run_skill name:graph-search-engine arguments:"搜索 Ochetobius elongatus 文献"
 
-# Python 脚本入口
-python workspace/scripts/pipeline_search_species.py "检索珠星三块鱼相关文献"
-python workspace/scripts/coordinator.py           # 自检
-python workspace/scripts/credibility_scorer.py --example
-python workspace/scripts/self_evolve.py --example
+# 物种全景分析 (推荐)
+python scripts/run_full_analysis.py "珠星三块鱼" "Tribolodon brandti"
+
+# 运行测试集
+python scripts/test_pipeline.py
+
+# 单模块
+python scripts/trend_analyzer.py "珠星三块鱼"
+python scripts/gap_analyzer.py "珠星三块鱼"
+python scripts/cross_synthesis.py "珠星三块鱼" "Tribolodon brandti"
+python scripts/reasoning_engine.py "珠星三块鱼" "Tribolodon brandti"
+
+# CLI交互入口
+python scripts/search_species.py "珠星三块鱼"
+
+# 旧搜索管线（兼容）
+python scripts/pipeline_search_species.py "检索珠星三块鱼相关文献"
+python scripts/coordinator.py           # 自检
+python scripts/credibility_scorer.py --example
+python scripts/self_evolve.py --example
 ```
 
 ## 快速开始
@@ -86,12 +103,19 @@ workspace/
 │   ├── auto-skill.md
 │   └── ocr-solution-audit.md
 ├── scripts/                 — Python 可执行实现
-│   ├── pipeline_search_species.py   — 搜索管线 v8.2
+│   ├── run_full_analysis.py         — 一键全量分析 Phase 0-5 🆕
+│   ├── kb_loader.py                 — 统一数据加载器        🆕
+│   ├── trend_analyzer.py            — 研究趋势分析          🆕
+│   ├── gap_analyzer.py              — 研究空白识别          🆕
+│   ├── cross_synthesis.py           — 跨物种涌现(5检测器)   🆕
+│   ├── reasoning_engine.py          — 生态假说推理(6假说)   🆕
+│   ├── test_pipeline.py             — 管线测试集(38项)      🆕
+│   ├── search_species.py            — CLI交互入口
+│   ├── pipeline_search_species.py   — 搜索管线(兼容)
 │   ├── coordinator.py               — 五项目协调器
 │   ├── credibility_scorer.py        — 三角验证评分
 │   ├── self_evolve.py               — 自进化反馈
-│   ├── kb_to_graph_sync.py          — KB↔图谱同步
-│   └── merge_graphs.py              — 图谱合并
+│   └── kb_to_graph_sync.py          — KB↔图谱同步
 ├── config/
 │   └── root_config/
 │       ├── species_graph.yaml       — 48物种 176论文

@@ -4,7 +4,7 @@
 
 # eon-workspace
 
-> **三生万物 v8.1 — 六项目统一工作空间**
+> **三生万物 v8.2 — 六项目统一工作空间 + 物种全景分析管线**
 > 道(eon-core) → S(fish知识) + T(cognitive验证) → 万物(P₁porpoise江豚 + P₂coilia刀鲚 + P₃culter鲌类)
 > conflict-arbiter 已合并到 cognitive-search-engine T层
 
@@ -33,20 +33,23 @@
 # 加载全部适配器 (6/6)
 python -c "from scripts.project_loader import load_all; print(load_all())"
 
+# 物种全景分析 (管线 Phase 0-5)
+python workspace/scripts/run_full_analysis.py "珠星三块鱼" "Tribolodon brandti"
+
 # 物种搜索 (经由 eon-core → workspace)
 python eon-core/src/main.py search "珠星三块鱼"
 
 # 健康检查
 python eon-core/src/main.py health
 
+# 运行测试集 (38项)
+python workspace/scripts/test_pipeline.py
+
 # 三角验证评分
 python fish-ecology-assistant/scripts/run_lit_search.py "珠星三块鱼"
 
 # 知识库→图谱同步
 python fish-ecology-assistant/scripts/kb_to_graph_sync.py
-
-# 分类学变更检查
-python fish-ecology-assistant/scripts/kb_to_graph_sync.py --check
 ```
 
 ## 项目一览
@@ -83,16 +86,20 @@ python fish-ecology-assistant/scripts/kb_to_graph_sync.py --check
 ## 数据结构
 
 ```
-species_graph.yaml    48物种, 176论文, 12科
-fish_species_kb.yaml  27条目 (species_graph_id已同步)
-scripts/ (7个):
-  credibility_scorer.py  🟢🟡🟠🔴 三角验证
-  self_evolve.py         6维度自进化
-  kb_to_graph_sync.py    KB↔图谱同步
-  taxonomy_sync.py       分类学同步 (已合并入--check)
-  run_lit_search.py      CLI搜索入口
-  search_species.py      旧版 (deprecated)
-  add_literature.py      DOI元数据采集
+species_graph.yaml    43物种, 300+论文, 12科
+fish_species_kb.yaml  1条目 (仅富集画像用，论文以图谱为主)
+scripts/ (workspace 管线):
+  run_full_analysis.py     一键全量分析 (Phase 0-5)   🆕 v1.0
+  kb_loader.py             统一数据加载(图谱主+KB可选) 🆕 v2.0
+  trend_analyzer.py        研究趋势分析(4期跃迁)       🆕 v1.0
+  gap_analyzer.py          研究空白识别(多维)          🆕 v1.0
+  cross_synthesis.py       跨物种涌现(5检测器)         🆕 v2.0
+  reasoning_engine.py      生态假说推理(6假说)         🆕 v3.1
+  search_species.py        CLI交互入口                ✅
+  test_pipeline.py         管线测试集(38项)            🆕 v1.0
+  credibility_scorer.py    三角验证评分                ✅
+  self_evolve.py           自进化反馈                  ✅
+  kb_to_graph_sync.py      KB↔图谱同步                ✅
 ```
 
 ## Skills — 搜索协议
