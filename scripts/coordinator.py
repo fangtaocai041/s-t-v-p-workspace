@@ -34,7 +34,7 @@ def _lazy_getter(name: str):
     """Lazy-import and cache project loader to avoid circular imports."""
     if not _PROJECT_GETTERS:
         from scripts.project_loader import (
-            get_fish, get_cognitive, get_porpoise, get_coilia, get_culter, get_conflict, get_eon,
+            get_fish, get_cognitive, get_porpoise, get_coilia, get_culter, get_conflict,
         )
         _PROJECT_GETTERS.update({
             "fish": get_fish,
@@ -43,7 +43,6 @@ def _lazy_getter(name: str):
             "coilia": get_coilia,
             "culter": get_culter,
             "conflict": get_conflict,
-            "eon": get_eon,
         })
     getter = _PROJECT_GETTERS.get(name)
     if getter is None:
