@@ -32,3 +32,6 @@ bin/node.exe
 *.mp4
 *.zip
 *.csv
+
+logs/
+*.log
