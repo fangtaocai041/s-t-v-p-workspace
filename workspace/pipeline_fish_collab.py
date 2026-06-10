@@ -109,26 +109,76 @@ def run_fish_pipeline(
         result["phases"]["1_fish"] = {"status": "error", "error": str(exc)}
 
     # ══════════════════════════════════════════
-    # Phase 2: 协同 — 文献搜索
+    # Phase 2: 协同 — 文献搜索 + 三角验证评分
     # ══════════════════════════════════════════
     if enable_literature:
         _log(f"\n▸ Phase 2/5: {_phase_tag('2', 'cognitive-search-engine')} 协同")
-        _log("  └─ 文献搜索...")
+        _log("  └─ 文献搜索 (lit-search v3.1 + credibility_score)...")
 
         phase2_start = time.time()
         try:
-            lit_result = search_species(species_name)
-            result["phases"]["2_cognitive"] = {
-                "total_papers": getattr(lit_result, "total_papers", 0),
-                "mode": getattr(lit_result, "mode", ""),
-                "scientific_name": getattr(lit_result, "scientific_name", ""),
-                "categories": getattr(lit_result, "categories", []),
-            }
-            elapsed = time.time() - phase2_start
-            total = result["phases"]["2_cognitive"]["total_papers"]
-            mode = result["phases"]["2_cognitive"]["mode"]
-            _log(f"     ✓ 检索完成 — {total} 篇论文 ({mode})")
-            _log(f"     ⏱ {elapsed:.2f}s")
+            # Read species_graph directly (0 token)
+            import yaml
+            _graph_path = _WORKSPACE_ROOT / "cognitive-search-engine" / "config" / "species_graph.yaml"
+            if _graph_path.exists():
+                with open(_graph_path, encoding="utf-8") as f:
+                    _graph = yaml.safe_load(f)
+
+                # Find species
+                _q = species_name.lower().strip()
+                _sid = None
+                for _sp in _graph["graph"]["species"]:
+                    _spid = _sp.get("id", "").lower().replace("_", " ")
+                    if _q in _spid or _q in _sp.get("name", "").lower() or _q in _sp.get("chinese", "").lower():
+                        _sid = _sp.get("id", "")
+                        _sci_name = _sp.get("name", "")
+                        _cn_name = _sp.get("chinese", "")
+                        break
+
+                if _sid:
+                    _papers = [p for p in _graph["graph"]["papers"] if _sid in p.get("species", [])]
+                    # Credibility scoring
+                    try:
+                        _SCRIPTS = str(_WORKSPACE_ROOT / "fish-ecology-assistant" / "scripts")
+                        if _SCRIPTS not in sys.path:
+                            sys.path.insert(0, _SCRIPTS)
+                        from credibility_scorer import score_papers, format_credibility
+                        _scored = score_papers(_papers, species_name=_sci_name)
+                    except ImportError:
+                        _scored = _papers
+
+                    _high = sum(1 for p in _scored if p.get("_credibility_label") == "高")
+                    _mid = sum(1 for p in _scored if p.get("_credibility_label") == "中")
+                    _low = sum(1 for p in _scored if p.get("_credibility_label") == "低")
+
+                    result["phases"]["2_cognitive"] = {
+                        "total_papers": len(_papers),
+                        "scientific_name": _sci_name,
+                        "chinese_name": _cn_name,
+                        "mode": "graph_lookup",
+                        "credibility": {"high": _high, "mid": _mid, "low": _low},
+                        "papers_top5": [
+                            {"title": p.get("title","")[:60], "score": p.get("_credibility_score",0),
+                             "flag": p.get("_credibility_flag","")}
+                            for p in sorted(_scored, key=lambda x: x.get("_credibility_score",0), reverse=True)[:5]
+                        ],
+                    }
+                    elapsed = time.time() - phase2_start
+                    total = result["phases"]["2_cognitive"]["total_papers"]
+                    _log(f"     ✓ 图谱: {_cn_name} — {total} 篇论文")
+                    _log(f"     ✓ 置信: 🟢{_high} 🟡{_mid} 🟠{_low}")
+                    _log(f"     ⏱ {elapsed:.2f}s")
+                else:
+                    # Fallback: coordinated_search
+                    lit_result = search_species(species_name)
+                    result["phases"]["2_cognitive"] = {
+                        "total_papers": getattr(lit_result, "total_papers", 0),
+                        "mode": "coordinated_search",
+                    }
+                    _log(f"     ✓ 引擎检索: {getattr(lit_result, 'total_papers', 0)} 篇")
+            else:
+                _log("     ⚠️ species_graph.yaml not found, skipping")
+                result["phases"]["2_cognitive"] = {"status": "skipped"}
         except Exception as exc:
             _log(f"     ❌ 文献搜索失败: {exc}")
             result["phases"]["2_cognitive"] = {"status": "error", "error": str(exc)}
