@@ -139,8 +139,7 @@ def run_fish_pipeline(
     # Phase 3: 冲突裁决 (已由 lookup_species 内置计算)
     # ══════════════════════════════════════════
     if enable_conflict:
-        _log(f"
-▸ Phase 3/5: {_phase_tag('3', 'conflict-arbiter')} 协同")
+        _log(f"\n▸ Phase 3/5: {_phase_tag('3', 'conflict-arbiter')} 协同")
         _log("  └─ 冲突裁决 (已内嵌在 lookup_species 中)...")
         phase3_start = time.time()
         try:
