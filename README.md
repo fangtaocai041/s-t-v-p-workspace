@@ -95,6 +95,25 @@ scripts/ (7个):
   add_literature.py      DOI元数据采集
 ```
 
+## Skills — 搜索协议
+
+`.reasonix/skills/` 与 `workspace/skills/` 内容同步，两目录均可调用：
+
+| Skill | 版本 | 用途 |
+|-------|:----:|------|
+| `graph-search-engine` | v4.1 | 图谱物种搜索 — 7引擎并行 + Pareto最优满意 + 自适应深度 |
+| `cognitive-species-search` | v3.2 | 认知物种搜索 — 符号学+语言学+语音学+逻辑推理链 |
+| `chinese-academic-search` | v1.0 | 中文期刊搜索 — 弥补 PubMed/Crossref 不索引中文期刊的盲区 |
+| `self-evolve` | v1.0 | 自进化反馈 — 搜索后自动调参 + 指标驱动进化 |
+| `parallel-farm` | — | 并行子 agent 派发 — 多角度独立调查汇总 |
+| `meso-orchestrator` | v1.0 | 跨项目协调 — Macro(BDI)→Meso(Route)→Micro(Execute) |
+| `auto-skill` | — | 自动技能沉淀 — 非平凡任务自动生成 SKILL.md |
+| `ocr-solution-audit` | — | OCR 方案审计 — 五维对比推荐最优路径 |
+
+调用方式：`/run_skill name:graph-search-engine arguments:"搜索 鳤 文献"`
+
+Python 脚本入口：`python workspace/scripts/pipeline_search_species.py "检索珠星三块鱼"`
+
 ## 文档
 
 | 文档 | 位置 |
