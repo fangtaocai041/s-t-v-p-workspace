@@ -25,16 +25,18 @@ projects:
     adapters: ["fish", "cognitive", "porpoise", "coilia", "culter", "conflict"]
 
   cognitive-search-engine:
-    version: "v5.5.0"
-    date: "2026-06-09"
+    version: "v5.6.0"
+    date: "2026-06-10"
     role: "三角核心·搜索验证"
+    note: "species_graph 172 papers, lit-search v3.1 集成"
     adapter: "src/adapter.py → CognitiveSearchAdapter"
     path: "cognitive-search-engine/"
 
   fish-ecology-assistant:
-    version: "v6.3.0"
-    date: "2026-06-08"
+    version: "v6.4.0"
+    date: "2026-06-10"
     role: "三角核心·知识供给"
+    note: "lit-search v3.1, species_graph 33物种172论文, self_evolve, kb_to_graph_sync"
     adapter: "src/adapter.py → FishEcologyAdapter"
     path: "fish-ecology-assistant/"
 
