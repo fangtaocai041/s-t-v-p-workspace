@@ -1,0 +1,3792 @@
+graph:
+  papers:
+  - doi: 10.3390/genes17010076
+    title: Comparative Transcriptome Analysis Reveals the Seawater Adaptation Mechanism
+      in Pseudaspius hakonensis.
+    year: 2026
+    journal: Genes
+    authors:
+    - Xu Ziyue
+    - Zheng Wen
+    - Chen Wenjun
+    - Zhou Min
+    - Zhai Dongdong
+    - Xia Ming
+    - Liu Hongyan
+    - Xiong Fei
+    - Wang Ying
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1017/S0022149X24000233
+    title: 'Morphological and molecular data on Pseudozoogonoides ugui Shimazu, 1974
+      (Digenea: Microphalloidea: Zoogonidae) ex Pseudaspius hakonensis (Günther, 1877)
+      and taxonomic problems in Zoogoninae genera.'
+    year: 2024
+    journal: Journal of helminthology
+    authors:
+    - Atopkin D M
+    - Ivashko Y I
+    - Izrailskaia A V
+    - Tatonova Y V
+    - Besprozvannykh V V
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1186/s12915-024-01885-2
+    title: Genomic insights into the seawater adaptation in Cyprinidae.
+    year: 2024
+    journal: BMC biology
+    authors:
+    - Wang Ying
+    - Zhang Xuejing
+    - Wang Jing
+    - Wang Cheng
+    - Xiong Fei
+    - Qian Yuting
+    - Meng Minghui
+    - Zhou Min
+    - Chen Wenjun
+    - Ding Zufa
+    - Yu Dan
+    - Liu Yang
+    - Chang Yumei
+    - He Shunping
+    - Yang Liandong
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1016/j.jenvrad.2022.107103
+    title: Factors affecting 137Cs radioactivity and water-to-body concentration ratios
+      of fish in river and pond environments near the Fukushima Dai-ichi Nuclear Power
+      Plant.
+    year: 2023
+    journal: Journal of environmental radioactivity
+    authors:
+    - Wada Toshihiro
+    - Hinata Akinori
+    - Furuta Yuma
+    - Sasaki Keiichi
+    - Konoplev Alexei
+    - Nanba Kenji
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1016/j.parint.2022.102605
+    title: 'Resolution of cryptic species complexes within the genus Metagonimus (Trematoda:
+      Heterophyidae) in Japan, with descriptions of four new species.'
+    year: 2022
+    journal: Parasitology international
+    authors:
+    - Nakao Minoru
+    - Ishikawa Takanori
+    - Hibino Yusuke
+    - Ohari Yuma
+    - Taniguchi Rintaro
+    - Takeyama Tomohiro
+    - Nakamura Shingo
+    - Kakino Wataru
+    - Ikadai Hiromi
+    - Sasaki Mizuki
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1134/s0006297907120085
+    title: 'Analysis of mitochondrial DNA: taxonomic and phylogenetic relationships
+      in two fish taxa (Pisces: Mugilidae and Cyprinidae).'
+    year: 2007
+    journal: Biochemistry. Biokhimiia
+    authors:
+    - Semina A V
+    - Polyakova N E
+    - Brykov Vl A
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.2108/zsj.19.1291
+    title: Speciation and dispersal of Tribolodon species (Pisces, Cyprinidae) around
+      the Sea of Japan.
+    year: 2002
+    journal: Zoological science
+    authors:
+    - Sakai Harumi
+    - Goto Akira
+    - Jeon Sang-Rin
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1007/s10641-021-01166-9
+    title: Changes in foraging and predator avoidance behavior of Japanese dace (Pseudaspius
+      hakonensis) to predation risk by invasive smallmouth bass (Micropterus dolomieu)
+      in a Japanese lake
+    year: 2021
+    journal: Environmental Biology of Fishes
+    authors:
+    - Miles I. Peterson
+    - Satoshi Kitano
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.12782/specdiv.27.279
+    title: '&lt;i&gt;Limnotrachelobdella okae&lt;/i&gt; (Hirudinida: Piscicolidae)
+      Parasitic on Big-scaled Redfin, &lt;i&gt;Pseudaspius hakonensis&lt;/i&gt; (Cypriniformes:
+      Leuciscidae), in Two Brackish Water Lakes, Hokkaido, Japan'
+    year: 2022
+    journal: Species Diversity
+    authors:
+    - Kazuya Nagasawa
+    - Mizuki Sasaki
+    - Hajime Matsubara
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.18353/crustacea.53.0_1
+    title: 'New records of a freshwater fish parasite &lt;i&gt;Argulus japonicus&lt;/i&gt;
+      (Branchiura: Argulidae) from northern Honshu, Japan, with a note on its occurrence
+      in a brackish water lake'
+    year: 2024
+    journal: Crustacean Research
+    authors:
+    - Kazuya Nagasawa
+    - Masato Nitta
+    - Nobuyuki Azuma
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.2305/iucn.uk.2022-1.rlts.t159708969a159709057.en
+    title: 'Pseudaspius hakonensis: Bogutskaya, N.'
+    year: 2020
+    journal: IUCN Red List of Threatened Species
+    authors:
+    - IUCN
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.38006/00187-838-4.2024.274.275
+    title: ГЕЛЬМИНТОФАУНА КРУПНОЧЕШУЙНОЙ КРАСНОПЕРКИ PSEUDASPIUS HAKONENSIS (Günther,
+      1877) ЮЖНОГО САХАЛИНА
+    year: 2024
+    journal: Знание-М eBooks
+    authors:
+    - Е. В. Фролов
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1134/s1063074022050224
+    title: Identification of Three Far Eastern Redfin Species of the Genus Pseudaspius
+      (Osteichthyes, Cyprinidae) Based on Multidimensional Analysis of Measurable
+      Characters
+    year: 2022
+    journal: Russian Journal of Marine Biology
+    authors:
+    - Anna O. Zolotova
+    - Yuri Ph. Kartavtsev
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1007/s10641-021-01067-x
+    title: Habitat dependent predation‐competition interaction shifts of invasive
+      smallmouth bass (Micropterus dolomieu) and resident cyprinids in the Chikuma
+      River, Nagano Japan
+    year: 2021
+    journal: Environmental Biology of Fishes
+    authors:
+    - Miles I. Peterson
+    - Satoshi Kitano
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1007/s10228-021-00804-7
+    title: Juvenile migration of Japanese dace Pseudaspius hakonensis revealed in
+      a tributary of Lake Biwa with seasonal changes in abundance and stable isotope
+      ratios
+    year: 2021
+    journal: Ichthyological Research
+    authors:
+    - Daisuke Ishizaki
+    - Takamaru Nagata
+    - Takeshi Kikko
+    - Toshiaki Mizuno
+    - Chieri Ida
+    - Takuya Okubo
+    - Yasuhiro Fujioka
+    - Taiga Yodo
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1134/s0032945224700747
+    title: Morphological Variability of Far Eastern Redfins of the Genus Pseudaspius
+      (Leuciscidae)
+    year: 2024
+    journal: Journal of Ichthyology
+    authors:
+    - Н. С. Романов
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1134/s1022795411100036
+    title: Phylogenetic analysis of Altai osmans of the genus Oreoleuciscus (Pisces,
+      Cyprinidae, Leuciscinae), based on the analysis of the cytochrome oxidase 1
+      gene (Co-1) sequence
+    year: 2011
+    journal: Russian Journal of Genetics
+    authors:
+    - Н. М. Батищева
+    - Yuri Ph. Kartavtsev
+    - N.G. Bogutskaya
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1023/a:1021103328837
+    title: Genetic Divergence of Far-Eastern Dace Species Belonging to the Genus Tribolodon
+      (Pisces, Cyprinidae) and Closely Related Taxa
+    year: 2002
+    journal: Russian Journal of Genetics
+    authors:
+    - Yu. F. Kartavtsev
+    - Vladimir V. Sviridov
+    - Naoto Hanzawa
+    - Takuma Sasaki
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1266/ggs.82.329
+    title: 'Genetic divergence and phylogenetic independence of Far Eastern species
+      in subfamily Leuciscinae (Pisces: Cyprinidae) inferred from mitochondrial DNA
+      analyses'
+    year: 2007
+    journal: Genes & Genetic Systems
+    authors:
+    - Takeshi Sasaki
+    - Yuri Ph. Kartavtsev
+    - Satoru Chiba
+    - Takayuki Uematsu
+    - Vladimir V. Sviridov
+    - Naoto Hanzawa
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.3347/PHD.23096
+    title: 'Infection characteristics of Metagonimus species (Digenea: Heterophyidae)
+      metacercariae in fish from major rivers of Korea.'
+    year: 2024
+    journal: Parasites, hosts and diseases
+    authors:
+    - Sohn Woon-Mok
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1016/j.saa.2022.121209
+    title: Japanese dace (Tribolodon hakonensis) fish freshness estimation using front-face
+      fluorescence spectroscopy coupled with chemometric analysis.
+    year: 2022
+    journal: Spectrochimica acta. Part A, Molecular and biomolecular spectroscopy
+    authors:
+    - Abamba Omwange Ken
+    - Saito Yoshito
+    - Firmanda Al Riza Dimas
+    - Zichen Huang
+    - Kuramoto Makoto
+    - Shiraga Keiichiro
+    - Ogawa Yuichi
+    - Kondo Naoshi
+    - Suzuki Tetsuhito
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.3347/kjp.2019.57.6.681
+    title: Infection Status with Digenetic Trematode Metacercariae in Fishes from
+      Coastal Lakes in Gangwon-do, Republic of Korea.
+    year: 2019
+    journal: The Korean journal of parasitology
+    authors:
+    - Sohn Woon-Mok
+    - Na Byoung-Kuk
+    - Cho Shin-Hyeong
+    - Lee Soon-Won
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1007/s10695-018-0600-3
+    title: 'A thermostable trypsin from freshwater fish Japanese dace (Tribolodon
+      hakonensis): a comparison of the primary structures among fish trypsins.'
+    year: 2019
+    journal: Fish physiology and biochemistry
+    authors:
+    - Kanno Gaku
+    - Klomklao Sappasith
+    - Kumagai Yuya
+    - Kishimura Hideki
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1016/j.scitotenv.2017.12.017
+    title: Radiocesium dynamics in the aquatic ecosystem of Lake Onuma on Mt. Akagi
+      following the Fukushima Dai-ichi Nuclear Power Plant accident.
+    year: 2018
+    journal: The Science of the total environment
+    authors:
+    - Suzuki Kyuma
+    - Watanabe Shun
+    - Yuasa Yumi
+    - Yamashita Yasunori
+    - Arai Hajime
+    - Tanaka Hideki
+    - Kuge Toshihiro
+    - Mori Masanobu
+    - Tsunoda Kin-Ichi
+    - Nohara Seiichi
+    - Iwasaki Yuichi
+    - Minai Yoshitaka
+    - Okada Yukiko
+    - Nagao Seiya
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.3347/kjp.2014.52.4.399
+    title: Prevalence of zoonotic trematode metacercariae in freshwater fish from
+      Gangwon-do, Korea.
+    year: 2014
+    journal: The Korean journal of parasitology
+    authors:
+    - Cho Shin-Hyeong
+    - Lee Won-Ja
+    - Kim Tong-Soo
+    - Seok Won-Seok
+    - Lee Taejoon
+    - Jeong Kyungjin
+    - Na Byoung-Kuk
+    - Sohn Woon-Mok
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1002/etc.1812
+    title: Identification and accumulation of aromatic sensitizers in fish from paper
+      recycling in Japan.
+    year: 2012
+    journal: Environmental toxicology and chemistry
+    authors:
+    - Terasaki Masanori
+    - Jozuka Kazuhiko
+    - Makino Masakazu
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1007/s11230-011-9336-5
+    title: 'Redescription of the fish parasite Nerocila japonica Schioedte & Meinert,
+      1881 (Crustacea: Isopoda: Cymothoidae), with comments on previous records of
+      N. acuminata in Japanese waters.'
+    year: 2012
+    journal: Systematic parasitology
+    authors:
+    - Yamauchi Takeo
+    - Nagasawa Kazuya
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1007/s00442-007-0827-7
+    title: Effects of experimental duration and density of Japanese dace Tribolodon
+      hakonensis on the strength of trophic cascades on benthic algae.
+    year: 2007
+    journal: Oecologia
+    authors:
+    - Katano Osamu
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1645/GE-472R2.1
+    title: A new pseudophyllidean from a freshwater fish, Gambusia affinis, in China.
+    year: 2005
+    journal: The Journal of parasitology
+    authors:
+    - Yang Wen-Chuan
+    - Wang Yan-Hai
+    - Peng Wen-Feng
+    - Zhou Lin
+    - Liu Sheng-Fa
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1111/j.1365-2656.2005.01032.x
+    title: Intraguild indirect effects through trophic cascades between stream-dwelling
+      fishes.
+    year: 2006
+    journal: The Journal of animal ecology
+    authors:
+    - Katano Osamu
+    - Nakamura Tomoyuki
+    - Yamamoto Shoichiro
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.2108/zsj.22.861
+    title: Seasonal variations in plasma concentrations of sex steroid hormones and
+      vitellogenin in wild male Japanese dace (Tribolodon hakonensis) collected from
+      different sites of the Jinzu river basin.
+    year: 2005
+    journal: Zoological science
+    authors:
+    - Ma Ying-Xin
+    - Matsuda Kouhei
+    - Uchiyama Minoru
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1007/s00359-005-0037-x
+    title: Seasonal variation of chromophore composition in the eye of the Japanese
+      dace, Tribolodon hakonensis.
+    year: 2005
+    journal: Journal of comparative physiology. A, Neuroethology, sensory, neural,
+      and behavioral physiology
+    authors:
+    - Ueno Y
+    - Ohba H
+    - Yamazaki Y
+    - Tokunaga F
+    - Narita K
+    - Hariyama T
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1002/jez.a.84
+    title: Nucleotide and protein sequences of a proteinase inhibitor from the vitelline
+      envelope of dace (Tribolodon hakonensis) eggs.
+    year: 2004
+    journal: Journal of experimental zoology. Part A, Comparative experimental biology
+    authors:
+    - Hosomi Osamu
+    - Ohe Yoshihide
+    - Takeya Akira
+    - Hosaka Kohei
+    - Okubo Toyoji
+    - Iyobe Shizuko
+    - Kudo Shigeharu
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1016/s1096-4959(03)00287-2
+    title: Molecular biology of major components of chloride cells.
+    year: 2003
+    journal: Comparative biochemistry and physiology. Part B, Biochemistry & molecular
+      biology
+    authors:
+    - Hirose Shigehisa
+    - Kaneko Toyoji
+    - Naito Nobuko
+    - Takei Yoshio
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1079/cabicompendium.60652
+    title: Tribolodon hakonensis
+    year: 2019
+    journal: CABI Compendium
+    authors: []
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.35399/isk.33.4.6
+    title: Egg Development and Early Life History of the Anadromous Fish Tribolodon
+      hakonensis in the Seomjin River, Korea
+    year: 2021
+    journal: Korean Journal of Ichthyology
+    authors:
+    - Choi Sungkook
+    - Lee Wan-Ok
+    - Hong Yang-Ki
+    - Song Mi-Young
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.30826/molphy2018-42
+    title: IDENTIFICATION OF HYBRIDS BETWEEN TRIBOLODON HAKONENSIS AND TRIBOLODON
+      BRANDTII USING MORPHOLOGICAL TRAITS AND FOUR MOLECULAR GENETIC MARKERS
+    year: 2018
+    journal: MOLECULAR PHYLOGENETICS
+    authors:
+    - ZOLOTOVA A.O.
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1134/s004287521902022x
+    title: "Морфологическая изменчивость крупночешуйной краснопёрки\n            <i>\n\
+      \              Tribolodon hakonensis\n            </i>\n            (Cyprinidae)"
+    year: 2019
+    journal: Вопросы ихтиологии
+    authors:
+    - Романов Н. С.
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1134/s0032945219020188
+    title: Morphological Variability of Big-Scaled Redfin Tribolodon hakonensis (Cyprinidae)
+    year: 2019
+    journal: Journal of Ichthyology
+    authors:
+    - Romanov N. S.
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.21825/ichmet.71186
+    title: Spatio-Temporal Analyses of 100 Year Heavy Metals Pollution in the Watarase
+      River and Biological Responses of Japanese Dace, Tribolodon hakonensis
+    year: 2016
+    journal: Proceedings of the 18th International Conference on Heavy Metals in the
+      Environment
+    authors:
+    - Kashiwada Shosaku
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.7868/s0042875215050124
+    title: Сравнительный анализ ультраструктуры гамет крупночешуйной краснопёрки<i>Tribolodon
+      hakonensis</i>(Cyprinidae) Южного Приморья и Сахалина
+    year: 2015
+    journal: Вопросы ихтиологии
+    authors:
+    - Незнанова С. Ю.
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1007/s10164-006-0195-5
+    title: Spawning habitat selection and suitability for Japanese dace, Tribolodon
+      hakonensis
+    year: 2006
+    journal: Journal of Ethology
+    authors:
+    - Shirotori Yukinori
+    - Yamaguchi Motoyoshi
+    - Ikuta Kazumasa
+    - Murakami Mayumi
+    - Hakoyama Hiroshi
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1016/0921-8696(92)91137-u
+    title: Distribution pattern of retinal ganglion cells and the central projections
+      in a cyprinid teleost (Tribolodon hakonensis)
+    year: 1992
+    journal: Neuroscience Research Supplements
+    authors:
+    - Yoshimoto Masami
+    - Ito Hironobu
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.2331/suisan.40.433
+    title: 'Pseudozoogonoides ugui sp. nov., A New Digenetic Trematode from the Dace,
+      Tribolodon hakonensis, from Hokkaido, Japan (Trematoda: Zoogonidae)'
+    year: 1974
+    journal: NIPPON SUISAN GAKKAISHI
+    authors:
+    - SHIMAZU Takeshi
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.2330/joralbiosci1965.25.801
+    title: Replacement pattern of the pharyngeal teeth in cyprinid fish, Tribolodon
+      hakonensis.
+    year: 1983
+    journal: Japanese Journal of Oral Biology
+    authors:
+    - Nakajima Tsuneo
+    - Yoshida Hisaho
+    - Sone Banri
+    - Hotta Yoshihiko
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.2331/suisan.41.507
+    title: Alarm reaction of three japanese cyprinid fishes, Tribolodon hakonensis,
+      gnathopogon elongatus elongatus, and rhodeus ocellatus ocellatus.
+    year: 1975
+    journal: NIPPON SUISAN GAKKAISHI
+    authors:
+    - AOKI Ichiro
+    - KUROKI Toshiro
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1002/jmor.1052050204
+    title: 'Morphogenesis of the pharyngeal teeth in the japanese dace, <i>Tribolodon
+      hakonensis</i>(Pisces: Cyprinidae)'
+    year: 1990
+    journal: Journal of Morphology
+    authors:
+    - Nakajima Tsuneo
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1017/s0967199498000124
+    title: Assembly <i>in vitro</i> of vitelline envelope components induced by a
+      cortical alveolus sialoglycoprotein of eggs of the fish <i>Tribolodon hakonensis</i>
+    year: 1998
+    journal: Zygote
+    authors:
+    - Kudo Shigeharu
+    - Teshima Chisato
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1007/s102280200060
+    title: Predation of Japanese dace, Tribolodon hakonensis, by largemouth bass,
+      Micropterus salmoides, in experimental aquaria
+    year: 2002
+    journal: Ichthyological Research
+    authors:
+    - Katano Osamu
+    - Yamamoto Shoichiro
+    - Nakamura Tomoyuki
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.3147/jsfp.12.205
+    title: Note on the Digramma alternans(RUD., 1810) Found on the Japanese Dace,
+      Tribolodon hakonensis Inhabited a River in Hokkaido, Japan
+    year: 1977
+    journal: Fish Pathology
+    authors:
+    - AWAKURA Teruhiko
+    - KAWAMURA Hiroshi
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1016/s0300-9629(76)80109-0
+    title: Spectral sensitivity of a fish, Tribolodon Hakonensis (Günther), retina
+      from two localities
+    year: 1976
+    journal: 'Comparative Biochemistry and Physiology Part A: Physiology'
+    authors:
+    - Niwa Hiroshi
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1007/bf00611180
+    title: Visual responses recorded from the optic tectum of Japanese dace,Tribolodon
+      hakonensis
+    year: 1983
+    journal: Journal of Comparative Physiology ? A
+    authors:
+    - Kawasaki Masashi
+    - Aoki Kiyoshi
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1016/s0021-9258(18)51498-8
+    title: Isolation and structures of glycoprotein-derived free sialooligosaccharides
+      from the unfertilized eggs of Tribolodon hakonensis, a dace
+    year: 1989
+    journal: Journal of Biological Chemistry
+    authors:
+    - Shintaro Inoue
+    - Mariko Iwasaki
+    - Kenichi Ishii
+    - Ken Kitajima
+    - Yuuki Inoue
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1016/s0946-672x(99)80008-x
+    title: Arsenic Accumulation in Organs of the Fresh Water Fish Tribolodon hakonensis
+    year: 1999
+    journal: Journal of Trace Elements in Medicine and Biology
+    authors:
+    - Akiko Takatsu
+    - Takayoshi Kuroiwa
+    - Akira Uchiumi
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1016/j.jfoodeng.2020.110111
+    title: Fish freshness monitoring using UV-fluorescence imaging on Japanese dace
+      (Tribolodon hakonensis) fisheye
+    year: 2020
+    journal: Journal of Food Engineering
+    authors:
+    - Ken Abamba Omwange
+    - Dimas Firmanda Al Riza
+    - Sen Nie
+    - Tomoo Shiigi
+    - Makoto Kuramoto
+    - Yuichi Ogawa
+    - Naoshi Kondo
+    - Tetsuhito Suzuki
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1002/jez.1402450110
+    title: Chorionic peroxidase activity in the eggs of the fish <i>Tribolodon hakonensis</i>
+    year: 1988
+    journal: Journal of Experimental Zoology
+    authors:
+    - Shigeharu Kudo
+    - Atsuhiko Sato
+    - Matsuhisa Inoue
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1266/jjg.62.27
+    title: Variability of mitochondrial DNA in Japanese dace, Tribolodon hakonensis
+      (Cyprinidae).
+    year: 1987
+    journal: The Japanese Journal of Genetics
+    authors:
+    - Naoto Hanzawa
+    - Hiromichi Yonekawa
+    - Ken-ichi Numachi
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1007/s11284-017-1466-z
+    title: Web image search revealed large‐scale variations in breeding season and
+      nuptial coloration in a mutually ornamented fish, <i>Tribolodon hakonensis</i>
+    year: 2017
+    journal: Ecological Research
+    authors:
+    - Keisuke Atsumi
+    - Itsuro Koizumi
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1016/j.eaef.2018.01.001
+    title: Freshness related fluorescent compound changes in Japanese dace fish (Tribolodon
+      hakonensis) eye fluid during storage
+    year: 2018
+    journal: Engineering in Agriculture Environment and Food
+    authors:
+    - Qiuhong Liao
+    - Tetsuhito Suzuki
+    - Yuri Shirataki
+    - Makoto Kuramoto
+    - Naoshi Kondo
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1016/0016-6480(64)90038-3
+    title: In vitro bioconversion of progesterone-4-C14 to 17α-hydroxyprogesterone
+      and androst-4-ene-3,17-dione in testicular tissue of Tribolodon hakonensis Günther
+    year: 1964
+    journal: General and Comparative Endocrinology
+    authors:
+    - Ryoichi Arai
+    - Mikio Shikita
+    - Bun-ichi Tamaoki
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.11369/jji1950.37.17
+    title: Larval developmental intervals in Tribolodon hakonensis (Cyprinidae)
+    year: 1990
+    journal: Japanese Journal of Ichthyology
+    authors:
+    - Harumi Sakai
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.11369/jji1950.29.185
+    title: Vertebral Anomalies in the Cyprinid Fish, Tribolodon hakonensis
+    year: 1982
+    journal: Japanese Journal of Ichthyology
+    authors:
+    - Noritomo Komada
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1016/j.lwt.2021.112207
+    title: Evaluating Japanese dace (Tribolodon hakonensis) fish freshness during
+      storage using multispectral images from visible and UV excited fluorescence
+    year: 2021
+    journal: LWT
+    authors:
+    - Ken Abamba Omwange
+    - Yoshito Saito
+    - Zichen Huang
+    - Alin Khaliduzzaman
+    - Makoto Kuramoto
+    - Yuichi Ogawa
+    - Naoshi Kondo
+    - Tetsuhito Suzuki
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.2331/suisan.75.419
+    title: Use of otolith microchemistry to estimate the migratory history of Japanese
+      dace Tribolodon hakonensis in the Kamo River, Mie Prefecture
+    year: 2009
+    journal: NIPPON SUISAN GAKKAISHI
+    authors:
+    - Daisuke Ishizaki
+    - Tsuguo Otake
+    - Tatsuya Sato
+    - Taiga Yodo
+    - Motoi Yoshioka
+    - Masaaki Kashiwagi
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.1007/s10228-009-0114-1
+    title: Population density, growth and migration via the sea to different streams
+      of Japanese dace Tribolodon hakonensis in lower reaches of small streams
+    year: 2009
+    journal: Ichthyological Research
+    authors:
+    - Osamu Katano
+    - Tomoyuki Nakamura
+    - Shin‐ichiro Abe
+    - Yoshihiro Baba
+    species:
+    - Tribolodon_hakonensis
+    source: auto_ingest
+  - doi: 10.12677/jwrr.2018.72024
+    title: Exploration of Mulberry Fish Pond in the Pearl River Delta Region from
+      the Angle of Water Resources
+    year: 2018
+    journal: Journal of Water Resources Research
+    authors:
+    - 侯 思颖
+    species:
+    - 珠星三块鱼
+    source: auto_ingest
+  - doi: 10.12677/ccrl.2024.131001
+    title: Analysis of Typhoon Impact on Ozone Profile Changes in the Yangtze River
+      Delta and Pearl River Delta Based on 5-Year OMI Satellite Data
+    year: 2024
+    journal: Climate Change Research Letters
+    authors:
+    - 韦 玉婷
+    species:
+    - 珠星三块鱼
+    source: auto_ingest
+  - doi: 10.12677/aep.2023.134128
+    title: Analysis of Typhoon Impact on Ozone Profile Changes in the Pearl River
+      Delta Based on 5-Year OMI Satellite Data
+    year: 2023
+    journal: Advances in Environmental Protection
+    authors:
+    - 韦 玉婷
+    species:
+    - 珠星三块鱼
+    source: auto_ingest
+  - doi: 10.3724/sp.j.1118.2018.18056
+    title: Species classification and origin of <i>Tribolodon</i> in the Suifen River,
+      China
+    year: 2018
+    journal: Journal of Fishery Sciences of China
+    authors:
+    - Yu‐Mei Chang
+    - Lei Cheng
+    - Bo Sun
+    - Baofeng Su
+    - Liqun Liang
+    - Weikun WANG
+    species:
+    - 珠星三块鱼
+    source: auto_ingest
+  - doi: 10.5281/zenodo.4430974
+    title: ESPnet2 pretrained model, kamo-naoyuki/hkust_asr_train_asr_transformer2_raw_zh_char_batch_bins20000000_ctc_confignore_nan_gradtrue_sp_valid.acc.ave,
+      fs=16k, lang=zh
+    year: 2021
+    journal: Zenodo (CERN European Organization for Nuclear Research)
+    authors:
+    - kamo-naoyuki
+    species:
+    - 珠星三块鱼
+    source: auto_ingest
+  - doi: 10.5281/zenodo.4604023
+    title: ESPnet2 pretrained model, Emiru Tsunoo/aishell_asr_train_asr_streaming_transformer_raw_zh_char_sp_valid.acc.ave,
+      fs=16k, lang=zh
+    year: 2021
+    journal: Zenodo (CERN European Organization for Nuclear Research)
+    authors:
+    - Emiru Tsunoo
+    species:
+    - 珠星三块鱼
+    source: auto_ingest
+  - doi: 10.2305/iucn.uk.2022-1.rlts.t159709138a159709173.en
+    title: 'Pseudaspius leptocephalus: Bogutskaya, N.'
+    year: 2020
+    journal: IUCN Red List of Threatened Species
+    authors: []
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.2305/iucn.uk.2022-1.rlts.t159708848a159708904.en
+    title: 'Pseudaspius brandtii: Bogutskaya, N.'
+    year: 2020
+    journal: IUCN Red List of Threatened Species
+    authors: []
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.31857/s0134347522050114
+    title: 'ИДЕНТИФИКАЦИЯ ТРЕХ ВИДОВ ДАЛЬНЕВОСТОЧНЫХ КРАСНОПЕРОК РОДА PSEUDASPIUS
+      (OSTEICHTHYES: CYPRINIDAE) НА ОСНОВЕ МНОГОМЕРНОГО АНАЛИЗА ПЛАСТИЧЕСКИХ ПРИЗНАКОВ'
+    year: 2022
+    journal: Биология моря
+    authors: []
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.2305/iucn.uk.2022-1.rlts.t159709497a159709571.en
+    title: 'Pseudaspius sachalinensis: Bogutskaya, N.'
+    year: 2020
+    journal: IUCN Red List of Threatened Species
+    authors: []
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1007/s10228-024-00990-0
+    title: Notes on reproductive ecology of Pseudaspius nakamurai in the Agano River
+    year: 2025
+    journal: Ichthyological Research
+    authors:
+    - Furusawa Chiharu
+    - Takeuchi Yuma
+    - Hara Natsuki
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1007/s12562-020-01452-y
+    title: Estimating biological half-lives of 137Cs in a cyprinid fish Tribolodon
+      hakonensis by a one-compartment model considering growth dilution effect
+    year: 2020
+    journal: Fisheries Science
+    authors:
+    - Niizeki Kouji
+    - Wada Toshihiro
+    - Nanba Kenji
+    - Sasaki Keiichi
+    - Teramoto Wataru
+    - Izumi Shigehiko
+    - Nomura Hirotaka
+    - Inatomi Naohiko
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1038/s41597-025-04661-1
+    title: Chromosome-level genome assembly of flathead asp (Pseudaspius leptocephalus).
+    year: 2025
+    journal: Scientific data
+    authors:
+    - Gong Xiong
+    - Ding Zufa
+    - Jiang Haifeng
+    - Wang Cheng
+    - Qian Yuting
+    - Chen Wenjun
+    - Yu Dan
+    - Liu Yang
+    - Zheng Lingling
+    - Yang Liandong
+    - Geng Longwu
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.3389/fmars.2023.1158845
+    title: Comparison genetic diversity and population structure of four Pseudaspius
+      leptocephalus populations in Heilongjiang River Basin based on mitochondrial
+      COI gene
+    year: 2023
+    journal: Frontiers in Marine Science
+    authors:
+    - Haijun Wei
+    - Longwu Geng
+    - Xinchi Shang
+    - Lei Li
+    - Bo Ma
+    - Yuyong Zhang
+    - Wang Li
+    - Xu Wei
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1002/rra.4148
+    title: Preferential behavior of <i>Tribolodon hakonensis</i> for fishways according
+      to biological characteristics
+    year: 2023
+    journal: River Research and Applications
+    authors:
+    - Taku Masumoto
+    - Masahiko Nakai
+    - Takashi Asaeda
+    - Mizanur Rahman
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.3390/d16110704
+    title: Fish Diversity in a Little-Known Border River Between China, North Korea,
+      and Russia, According to Traditional and eDNA Surveys
+    year: 2024
+    journal: Diversity
+    authors:
+    - Chen Tian
+    - Zhi‐Xian Sun
+    - Yutian Fang
+    - Dong Sheng
+    - Bo Li
+    - Cunqi Liu
+    - Yahui Zhao
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1134/s1063074021060055
+    title: The Formation of Biological Diversity of Far Eastern Redfins of the Genus
+      Tribolodon (Cyprinidae)
+    year: 2021
+    journal: Russian Journal of Marine Biology
+    authors:
+    - В. Н. Долганов
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.2108/zsj.23.323
+    title: Phylogenetic and Taxonomic Relationships of Northern Far Eastern Phoxinin
+      Minnows, Phoxinus and Rhynchocypris (Pisces, Cyprinidae), as Inferred from Allozyme
+      and Mitochondrial 16S rRNA Sequence Analyses
+    year: 2006
+    journal: ZOOLOGICAL SCIENCE
+    authors:
+    - Harumi Sakai
+    - Yukimasa Ito
+    - S. V. Shedko
+    - Sergei N. Safronov
+    - С. В. Фролов
+    - И. А. Черешнев
+    - Sang-Rin Jeon
+    - Akira Gotō
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1002/nafm.10976
+    title: Male guarding behavior and brood predators of invasive Bluegill in a Japanese
+      lake
+    year: 2024
+    journal: North American Journal of Fisheries Management
+    authors:
+    - Miles I. Peterson
+    - Satoshi Kitano
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.5962/p.234844
+    title: Record of fishes obtained in Japan by David Starr Jordan in Japan, 1922
+    year: 1925
+    journal: Memoirs of the Carnegie Museum
+    authors:
+    - David Starr Jordan
+    - Carl L. Hubbs
+    - E. A. McGregor
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1111/1440-1703.12316
+    title: Spawning season and nest guarding behavior of invasive smallmouth bass
+      ( <i>Micropterus dolomieu</i> ) in a Japanese Lake
+    year: 2022
+    journal: Ecological Research
+    authors:
+    - Miles I. Peterson
+    - Satoshi Kitano
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1111/1440-1703.12262
+    title: Relative importance of host‐dependent versus physical environmental characteristics
+      affecting the distribution of an ectoparasitic copepod infecting the mouth cavity
+      of stream salmonid
+    year: 2021
+    journal: Ecological Research
+    authors:
+    - Ryota Hasegawa
+    - Itsuro Koizumi
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.3390/life14080974
+    title: 'Morphological and Molecular Characterization of Three Myxosporean Species
+      of the Genera Myxobolus, Henneguya, and Myxidium (Cnidaria: Myxozoa) Infecting
+      Freshwater Fish, Isolated for the First Time in Japan'
+    year: 2024
+    journal: Life
+    authors:
+    - Mariko Sekiya
+    - Haruya Sakai
+    - Yingchun Li
+    - Imron Rosyadi
+    - Muchammad Yunus
+    - Hiroshi Sato
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.3390/pathogens12040562
+    title: 'Limnotrachelobdella hypophthalmichthysa n. sp. (Hirudinida: Piscicolidae)
+      on Gills of Bighead Carp Hypophthalmichthys nobilis in China'
+    year: 2023
+    journal: Pathogens
+    authors:
+    - Lin Lin
+    - Houda Cheng
+    - Wenxiang Li
+    - Ming Li
+    - Hong Zou
+    - Guitang Wang
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1126/sciadv.adq0945
+    title: Sequential migrations of diverse fish community provide seasonally prolonged
+      and stable nutrient inputs to a river
+    year: 2024
+    journal: Science Advances
+    authors:
+    - Akira Kurasawa
+    - Yuji Onishi
+    - Keisuke Koba
+    - Keitaro Fukushima
+    - Hiromi Uno
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.2326/osj.23.125
+    title: Application of Dietary Content Analysis Using Dropped Feces to Assess Damage
+      to Fisheries by Great Cormorant
+    year: 2024
+    journal: ORNITHOLOGICAL SCIENCE
+    authors:
+    - Tetsuo Asai
+    - Shiori Ikushima
+    - Michiyo Sugiyama
+    - Tomoya Morimoto
+    - Akiko SUDO
+    - Toshifumi Minamoto
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1038/s41437-019-0292-1
+    title: 'European minnows through time: museum collections aid genetic assessment
+      of species introductions in freshwater fishes (Cyprinidae: Phoxinus species
+      complex)'
+    year: 2020
+    journal: Heredity
+    authors:
+    - Anja Palandačić
+    - Luise Kruckenhauser
+    - Harald Ahnelt
+    - Ernst Mikschi
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.15017/7171716
+    title: 九州大学で発見された木村清朗氏による室見川魚類目録ならびに博多湾流入河川の淡水魚類標本
+    year: 2024
+    journal: Institutional Repositories DataBase (IRDB)
+    authors:
+    - Yusuke Hibino
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.3390/fishes9040147
+    title: Environmental DNA Characterization of the Fish Species Composition in the
+      Mukawa River and Adjacent Habitats
+    year: 2024
+    journal: Fishes
+    authors:
+    - Hyojin Ahn
+    - Michael J. Miller
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.14411/fp.2006.035
+    title: 'Camallanus cotti (Nematoda: Camallanidae), an introduced parasite of fishes
+      in New Caledonia'
+    year: 2006
+    journal: Folia Parasitologica
+    authors:
+    - František Moravec
+    - Jean‐Lou Justine
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.36038/2307-3497-2022-187-48-64
+    title: Annotated list of fish-like vertebrates and fishes of the fresh water bodies
+      of the continental coast of the Sea of Okhotsk
+    year: 2022
+    journal: Trudy VNIRO
+    authors:
+    - С. Л. Марченко
+    - О. А. Мазникова
+    - S. E. Kulbachny
+    - Е. А. Кириллова
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1111/fwb.70045
+    title: Benefits of Aquatic Vegetation for Fish in an Ecosystem Dominated by an
+      Invasive Piscivore
+    year: 2025
+    journal: Freshwater Biology
+    authors:
+    - Miles I. Peterson
+    - Yoichi Kondo
+    - Naoya Wada
+    - Yoshiaki Tsuda
+    - Satoshi Kitano
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.2139/ssrn.4009740
+    title: 'Resolution of Cryptic Species Complexes within the Genus &lt;i&gt;Metagonimus&lt;/i&gt;
+      (Trematoda: Heterophyidae) in Japan, with Descriptions of Four New Species'
+    year: 2022
+    journal: SSRN Electronic Journal
+    authors:
+    - Minoru Nakao
+    - Takanori Ishikawa
+    - Yusuke Hibino
+    - Yuma Ohari
+    - Rintaro Taniguchi
+    - Tomohiro Takeyama
+    - Shingo Nakamura
+    - Wataru Kakino
+    - Hiromi Ikadai
+    - Mizuki Sasaki
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.15468/dl.uh8xk2
+    title: Occurrence Download
+    year: 2026
+    journal: Global Biodiversity Information Facility
+    authors:
+    - GBIF.org User
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.31857/s0134347524020031
+    title: Fluctuating Asymmetry of Some Characters in the Sakhalin Redfin &lt;i&gt;Pseudaspius
+      sachalinensis&lt;/i&gt; (Nikolskii, 1889) (Cypriniformes, Leuciscidae)
+    year: 2024
+    journal: Биология моря
+    authors:
+    - Н. С. Романов
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1007/s12562-025-01923-0
+    title: Factors affecting variations in 137Cs concentrations of masu salmon during
+      summer–autumn in a forest river and connected dam reservoir near the Fukushima
+      evacuation zone
+    year: 2025
+    journal: Fisheries Science
+    authors:
+    - Toshihiro Wada
+    - Shinya Miura
+    - Akinori Hinata
+    - Shota Hoshi
+    - Tsutomu Kanasashi
+    - Kazuyoshi Takasaki
+    - Gyo Kawata
+    - Yumiko Ishii
+    - Masaru Sakai
+    - Seiji Hayashi
+    - Kenji Nanba
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1134/s0032945225600223
+    title: Genetic Variability and Relationships of the Threaded Sculpin Gymnocanthus
+      pistilliger (Cottidae)
+    year: 2025
+    journal: Journal of Ichthyology
+    authors:
+    - О. А. Радченко
+    - A. V. Petrovskaya
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1645/23-14
+    title: Revision of Sanguinicola Plehn, 1905 with Redescription of Sanguinicola
+      volgensis (Rašín, 1929) McIntosh, 1934, Description of a New Species, Proposal
+      of a New Genus, and Phylogenetic Analysis
+    year: 2023
+    journal: Journal of Parasitology
+    authors:
+    - Micah B. Warren
+    - Larisa G. Poddubnaya
+    - А. Е. Жохов
+    - Florian B. Reyda
+    - Anindo Choudhury
+    - Stephen A. Bullard
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.5331/bgr.24r01
+    title: Multidisciplinary research for sea ice in Saroma-ko Lagoon, Hokkaido, Japan
+      2023
+    year: 2024
+    journal: Bulletin of Glaciological Research
+    authors:
+    - Daïki Nomura
+    - Ryota Akino
+    - Matthew Corkill
+    - Keizo HIRANO
+    - Akihide Kasai
+    - Seiji Katakura
+    - Yusuke Kawaguchi
+    - Tatsuya Kawakami
+    - Riri KIMURA
+    - Delphine Lannuzel
+    - Ryosuke Makabe
+    - Mirai Matsuura
+    - Kohei Matsuno
+    - Klaus M Meiners
+    - Keizo Nagasaki
+    - Yuichi Nosaka
+    - Nana SAMORI
+    - Shinnosuke Sakaya
+    - Eun Yae Son
+    - Ryotaro Suga
+    - Yumi SUNAKAWA
+    - K. Takahashi
+    - Masaharu Takahashi
+    - Yuka Takeda
+    - Takenobu Toyota
+    - Manami Tozawa
+    - Pat Wongpan
+    - Hiroshi Yoshida
+    - Kazuhiro YOSHIDA
+    - Masaki Yoshimura
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.22541/au.169405766.64814607/v1
+    title: Connectivity and short-term flood interactively affect fish community composition
+      in drainage ditches of paddy fields in an agricultural landscape
+    year: 2023
+    journal: ''
+    authors:
+    - Hideyuki Iwamoto
+    - Daisuke Tahara
+    - Takehito Yoshida
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.15468/dl.6j7zfu
+    title: Occurrence Download
+    year: 2026
+    journal: Global Biodiversity Information Facility
+    authors:
+    - GBIF.org User
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1051/parasite/1988635349
+    title: Les hôtes des Acanthocéphales. II — Les hotes définitifs. 1. Poissons
+    year: 1988
+    journal: Annales de Parasitologie Humaine et Comparée
+    authors:
+    - Yves J. Golvan
+    - Isaure de Buron
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.15468/dl.m7y898
+    title: Occurrence Download
+    year: 2026
+    journal: Global Biodiversity Information Facility
+    authors:
+    - GBIF.org User
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.26428/1606-9919-2020-200-308-320
+    title: Reproductive biology of amur flathead asp Pseudaspius leptocephalus (Pallas,
+      1776)
+    year: 2020
+    journal: Izvestiya TINRO
+    authors:
+    - Semenchenko N. N.
+    - Ostrovskaya E. V.
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.21203/rs.3.rs-26809/v2
+    title: In vitro resynthesis of lichenization reveals the genetic background of
+      symbiosis-specific fungal-algal interaction in Usnea hakonensis.
+    year: 0
+    journal: ''
+    authors:
+    - Kono Mieko
+    - Kon Yoshiaki
+    - Ohmura Yoshihito
+    - Satta Yoko
+    - Terai Yohey
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.26428/1606-9919-2020-200-118-130
+    title: GROWTH OF AMUR FLATHEAD ASP PSEUDASPIUS LEPTOCEPHALUS (PALLAS, 1776)
+    year: 2020
+    journal: Izvestiya TINRO
+    authors:
+    - Semenchenko N. N.
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.21203/rs.3.rs-26809/v3
+    title: In vitro resynthesis of lichenization reveals the genetic background of
+      symbiosis-specific fungal-algal interaction in Usnea hakonensis.
+    year: 0
+    journal: ''
+    authors:
+    - Kono Mieko
+    - Kon Yoshiaki
+    - Ohmura Yoshihito
+    - Satta Yoko
+    - Terai Yohey
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.21203/rs.3.rs-26809/v1
+    title: In vitro resynthesis of lichenization reveals the genetic background of
+      symbiosis-specific fungal-algal interaction in Usnea hakonensis.
+    year: 0
+    journal: ''
+    authors:
+    - Kono Mieko
+    - Kon Yoshiaki
+    - Ohmura Yoshihito
+    - Satta Yoko
+    - Terai Yohey
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.2208/prohe.52.1189
+    title: FLOW STRUCTURE AND SWIMMING BEHAVIOR OF LEUCISCUS HAKONENSIS AT POOL-AND-WEIR
+      TYPE FISHWAY WITH SLOPE 1/5
+    year: 2008
+    journal: PROCEEDINGS OF HYDRAULIC ENGINEERING
+    authors:
+    - NAMIHIRA Atsushi
+    - GOTO Masahiro
+    - KOBAYASHI Hiroyasu
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1007/s10228-019-00726-5
+    title: A revised generic taxonomy for Far East Asian minnow Rhynchocypris and
+      dace Pseudaspius
+    year: 2020
+    journal: Ichthyological Research
+    authors:
+    - Sakai Harumi
+    - Watanabe Katsutoshi
+    - Goto Akira
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1007/s11284-018-1598-9
+    title: "Correction to: Web image search revealed large‐scale variations in breeding\
+      \ season and nuptial coloration in a mutually ornamented fish,\n           \
+      \         <i>Tribolodon hakonensis</i>"
+    year: 2018
+    journal: Ecological Research
+    authors:
+    - Atsumi Keisuke
+    - Koizumi Itsuro
+    species:
+    - Pseudaspius_hakonensis
+    source: auto_ingest
+  - doi: 10.1111/j.2517-6161.1995.tb02031.x
+    title: 'Controlling the False Discovery Rate: A Practical and Powerful Approach
+      to Multiple Testing'
+    year: 1995
+    journal: Journal of the Royal Statistical Society Series B (Statistical Methodology)
+    authors:
+    - Yoav Benjamini
+    - Yosef Hochberg
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1007/bf02310555
+    title: Coefficient Alpha and the Internal Structure of Tests
+    year: 1951
+    journal: Psychometrika
+    authors:
+    - Lee J. Cronbach
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1136/bmj.315.7109.629
+    title: Bias in meta-analysis detected by a simple, graphical test
+    year: 1997
+    journal: BMJ
+    authors:
+    - Matthias Egger
+    - George Davey Smith
+    - Martin Schneider
+    - C. Minder
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.5860/choice.29-3352
+    title: 'Multiple regression: testing and interpreting interactions'
+    year: 1992
+    journal: Choice Reviews Online
+    authors: []
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2307/1913236
+    title: 'Co-Integration and Error Correction: Representation, Estimation, and Testing'
+    year: 1987
+    journal: Econometrica
+    authors:
+    - Robert F. Engle
+    - C. W. J. Granger
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2307/1913827
+    title: Specification Tests in Econometrics
+    year: 1978
+    journal: Econometrica
+    authors:
+    - Jerry A. Hausman
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.3758/brm.41.4.1149
+    title: 'Statistical power analyses using G*Power 3.1: Tests for correlation and
+      regression analyses'
+    year: 2009
+    journal: Behavior Research Methods
+    authors:
+    - Franz Faul
+    - Edgar Erdfelder
+    - Axel Buchner
+    - Albert-Georg Lang
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2307/4615733
+    title: A Simple Sequentially Rejective Multiple Test Procedure
+    year: 1979
+    journal: Scandinavian Journal of Statistics
+    authors:
+    - Sture Holm
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2307/2297968
+    title: 'Some Tests of Specification for Panel Data: Monte Carlo Evidence and an
+      Application to Employment Equations'
+    year: 1991
+    journal: The Review of Economic Studies
+    authors:
+    - Manuel Arellano
+    - Stephen Bond
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2307/1912934
+    title: A Heteroskedasticity-Consistent Covariance Matrix Estimator and a Direct
+      Test for Heteroskedasticity
+    year: 1980
+    journal: Econometrica
+    authors:
+    - Halbert White
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2307/3001478
+    title: Multiple Range and Multiple F Tests
+    year: 1955
+    journal: Biometrics
+    authors:
+    - David B. Duncan
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1002/jae.616
+    title: Bounds testing approaches to the analysis of level relationships
+    year: 2001
+    journal: Journal of Applied Econometrics
+    authors:
+    - M. Hashem Pesaran
+    - Yongcheol Shin
+    - Richard J. Smith
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1002/jcc.20035
+    title: Development and testing of a general amber force field
+    year: 2004
+    journal: Journal of Computational Chemistry
+    authors:
+    - Junmei Wang
+    - Romain M. Wolf
+    - James W. Caldwell
+    - Peter A. Kollman
+    - David A. Case
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1093/bioinformatics/14.9.817
+    title: 'MODELTEST: testing the model of DNA substitution.'
+    year: 1998
+    journal: Bioinformatics
+    authors:
+    - David Posada
+    - Keith A. Crandall
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1093/biomet/75.2.335
+    title: Testing for a unit root in time series regression
+    year: 1988
+    journal: Biometrika
+    authors:
+    - Peter C.B. Phillips
+    - Pierre Perrón
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1093/biomet/52.3-4.591
+    title: An analysis of variance test for normality (complete samples)
+    year: 1965
+    journal: Biometrika
+    authors:
+    - Samuel S. Shapiro
+    - M. B. Wilk
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.18637/jss.v082.i13
+    title: '<b>lmerTest</b> Package: Tests in Linear Mixed Effects Models'
+    year: 2017
+    journal: Journal of Statistical Software
+    authors:
+    - Alexandra Kuznetsova
+    - Per B. Brockhoff
+    - Rune Haubo Bojesen Christensen
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2307/1907187
+    title: Nonparametric Tests Against Trend
+    year: 1945
+    journal: Econometrica
+    authors:
+    - Henry B. Mann
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1111/j.1558-5646.1989.tb04220.x
+    title: ANALYZING TABLES OF STATISTICAL TESTS
+    year: 1989
+    journal: Evolution
+    authors:
+    - William R. Rice
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1016/s0304-4076(03)00092-7
+    title: Testing for unit roots in heterogeneous panels
+    year: 2003
+    journal: Journal of Econometrics
+    authors:
+    - Kyung So Im
+    - M. Hashem Pesaran
+    - Yongcheol Shin
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1207/s15327906mbr0102_10
+    title: The Scree Test For The Number Of Factors
+    year: 1966
+    journal: Multivariate Behavioral Research
+    authors:
+    - Raymond B. Cattell
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1037/0033-2909.88.3.588
+    title: Significance tests and goodness of fit in the analysis of covariance structures.
+    year: 1980
+    journal: Psychological Bulletin
+    authors:
+    - Peter M. Bentler
+    - Douglas G. Bonett
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2307/2533446
+    title: Operating Characteristics of a Rank Correlation Test for Publication Bias
+    year: 1994
+    journal: Biometrics
+    authors:
+    - Colin B. Begg
+    - Madhuchhanda Mazumdar
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1093/ajcp/45.4_ts.493
+    title: Antibiotic Susceptibility Testing by a Standardized Single Disk Method
+    year: 1966
+    journal: American Journal of Clinical Pathology
+    authors:
+    - Alfred W. Bauer
+    - William Kirby
+    - J. C. Sherris
+    - Marvin Turck
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2307/2074955
+    title: Testing Structural Equation Models.
+    year: 1994
+    journal: Contemporary Sociology A Journal of Reviews
+    authors:
+    - Charles W. Mueller
+    - Kenneth A. Bollen
+    - J. Scott Long
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1086/260061
+    title: 'Risk, Return, and Equilibrium: Empirical Tests'
+    year: 1973
+    journal: Journal of Political Economy
+    authors:
+    - Eugene F. Fama
+    - James D. MacBeth
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1207/s15328007sem0902_5
+    title: Evaluating Goodness-of-Fit Indexes for Testing Measurement Invariance
+    year: 2002
+    journal: Structural Equation Modeling A Multidisciplinary Journal
+    authors:
+    - Gordon W. Cheung
+    - Roger B. Rensvold
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1037/h0040957
+    title: Construct validity in psychological tests.
+    year: 1955
+    journal: Psychological Bulletin
+    authors:
+    - Lee J. Cronbach
+    - Paul E. Meehl
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1002/1097-0142(1950)3:1<32::aid-cncr2820030106>3.0.co;2-3
+    title: Index for rating diagnostic tests
+    year: 1950
+    journal: Cancer
+    authors:
+    - W. J. Youden
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1093/genetics/123.3.585
+    title: Statistical method for testing the neutral mutation hypothesis by DNA polymorphism.
+    year: 1989
+    journal: Genetics
+    authors:
+    - Fumio Tajima
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1093/oxfordjournals.jhered.a111573
+    title: 'GENEPOP (Version 1.2): Population Genetics Software for Exact Tests and
+      Ecumenicism'
+    year: 1995
+    journal: Journal of Heredity
+    authors:
+    - Michel Raymond
+    - François Rousset
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1016/0304-4076(92)90104-y
+    title: Testing the null hypothesis of stationarity against the alternative of
+      a unit root
+    year: 1992
+    journal: Journal of Econometrics
+    authors:
+    - Denis Kwiatkowski
+    - Peter C.B. Phillips
+    - Peter Schmidt
+    - Yongcheol Shin
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1016/s0304-4076(01)00098-7
+    title: 'Unit root tests in panel data: asymptotic and finite-sample properties'
+    year: 2002
+    journal: Journal of Econometrics
+    authors:
+    - Andrew Levin
+    - Chien‐Fu Lin
+    - Chia-Shang James Chu
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2307/2580595
+    title: Testing Structural Equation Models.
+    year: 1995
+    journal: Social Forces
+    authors:
+    - Clifford C. Clogg
+    - Kenneth A. Bollen
+    - J. Scott Long
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1214/aoms/1177730491
+    title: On a Test of Whether one of Two Random Variables is Stochastically Larger
+      than the Other
+    year: 1947
+    journal: The Annals of Mathematical Statistics
+    authors:
+    - H. B. Mann
+    - Douglas R. Whitney
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1016/j.jneumeth.2007.03.024
+    title: Nonparametric statistical testing of EEG- and MEG-data
+    year: 2007
+    journal: Journal of Neuroscience Methods
+    authors:
+    - Eric Maris
+    - Robert Oostenveld
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1111/j.1532-5415.1991.tb01616.x
+    title: 'The Timed “Up &amp; Go”: A Test of Basic Functional Mobility for Frail
+      Elderly Persons'
+    year: 1991
+    journal: Journal of the American Geriatrics Society
+    authors:
+    - Diane Podsiadlo
+    - Sandra Richardson
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1214/aos/1013699998
+    title: The control of the false discovery rate in multiple testing under dependency
+    year: 2001
+    journal: The Annals of Statistics
+    authors:
+    - Yoav Benjamini
+    - Daniel Yekutieli
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1002/jae.951
+    title: A simple panel unit root test in the presence of cross‐section dependence
+    year: 2007
+    journal: Journal of Applied Econometrics
+    authors:
+    - M. Hashem Pesaran
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1111/1468-0084.0610s1631
+    title: A Comparative Study of Unit Root Tests with Panel Data and a New Simple
+      Test
+    year: 1999
+    journal: Oxford Bulletin of Economics and Statistics
+    authors:
+    - G. S. Maddala
+    - Shaowen Wu
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1016/s0065-2601(08)60281-6
+    title: 'Universals in the Content and Structure of Values: Theoretical Advances
+      and Empirical Tests in 20 Countries'
+    year: 1992
+    journal: Advances in experimental social psychology
+    authors:
+    - Shalom H. Schwartz
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2307/1162101
+    title: Statistical Theories of Mental Test Scores
+    year: 1969
+    journal: American Educational Research Journal
+    authors:
+    - William W. Rozeboom
+    - Frederic M. Lord
+    - Melvin R. Novick
+    - Allan Birnbaum
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1016/j.jml.2012.11.001
+    title: 'Random effects structure for confirmatory hypothesis testing: Keep it
+      maximal'
+    year: 2013
+    journal: Journal of Memory and Language
+    authors:
+    - Dale J. Barr
+    - Roger Lévy
+    - Christoph Scheepers
+    - Harry Tily
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1111/j.1360-0443.1991.tb01879.x
+    title: 'The Fagerström Test for Nicotine Dependence: a revision of the Fagerstrom
+      Tolerance Questionnaire'
+    year: 1991
+    journal: British Journal of Addiction
+    authors:
+    - Todd F. Heatherton
+    - Lynn T. Kozlowski
+    - Richard C. Frecker
+    - Karl‐Olov Fagerström
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1037/0022-3514.90.5.751
+    title: A meta-analytic test of intergroup contact theory.
+    year: 2006
+    journal: Journal of Personality and Social Psychology
+    authors:
+    - Thomas F. Pettigrew
+    - Linda R. Tropp
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1021/ja9621760
+    title: Development and Testing of the OPLS All-Atom Force Field on Conformational
+      Energetics and Properties of Organic Liquids
+    year: 1996
+    journal: Journal of the American Chemical Society
+    authors:
+    - William L. Jorgensen
+    - David S. Maxwell
+    - Julian Tirado‐Rives
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1016/0030-5073(76)90016-7
+    title: 'Motivation through the design of work: test of a theory'
+    year: 1976
+    journal: Organizational Behavior and Human Performance
+    authors:
+    - J. Richard Hackman
+    - Greg R. Oldham
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1016/j.ultras.2026.108186
+    title: Morphology engineering of vertically aligned carbon nanotubes for enhanced
+      photoacoustic emission.
+    year: 2026
+    journal: Ultrasonics
+    authors:
+    - Hu Er-Tao
+    - He Weiye
+    - Li Yongpeng
+    - Zhao Hongzhi
+    - Lv Peng
+    - Cai Qing-Yuan
+    - Feng Yiyu
+    - Yu Kehan
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1016/j.cognition.2026.106603
+    title: 'The wham-womb sound symbolic effect: English-speaking children and adults
+      link phonemes with arousal.'
+    year: 2026
+    journal: Cognition
+    authors:
+    - Kuo Jillian E
+    - Li Ye
+    - Yu Christine S-P
+    - McBeath Michael K
+    - Benitez Viridiana L
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1016/j.yhbeh.2026.105952
+    title: Androgen receptor activation is involved in maintaining goal-directed behavior
+      in levonorgestrel-treated female rats.
+    year: 2026
+    journal: Hormones and behavior
+    authors:
+    - Mohammed Zaidan
+    - Thrailkill Eric A
+    - Firehock Grace
+    - Nelson Eric
+    - Flanagan Ellie
+    - Marabello Juliette
+    - Penny Julia
+    - Reulbach Jamie C
+    - Frost Luke
+    - Toufexis Donna J
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1016/j.nut.2026.113264
+    title: Taste preferences and dietary characteristics during complementary feeding
+      according to genetic polymorphisms.
+    year: 2026
+    journal: Nutrition (Burbank, Los Angeles County, Calif.)
+    authors:
+    - Neves Renata O
+    - Magalhães Elma I S
+    - Ficagna Cátia R
+    - Rechenmacher Ciliana
+    - Borges Rogério B
+    - Goldani Marcelo Z
+    - Nunes Leandro M
+    - Bernardi Juliana R
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1016/j.rbmo.2026.105500
+    title: A feasibility study to examine the link between lifestyle and environmental
+      exposures and endometriotic phenotype.
+    year: 2026
+    journal: Reproductive biomedicine online
+    authors:
+    - Knapman Blake
+    - Ng Cecilia
+    - McKinnon Brett
+    - Gonzalez Adriana Meneses
+    - Amoako Akwasi
+    - Henders Anjali K
+    - Abbott Jason
+    - Mortlock Sally
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1016/j.foot.2026.102268
+    title: 'Implementation of the enhanced paper grip test in podiatric practice:
+      A clinical audit of feasibility and association with recent falls.'
+    year: 2026
+    journal: Foot (Edinburgh, Scotland)
+    authors:
+    - Branthwaite Helen
+    - Chockalingam Nachiappan
+    - Chatzistergos Panagiotis
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1016/j.ajp.2026.105041
+    title: Development and validation of revised battery for ECT-related cognitive
+      deficits (B4ECT ReCoDe).
+    year: 2026
+    journal: Asian journal of psychiatry
+    authors:
+    - Sadhula Kranthi Kumar
+    - Sinha Preeti
+    - Arumugham Shyam Sundar
+    - Vs Sreeraj
+    - Thirthalli Jagadisha
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1021/acssensors.6c00401
+    title: Mechanism-Informed Design Framework of Nanocrystalline Semiconductor Chemiresistors
+      Enabling Room-Temperature, ppb-Level, Dual-Redox Gas Sensing.
+    year: 2026
+    journal: ACS sensors
+    authors:
+    - Li Yanyan
+    - Wu Liang
+    - He Zhuoyang
+    - An Ran
+    - Hao Shiwen
+    - Zhou Shiming
+    - Zhao Tianshuo
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2196/93877
+    title: 'Evaluation of the Importance of Stopping Elderly Accidents, Deaths, and
+      Injuries (STEADI)-Based Factors in Wearable Fall Risk Assessment: Secondary
+      Data Analysis.'
+    year: 2026
+    journal: JMIR mHealth and uHealth
+    authors:
+    - Ghoreishi Nozhan
+    - Ansah Stella
+    - Lu Jiayu
+    - Lu Wei
+    - Moon Sanghee
+    - Delgado Ferdinand
+    - Chen Diliang
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1002/advs.76039
+    title: Surfaceome Reprogramming of Stemsomes Promotes Lung Cancer Targeting via
+      Potentiated Receptor-Ligand Interactions.
+    year: 2026
+    journal: Advanced science (Weinheim, Baden-Wurttemberg, Germany)
+    authors:
+    - Kim Geunhye
+    - Kwon In Ah
+    - Jeong Bo Seop
+    - Kim Hyo Seon
+    - Park Joo-Hwan
+    - Park Sung Jean
+    - Lee Sang-Rae
+    - Lee Youngki
+    - Khang Dongwoo
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1002/advs.76056
+    title: Electrolyte Design for Simultaneous Interfacial Stabilization in Si||NCM811
+      Full Cells.
+    year: 2026
+    journal: Advanced science (Weinheim, Baden-Wurttemberg, Germany)
+    authors:
+    - Jang Seo Yun
+    - Lee Kyu Hong
+    - Kim Juhyoung
+    - Kim Dong Wook
+    - Lee Kyu Hyoung
+    - Kim Do Youb
+    - Kim Se-Hee
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1021/acs.langmuir.6c01302
+    title: Tuning the Behaviors of Polymeric Surfactants at Liquid-Liquid Interfaces
+      via Amino Acid Conjugation.
+    year: 2026
+    journal: 'Langmuir : the ACS journal of surfaces and colloids'
+    authors:
+    - Cruz-Amaya Karen S
+    - Ghosh Rohini
+    - Bellido-Aguilar Daniel A
+    - Danley Matthew J
+    - Savagatrup Suchol
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1021/jacs.6c03316
+    title: A Multifunctional Near-Infrared Platinum(II) Agent for High-Performance
+      Chemo-Photothermal Therapy.
+    year: 2026
+    journal: Journal of the American Chemical Society
+    authors:
+    - Chen Yingying
+    - Yang Sheng-Yi
+    - Ou Xinwen
+    - Cai Qinming
+    - Liu Cheng
+    - Su Xuxian
+    - Sun Jianwei
+    - Kwok Ryan T K
+    - Zheng Di-Wei
+    - Lam Jacky W Y
+    - Yu Wenqian
+    - Wang Fuan
+    - Tang Ben Zhong
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1111/1750-3841.71178
+    title: Antidiabetic Activity of Chickpea Albumin Hydrolysate in Streptozotocin-Induced
+      Diabetic Rats.
+    year: 2026
+    journal: Journal of food science
+    authors:
+    - Navarro-Leyva Alicia
+    - López-Angulo Gabriela
+    - Delgado-Vargas Francisco
+    - Bastidas-Ponce Aimée
+    - Salazar-Salas Nancy Yareli
+    - Soto-Lozoya Jenifer Mariana
+    - López-Valenzuela José Ángel
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1093/jvimsj/aalag108
+    title: Analytical validation, reference interval determination, and diagnostic
+      performance of plasma symmetric dimethylarginine in cattle.
+    year: 2026
+    journal: Journal of veterinary internal medicine
+    authors:
+    - De Campos Charly
+    - Barroca Inês de Brito Neves
+    - Baydoun Zahida
+    - Chenal Théo
+    - Gonçalves-Brandão Manon
+    - Schelcher François
+    - Trumel Catherine
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1021/acssensors.6c00916
+    title: Modular CRISPR-Cas12a-Activated Gold Nanoparticle Assay for Rapid Visual
+      Detection of Hepatocellular Carcinoma-Related miRNAs.
+    year: 2026
+    journal: ACS sensors
+    authors:
+    - Sun Yinghui
+    - Wang Rui
+    - Sun Hongxiao
+    - Chen Jiadong
+    - Liang Chengwei
+    - Zhang Zhiyang
+    - Feng Yujie
+    - Chen Lingxin
+    - Wang Xiaokun
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1093/cid/ciag348
+    title: Cost-effectiveness Analysis of Xpert MTB/RIF Ultra for the Diagnosis of
+      HIV-Associated Tuberculous Meningitis.
+    year: 2026
+    journal: 'Clinical infectious diseases : an official publication of the Infectious
+      Diseases Society of America'
+    authors:
+    - Siddiqi Omar K
+    - Jahn Beate
+    - Rochau Ursula
+    - Walukaga Stewart
+    - Rajasingham Radha
+    - Siebert Uwe
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1021/acs.jmedchem.6c00144
+    title: Structure-Based Design and Optimization of Novel PHGDH Inhibitors for Overcoming
+      Erlotinib-Resistant Lung Cancer.
+    year: 2026
+    journal: Journal of medicinal chemistry
+    authors:
+    - Wu Xingmei
+    - Tang Shuai
+    - Yan Yiyang
+    - Cao Xinyu
+    - Cen Yixin
+    - Lan Xiaojing
+    - Zhu Yingjie
+    - Shi Da-Yu
+    - Lin Guo-Qiang
+    - Tian Ping
+    - Huang Min
+    - Gao Dingding
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1097/BRS.0000000000005759
+    title: 'Epinephrine-added Irrigation Shortens and Stabilizes Operative Time in
+      Full-endoscopic Lumbar Decompression after Adjusting for the Learning Curve:
+      An Interrupted Time Series Study.'
+    year: 2026
+    journal: Spine
+    authors:
+    - Takenaka Shota
+    - Kanayama Sadaaki
+    - Yamada Shutaro
+    - Kono Tsuyoshi
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1002/pros.70205
+    title: 'Enhancing Continence Recovery After Robot-Assisted Radical Prostatectomy:
+      A Novel Combined Approach Using Testosterone Therapy and Magnetic Stimulation.'
+    year: 2026
+    journal: The Prostate
+    authors:
+    - Tanaka Yasunari
+    - Shimizu Fumitaka
+    - Abudurezake Abulaiti
+    - Diabangouaya Myriam
+    - Ikehata Yoshihiro
+    - Kobayashi Takuro
+    - China Toshiyuki
+    - Tamura Yoshifumi
+    - Ide Hisamitsu
+    - Horie Shigeo
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1093/occmed/kqag048
+    title: Patients seeking occupational health advice before and after COVID-19.
+    year: 2026
+    journal: Occupational medicine (Oxford, England)
+    authors:
+    - Hazoor Hadia
+    - Pearson Nick
+    - Creed Francis
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1093/nutrit/nuag080
+    title: 'Associations Between Micronutrients and Red Cell Distribution Width in
+      Adults: A Scoping Review.'
+    year: 2026
+    journal: Nutrition reviews
+    authors:
+    - Hudson Joshua M
+    - Mohammed Haris
+    - Donkin Rebecca M
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1080/17483107.2026.2683898
+    title: Exploring occupational therapists' perceptions of the use of functional
+      electrical stimulation in adult stroke rehabilitation.
+    year: 2026
+    journal: Disability and rehabilitation. Assistive technology
+    authors:
+    - Frew Sarah
+    - Breytenbach Fiona
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1093/rpd/ncag051
+    title: 'EURADOS WG10 2019 field test of retrospective dosimetry methods: The NRPI
+      results of mobile phones and salt dosemeters.'
+    year: 2026
+    journal: Radiation protection dosimetry
+    authors:
+    - Čemusová Zina
+    - Ekendahl Daniela
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.36740/WLek/216769
+    title: Designing and molecular docking analysis of newly acetazolamide derived
+      compounds integrating 4-oxothiazolidine group as possible carbonic anhydrase
+      deactivators.
+    year: 2026
+    journal: 'Wiadomosci lekarskie (Warsaw, Poland : 1960)'
+    authors:
+    - Ayoub Shaymaa Abdul Zahra
+    - Aldabagh Noor H Naser
+    - Atiya Rana Neama
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1371/journal.pone.0351129
+    title: Integrative computational analysis of plant-derived flavonoids as inhibitors
+      of Listeriolysin O and Internalin A in Listeria monocytogenes.
+    year: 2026
+    journal: PloS one
+    authors:
+    - Sourav Shahadul Hassan
+    - Siddiquee Noimul Hasan
+    - Tabassum Rahnuma
+    - Islam Lamia
+    - Zaidi Syed Kashif
+    - Uddin Mohammad Sharif
+    - Saha Sumita Rani
+    - Hossain Imam
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1073/pnas.2538139123
+    title: 'Cognition does not automatically influence perception: Evidence from neural
+      encoding of colors belonging to different categories.'
+    year: 2026
+    journal: Proceedings of the National Academy of Sciences of the United States
+      of America
+    authors:
+    - Martinovic Jasna
+    - Delov Alexey A
+    - Tomastikova Jana
+    - Martin Joel T
+    - Paramei Galina V
+    - Griber Yulia A
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1073/pnas.2607035123
+    title: 'Void-X: A generative void-filling model for predicting atomic packing
+      in proteins.'
+    year: 2026
+    journal: Proceedings of the National Academy of Sciences of the United States
+      of America
+    authors:
+    - Yang Jing
+    - Yuan Junying
+    - Chou James J
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1073/pnas.2520997123
+    title: A GTP synthase ribozyme with increased GTP turnover.
+    year: 2026
+    journal: Proceedings of the National Academy of Sciences of the United States
+      of America
+    authors:
+    - Han Xu
+    - Pepper Zoe J
+    - Arriola Joshua T
+    - Müller Ulrich F
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1371/journal.pmed.1005122
+    title: 'Prediction of hospitalisation in young children with pneumonia in Malawi:
+      A machine learning-based approach.'
+    year: 2026
+    journal: PLoS medicine
+    authors:
+    - Staunton Patrick
+    - Makrooni Mohammad Adib
+    - Chisale Master
+    - Nyambolo Billy
+    - Wu Joseph
+    - McCarthy Damien
+    - Ledwidge Mark
+    - Bin Nisar Yasir
+    - Watson Chris
+    - Mbakaya Balwani
+    - Seoighe Cathal
+    - Gallagher Joe
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1371/journal.pone.0350932
+    title: Study on tensile mechanical response and microstructure of polypropylene
+      fiber reinforced loess under freezing.
+    year: 2026
+    journal: PloS one
+    authors:
+    - Wang Yuxing
+    - Liu Chunhui
+    - Zhong Yimin
+    - Mao Erqing
+    - He Fei
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1371/journal.pmen.0000629
+    title: 'Discharge-time prediction of 1-month posttraumatic stress symptom severity
+      (PCL-5) after mechanical ventilation using a dual-attention 1D-CNN: Development
+      and validation.'
+    year: 2026
+    journal: PLOS mental health
+    authors:
+    - Xia Qingqing
+    - Zhang Wei
+    - Zhuang Jinqiang
+    - Zhu Ming
+    - Wu Lei
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1371/journal.pone.0350550
+    title: 'Parameter calibration method for car-following models under snowy weather
+      conditions: Integrating an informer time series encoder and physics-informed
+      neural networks.'
+    year: 2026
+    journal: PloS one
+    authors:
+    - Sun Yaping
+    - Li Wenfang
+    - Yang Mengyang
+    - Zhang Xingchen
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1371/journal.pone.0350325
+    title: Spatial distribution and risk assessment of dengue incidence at district
+      level across major climatic zones in India.
+    year: 2026
+    journal: PloS one
+    authors:
+    - James Meenu Mariya
+    - Balasubramani Karuppusamy
+    - Balabaskaran Nina Praveen
+    - Gopalan Natarajan
+    - Behera Sujit Kumar
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1093/humrep/deag081
+    title: 'ESHRE PGT Consortium data collection XXII-XXIV: PGT analyses from 2019
+      to 2021†.'
+    year: 2026
+    journal: Human reproduction (Oxford, England)
+    authors:
+    - Spinella F
+    - Christopikou D
+    - De Rycke M
+    - Florensa M
+    - Heijligers M
+    - Toft C L F
+    - Constantinou E
+    - Viville S
+    - Goossens V
+    - Dimitriadou E
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1371/journal.pone.0350925
+    title: Knowledge embedded wind tunnel typical pressure vessel design optimization
+      method research.
+    year: 2026
+    journal: PloS one
+    authors:
+    - Yang Yisheng
+    - Yan Sijie
+    - Xie Qiang
+    - Liu Bowen
+    - Yan Xiqiang
+    - Yang Zeyuan
+    - Ding Han
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1371/journal.pone.0351069
+    title: 'Promoting shared decision-making in colorectal cancer screening in primary
+      care: A cluster randomized controlled trial.'
+    year: 2026
+    journal: PloS one
+    authors:
+    - Scharf Tamara
+    - Martin Yonas
+    - Janggen Marc-Andrea
+    - Rohrbasser Adrian
+    - Tal Kali
+    - Biller-Andorno Nikola
+    - Bulliard Jean-Luc
+    - Selby Kevin
+    - Auer Reto
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1371/journal.pone.0350297
+    title: 'Pathways linking internalized HIV stigma to attitudes and beliefs toward
+      ART through depression: Conditional indirect effects of food insecurity.'
+    year: 2026
+    journal: PloS one
+    authors:
+    - Sorkpor Setor K
+    - Ouner Jerry John
+    - Thompson Rachel G A
+    - Alhassan Robert Kaba
+    - Gyamerah Akua O
+    - Yigit Ibrahim
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1094/PDIS-02-26-0426-RE
+    title: Potential Advantages of Infrared Spectroscopy in Early Diagnosis of Pine
+      Wilt Disease.
+    year: 2026
+    journal: Plant disease
+    authors:
+    - Li Ying
+    - Ye Jianren
+    - Cheng Hao
+    - Chen Tingting
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1159/000552560
+    title: Feasibility of DOAC Dipstick point-of-care testing in patients with acute
+      stroke and transient ischemic attack.
+    year: 2026
+    journal: Cerebrovascular diseases extra
+    authors:
+    - Ziegler Maximilian
+    - Szabo Kristina
+    - Hoyer Carolin
+    - Willmann Olaf
+    - Bursa Adrian
+    - Harenberg Job
+    - Spannagel Uwe
+    - Hetjens Svetlana
+    - Weiss Christel
+    - Kern Rolf
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1159/000552858
+    title: 'Comparing Speech Therapy Service Delivery Models in Iranian Primary Schools:
+      A Double-Blind Randomized Controlled Study.'
+    year: 2026
+    journal: 'Folia phoniatrica et logopaedica : official organ of the International
+      Association of Logopedics and Phoniatrics (IALP)'
+    authors:
+    - Salmani Masoomeh
+    - Zareei Masume
+    - Maddah Marziyeh
+    - Paknazar Fatemeh
+    - Safi Atefeh
+    - Mohseni Khalaji Farnaz
+    - Nasiri Asefeh
+    - Salehi-Niya Kosar
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1159/000551152
+    title: Test Equivalency of the Spanish and English AzBio Sentences Among Bilingual
+      Normal Hearers.
+    year: 2026
+    journal: Audiology & neuro-otology
+    authors:
+    - Prentiss Sandra
+    - Velandia Sandra
+    - Ausili Sebastian
+    - Kuzbyt Brianna
+    - Snapp Hillary
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1159/000552759
+    title: Fully automated detection of pancreaticobiliary maljunction based on 3D
+      magnetic resonance cholangiopancreatography using deep learning.
+    year: 2026
+    journal: Digestion
+    authors:
+    - Zhang Xiaoyu
+    - Liu Weizheng
+    - Chang Ziyue
+    - Chai Chunyan
+    - Lu Wenping
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1159/000552865
+    title: Adolescent and Young Adult Perspectives on Receiving Pathogenic or Likely
+      Pathogenic Results in a Prospective Genomic Screening Clinical Trial.
+    year: 2026
+    journal: Public health genomics
+    authors:
+    - Sinclair Jessica A
+    - Donigan Emma C
+    - Barnett Cara L
+    - Miller Erin M
+    - Myers Melanie F
+    - McGowan Michelle L
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1021/acs.analchem.6c00639
+    title: Breast Cancer Diagnosis and HER2+ Versus Triple Negative Discrimination
+      by Infrared Spectral Histopathology.
+    year: 2026
+    journal: Analytical chemistry
+    authors:
+    - El Tahech Hayat
+    - Lerévérend Cédric
+    - Kane Seydou
+    - Fichel Caroline
+    - Hassani Jawaheer
+    - Trévoux Sandrine
+    - Untereiner Valérie
+    - Lehmann-Che Jacqueline
+    - Maquin Célia
+    - Corsois Laurent
+    - Merrouche Yacine
+    - Vuiblet Vincent
+    - Bolko Loïs
+    - Salmon Jean-Hugues
+    - Piot Olivier
+    - Potteaux Stéphane
+    - Gobinet Cyril
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1080/00140139.2026.2686284
+    title: 'GenAI as complete cognitive automation for untrained users at population
+      scale: implications for human factors and ergonomics.'
+    year: 2026
+    journal: Ergonomics
+    authors:
+    - Pak Richard
+    - Rovira Ericka
+    - McLaughlin Anne
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.3855/jidc.21859
+    title: Development and rapid identification of a self-constructed MALDI-TOF MS
+      library for Mycoplasma pneumoniae clinical isolates.
+    year: 2026
+    journal: Journal of infection in developing countries
+    authors:
+    - Cen Ke
+    - Qin Cong
+    - Wang Jie
+    - Wu Shenghai
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.22427/ntp-data-test-test-test
+    title: TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST
+      TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST
+      TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST
+      TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST
+      TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST
+      TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST
+      TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST
+      TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST
+      TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST
+      TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST
+      TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST
+      TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST
+      TEST TEST TEST TEST TEST TEST TEST TEST TEST
+    year: 2019
+    journal: Chemical Effects in Biological Systems (CEBS)
+    authors: []
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.4211/hs.a9509a59540c470cb9888ccab662a363
+    title: TEST PUBLICATION EMAIL. TEST PUBLICATION EMAIL. TEST PUBLICATION EMAIL.
+      TEST PUBLICATION EMAIL.
+    year: 2024
+    journal: HydroShare Resources
+    authors:
+    - Cowan Devin
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.4211/hs.4e0830e599cc4beabbf2924cff1bd8d6
+    title: CUSTOM LICENSE publication test -- testing deposit to Crossref with URL
+    year: 2025
+    journal: HydroShare Resources
+    authors:
+    - HydroShare HydroShare
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.6019/s-bsst2328
+    title: Test Test Test Test Test Test
+    year: 0
+    journal: BioStudies Database
+    authors:
+    - TEst
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.4211/hs.9bb283fb474a48ff91de9a417ad62c91
+    title: CUSTOM LICENSE publication test -- testing deposit to Crossref with no
+      URL
+    year: 2025
+    journal: HydroShare Resources
+    authors:
+    - HydroShare HydroShare
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.5555/987654
+    title: test test test
+    year: 0
+    journal: ''
+    authors: []
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.4211/hs.fd2a1f0d15e14ac0acdb65a944bf8787
+    title: test publication -- Hydroshare Admin test publication
+    year: 2025
+    journal: HydroShare Resources
+    authors:
+    - HydroShare HydroShare
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2139/ssrn.2168983
+    title: Test Test Test Test Test Test Test
+    year: 0
+    journal: SSRN Electronic Journal
+    authors:
+    - Jackson Addie
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.4211/hs.8d8e29ad57d1415fafba14ef4cc229bc
+    title: resource test publication and funders resource test publication and funders
+    year: 2024
+    journal: HydroShare Resources
+    authors:
+    - HydroShare HydroShare
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.4016/18794.01
+    title: test
+    year: 2010
+    journal: SciVee
+    authors:
+    - Test Test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.4016/13484.01
+    title: test
+    year: 2009
+    journal: SciVee
+    authors:
+    - Test Test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.4016/18866.01
+    title: test
+    year: 2010
+    journal: SciVee
+    authors:
+    - Test Test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2139/ssrn.2323844
+    title: Addie Test Test Test Addie Test Test Test
+    year: 0
+    journal: SSRN Electronic Journal
+    authors:
+    - Jackson Addie
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.70879/ssadsax34423sd
+    title: Test
+    year: 2024
+    journal: Test
+    authors: []
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.36934/tr2025_116
+    title: test
+    year: 0
+    journal: ''
+    authors:
+    - test test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2172/1546565
+    title: Test
+    year: 2019
+    journal: ''
+    authors:
+    - Test Test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.55277/researchhub.cy5l5yon
+    title: test
+    year: 2024
+    journal: ''
+    authors:
+    - Test Test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2172/1373478
+    title: test
+    year: 2017
+    journal: ''
+    authors:
+    - test test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2172/1373483
+    title: test
+    year: 2017
+    journal: ''
+    authors:
+    - test test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2172/1373480
+    title: test
+    year: 2015
+    journal: ''
+    authors:
+    - test test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.5555/akfjlae34
+    title: Test Test Test
+    year: 0
+    journal: ''
+    authors: []
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2172/1395711
+    title: test
+    year: 2017
+    journal: ''
+    authors:
+    - test test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.53832/opendevedtest.1000420
+    title: test
+    year: 2026
+    journal: ''
+    authors:
+    - test test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.5555/funlittlebook
+    title: test test test
+    year: 2024
+    journal: ''
+    authors: []
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2172/1577301
+    title: Test
+    year: 2019
+    journal: ''
+    authors:
+    - Test Test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2172/1395689
+    title: test
+    year: 2017
+    journal: ''
+    authors:
+    - test test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2172/1395729
+    title: test
+    year: 2017
+    journal: ''
+    authors:
+    - test test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.55277/researchhub.cy5l5yon.1
+    title: test
+    year: 2025
+    journal: ''
+    authors:
+    - Test Test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2172/1373481
+    title: test
+    year: 2017
+    journal: ''
+    authors:
+    - test test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2172/1395715
+    title: test-edit
+    year: 2017
+    journal: ''
+    authors:
+    - test test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2172/2376289
+    title: Test
+    year: 2024
+    journal: ''
+    authors:
+    - Test Test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.36288/testingtesttest002
+    title: Test test test
+    year: 0
+    journal: ''
+    authors: []
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2172/1988392
+    title: test
+    year: 2023
+    journal: ''
+    authors:
+    - test test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.20354/b4/test.2019.06.30
+    title: 'WITHDRAWN: TEST'
+    year: 1922
+    journal: ''
+    authors:
+    - TEST TEST
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.53832/opendevedtest.1000421
+    title: test 2
+    year: 2026
+    journal: ''
+    authors:
+    - test test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.70675/55085c33z08f6z4a7bzb9f5zd13e9b9a1e5e
+    title: Test test test
+    year: 0
+    journal: ''
+    authors:
+    - Pink Thomas
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.62184/tst.1234567
+    title: test test
+    year: 2024
+    journal: test
+    authors: []
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2172/1395680
+    title: test AC36-95GO10106
+    year: 2017
+    journal: ''
+    authors:
+    - test test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.17504/protocols.io.kgyctxw
+    title: Test protocol v1
+    year: 0
+    journal: ''
+    authors:
+    - Test Test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2172/1395709
+    title: test AC36-92R208033
+    year: 2017
+    journal: ''
+    authors:
+    - test test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1007/978-1-4302-0420-6_8
+    title: Test, Test, Test, and Test Again
+    year: 0
+    journal: Beginning PL/SQL
+    authors: []
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2172/1395685
+    title: test AC36-95R324591
+    year: 2017
+    journal: ''
+    authors:
+    - test test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2172/1395727
+    title: test AC36-92R208033
+    year: 2017
+    journal: ''
+    authors:
+    - test test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.5116/ijme.54ca.a5ae
+    title: test
+    year: 2015
+    journal: International Journal of Medical Education
+    authors:
+    - test test
+    - test test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2172/1423772
+    title: STI product title - API Test 3.6.2018
+    year: 2014
+    journal: ''
+    authors:
+    - Last Test MB Test Middle Test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.2172/1464038
+    title: STI Product Title _ Test
+    year: 2018
+    journal: ''
+    authors:
+    - Test Test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.17504/protocols.io.b2g5qby6
+    title: Test Document Protocol v1
+    year: 0
+    journal: ''
+    authors:
+    - Test Test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1596/41128
+    title: test 2-29
+    year: 2000
+    journal: ''
+    authors:
+    - test test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1596/dspace/60479
+    title: test 2-29
+    year: 2000
+    journal: ''
+    authors:
+    - test test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.58848/te.2022.4.1000
+    title: test tierethik doi test
+    year: 2023
+    journal: TIERethik
+    authors:
+    - test 2 test
+    species:
+    - test
+    source: auto_ingest
+  - doi: 10.1016/j.cbpb.2007.01.014
+    title: Purification, cloning and characterization of egg lectins from the teleost
+      Tribolodon brandti.
+    year: 2007
+    journal: Comparative biochemistry and physiology. Part B, Biochemistry & molecular
+      biology
+    authors:
+    - Jimbo Mitsuru
+    - Usui Rika
+    - Sakai Ryuichi
+    - Muramoto Koji
+    - Kamiya Hisao
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.1134/s1063074009050071
+    title: Thermoadaptation and fatty acid composition of main phospholipids of the
+      small-scaled redfin Tribolodon brandti under natural and experimental conditions
+    year: 2009
+    journal: Russian Journal of Marine Biology
+    authors:
+    - P. V. Velansky
+    - E. Ya. Kostetsky
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.3724/sp.j.1118.2011.00689
+    title: Adaptability of Tribolodon brandti (Dybowski) to NaCl concentration and
+      alkalinity
+    year: 2013
+    journal: Journal of Fishery Sciences of China
+    authors:
+    - Bing‐Jie Chi
+    - Liqun Liang
+    - Chunlei Liu
+    - Yu‐Mei Chang
+    - Shan Wang
+    - Qixia Han
+    - Guoqiang Gao
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.1134/s1063074016010090
+    title: 'Analysis of interpopulation and interspecies morphological differences
+      between Far Eastern redfins of the genus Tribolodon (Teleostei: Cyprinidae)'
+    year: 2016
+    journal: Russian Journal of Marine Biology
+    authors:
+    - В. Н. Иванков
+    - E. E. Borisovets
+    - С. Г. Большаков
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.1046/j.1444-2906.2002.00501.x
+    title: Growth model for the endangered cyprinid fish Tribolodon nakamurai based
+      on otolith analyses
+    year: 2002
+    journal: Fisheries Science
+    authors:
+    - Chifumi Imai
+    - Harumi Sakai
+    - Kazuhiko Katsura
+    - Wataru Honto
+    - YOUJI HIDA
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.1134/s1063074013030073
+    title: Phase transitions of phospholipids as a criterion for assessing the capacity
+      for thermal adaptation in fish
+    year: 2013
+    journal: Russian Journal of Marine Biology
+    authors:
+    - E. Ya. Kostetsky
+    - P. V. Velansky
+    - Н. М. Санина
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.4061/2011/838914
+    title: Diversified Carbohydrate-Binding Lectins from Marine Resources
+    year: 2011
+    journal: Journal of Amino Acids
+    authors:
+    - Tomohisa Ogawa
+    - Mizuki Watanabe
+    - Takako Naganuma
+    - Koji Muramoto
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.15027/35450
+    title: A synopsis of the parasites from cyprinid fishes of the genus Tribolodon
+      in Japan (1908-2013)
+    year: 2013
+    journal: Institutional Repositories DataBase (IRDB)
+    authors:
+    - Kazuya Nagasawa
+    - Hirotaka Katahira
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.1016/s2221-1691(12)60084-7
+    title: Hemolymph proteins in marine crustaceans
+    year: 2012
+    journal: Asian Pacific Journal of Tropical Biomedicine
+    authors:
+    - W. Sylvester Fredrick
+    - S. Ravichandran
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.11501/3080768
+    title: 生活史初期におけるマルタ(Tribolodon brandti)の生物生産過程に関する研究
+    year: 1995
+    journal: Institutional Repositories DataBase (IRDB)
+    authors:
+    - 雅大 三浦
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.15560/9.1.63
+    title: Illustrated checklist of fishes from the Shubuto River System, southwestern
+      Hokkaido, Japan
+    year: 2013
+    journal: Check List
+    authors:
+    - Yusuke Miyazaki
+    - Akira Terui
+    - Hiroshi Senou
+    - Izumi Washitani
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.1186/s12864-024-10659-7
+    title: Identification of the effects of alkalinity exposure on the gills of oriental
+      river prawns, Macrobrachium nipponense
+    year: 2024
+    journal: BMC Genomics
+    authors:
+    - Shubo Jin
+    - Rong Zhou
+    - Xuanbin Gao
+    - Yiwei Xiong
+    - Wenyi Zhang
+    - Hui Qiao
+    - Yanyou Wu
+    - Sufei Jiang
+    - Hongtuo Fu
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.3390/antiox13010129
+    title: Effects of Alkalinity Exposure on Antioxidant Status, Metabolic Function,
+      and Immune Response in the Hepatopancreas of Macrobrachium nipponense
+    year: 2024
+    journal: Antioxidants
+    authors:
+    - Shubo Jin
+    - Mingjia Xu
+    - Xuanbin Gao
+    - Sufei Jiang
+    - Yiwei Xiong
+    - Wenyi Zhang
+    - Hui Qiao
+    - Yanyou Wu
+    - Hongtuo Fu
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.12782/specdiv.22.167
+    title: 'First Records of &lt;i&gt;Tracheliastes sachalinensis&lt;/i&gt; (Copepoda:
+      Lernaeopodidae), a Fin Parasite of Cyprinids, from Japan'
+    year: 2017
+    journal: Species Diversity
+    authors:
+    - Kazuya Nagasawa
+    - Shigehiko Urawa
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.5772/36578
+    title: Affinity Chromatography of Lectins
+    year: 2012
+    journal: InTech eBooks
+    authors:
+    - Jure Pohleven
+    - Borut trukelj
+    - Janko Kos
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.3390/md15060161
+    title: Isolation, Amino Acid Sequences, and Plausible Functions of the Galacturonic
+      Acid-Binding Egg Lectin of the Sea Hare Aplysia kurodai
+    year: 2017
+    journal: Marine Drugs
+    authors:
+    - Shoko Motohashi
+    - Mitsuru Jimbo
+    - Tomohiro Naito
+    - Takefumi Suzuki
+    - Ryuichi Sakai
+    - Hisao Kamiya
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.3390/ijms26094321
+    title: Transcriptome Profiling Analysis Reveals Changes in the Antioxidant Defense
+      System, Morphology, and Gene Expression in the Gills of Macrobrachium nipponense
+      Caused by Alkalinity Exposure
+    year: 2025
+    journal: International Journal of Molecular Sciences
+    authors:
+    - Shubo Jin
+    - Yuefan Zhang
+    - Hongtuo Fu
+    - Wenyi Zhang
+    - Hui Qiao
+    - Yiwei Xiong
+    - Sufei Jiang
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.3390/ani15020158
+    title: Genetic Diversity and Population Structure of Macrobrachium nipponense
+      Populations in the Saline–Alkaline Regions of China
+    year: 2025
+    journal: Animals
+    authors:
+    - Romaric Iko
+    - Z. Y. Gao
+    - Sufei Jiang
+    - Yiwei Xiong
+    - Wenyi Zhang
+    - Hui Qiao
+    - Shubo Jin
+    - Hongtuo Fu
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.5772/35509
+    title: The Difference of Lectin Recovery by Sugar-Bound Resin
+    year: 2012
+    journal: InTech eBooks
+    authors:
+    - Mitsuru Jimbo
+    - Shin Satoh
+    - Hirofumi Hasegawa
+    - Hiroshi Miyake
+    - Takao Yoshida
+    - Tadashi Maruyama
+    - Hisao Kamiy
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.3389/fphar.2024.1382876
+    title: 'From sugar binders to diabetes fighters: the lectin saga of antihyperglycemic
+      activity through systematic review and meta-analysis'
+    year: 2024
+    journal: Frontiers in Pharmacology
+    authors:
+    - Akshaya Simha N
+    - Shashank M. Patil
+    - M K Jayanthi
+    - N Chaitra
+    - Ling Shing Wong
+    - Jureerat Kijsomporn
+    - Ranjith Raj
+    - Ramith Ramu
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.5962/bhl.part.26969
+    title: The Zoogonidae (Digenea) of fishes from the north-east Atlantic
+    year: 1986
+    journal: Bulletin of the British Museum (Natural History) Zoology
+    authors:
+    - Rodney A. Bray
+    - David I. Gibson
+    - Latragrunn
+    - Alle Bank
+    - Resund
+    - Jan
+    - Jan
+    - Grampian Lossiemouth
+    - Scotland
+    - Swatchway
+    - Devon England
+    - Nicoll
+    - Jones Baylis
+    - Gobius Niger
+    - Galway Bay
+    - Ireland
+    - Jones Baylis
+    - Jones Baylis
+    - Loch Ewe
+    - Scotland
+    - R Bray
+    - D Gibson
+    - Jan
+    - Jan
+    - Jan
+    - R Bray
+    - D
+    - L Aleshkina
+    - J Amato
+    - H Arai
+    - P Barbagallo
+    - U Drago
+    - H Baylis
+    - E Jones
+    - C Bayssade-Dufour
+    - C Maillard
+    - M Benazzi
+    - G Benazzi Lentati
+    - R Bray
+    - D Gibson
+    - D Rollinson
+    - A Brinkmann
+    - F Brooks
+    - M Byrd
+    - R Campbell
+    - T Cheng
+    - J Sullivan
+    - K Harris
+    - G Chubrik
+    - A Cooper
+    - H Crofton
+    - J Crothers
+    - M Cuenot
+    - Dafs
+    - P De Coursey
+    - W Vernberg
+    - K Diesing
+    - A Dolgikh
+    - N Naidenova
+    - R Dollfus
+    - W Durio
+    - H Manter
+    - F Edwards
+    - R Ergens
+    - H Fantham
+    - F Filippi
+    - De
+    - J Fischthal
+    - J Thomas
+    - A Gaevskaya
+    - A Kovaleva
+    - J Gambino
+    - A Giard
+    - D Gibson
+    - R Bray
+    - H Gijon
+    - R Lopez-Roman
+    - F De Armas
+    - B Valladares
+    - R Goldschmidt
+    - E Graeffe
+    - V Gregoire
+    - A Gupta
+    - P Sharma
+    - A Ichihara
+    - K Kato
+    - S Kamegai
+    - S Kamegai
+    - H Nonobe
+    - M Machida
+    - M Isakova-Keo
+    - I Issaitschikov
+    - B James
+    - A Sannia
+    - E Bowers
+    - J Johnstone
+    - S Kamegai
+    - M Keie
+    - V Korotaeva
+    - A Kovaleva
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.26428/1606-9919-2021-201-44-61
+    title: Long-term dynamics of biomass and dominant species of the bottom fish complex
+      in Peter the Great Bay
+    year: 2021
+    journal: Izvestiya TINRO
+    authors:
+    - П. В. Калчугин
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.3739/rikusui.74.1
+    title: Decadal changes in standing crops of fish and crustaceans in Lake Kasumigaura,
+      Ibaraki Prefecture
+    year: 2013
+    journal: Japanese Journal of Limnology (Rikusuigaku Zasshi)
+    authors:
+    - A Tominaga
+    - Hiromi Hanzawa
+    - Takanori Yanai
+    - Kazunori Arayama
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.22761/gd.2024.0031
+    title: Fish Diversity of East Sea Streams in Han River Region
+    year: 2024
+    journal: GEO DATA
+    authors:
+    - Jeong Ho Hwang
+    - Jong‐Hak Yun
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.26428/1606-9919-2016-187-3-18
+    title: 'Anthropogenic pollution of estuaries in south Primorye: a review'
+    year: 2016
+    journal: Izvestiya TINRO
+    authors:
+    - Nickolay V. Kolpakov
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.3739/rikusui.68.157
+    title: Distribution and present status of fishes in Lake Takkobu and adjacent
+      rivers
+    year: 2007
+    journal: Japanese Journal of Limnology (Rikusuigaku Zasshi)
+    authors:
+    - Tsutomu Hariu
+    - Hirotsugu Nakajima
+    - Noriko Takamura
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.26717/bjstr.2021.34.005600
+    title: 'The Studies of Chinese Minnow (Rhynchocypris oxycephalus) and Amur Minnow
+      (Rhynchocypris lagowskii ): A Review'
+    year: 2021
+    journal: Biomedical Journal of Scientific & Technical Research
+    authors:
+    - In‐Seok Park
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.32851/wba.2022.1.3
+    title: THE INTRODUCENTS OF THE PRIMORSKY ESTUARIES OF THE NORTH-WESTERN BLACK
+      SEA REGION
+    year: 2022
+    journal: Water bioresources and aquaculture
+    authors:
+    - P.V. Shekk
+    - M. I. Burgaz
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.24866/1997-2857/2024-3/5-17
+    title: ХОЗЯЙСТВЕННАЯ АДАПТАЦИЯ НАСЕЛЕНИЯ ПАЛЕОМЕТАЛЛА НА ПАМЯТНИКЕ КЛЕРК-5 В ПРИМОРЬЕ
+    year: 2024
+    journal: Гуманитарные исследования в Восточной Сибири и на Дальнем Востоке
+    authors:
+    - Юрий Евгеньевич ВОСТРЕЦОВ
+    - Роман Александрович АРТЕМКИН
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.14943/doctoral.k13892
+    title: Roles of male mate choice and its heterogeneity in reproductive isolation
+      among mutually ornamented fishes
+    year: 2020
+    journal: Hokkaido University Collection of Scholarly and Academic Papers (Hokkaido
+      University)
+    authors:
+    - 圭佑 渥美
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.1093/biolre/ioag012
+    title: Comparative proteomic analysis of the zebrafish ( <i>Danio rerio</i> )
+      perivitelline fluid; identifying putative cortical alveoli-associated proteins
+    year: 2026
+    journal: Biology of Reproduction
+    authors:
+    - B A Lewis
+    - K L Reader
+    - M W Pankhurst
+    - Caroline W. Beck
+    - P M Lokman
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.15083/00006919
+    title: 北海道朱太川水系におけるカワシンジュガイの個体群維持機構の解明
+    year: null
+    journal: Institutional Repositories DataBase (IRDB)
+    authors:
+    - 慧 照井
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.1079/cabicompendium.60651
+    title: Tribolodon ezoe
+    year: 2019
+    journal: CABI Compendium
+    authors: []
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.35399/isk.30.1.3
+    title: Egg Development and Early Life History of the Tribolodon brandtii from
+      the Korean Peninsula
+    year: 2018
+    journal: Korean Journal of Ichthyology
+    authors:
+    - Choi Sung Kook
+    - Hong Yang-Ki
+    - Song Sun-Hwa
+    - Kim Kyeong-Hwan
+    - Song Mi-Young
+    - Lee Wan-Ok
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.5962/bhl.part.75986
+    title: Morphologie des poils des Chiroptères d'Europe Myotis brandti (Eversmann,
+      1845)
+    year: 1974
+    journal: Revue suisse de zoologie.
+    authors:
+    - Tupinier Y
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.31857/s013434752106005x
+    title: "Формирование биологического разнообразия дальневосточных красноперок рода\n\
+      \            <i>\n              Tribolodon\n            </i>\n            (Cyprinidae)"
+    year: 2021
+    journal: Биология моря
+    authors:
+    - Долганов В. Н.
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.36038/0234-2774-2015-16-1-107-117
+    title: DYNAMICS OF FAR-EASTERN DACE  TRIBOLODON BRANDTII  IN THE AMUR  BAY (PETER
+      THE GREAT BAY, JAPAN SEA)
+    year: 2015
+    journal: Problems of fisheries
+    authors:
+    - Vdovin A.N.
+    - Zuenko Yu.I.
+    - Solomatov S.F.
+    - Bolshakov S.G.
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.1007/s10228-004-0264-0
+    title: Otolith Sr : Ca ratios of the freshwater and anadromous cyprinid genus
+      Tribolodon
+    year: 2005
+    journal: Ichthyological Research
+    authors:
+    - Sakai Harumi
+    - Imai Chifumi
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.1016/s1383-5769(98)80865-9
+    title: On the parasitism of Diagramma interrupta in rosyface dace, Tribolodon
+      ezoe in Lake Shikaribetsu of Hokkaido
+    year: 1998
+    journal: Parasitology International
+    authors:
+    - Awakura T
+    - Sakamoto H
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.2305/iucn.uk.2019-2.rlts.t122055851a122055879.en
+    title: 'Tribolodon nakamurai: Miyazaki, Y., Nakajima, J., Takaku, K. &amp; Taniguchi,
+      Y.'
+    year: 2017
+    journal: IUCN Red List of Threatened Species
+    authors: []
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest
+  - doi: 10.1016/j.mambio.2017.06.004
+    title: Genetic structure of the Turkish hamster ( Mesocricetus brandti )
+    year: 2017
+    journal: Mammalian Biology
+    authors:
+    - Neumann Karsten
+    - Yiğit Nuri
+    - Fritzsche Peter
+    - Çolak Ercüment
+    - Feoktistova Natalia
+    - Surov Alexei
+    - Michaux Johan
+    species:
+    - Tribolodon_brandti
+    source: auto_ingest

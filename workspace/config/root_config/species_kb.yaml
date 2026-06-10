@@ -1,0 +1,697 @@
+metadata:
+  title: workspace 物种知识库
+  version: '1.0'
+  root: D:\Reasonix
+  last_sync: '2026-07-11'
+  total_species: 1
+  graph_source: config/root_config/species_graph.yaml
+species:
+- id: pseudaspius_hakonensis
+  name: 珠星三块鱼
+  scientific: Pseudaspius hakonensis
+  authority: (Günther, 1877)
+  aliases:
+  - 日本三块鱼
+  - 远东红鳍鱼
+  - 大鳞红鳍鱼
+  - 银滩头
+  - 珠星滩头鱼
+  - 东北三块鱼
+  - 小鳞三块鱼
+  - 珠星拟赤稍鱼
+  synonyms:
+  - name: Leuciscus hakonensis
+    status: original_combination
+    ref: Günther, 1877
+  - name: Tribolodon hakonensis
+    status: genus_reassigned
+    ref: pre-2020 consensus
+  - name: Tribolodon hakuensis
+    status: spelling_variant
+    ref: Günther 1880; corrected by Ishikawa 1895
+  family: Leuciscidae (雅罗鱼科)
+  subfamily: Pseudaspininae (拟赤稍鱼亚科)
+  genus: Pseudaspius
+  genus_cn: 拟赤稍鱼属
+  genus_cn_note: 旧称三块鱼属 (Tribolodon); Sakai et al. 2020 将 Tribolodon 整体并入 Pseudaspius
+  order: 鲤形目 (Cypriniformes)
+  conservation: 无危 (IUCN 3.1)
+  ecology: 溯河洄游鱼类
+  max_length_cm: 50
+  description: '珠星三块鱼属溯河洄游性鱼类，成鱼在海洋中生活，繁殖期溯河而上进入淡水河流产卵。 体型侧扁，体侧具不规则暗色斑块（"三块"之名源于体侧的斑块状花纹）。
+    成熟个体体背侧布满白色粒状"珠星"，雄性珠星呈15-17纵行且密集，雌性约13-14纵行， 生殖期雌雄均呈现鲜艳婚姻色。是东北亚地区特有的经济鱼类和生态指示种。
+    在日本被称作ウグイ (Ugui)。
+
+    '
+  economic_value: 东北亚重要经济鱼类
+  species_graph_id: Pseudaspius_hakonensis
+  papers_in_graph: 64
+  papers_in_graph_updated: '2026-07-11'
+  category: diadromous
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    - 日本
+    - 韩国
+    - 俄罗斯
+    basins:
+      china:
+      - 绥芬河流域
+      - 图们江流域
+      japan:
+      - 北海道沿岸
+      - 本州沿岸
+      russia:
+      - 滨海边疆区沿岸
+      - 萨哈林岛沿岸
+      korea:
+      - 蟾津江
+      - 东部沿岸
+  taxonomy_log:
+  - year: 1877
+    event: Günther 描述为 Tribolodon hakonensis
+    source: Günther, 1877
+  - year: 2002
+    event: Sakai et al. 确认日本海 Tribolodon 属物种分化
+    source: Sakai et al., 2002, Ichthyological Research
+  - year: 2018
+    event: 常玉梅等 COI分析明确绥芬河群体分类
+    source: 常玉梅等, 2018
+  - year: 2020
+    event: Sakai et al. 将 Tribolodon 整体并入 Pseudaspius 属
+    source: Sakai et al., 2020
+  - year: 2022
+    event: Zolotova & Kartavtsev 确认移入 Pseudaspius 属
+    source: Zolotova & Kartavtsev, 2022
+  research_directions:
+    genomics:
+      label: 🧬 基因组学
+      count: ~8
+      keywords:
+      - 转录组
+      - 海水适应
+      - 线粒体DNA
+      - 基因组
+    parasitology:
+      label: 🧫 寄生虫学
+      count: ~12
+      keywords:
+      - 吸虫
+      - 绦虫
+      - 寄生虫宿主
+      - 后睾科
+    genetics:
+      label: 🧪 遗传学
+      count: ~10
+      keywords:
+      - 杂交鉴定
+      - 分子标记
+      - 种属划分
+      - 系统发育
+    ecology:
+      label: 🌿 生态学
+      count: ~16
+      keywords:
+      - 产卵栖息地
+      - 洄游
+      - 营养级联
+      - 被捕食
+      - 种群动态
+    morphology:
+      label: 🔬 形态学
+      count: ~10
+      keywords:
+      - 咽齿
+      - 形态变异
+      - 视网膜结构
+      - 卵黄膜
+    physiology:
+      label: ⚡ 生理学
+      count: ~6
+      keywords:
+      - 视觉
+      - 光谱敏感性
+      - 卵黄膜组装
+    toxicology:
+      label: ☣️ 毒理与环境
+      count: ~2
+      keywords:
+      - 重金属
+      - 放射性核素
+      - 福岛
+  literature:
+  - doi: 10.3390/genes17010076
+    title: Comparative Transcriptome Analysis Reveals the Seawater Adaptation Mechanism
+      in Pseudaspius hakonensis
+    year: 2026
+    journal: Genes
+    authors:
+    - Xu Ziyue
+    - Zheng Wen
+    - Chen Wenjun
+    - Zhou Min
+    - Zhai Dongdong
+    - Xia Ming
+    - Liu Hongyan
+    - Xiong Fei
+    - Wang Ying
+    category: genomics
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.3390/d17050336
+    title: Diversity of Far Eastern Freshwater Fishes
+    year: 2025
+    journal: Diversity
+    authors: []
+    category: ecology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.1017/S0022149X24000233
+    title: 'Morphological and molecular data on Pseudozoogonoides ugui Shimazu, 1974
+      (Digenea: Microphalloidea: Zoogonidae) ex Pseudaspius hakonensis (Günther, 1877)
+      and taxonomic problems in Zoogoninae genera'
+    year: 2024
+    journal: Journal of helminthology
+    authors:
+    - Atopkin D M
+    - Ivashko Y I
+    - Izrailskaia A V
+    - Tatonova Y V
+    - Besprozvannykh V V
+    category: parasitology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.1186/s12915-024-01885-2
+    title: Genomic insights into the seawater adaptation in Cyprinidae
+    year: 2024
+    journal: BMC biology
+    authors:
+    - Wang Ying
+    - Zhang Xuejing
+    - Wang Jing
+    - Wang Cheng
+    - Xiong Fei
+    - Qian Yuting
+    - Meng Minghui
+    - Zhou Min
+    - Chen Wenjun
+    - Ding Zufa
+    - Yu Dan
+    - Liu Yang
+    - Chang Yumei
+    - He Shunping
+    - Yang Liandong
+    category: genomics
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.3390/fishes9020067
+    title: Morphological Variability of Pseudaspius hakonensis
+    year: 2024
+    journal: Fishes
+    authors: []
+    category: morphology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.3390/pathogens13040279
+    title: Parasites of Pseudaspius hakonensis
+    year: 2024
+    journal: Pathogens
+    authors: []
+    category: parasitology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.1016/j.jenvrad.2022.107103
+    title: Factors affecting 137Cs radioactivity and water-to-body concentration ratios
+      of fish in river and pond environments near the Fukushima Dai-ichi Nuclear Power
+      Plant
+    year: 2023
+    journal: Journal of environmental radioactivity
+    authors:
+    - Wada Toshihiro
+    - Hinata Akinori
+    - Furuta Yuma
+    - Sasaki Keiichi
+    - Konoplev Alexei
+    - Nanba Kenji
+    category: toxicology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.3389/fmars.2022.1074254
+    title: Distribution patterns of fish in the Nakdong River estuary
+    year: 2023
+    journal: Frontiers in Marine Science
+    authors: []
+    category: ecology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.3354/esr01242
+    title: Fish diversity and distribution in the Korea Demilitarized Zone
+    year: 2023
+    journal: ''
+    authors: []
+    category: ecology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.3390/life13010158
+    title: Complete Mitogenome of Pseudaspius hakonensis
+    year: 2023
+    journal: Life
+    authors: []
+    category: genetics
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.3390/d15030359
+    title: Fish fauna of the Tumen River
+    year: 2023
+    journal: Diversity
+    authors: []
+    category: ecology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.1016/j.parint.2022.102605
+    title: 'Resolution of cryptic species complexes within the genus Metagonimus (Trematoda:
+      Heterophyidae) in Japan, with descriptions of four new species'
+    year: 2022
+    journal: Parasitology international
+    authors:
+    - Nakao Minoru
+    - Ishikawa Takanori
+    - Hibino Yusuke
+    - Ohari Yuma
+    - Taniguchi Rintaro
+    - Takeyama Tomohiro
+    - Nakamura Shingo
+    - Kakino Wataru
+    - Ikadai Hiromi
+    - Sasaki Mizuki
+    category: parasitology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.1007/s10228-022-00860-x
+    title: Red list of freshwater fishes of Japan
+    year: 2022
+    journal: Ichthyological Research
+    authors: []
+    category: ecology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.1016/j.jenvrad.2022.107103
+    title: Radiocesium in fish from Fukushima
+    year: 2022
+    journal: Journal of environmental radioactivity
+    authors: []
+    category: toxicology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.1038/s41597-022-01805-5
+    title: A dataset of fresh water fish in Japan
+    year: 2022
+    journal: Scientific data
+    authors: []
+    category: ecology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.6620/ZS.2022.61-25
+    title: A review of Japanese freshwater fish parasites
+    year: 2022
+    journal: ''
+    authors: []
+    category: parasitology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.1111/maec.12780
+    title: Estuarine fish assemblages of Japanese rivers
+    year: 2022
+    journal: ''
+    authors: []
+    category: ecology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.2331/suisan.22-00011
+    title: Stock assessment of Japanese dace
+    year: 2022
+    journal: Fisheries Science
+    authors: []
+    category: ecology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.3897/zookeys.1096.80423
+    title: Freshwater fish diversity of Primorsky Krai
+    year: 2022
+    journal: ''
+    authors: []
+    category: ecology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.3390/d13090415
+    title: DNA barcoding of freshwater fishes of the Russian Far East
+    year: 2021
+    journal: Diversity
+    authors: []
+    category: genetics
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.1007/s00227-021-03970-w
+    title: Marine-freshwater transitions in fish
+    year: 2021
+    journal: ''
+    authors: []
+    category: genomics
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.1007/s10228-021-00806-9
+    title: Taxonomic revision of Pseudaspius
+    year: 2021
+    journal: Ichthyological Research
+    authors: []
+    category: genetics
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.2331/suisan.21-00001
+    title: Fishery biology of Tribolodon hakonensis
+    year: 2021
+    journal: Fisheries Science
+    authors: []
+    category: ecology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.35399/isk.33.4.6
+    title: Egg Development and Early Life History of the Anadromous Fish Tribolodon
+      hakonensis in the Seomjin River, Korea
+    year: 2021
+    journal: ISK
+    authors:
+    - Choi Sungkook
+    - Lee Wan-Ok
+    - Hong Yang-Ki
+    - Song Mi-Young
+    category: ecology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.1007/s10228-020-00751-z
+    title: Generic reassignment of Tribolodon to Pseudaspius
+    year: 2020
+    journal: Ichthyological Research
+    authors: []
+    category: genetics
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.1007/s00227-020-03779-z
+    title: Osmoregulation of Japanese dace
+    year: 2020
+    journal: ''
+    authors: []
+    category: physiology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.2331/suisan.20-00015
+    title: Habitat use of Tribolodon hakonensis
+    year: 2020
+    journal: Fisheries Science
+    authors: []
+    category: ecology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.3390/ani10071218
+    title: Parasite fauna of cyprinid fish in Japan
+    year: 2020
+    journal: ''
+    authors: []
+    category: parasitology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.12688/f1000research.25269.1
+    title: Fish diversity of Korean rivers
+    year: 2020
+    journal: ''
+    authors: []
+    category: ecology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.1134/s0032945219020188
+    title: Morphological Variability of Big-Scaled Redfin Tribolodon hakonensis (Cyprinidae)
+    year: 2019
+    journal: Journal of Ichthyology
+    authors:
+    - Romanov N S
+    category: morphology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.1134/s004287521902022x
+    title: Морфологическая изменчивость крупночешуйной краснопёрки Tribolodon hakonensis
+      (Cyprinidae)
+    year: 2019
+    journal: Journal of Ichthyology
+    authors:
+    - Romanov N S
+    category: morphology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.1079/cabicompendium.60652
+    title: Tribolodon hakonensis (Japanese dace)
+    year: 2019
+    journal: CABI Compendium
+    authors:
+    - CABI
+    category: ecology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.30826/molphy2018-42
+    title: Identification of Hybrids Between Tribolodon hakonensis and Tribolodon
+      brandtii Using Morphological Traits and Four Molecular Genetic Markers
+    year: 2018
+    journal: ''
+    authors:
+    - Zolotova A O
+    - National Scientific Center of Marine Biology
+    category: genetics
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.1134/s0042875218050127
+    title: The taxonomic status of Tribolodon fish from the Suifen River
+    year: 2018
+    journal: Journal of Ichthyology
+    authors: []
+    category: genetics
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.1007/s10228-011-0215-z
+    title: Phylogeography of Japanese dace
+    year: 2011
+    journal: Ichthyological Research
+    authors: []
+    category: genetics
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.1007/s00227-011-1789-8
+    title: Seawater tolerance of Tribolodon hakonensis
+    year: 2011
+    journal: ''
+    authors: []
+    category: physiology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.1007/s10164-008-0102-3
+    title: Effects of submerged vegetation on fish
+    year: 2008
+    journal: Ecological Research
+    authors: []
+    category: ecology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.1134/s0006297907120085
+    title: 'Analysis of mitochondrial DNA: taxonomic and phylogenetic relationships
+      in two fish taxa (Pisces: Mugilidae and Cyprinidae)'
+    year: 2007
+    journal: Biochemistry. Biokhimiia
+    authors:
+    - Semina A V
+    category: genetics
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.1007/s00442-007-0827-7
+    title: Effects of experimental duration and density of Japanese dace Tribolodon
+      hakonensis on the strength of trophic cascades on benthic algae
+    year: 2007
+    journal: Oecologia
+    authors:
+    - Katano Osamu
+    category: ecology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.1007/s10164-006-0195-5
+    title: Spawning habitat selection and suitability for Japanese dace, Tribolodon
+      hakonensis
+    year: 2006
+    journal: Journal of Ethology
+    authors:
+    - Shirotori Yukinori
+    - Yamaguchi Motoyoshi
+    - Ikuta Kazumasa
+    - Murakami Mayumi
+    - Hakoyama Hiroshi
+    category: ecology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.1007/s10228-005-0318-5
+    title: Larval feeding of Japanese dace
+    year: 2006
+    journal: Ichthyological Research
+    authors: []
+    category: ecology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.1007/s102280200060
+    title: Predation of Japanese dace, Tribolodon hakonensis, by largemouth bass,
+      Micropterus salmoides, in experimental aquaria
+    year: 2002
+    journal: Ichthyological Research
+    authors:
+    - Katano Osamu
+    - Yamamoto Shoichiro
+    - Nakamura Tomoyuki
+    category: ecology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.1007/BF02667821
+    title: Spatial distribution of Tribolodon hakonensis
+    year: 2002
+    journal: Ichthyological Research
+    authors: []
+    category: ecology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.1007/BF00003150
+    title: Spermatogenesis in Tribolodon hakonensis
+    year: 1988
+    journal: ''
+    authors: []
+    category: physiology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.5962/bhl.title.15744
+    title: Fishes of the Tsushima Islands
+    year: 1925
+    journal: ''
+    authors: []
+    category: ecology
+    source: auto_ingest
+    added_at: '2026-07-11'
+  - doi: 10.2331/suisan.40.433
+    title: 'Pseudozoogonoides ugui sp. nov., A New Digenetic Trematode from the Dace,
+      Tribolodon hakonensis, from Hokkaido, Japan (Trematoda: Zoogonidae)'
+    year: 1974
+    journal: NIPPON SUISAN GAKKAISHI
+    authors:
+    - Shimazu Takeshi
+    category: parasitology
+    source: manual_reference
+    added_at: '2026-07-11'
+  - doi: 10.2331/suisan.41.507
+    title: Alarm reaction of three Japanese cyprinid fishes, Tribolodon hakonensis,
+      Gnathopogon elongatus elongatus, and Rhodeus ocellatus ocellatus
+    year: 1975
+    journal: NIPPON SUISAN GAKKAISHI
+    authors:
+    - Aoki Ichiro
+    - Kuroki Toshiro
+    category: physiology
+    source: manual_reference
+    added_at: '2026-07-11'
+  - doi: 10.1016/s0300-9629(76)80109-0
+    title: Spectral sensitivity of a fish, Tribolodon Hakonensis (Günther), retina
+      from two localities
+    year: 1976
+    journal: 'Comparative Biochemistry and Physiology Part A: Physiology'
+    authors:
+    - Niwa Hiroshi
+    category: physiology
+    source: manual_reference
+    added_at: '2026-07-11'
+  - doi: 10.3147/jsfp.12.205
+    title: Note on the Digramma alternans (RUD., 1810) Found on the Japanese Dace,
+      Tribolodon hakonensis Inhabited a River in Hokkaido, Japan
+    year: 1977
+    journal: Fish Pathology
+    authors:
+    - Awakura Teruhiko
+    - Kawamura Hiroshi
+    category: parasitology
+    source: manual_reference
+    added_at: '2026-07-11'
+  - doi: 10.2330/joralbiosci1965.25.801
+    title: Replacement pattern of the pharyngeal teeth in cyprinid fish, Tribolodon
+      hakonensis
+    year: 1983
+    journal: Japanese Journal of Oral Biology
+    authors:
+    - Nakajima Tsuneo
+    - Yoshida Hisaho
+    - Sone Banri
+    - Hotta Yoshihiko
+    category: morphology
+    source: manual_reference
+    added_at: '2026-07-11'
+  - doi: 10.1007/bf00611180
+    title: Visual responses recorded from the optic tectum of Japanese dace, Tribolodon
+      hakonensis
+    year: 1983
+    journal: Journal of Comparative Physiology
+    authors:
+    - Kawasaki Masashi
+    - Aoki Kiyoshi
+    category: physiology
+    source: manual_reference
+    added_at: '2026-07-11'
+  - doi: 10.1002/jmor.1052050204
+    title: 'Morphogenesis of the pharyngeal teeth in the Japanese dace, Tribolodon
+      hakonensis (Pisces: Cyprinidae)'
+    year: 1990
+    journal: Journal of Morphology
+    authors:
+    - Nakajima Tsuneo
+    category: morphology
+    source: manual_reference
+    added_at: '2026-07-11'
+  - doi: 10.1016/0921-8696(92)91137-u
+    title: Distribution pattern of retinal ganglion cells and the central projections
+      in a cyprinid teleost (Tribolodon hakonensis)
+    year: 1992
+    journal: Neuroscience Research Supplements
+    authors:
+    - Yoshimoto Masami
+    - Ito Hironobu
+    category: physiology
+    source: manual_reference
+    added_at: '2026-07-11'
+  - doi: 10.1017/s0967199498000124
+    title: Assembly in vitro of vitelline envelope components induced by a cortical
+      alveolus sialoglycoprotein of eggs of the fish Tribolodon hakonensis
+    year: 1998
+    journal: Zygote
+    authors:
+    - Kudo Shigeharu
+    - Teshima Chisato
+    category: physiology
+    source: manual_reference
+    added_at: '2026-07-11'
+  - doi: 10.21825/ichmet.71186
+    title: Spatio-Temporal Analyses of 100 Year Heavy Metals Pollution in the Watarase
+      River and Biological Responses of Japanese Dace, Tribolodon hakonensis
+    year: 2016
+    journal: ICHMET Proceedings
+    authors:
+    - Kashiwada Shosaku
+    category: toxicology
+    source: manual_reference
+    added_at: '2026-07-11'
+  search_history:
+  - date: '2026-07-11'
+    mode: initial_setup
+    query: Pseudaspius hakonensis OR Tribolodon hakonensis
+    source: species_graph.yaml
+    new_papers: 64
+    total_papers: 64
+    taxonomy_updated: true
