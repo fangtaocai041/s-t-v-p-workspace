@@ -4,64 +4,102 @@
 
 # eon-workspace
 
-> **三生万物 v8.1 — Seven Projects Unified**
-> Triangle Core: fish + cognitive + eon-core (sealed, arity=3)
-> Derived: P₁(porpoise) · P₂(coilia) · P₃(culter) · C(conflict) (open, arity≥0)
+> **三生万物 v8.1 — 六项目统一工作空间**
+> 道(eon-core) → S(fish知识) + T(cognitive验证) → 万物(P₁porpoise江豚 + P₂coilia刀鲚 + P₃culter鲌类)
+> conflict-arbiter 已合并到 cognitive-search-engine T层
+
+## 目录结构
 
 ```
-eon-core/                   → ☯️ Coordination kernel [Triangle Core]
-fish-ecology-assistant/     → Triangle V0: Knowledge supply
-cognitive-search-engine/    → Triangle V1: Validation engine
-porpoise-agent/             → Derived P₁: Porpoise domain
-coilia-agent/               → Derived P₂: Coilia domain
-culter-agent/               → Derived P₃: Culter domain
-conflict-arbiter/           → Derived C:  Conflict arbitration
-scripts/project_loader.py   → Unified DirectLoader (7 adapters)
-scripts/coordinator.py      → Unified coordinator (6 pathways)
-scripts/quality_gate.py     → Quality gate (5 checks)
+根目录 (6项目 + workspace/)
+├── eon-core/                    → 道: 协调内核 (OriginKernel + project_loader)
+├── fish-ecology-assistant/      → S: 知识供给 (KB + lit-search v3.1)
+├── cognitive-search-engine/     → T: 搜索验证 (credibility_scorer + species_graph + arbiter)
+├── porpoise-agent/              → P₁: 江豚专研
+├── coilia-agent/                → P₂: 刀鲚专研
+├── culter-agent/                → P₃: 鲌类专研
+├── workspace/                   → 统一入口 + 配置文件 + 数据 + 文档
+│   ├── config/                  → coordination.yaml, VERSION.yaml
+│   ├── data/                    → CSV, 下载数据
+│   ├── scripts/                 → 工作空间级脚本
+│   ├── logs/                    → 运行日志
+│   └── docs/                    → 架构文档
+└── .reasonix/                   → Reasonix 运行时配置
 ```
 
-## Quick Start
+## 快速开始
 
 ```bash
-# Quality gate — validate all 7 projects (5/5 gates)
-python scripts/quality_gate.py
+# 加载全部适配器 (6/6)
+python -c "from scripts.project_loader import load_all; print(load_all())"
 
-# Load all adapters (7/7)
-python -c "from scripts.project_loader import get_all_adapters; print({k:type(v).__name__ for k,v in get_all_adapters().items()})"
+# 物种搜索 (经由 eon-core → workspace)
+python eon-core/src/main.py search "珠星三块鱼"
 
-# Full health check (7/7)
-python -c "from scripts.coordinator import coordinator; [print(f'{p}: {coordinator.health(p)[\"status\"]}') for p in ['eon','fish','cognitive','porpoise','coilia','culter','conflict']]"
+# 健康检查
+python eon-core/src/main.py health
+
+# 三角验证评分
+python fish-ecology-assistant/scripts/run_lit_search.py "珠星三块鱼"
+
+# 知识库→图谱同步
+python fish-ecology-assistant/scripts/kb_to_graph_sync.py
+
+# 分类学变更检查
+python fish-ecology-assistant/scripts/kb_to_graph_sync.py --check
 ```
 
-## Projects
+## 项目一览
 
-| Project | Version | Layer | Role | Adapter |
-|---------|:------:|:-----:|------|---------|
-| [eon-core](eon-core/) | v8.0.0 | TriangleCore | Coordinator (T) | `EonCoreAdapter` |
-| [cognitive-search-engine](cognitive-search-engine/) | v5.5.0 | TriangleCore | Validation V1 | `CognitiveSearchAdapter` |
-| [fish-ecology-assistant](fish-ecology-assistant/) | v6.3.0 | TriangleCore | Knowledge V0 | `FishEcologyAdapter` |
-| [porpoise-agent](porpoise-agent/) | v4.3.0 | Derived P₁ | Porpoise specialist | `PorpoiseAdapter` |
-| [coilia-agent](coilia-agent/) | v1.2.0 | Derived P₂ | Coilia specialist | `CoiliaAdapter` |
-| [culter-agent](culter-agent/) | v2.0.0 | Derived P₃ | Culter specialist | `CulterAdapter` |
-| [conflict-arbiter](conflict-arbiter/) | v1.0.0 | Derived C | Conflict arbitration | `ConflictArbiterAdapter` |
+| 项目 | 版本 | 角色 | 功能 |
+|------|:----:|:----:|------|
+| eon-core | v8.1.0 | 道(协调内核) | OriginKernel + project_loader → workspace 委托 |
+| fish-ecology-assistant | v6.4.0 | S(三角·知识) | fish_species_kb + lit-search v3.1 + 6脚本 |
+| cognitive-search-engine | v5.6.0 | T(三角·验证) | credibility_scorer + species_graph(48种176篇) + arbiter |
+| porpoise-agent | v4.3.0 | P₁(江豚) | 声学+种群建模 |
+| coilia-agent | v1.2.0 | P₂(刀鲚) | 耳石微化学+资源评估 |
+| culter-agent | v2.0.0 | P₃(鲌类) | 生长+基因组+营养 |
 
-## Architecture
+## 架构
 
 ```
-道 (User) → 一 (IProjectAdapter) → 二 (YinYang Poles)
-→ 三角 (fish + cognitive + eon-core) → 万物 (P₁ P₂ P₃ ... C)
+道 eon-core (协调内核)
+├── S fish-ecology-assistant (知识供给)
+│   ├── fish_species_kb.yaml (27条目)
+│   └── lit-search v3.1 (12层管线 + 三角验证评分)
+├── T cognitive-search-engine (搜索验证)
+│   ├── species_graph.yaml (48物种, 176论文)
+│   ├── credibility_scorer.py (0-100评分)
+│   └── arbiter.py (冲突仲裁)
+└── 万物衍生
+    ├── P₁ porpoise-agent (江豚)
+    ├── P₂ coilia-agent (刀鲚)
+    └── P₃ culter-agent (鲌类)
+
+精简: conflict-arbiter → cognitive 内嵌 (655行)
+删除: 55个僵尸文件 (vertices/trigrams/samsara等)
 ```
 
-**6 Data Pathways**: P1(fish→cognitive) · P2(cognitive→fish) · P3(cognitive→domain) · P4(health→karma) · P5(all→conflict) · P6(conflict→user)
+## 数据结构
 
-## Documentation
+```
+species_graph.yaml    48物种, 176论文, 12科
+fish_species_kb.yaml  27条目 (species_graph_id已同步)
+scripts/ (7个):
+  credibility_scorer.py  🟢🟡🟠🔴 三角验证
+  self_evolve.py         6维度自进化
+  kb_to_graph_sync.py    KB↔图谱同步
+  taxonomy_sync.py       分类学同步 (已合并入--check)
+  run_lit_search.py      CLI搜索入口
+  search_species.py      旧版 (deprecated)
+  add_literature.py      DOI元数据采集
+```
 
-| Document | Description |
-|----------|-------------|
-| [SANSHENG_WANWU.md](docs/SANSHENG_WANWU.md) | Architecture specification (canonical) |
-| [ARCHITECTURE_OVERVIEW.md](docs/ARCHITECTURE_OVERVIEW.md) | Module responsibilities |
-| [PROJECT_RELATIONSHIPS.md](docs/PROJECT_RELATIONSHIPS.md) | Cross-project pathways |
-| [EXECUTION_FLOW.md](docs/EXECUTION_FLOW.md) | Runtime execution flow |
-| [VERSION.yaml](VERSION.yaml) | Single source of truth for versions |
-| [coordination.yaml](coordination.yaml) | Unified coordination config |
+## 文档
+
+| 文档 | 位置 |
+|------|------|
+| 架构规范 | `workspace/docs/root_docs/SANSHENG_WANWU.md` |
+| 版本号 | `workspace/config/VERSION.yaml` |
+| 协调配置 | `workspace/config/coordination.yaml` |
+| 工程语法 (20条规则) | `fish-ecology-assistant/.reasonix/handbooks/engineering-grammar.md` |

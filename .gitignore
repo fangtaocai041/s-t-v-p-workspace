@@ -1,59 +1,34 @@
-# Workspace-level files only — 5 projects are separate repos
-/cognitive-search-engine/
-/fish-ecology-assistant/
-/porpoise-agent/
-/coilia-agent/
-/meso-cosmos-agent/
-
-# Personal test files
-*.mp4
-make_video.py
-/node_modules/
-/dist/
-*.egg-info/
-__pycache__/
-*.pyc
-
-# Node (moved to bin/)
-/bin/node.exe
-package-lock.json
-package.json
-
-# OCR test files (moved to ocr/)
-/ocr/*.js
-/ocr/*.traineddata
-/ocr/*.jpg
-
-# Binary / scripts (moved to bin/)
-/bin/uninstall.exe
-/bin/reasonix-desktop.exe
-/bin/fix-tokenizer.bat
-start-reasonix.bat
-
-# Security
+# Security — API keys / credentials
 .env
 CREDENTIALS.*.yaml
 
-# Personal
-.reasonix/
-/bin/add-defender-exclusion.ps1
-research_plan.pdf
-
-# Runtime logs
-logs/*.log
-
-# Cherry Studio MCP config
+# MCP config (may contain keys)
 cherry-studio-mcp-*.json
-# (cleaned up — nul) deleted)
 
-# Truncated results cache
+# Personal — advisor / lab info
+workspace/docs/research_plan.pdf
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Node
+node_modules/
+package-lock.json
+package.json
+
+# Reasonix runtime
 .reasonix/truncated-results/
+.reasonix/setup-migrate.ps1
 
-# Dryad / data download artifacts (moved to data/)
-/data/dryad_*.zip
-/data/dryad_*.md
-/data/download_dryad.py
-.playwright-mcp/
+# Logs
+workspace/logs/*.log
+workspace/logs/*.jsonl
 
-# Test artifacts
-logs/catalog_feedback.jsonl
+# Large binary files
+bin/node.exe
+*.mp4
+*.zip
+*.csv

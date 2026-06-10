@@ -149,7 +149,7 @@ def _load_coordination() -> Dict[str, Any]:
     if _coordination_config:
         return _coordination_config
 
-    coord_path = _WORKSPACE_ROOT / "coordination.yaml"
+    coord_path = _WORKSPACE_ROOT / "workspace" / "config" / "coordination.yaml"
     if not coord_path.is_file():
         _coordination_config = {"_loaded": False, "_error": "coordination.yaml not found"}
         return _coordination_config

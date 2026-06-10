@@ -1,0 +1,113 @@
+# ═══════════════════════════════════════════════════════════════
+# VERSION.yaml v7.3 — 三生万物版本号
+# ==============================================================
+# Single Source of Truth for all projects in the workspace.
+# Run scripts/sync_versions.py to auto-sync to README, docs, etc.
+# ═══════════════════════════════════════════════════════════════
+
+workspace:
+  version: "v8.0.0"
+  date: "2026-07-11"
+  name: "eon-workspace"
+  code: "sansheng-wanwu-v2"
+  architecture: "三生万物 v8: 三角核心(fish+cognitive+eon-core) + 万物衍生(porpoise+coilia+culter) + 冲突仲裁(conflict)"
+  total_projects: 7
+  total_modules: 52
+
+projects:
+  eon-core:
+    version: "v8.1.0"
+    date: "2026-06-10"
+    role: "道(协调内核)"
+    description: "轻量协调内核: OriginKernel + project_loader → workspace → 7项目路由。道→S(fish)+T(cognitive)→万物(P₁porpoise+P₂coilia+P₃culter+Cconflict)"
+    path: "eon-core/"
+    adapter: "src/adapter.py → EonCoreAdapter"
+    adapters: ["fish", "cognitive", "porpoise", "coilia", "culter", "conflict"]
+
+  cognitive-search-engine:
+    version: "v5.6.0"
+    date: "2026-06-10"
+    role: "T(三角·搜索验证)"
+    note: "species_graph 172 papers, lit-search v3.1 集成"
+    adapter: "src/adapter.py → CognitiveSearchAdapter"
+    path: "cognitive-search-engine/"
+
+  fish-ecology-assistant:
+    version: "v6.4.0"
+    date: "2026-06-10"
+    role: "S(三角·知识供给)"
+    note: "lit-search v3.1, species_graph 33物种172论文, self_evolve, kb_to_graph_sync"
+    adapter: "src/adapter.py → FishEcologyAdapter"
+    path: "fish-ecology-assistant/"
+
+  porpoise-agent:
+    version: "v4.3.0"
+    date: "2026-06-08"
+    role: "P₁(万物·江豚)"
+    adapter: "src/adapter.py → PorpoiseAdapter"
+    path: "porpoise-agent/"
+
+  coilia-agent:
+    version: "v1.2.0"
+    date: "2026-06-08"
+    role: "P₂(万物·刀鲚)"
+    adapter: "src/adapter.py → CoiliaAdapter"
+    path: "coilia-agent/"
+
+  culter-agent:
+    version: "v2.0.0"
+    date: "2026-07-11"
+    role: "P₃(万物·鲌类)"
+    adapter: "src/adapter.py → CulterAdapter"
+    path: "culter-agent/"
+
+  conflict-arbiter:
+    status: "merged into cognitive-search-engine T layer"
+    note: "conflict-arbiter/src/arbiter.py → cognitive-search-engine/src/arbiter.py"
+
+# ═══════════════════════════════════════════════════════════════
+# Runtime Invariants
+# ═══════════════════════════════════════════════════════════════
+invariants:
+  - id: "INV-001"
+    name: "Topology DAG"
+    check: "nx.is_directed_acyclic_graph(self.topology)"
+    enforced_at: "bootstrap + reconfigure"
+  - id: "INV-002"
+    name: "Yang-verify isolation"
+    check: "YangPole.verify() raises RuntimeError"
+    enforced_at: "mypy strict + runtime"
+  - id: "INV-003"
+    name: "Yin-expand isolation"
+    check: "YinPole.expand() raises RuntimeError"
+    enforced_at: "mypy strict + runtime"
+  - id: "INV-004"
+    name: "EventBus isolation"
+    check: "No direct vertex-to-vertex import"
+    enforced_at: "import linter + code review"
+  - id: "INV-005"
+    name: "Spectral gap"
+    check: "lambda2 >= 0.1 * baseline_lambda2"
+    enforced_at: "reconfigure + health_pulse"
+  - id: "INV-006"
+    name: "DEVA fairness"
+    check: "deva_count <= 0.25 * total_agents"
+    enforced_at: "KarmaCourt.audit_fairness()"
+  - id: "INV-007"
+    name: "NARAKA self-healing"
+    check: "NARAKA agents auto-reincarnate after cooldown"
+    enforced_at: "SamsaraRing.run_karma_cycle()"
+  - id: "INV-008"
+    name: "Reincarnation atomicity"
+    check: "7-step protocol with snapshot rollback"
+    enforced_at: "ReincarnationProtocol.execute()"
+
+# ═══════════════════════════════════════════════════════════════
+# Runtime Cycle Schedule
+# ═══════════════════════════════════════════════════════════════
+runtime_cycles:
+  health_pulse: { interval_s: 5,  component: "OriginKernel.health_pulse" }
+  wuxing_flow:  { interval_s: 15, component: "WuXingFlowEngine.run_cycle" }
+  karma_cycle:  { interval_s: 60, component: "SamsaraRing.run_karma_cycle" }
+  tendril_health: { interval_s: 30, component: "TendrilManager.health_cycle" }
+  chaos_disturb: { interval_queries: 100, component: "ChaosEngine.step" }

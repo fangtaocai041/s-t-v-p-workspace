@@ -16,8 +16,8 @@ $WorkspaceRoot = Split-Path -Parent $PSScriptRoot
 
 # 验证工作区结构
 $Required = @(
-    "coordination.yaml",
-    "VERSION.yaml",
+    "workspace/config/coordination.yaml",
+    "workspace/config/VERSION.yaml",
     "workspace.py",
     "cognitive-search-engine",
     "fish-ecology-assistant",

@@ -1,0 +1,94 @@
+# ============================================================
+# 三角核心协调配置 — Unified Coordination Config
+# ============================================================
+# 路径: D:/Reasonix/coordination.yaml
+# 唯一协调配置 — 所有7个项目由此文件统一管理。
+#
+# 道(eon-core) → S(fish知识) + T(cognitive验证) → 万物(P₁porpoise江豚 + P₂coilia刀鲚 + P₃culter鲌类 + conflict仲裁[T层内嵌])
+# 
+#
+# 🧠 Meso-Cosmos Agent (v5.0): workspace-level coordination
+#    Macro(BDI意图) → Meso(跨项目协调) → Micro(项目执行)
+#    Config: D:/Reasonix/config\meso_agent.yaml
+#    Skill:  D:/Reasonix/skills\meso-orchestrator.md
+
+coordination:
+  version: "5.0.0"
+  root: "D:\\Reasonix"
+  last_sync: "2026-07-11"
+  changelog:
+    - "v5.0.0 (2026-07-11): Unified all 7 projects. +culter-agent (P₃), +conflict-arbiter to derived_projects. Removed duplicate coordination.yaml (3 copies), meso_agent.yaml (2 copies). Removed deprecated workspace.py. coordinator.py now routes to all 6 adapters."
+    - "v4.2.1 (2026-07-11): Europe PMC integration — NCBI 500 failover."
+    - "v4.2.0 (2026-07-11): Search engine expansion 12→19 engines."
+    - "v4.2.1 (2026-07-11): Europe PMC integration — NCBI 500 failover. +search_europe_pmc provider, rule_engine PubMed→Europe PMC auto-fallback, meso_agent volume estimation dual-source (NCBI + Europe PMC). 20 engines total."
+    - "v4.2.0 (2026-07-11): Search engine expansion 12→19 engines. +5 Chinese academic engines (baidu_scholar/cnki_web/wanfang_web/cas_web/chinese_sweep), +2 preprint engines (biorxiv_api/researchgate_web). ENGINE_GROUPS expanded: chinese 3→7, full 7→9, +preprint group. Native HTTP providers in parallel_search.py."
+    - "v4.1.0 (2026-07-11): Exclusive search gateway — cognitive-search-engine declared as the sole external search entry point for the entire workspace. +search_gateway section in coordination.yaml, +.reasonix/config.yaml, +agent.yaml gateway role."
+    - "v3.2.0 (2026-06-07): Cross-project evolution engine propagation — +evolution.yaml (porpoise + fish), +component_registry.yaml (porpoise), +self-evolve skill (porpoise + fish). All three projects now have self-evolution capability."
+    - "v4.0.0 (2026-06-07): Meso-Cosmos Agent — workspace-level coordination layer. +config/meso_agent.yaml, +skills/meso-orchestrator.md. Macro(BDI)→Meso(Route)→Micro(Execute) across all 3 S-T-V projects."
+    - "v3.2.0 (2026-06-07): Cross-project evolution engine propagation — +evolution.yaml (porpoise + fish), +component_registry.yaml (porpoise), +self-evolve skill (porpoise + fish). All three projects now have self-evolution capability."
+    - "v3.1.0 (2026-06-07): Full cross-project co-evolution pass — all READMEs (EN+ZH) synced with Linked Projects sections, agent.version badges on all 3 projects, cognitive agent.yaml +shared section, fish + porpoise WEAKNESSES.md refreshed, porpoise zh README v3→v4.1"
+
+  # ===== Meso-Cosmos Agent (Workspace Level) =====
+  meso_cosmos:
+    enabled: true
+    config: "D:\\Reasonix\\config\\meso_agent.yaml"
+    skill: "D:\\Reasonix\\skills\\meso-orchestrator.md"
+    architecture: "Macro(BDI意图) → Meso(跨项目协调) → Micro(项目执行)"
+    description: "统一入口 — 解析研究问题 → 路由到三角+万物(7项目) → 协调管线执行 → 交叉验证 → 进化反馈"
+    pipeline:
+      - { phase: 0, name: "UNDERSTAND", layer: "Macro-BDI", action: "解析问题 → 识别领域 → 形成意图" }
+      - { phase: 1, name: "ROUTE", layer: "Meso-Coordination", action: "路由到 S/T/V 项目 → 资源分配" }
+      - { phase: 2, name: "EXECUTE", layer: "Micro-Execution", action: "委派到项目 agent → 并行监控" }
+      - { phase: 3, name: "VALIDATE", layer: "Cross-Verification", action: "权威评分 → 三角验证 → 矛盾检测" }
+      - { phase: 4, name: "SYNTHESIZE", layer: "Merge", action: "多项目结果合并 → 统一报告" }
+      - { phase: 5, name: "EVOLVE", layer: "Feedback", action: "评估 → 触发跨项目进化" }
+
+  # ===== S-T-V 三角 =====
+  # ===== 三角闭环 (Triangle Core) =====
+  # 道生一 → 一生二 → 二生三 → 三生万物
+  # 一: 太极(命令入口)  二: 阴阳(S↔V对立)  三: 三角闭环(缺一不可)
+  # 三角 = fish(知识) + cognitive(验证) + eon-core(协调)
+  # 万物: P₁(porpoise) P₂(coilia) ... 从三角衍生，三角不依赖万物
+  triangle_core:
+    fish_knowledge:
+      project: "fish-ecology-assistant"
+      role: "三角 V0 — 多物种知识库: 文献管理, 数据供给, 矛盾分析"
+      layer: "State/Knowledge"
+      exports: ["stats-assistant", "research-analyst", "phd-proposal-writer", "ima-smart-search"]
+    cognitive_engine:
+      project: "cognitive-search-engine"
+      role: "三角 V1 — 21引擎认知搜索: 图谱进化, 变体生成, 可信度验证"
+      layer: "Validation"
+      exports: ["graph-search-engine", "cognitive-species-search", "self-evolve"]
+      engine_path: "cognitive-search-engine"
+      loader: "importlib (DirectLoader, 零 MCP 进程)"
+    coordinator:
+      project: "eon-core"
+      role: "三角协调器 — EventBus, DAG路由, 四顶点拓扑"
+      layer: "Coordination"
+      repo: "https://github.com/fangtaocai041/eon-core"
+
+  # ===== 衍生项目 (万物) =====
+  # 从三角闭环派生，依赖三角提供知识和搜索能力
+  derived_projects:
+    porpoise:
+      id: "P₁"
+      project: "porpoise-agent"
+      role: "江豚(Neophocaena phocaenoides)专属智能体 — 种群监测, 威胁评估, 野外调查"
+      depends_on: ["fish_knowledge", "cognitive_engine"]
+    coilia:
+      id: "P₂"
+      project: "coilia-agent"
+      role: "刀鲚(Coilia nasus)专属智能体 — 耳石微化学, 洄游生态, 资源评估"
+      depends_on: ["fish_knowledge", "cognitive_engine"]
+    culter:
+      id: "P₃"
+      project: "culter-agent"
+      role: "鲌类(Culter/Chanodichthys)专属智能体 — 基因组学, 年龄生长, 同位素营养生态位, 同域共存, 资源评估"
+      depends_on: ["fish_knowledge", "cognitive_engine"]
+    conflict_arbiter:
+      id: "C"
+      project: "conflict-arbiter"
+      role: "冲突仲裁层 (火🟥) — 多源保护推荐冲突检测, 可信度加权仲裁, 熔断, 中国物种区域策略"
+      depends_on: ["fish_knowledge", "cognitive_engine"]
+
