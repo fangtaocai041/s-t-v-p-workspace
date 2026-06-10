@@ -168,6 +168,48 @@ def run_fish_pipeline(
                     _log(f"     ✓ 图谱: {_cn_name} — {total} 篇论文")
                     _log(f"     ✓ 置信: 🟢{_high} 🟡{_mid} 🟠{_low}")
                     _log(f"     ⏱ {elapsed:.2f}s")
+
+                    # Writeback: update KB papers_in_graph count
+                    try:
+                        _kb_path = _WORKSPACE_ROOT / "fish-ecology-assistant" / "config" / "fish_species_kb.yaml"
+                        if _kb_path.exists():
+                            with open(_kb_path, encoding="utf-8") as f:
+                                _kb_content = f.read()
+
+                            # Find tribolodon_brandti entry and update papers_in_graph
+                            _old = f"papers_in_graph:"
+                            _new = f"papers_in_graph: {total}"
+                            if _old in _kb_content:
+                                # Replace just the first occurrence after the species section
+                                _pos = _kb_content.find(_old)
+                                if _pos > 0:
+                                    _line_end = _kb_content.find("\n", _pos)
+                                    _old_line = _kb_content[_pos:_line_end]
+                                    _kb_content = _kb_content.replace(_old_line, f"papers_in_graph: {total}", 1)
+                                    with open(_kb_path, "w", encoding="utf-8") as f:
+                                        f.write(_kb_content)
+                                    _log(f"     ✓ KB写回: papers_in_graph {total}")
+                    except Exception:
+                        pass  # best effort
+
+                    # Self-evolve log
+                    try:
+                        _se_path = _WORKSPACE_ROOT / "fish-ecology-assistant" / "scripts" / "self_evolve.py"
+                        if _se_path.exists():
+                            sys.path.insert(0, str(_se_path.parent))
+                            from self_evolve import log_search
+                            log_search(_sid, {
+                                "mode": "graph_lookup",
+                                "layers_activated": ["L1"],
+                                "layers_producing": {"L1": total},
+                                "known_papers": total,
+                                "new_papers": 0,
+                                "total_papers": total,
+                                "tokens_estimated": 0,
+                                "mode_auto": False,
+                            })
+                    except Exception:
+                        pass
                 else:
                     # Fallback: coordinated_search
                     lit_result = search_species(species_name)
