@@ -62,11 +62,8 @@ projects:
     path: "culter-agent/"
 
   conflict-arbiter:
-    version: "v1.0.0"
-    date: "2026-07-11"
-    role: "C(万物·冲突仲裁)"
-    adapter: "src/adapter.py → ConflictArbiterAdapter"
-    path: "conflict-arbiter/"
+    status: "merged into cognitive-search-engine T layer"
+    note: "conflict-arbiter/src/arbiter.py → cognitive-search-engine/src/arbiter.py"
 
 # ═══════════════════════════════════════════════════════════════
 # Runtime Invariants
