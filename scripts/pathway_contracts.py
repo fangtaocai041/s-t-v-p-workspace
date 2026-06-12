@@ -11,11 +11,11 @@
   三 (Three)   = e项目(协调) + f项目(知识) + c项目(搜索) — 协调三角
   万物 (All)   = 从三角派生的领域专精 (P₁江豚 P₂刀鲚 P₃鲌类 conflict仲裁)
 
-  协调通路: P0(e项目→f/c/P₁/P₂/P₃/conflict) — 意图路由·资源分配
-  知识闭环: P1(f→c) P2(c→f) — 知识库→搜索→写回
-  赋能通路: P3(c→P₁/P₂/P₃) — c项目搜索赋能领域分析
-  业力回路: P4(各项目→e项目) — 健康检查→业力评估→资源调节
-  万物归仲裁: P5(万物→conflict) P6(conflict→user)
+  协调通路: O0(e→全项目) — 意图路由·资源分配
+  知识闭环: T1(f→c) T2(c→f) — 知识库→搜索→写回
+  业力回路: T3(各→e) — 健康检查→业力评估
+  赋能通路: D(c→P₁/P₂/P₃) — 搜索赋能领域分析
+  仲裁链:   A(万物→仲裁) R(仲裁→用户)
 
 用法:
   from scripts.pathway_contracts import PATHWAYS, verify_pathway
@@ -144,7 +144,7 @@ PATHWAYS: Dict[str, PathwayContract] = {
     # ═══ 通路 0: e项目协调分发 — 意图路由 ═══
     "P0_eon_to_all": PathwayContract(
         pathway_id="P0",
-        name="协调源→全项目: 意图路由 + 资源分配",
+        name="O 协调源 — e项目→全项目: 意图路由·资源分配",
         source="eon-core (协调源)",
         target="fish-ecology-assistant | cognitive-search-engine | porpoise-agent | coilia-agent | culter-agent | conflict-arbiter",
         source_call="OriginKernel.route_event(event: Event) → VertexChain",
@@ -165,7 +165,7 @@ PATHWAYS: Dict[str, PathwayContract] = {
     # ═══ 通路 1: 物种查询 → 文献搜索 ═══
     "P1_fish_to_cognitive": PathwayContract(
         pathway_id="P1",
-        name="物种名→文献搜索",
+        name="T1 三角 — f→c: 物种查询→文献搜索",
         source="fish-ecology-assistant (S/V0)",
         target="cognitive-search-engine (V/V1)",
         source_call="FishEcologyAdapter.lookup_species(name: str) → SpeciesProfile",
@@ -186,7 +186,7 @@ PATHWAYS: Dict[str, PathwayContract] = {
     # ═══ 通路 2: 搜索结果 → 可信度评分 ═══
     "P2_cognitive_to_fish": PathwayContract(
         pathway_id="P2",
-        name="搜索结果→可信度评分",
+        name="T2 三角 — c→f: 搜索结果→可信度评分",
         source="cognitive-search-engine (V/V1)",
         target="fish-ecology-assistant (S/V0)",
         source_call="CognitiveSearchAdapter.search() → dict { papers: [...] }",
@@ -208,7 +208,7 @@ PATHWAYS: Dict[str, PathwayContract] = {
     # ═══ 通路 3: 文献结果 → 领域分析 ═══
     "P3_cognitive_to_domain": PathwayContract(
         pathway_id="P3",
-        name="三角→派生: 认知赋能领域专精",
+        name="P₁ 江豚/P₂ 刀鲚/P₃ 鲌类 — c→衍生: 搜索赋能",
         source="cognitive-search-engine (V/V1, 三角形)",
         target="porpoise-agent | coilia-agent (P₁/V2 | P₂/V3, 三角派生)",
         note="P₁/P₂ 非三角形成员，而是三角稳定后派生的可复制模板",
@@ -230,7 +230,7 @@ PATHWAYS: Dict[str, PathwayContract] = {
     # ═══ 通路 4: 健康状态 → 业力评估 ═══
     "P4_health_to_karma": PathwayContract(
         pathway_id="P4",
-        name="健康状态→业力评估 (三角形内)",
+        name="T3 三角 — 各→e: 健康状态→业力评估",
         source="所有适配器 (三角形 + 派生)",
         target="eon-core (Samsara Ring, 三角形内核)",
         source_call="adapter.health() → dict { status, uptime, error_count }",
@@ -250,7 +250,7 @@ PATHWAYS: Dict[str, PathwayContract] = {
     # ═══ 通路 5: 任意项目输出 → 冲突仲裁 ═══
     "P5_all_to_conflict": PathwayContract(
         pathway_id="P5",
-        name="万物→冲突检测",
+        name="A 仲裁 — 万物→conflict: 冲突检测",
         source="fish (三角·V0) | cognitive (三角·V1) | porpoise (P₁) | coilia (P₂) | culter (P₃) | Pₙ",
         target="conflict-arbiter (C/V4)",
         source_call="adapter.search() → dict { recommendations, scores }",
@@ -275,7 +275,7 @@ PATHWAYS: Dict[str, PathwayContract] = {
     # ═══ 通路 6: 仲裁结果 → 用户输出 ═══
     "P6_conflict_to_user": PathwayContract(
         pathway_id="P6",
-        name="仲裁结果→裁决输出",
+        name="R 报告 — conflict→用户: 裁决输出",
         source="conflict-arbiter (C/V4)",
         target="user",
         source_call="ConflictArbiterAdapter.assess_conflict() → ConflictReport",

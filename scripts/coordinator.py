@@ -154,14 +154,13 @@ class Coordinator:
                 return {"pathway_id": pathway_id, "status": "OK",
                         "cognitive_loaded": cog_ok, "domain_available": domain_ok}
             elif pathway_id == "P0_eon_to_all":
-                # eon-core source: verify by import check
+                # O0: e项目→全项目 协调源验证
                 eon_ok = False
                 try:
                     from src.kernel.origin import OriginKernel
                     eon_ok = True
                 except ImportError:
                     pass
-                # All targets reachable via health check
                 all_targets_ok = all(
                     self.health(p).get("status") in ("HEALTHY", "STANDBY", "ok")
                     for p in ("fish", "cognitive", "porpoise", "coilia", "culter", "conflict")
@@ -346,7 +345,7 @@ def _p6_conflict_to_user(species: str = "", sources: list = None, **kwargs) -> D
 # ═══════════════════════════════════════════════════════════════
 
 def _p0_eon_to_all(intent: str = "", **kwargs) -> Dict[str, Any]:
-    """P0: e项目协调分发 — 意图路由 + 资源分配"""
+    """O0: e项目→全项目 协调分发 — 意图路由 + 资源分配"""
     projects = ["fish", "cognitive", "porpoise", "coilia", "culter", "conflict"]
     healths = {}
     for p in projects:
