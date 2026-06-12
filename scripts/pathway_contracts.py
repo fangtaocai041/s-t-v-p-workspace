@@ -94,6 +94,13 @@ CORES: Dict[str, CoreCompetency] = {
         one_liner="鲌类专精 — 年龄生长 + 资源评估 (三角派生模板 P₃)",
         entry_point="scripts.project_loader.get_culter()",
     ),
+    "conflict": CoreCompetency(
+        project="conflict-arbiter", vertex="C / V4",
+        function_name="detect_conflicts",
+        signature="detect_conflicts(sources, region) → ConflictReport",
+        one_liner="多源保护推荐冲突检测 — 加权仲裁 (万物归仲裁)",
+        entry_point="scripts.project_loader.get_conflict()",
+    ),
 }
 
 
@@ -334,7 +341,7 @@ class VolumeContract:
     description: str = """
         十个层次的同心架构:
         L0 OriginKernel → L1 YinYang → L2 Vertices → L3 Trigrams →
-        L4 Tetrahedron → L5 WuXing → L6 Samsara → L7 Sphere →
+        L4 Tetrahedron → L5 Monitoring → L6 Samsara → L7 Sphere →
         L8 Tendrils → L9 Evolution → (回到 L0)
     """
     layers: int = 10
@@ -376,17 +383,46 @@ def verify_pathway_structure(pathway_id: str) -> Dict[str, Any]:
     pw = PATHWAYS[pathway_id]
     issues: List[str] = []
 
-    # 检查源和目标是否在核心定义中 (允许"所有适配器"等多对一通路)
-    for role, name in [("source", pw.source), ("target", pw.target)]:
-        if "所有" in name or "全部" in name:
-            continue  # 多对一通路的源/目标是合法通配
-        project_key = None
-        for key, core in CORES.items():
-            if core.project in name:
-                project_key = key
-                break
-        if project_key is None and "eon-core" not in name.lower():
-            issues.append(f"{role} project not found in CORES: {name}")
+    # 检查源和目标是否在核心定义中 (支持多源/多目标, 用 | 分割)
+    def _split_pipe_outside_parens(text: str) -> list[str]:
+        """Split by | only when outside parentheses."""
+        parts = []
+        depth = 0
+        current = ""
+        for ch in text:
+            if ch == "(":
+                depth += 1
+            elif ch == ")":
+                depth -= 1
+            if ch == "|" and depth == 0:
+                parts.append(current.strip())
+                current = ""
+            else:
+                current += ch
+        if current.strip():
+            parts.append(current.strip())
+        return parts
+
+    for role, raw_name in [("source", pw.source), ("target", pw.target)]:
+        names = []
+        for part in _split_pipe_outside_parens(raw_name):
+            # 取括号前的内容作为项目名
+            paren_idx = part.find("(")
+            if paren_idx > 0:
+                part = part[:paren_idx].strip()
+            if part:
+                names.append(part)
+        for name in names:
+            if "所有" in name or "全部" in name or name in ("user", "用户", "Pₙ"):
+                continue  # 通配/用户/Pₙ 不是项目
+            project_key = None
+            for key, core in CORES.items():
+                # 匹配: 项目全名(core.project) 或 短key 出现在 name 中
+                if core.project in name or key in name.lower():
+                    project_key = key
+                    break
+            if project_key is None and "eon-core" not in name.lower():
+                issues.append(f"{role} project '{name}' not found in CORES")
 
     # 检查数据转换规则是否包含工程语言关键字
     engineering_keywords = ["INPUT", "STEP", "FOR EACH", "IF", "THEN", "ELSE", "RETURN"]

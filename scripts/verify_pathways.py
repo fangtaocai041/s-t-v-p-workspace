@@ -30,17 +30,21 @@ def verify_core_imports() -> dict:
     for key, core in CORES.items():
         try:
             if key == "eon_core":
-                # eon-core 没有 project_loader 适配器，验证模块存在
-                kernel_path = _WORKSPACE / "eon-core" / "src" / "kernel" / "origin.py"
-                results[key] = {
-                    "status": "OK" if kernel_path.exists() else "MISSING",
-                    "path": str(kernel_path),
-                }
+                # eon-core: verify by import check (no adapter)
+                _origin_file = _WORKSPACE / "eon-core" / "src" / "kernel" / "origin.py"
+                if _origin_file.is_file():
+                    import importlib.util
+                    _spec = importlib.util.spec_from_file_location("origin", str(_origin_file))
+                    _mod = importlib.util.module_from_spec(_spec)
+                    _spec.loader.exec_module(_mod)
+                    results[key] = {"status": "OK", "path": str(_origin_file)}
+                else:
+                    results[key] = {"status": "ERROR", "error": f"File not found: {_origin_file}"}
             else:
-                from scripts.project_loader import _resolve_project
-                proj = _resolve_project(core.project)
-                if proj:
-                    results[key] = {"status": "OK", "path": str(proj)}
+                from scripts.project_loader import load_all
+                adapters = load_all()
+                if key in adapters and adapters[key] is not False:
+                    results[key] = {"status": "OK", "path": f"project_loader.get_{key}()"}
                 else:
                     results[key] = {"status": "MISSING", "project": core.project}
         except Exception as e:
@@ -58,33 +62,77 @@ def verify_pathway_connectivity() -> dict:
             target_ok = False
 
             # 尝试通过 project_loader 加载
-            from scripts.project_loader import get_fish, get_cognitive, get_porpoise, get_coilia
+            from scripts.project_loader import get_fish, get_cognitive, get_porpoise, get_coilia, get_culter, get_conflict
+
+            # Map pathway short names → project folder names
+            PROJ_ALIASES = {
+                "fish": "fish-ecology-assistant", "cognitive": "cognitive-search-engine",
+                "porpoise": "porpoise-agent", "coilia": "coilia-agent",
+                "culter": "culter-agent", "conflict": "conflict-arbiter",
+                "Pₙ": None,  # generic placeholder
+            }
 
             adapters = {
                 "fish-ecology-assistant": get_fish,
                 "cognitive-search-engine": get_cognitive,
                 "porpoise-agent": get_porpoise,
                 "coilia-agent": get_coilia,
+                "culter-agent": get_culter,
+                "conflict-arbiter": get_conflict,
             }
 
-            # 多对一通路: 源是"所有适配器"
-            if "所有" in pw.source or "全部" in pw.source:
-                source_ok = True  # 多源通路合法
+            def _resolve_proj(name: str) -> str | None:
+                """Resolve any form (short/alias/full) to full project folder name."""
+                if name in adapters:
+                    return name
+                for alias, full in PROJ_ALIASES.items():
+                    if alias in name or name in alias:
+                        return full
+                return None
 
-            for proj_name, getter in adapters.items():
-                if proj_name in pw.source:
-                    adapter = getter()
+            # 多项源: 至少一个匹配即可
+            source_parts = pw.source.replace("|", ",").split(",")
+            for part in source_parts:
+                part = part.strip()
+                if "所有" in part or "全部" in part:
+                    source_ok = True
+                    break
+                proj = _resolve_proj(part)
+                if proj and proj in adapters:
+                    adapter = adapters[proj]()
                     h = adapter.health()
                     source_ok = "status" in h
-                if proj_name in pw.target:
-                    adapter = getter()
+                    if source_ok:
+                        break
+
+            # 目标匹配
+            target_parts = pw.target.replace("|", ",").split(",")
+            for part in target_parts:
+                part = part.strip()
+                proj = _resolve_proj(part)
+                if proj and proj in adapters:
+                    adapter = adapters[proj]()
                     h = adapter.health()
                     target_ok = "status" in h
+                    if target_ok:
+                        break
 
-            # P4: eon-core target — 验证内核模块存在 (非适配器接口)
+            # "user" target is not an adapter — valid by definition
+            if "user" in pw.target.lower() or "用户" in pw.target:
+                target_ok = True
+
+            # P4: eon-core target — 验证内核模块可导入 (非适配器接口)
             if "eon-core" in pw.target:
-                kernel = _WORKSPACE / "eon-core" / "src" / "kernel" / "origin.py"
-                target_ok = kernel.exists()
+                _origin_file = _WORKSPACE / "eon-core" / "src" / "kernel" / "origin.py"
+                if _origin_file.is_file():
+                    import importlib.util
+                    _spec = importlib.util.spec_from_file_location(
+                        "eon_origin_check", str(_origin_file))
+                    _mod = importlib.util.module_from_spec(_spec)
+                    _spec.loader.exec_module(_mod)
+                    target_ok = True
+                else:
+                    target_ok = False
 
             results[pw_id] = {
                 "status": "CONNECTED" if (source_ok and target_ok) else "BROKEN",
@@ -124,7 +172,8 @@ def main():
     core_ok = sum(1 for c in cores.values() if c["status"] == "OK")
     for key, result in cores.items():
         icon = "✅" if result["status"] == "OK" else "❌"
-        print(f"  {icon} {key}: {result['status']}")
+        detail = result.get("error", "")
+        print(f"  {icon} {key}: {result['status']}{'  (' + detail + ')' if detail else ''}")
 
     # 2. 通路结构验证
     print(f"\n  ── 线 (Lines): 4 数据流通路 ──")
