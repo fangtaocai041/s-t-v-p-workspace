@@ -153,6 +153,21 @@ class Coordinator:
                 )
                 return {"pathway_id": pathway_id, "status": "OK",
                         "cognitive_loaded": cog_ok, "domain_available": domain_ok}
+            elif pathway_id == "P0_eon_to_all":
+                # eon-core source: verify by import check
+                eon_ok = False
+                try:
+                    from src.kernel.origin import OriginKernel
+                    eon_ok = True
+                except ImportError:
+                    pass
+                # All targets reachable via health check
+                all_targets_ok = all(
+                    self.health(p).get("status") in ("HEALTHY", "STANDBY", "ok")
+                    for p in ("fish", "cognitive", "porpoise", "coilia", "culter", "conflict")
+                )
+                return {"pathway_id": pathway_id, "status": "OK",
+                        "eon_core_loaded": eon_ok, "all_targets_reachable": all_targets_ok}
             elif pathway_id == "P4_health_to_karma":
                 # eon-core is the kernel — verify by import check, not adapter health
                 eon_ok = False
@@ -326,7 +341,32 @@ def _p6_conflict_to_user(species: str = "", sources: list = None, **kwargs) -> D
 # 注册表
 # ================================================================
 
+# ═══════════════════════════════════════════════════════════════
+# P0: e项目 → 全项目 协调分发
+# ═══════════════════════════════════════════════════════════════
+
+def _p0_eon_to_all(intent: str = "", **kwargs) -> Dict[str, Any]:
+    """P0: e项目协调分发 — 意图路由 + 资源分配"""
+    projects = ["fish", "cognitive", "porpoise", "coilia", "culter", "conflict"]
+    healths = {}
+    for p in projects:
+        try:
+            h = _lazy_getter(p).health()
+            healths[p] = {"status": h.get("status", "UNKNOWN")}
+        except Exception as exc:
+            healths[p] = {"status": "ERROR", "error": str(exc)}
+    return {
+        "pathway_id": "P0",
+        "source": "eon-core (协调源)",
+        "targets": projects,
+        "all_targets_healthy": all(
+            h["status"] in ("ok", "HEALTHY", "STANDBY") for h in healths.values()
+        ),
+        "healths": healths,
+    }
+
 _PATHWAY_REGISTRY = {
+    "P0_eon_to_all": _p0_eon_to_all,
     "P1_fish_to_cognitive": _p1_fish_to_cognitive,
     "P2_cognitive_to_fish": _p2_cognitive_to_fish,
     "P3_cognitive_to_domain": _p3_cognitive_to_domain,

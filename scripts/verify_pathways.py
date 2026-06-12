@@ -121,6 +121,17 @@ def verify_pathway_connectivity() -> dict:
             if "user" in pw.target.lower() or "用户" in pw.target:
                 target_ok = True
 
+            # P0: eon-core source — 验证内核模块可导入 (非适配器接口)
+            if "eon-core" in pw.source and pw_id == "P0_eon_to_all":
+                _origin_file = _WORKSPACE / "eon-core" / "src" / "kernel" / "origin.py"
+                if _origin_file.is_file():
+                    import importlib.util
+                    _spec = importlib.util.spec_from_file_location(
+                        "eon_source_check", str(_origin_file))
+                    _mod = importlib.util.module_from_spec(_spec)
+                    _spec.loader.exec_module(_mod)
+                    source_ok = True
+
             # P4: eon-core target — 验证内核模块可导入 (非适配器接口)
             if "eon-core" in pw.target:
                 _origin_file = _WORKSPACE / "eon-core" / "src" / "kernel" / "origin.py"
@@ -163,7 +174,7 @@ def main():
     print(f"\n{'═'*60}")
     mode_str = "LIVE 执行模式" if live_mode else "结构验证模式"
     print(f"  通路端到端验证 ({mode_str})")
-    print(f"  三角形: P1 P2 P4  |  派生: P3")
+    print(f"  协调源: P0  |  三角: P1 P2 P4  |  衍生: P3 P5 P6")
     print(f"{'═'*60}")
 
     # 1. 核心专精导入验证

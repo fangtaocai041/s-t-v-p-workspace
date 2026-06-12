@@ -1,19 +1,21 @@
 """
-点→线→面→体: 五项目通路合约 (Pathway Contracts)
+点→线→面→体: 七项目通路合约 (Pathway Contracts)
 
-工程语言化五项目架构。不依赖自然语言描述 — 每条通路
+工程语言化七项目架构。不依赖自然语言描述 — 每条通路
 有精确的函数签名、输入/输出类型、执行顺序和验证规则。
 
-架构隐喻 (v7.4 修正):
-  道 (Tao)     = eon-core OriginKernel — 万物之源
+架构隐喻 (v8.0 修正):
+  道 (Dao)     = e项目(eon-core) OriginKernel — 协调源点, 万法之宗
   一 (One)     = IProjectAdapter 统一接口
-  二 (Two)     = fish(知识) + cognitive(搜索) — 对立统一
-  三 (Three)   = fish + cognitive + eon-core — 三角闭环
-  万物 (All)   = 从三角派生的领域专精模板 (P₁江豚 P₂刀鲚 ...Pₙ)
+  二 (Two)     = f项目(知识) + c项目(搜索) — 阴阳对偶, 知识生产闭环
+  三 (Three)   = e项目(协调) + f项目(知识) + c项目(搜索) — 协调三角
+  万物 (All)   = 从三角派生的领域专精 (P₁江豚 P₂刀鲚 P₃鲌类 conflict仲裁)
 
-  三角形内通路: P1(fish↔cognitive) P4(health→eon-core)
-  派生通路:     P3(cognitive→P₁/P₂/P₃) — 三角赋能领域专精
-  万物归仲裁:   P5(万物→conflict) P6(conflict→user) — 冲突仲裁
+  协调通路: P0(e项目→f/c/P₁/P₂/P₃/conflict) — 意图路由·资源分配
+  知识闭环: P1(f→c) P2(c→f) — 知识库→搜索→写回
+  赋能通路: P3(c→P₁/P₂/P₃) — c项目搜索赋能领域分析
+  业力回路: P4(各项目→e项目) — 健康检查→业力评估→资源调节
+  万物归仲裁: P5(万物→conflict) P6(conflict→user)
 
 用法:
   from scripts.pathway_contracts import PATHWAYS, verify_pathway
@@ -47,30 +49,31 @@ class CoreCompetency:
     output_type: str = ""                          # 输出类型 (可选)
 
 
-# 五项目的核心专精定义
-# 核心专精分为两层: 三角形 (道→一→二→三) + 派生模板 (万物)
+# 七项目的核心专精定义
+# 核心专精分为三层: 协调源 (e项目) → 三角执行 (f/c) → 万物衍生 (P₁/P₂/P₃/conflict)
 CORES: Dict[str, CoreCompetency] = {
-    # ═══ 三角形 (三): fish + cognitive + eon-core ═══
-    "fish": CoreCompetency(
-        project="fish-ecology-assistant", vertex="S / V0",
-        function_name="lookup_species",
-        signature="lookup_species(name: str) → SpeciesProfile",
-        one_liner="长江鱼类知识库查询 + 可信度评分 (三角形: 知识供给)",
-        entry_point="scripts.project_loader.get_fish()",
-    ),
-    "cognitive": CoreCompetency(
-        project="cognitive-search-engine", vertex="V / V1",
-        function_name="search_species",
-        signature="search_species(genus, species) → SearchResult",
-        one_liner="BDI+ReAct 多源认知搜索 (三角形: 验证引擎)",
-        entry_point="scripts.project_loader.get_cognitive()",
-    ),
+    # ═══ 协调源 (道): e项目 — 协调内核, 不参与具体数据流 ═══
     "eon_core": CoreCompetency(
         project="eon-core", vertex="Coordinator",
         function_name="route_event",
         signature="route_event(event: Event) → VertexChain",
-        one_liner="DAG拓扑路由 + 六道轮回 (三角形: 协调内核)",
+        one_liner="DAG拓扑路由 + 事件总线 + 业力引擎 (协调源点)",
         entry_point="eon-core/src/kernel/origin.py",
+    ),
+    # ═══ 三角执行 (二): f项目(知识) + c项目(搜索) — 知识生产闭环 ═══
+    "fish": CoreCompetency(
+        project="fish-ecology-assistant", vertex="V0",
+        function_name="lookup_species",
+        signature="lookup_species(name: str) → SpeciesProfile",
+        one_liner="多流域鱼类知识库查询 + 可信度评分 (知识供给)",
+        entry_point="scripts.project_loader.get_fish()",
+    ),
+    "cognitive": CoreCompetency(
+        project="cognitive-search-engine", vertex="V1",
+        function_name="search_species",
+        signature="search_species(genus, species) → SearchResult",
+        one_liner="BDI+ReAct 多源认知搜索 (搜索验证)",
+        entry_point="scripts.project_loader.get_cognitive()",
     ),
     # ═══ 万物: 从三角派生的领域专精模板 (可复制) ═══
     "porpoise": CoreCompetency(
@@ -136,8 +139,29 @@ class PathwayContract:
     status: PathwayStatus = PathwayStatus.ACTIVE
 
 
-# 六条通路定义
+# 七条通路定义
 PATHWAYS: Dict[str, PathwayContract] = {
+    # ═══ 通路 0: e项目协调分发 — 意图路由 ═══
+    "P0_eon_to_all": PathwayContract(
+        pathway_id="P0",
+        name="协调源→全项目: 意图路由 + 资源分配",
+        source="eon-core (协调源)",
+        target="fish-ecology-assistant | cognitive-search-engine | porpoise-agent | coilia-agent | culter-agent | conflict-arbiter",
+        source_call="OriginKernel.route_event(event: Event) → VertexChain",
+        target_call="各项目 adapter.execute(intent, resources) → Result",
+        data_flow="用户意图 → OriginKernel.parse() → 顶点拓扑匹配 → 路由到目标项目 → 执行",
+        transform="""
+            INPUT: user_intent (string)
+            STEP 1: intent_type = OriginKernel.classify(user_intent)
+            STEP 2: target_vertex = VertexTopology.route(intent_type)
+            STEP 3: resources = ResourceAllocator.assign(target_vertex, entropy_budget)
+            STEP 4: result = target_adapter.execute(intent_type, resources)
+            RETURN result
+        """,
+        verify_condition="eon-core importable AND target project reachable via adapter",
+        note="P0 是协调入口 — 所有外部请求先经过 e项目路由",
+        status=PathwayStatus.DEFINED,
+    ),
     # ═══ 通路 1: 物种查询 → 文献搜索 ═══
     "P1_fish_to_cognitive": PathwayContract(
         pathway_id="P1",
