@@ -345,7 +345,7 @@ def _p6_conflict_to_user(species: str = "", sources: list = None, **kwargs) -> D
 # ═══════════════════════════════════════════════════════════════
 
 def _p0_eon_to_all(intent: str = "", **kwargs) -> Dict[str, Any]:
-    """O0: e项目→全项目 协调分发 — 意图路由 + 资源分配"""
+    """O 协调源: e项目→全项目 · 意图路由 + 资源分配"""
     projects = ["fish", "cognitive", "porpoise", "coilia", "culter", "conflict"]
     healths = {}
     for p in projects:

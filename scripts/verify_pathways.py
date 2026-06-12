@@ -174,7 +174,7 @@ def main():
     print(f"\n{'═'*60}")
     mode_str = "LIVE 执行模式" if live_mode else "结构验证模式"
     print(f"  通路端到端验证 ({mode_str})")
-    print(f"  O(协调源)  |  T1(f→c) T2(c→f) T3(各→e)  |  P₁(江豚) P₂(刀鲚) P₃(鲌类)  |  A(仲裁) R(报告)")
+    print(f"  O(协调源)  |  P1(f→c) P2(c→f)  |  E(c→Pᵢ赋能)  |  F(各→e反馈)  |  A(仲裁) R(报告)")
     print(f"{'═'*60}")
 
     # 1. 核心专精导入验证
@@ -225,8 +225,8 @@ def main():
     print(f"{'═'*60}")
 
     if failed == 0:
-        print(f"  ✅ 全部通路可执行: 三角闭环 + 派生赋能")
-        print(f"     O(协调源)=e项目  |  T(三角)=f+c  |  P(衍生)=江豚·刀鲚·鲌类  |  A(仲裁)·R(报告)")
+        print(f"  ✅ 全部通路可执行: 星型拓扑 + 派生赋能")
+        print(f"     O(协调源)=e项目→分发  |  P(管道)=f↔c  |  E(赋能)=c→Pᵢ  |  F(反馈)=→e  |  A(仲裁)·R(报告)")
     else:
         print(f"  ❌ {failed} 条通路断裂 — 需修复")
 
