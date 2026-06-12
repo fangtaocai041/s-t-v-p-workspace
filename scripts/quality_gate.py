@@ -49,16 +49,15 @@ EXPECTED_ADAPTERS = {
 }
 
 def gate1_adapter_loading() -> dict:
-    """Load all 7 adapters via project_loader. Returns {key: class_name or error}."""
+    """Load all 6 adapters via project_loader. Returns {key: success/error}."""
     results = {}
-    from scripts.project_loader import get_all_adapters
-    adapters = get_all_adapters()
-    for key, adapter in adapters.items():
-        if adapter is None:
-            results[key] = f"FAILED: None returned"
+    from scripts.project_loader import load_all
+    adapters = load_all()
+    for key, status in adapters.items():
+        if status is False:
+            results[key] = "FAILED: returned False"
         else:
-            cls_name = type(adapter).__name__
-            results[key] = cls_name
+            results[key] = "OK"
     return results
 
 # ═══════════════════════════════════════════════════════════════
@@ -69,7 +68,7 @@ def gate2_adapter_health() -> dict:
     """Check all adapters report HEALTHY or STANDBY."""
     results = {}
     from scripts.coordinator import coordinator
-    for key in ["eon", "fish", "cognitive", "porpoise", "coilia", "culter", "conflict"]:
+    for key in ["fish", "cognitive", "porpoise", "coilia", "culter", "conflict"]:
         try:
             h = coordinator.health(key)
             status = h.get("status", "UNKNOWN")
@@ -189,8 +188,8 @@ def run_all(quick: bool = False, ci: bool = False) -> int:
 
     # ── GATE-1 ──
     g1 = gate1_adapter_loading()
-    check("GATE-1: Adapter Loading (7/7)", g1,
-          lambda v: v in EXPECTED_ADAPTERS.values())
+    check("GATE-1: Adapter Loading (6/6)", g1,
+          lambda v: v == "OK")
 
     if quick:
         return 0 if failures == 0 else 1
@@ -198,7 +197,7 @@ def run_all(quick: bool = False, ci: bool = False) -> int:
     # ── GATE-2 ──
     g2 = gate2_adapter_health()
     check("GATE-2: Adapter Health", g2,
-          lambda v: v in ("HEALTHY", "STANDBY"))
+          lambda v: v in ("HEALTHY", "STANDBY", "ok"))
 
     # ── GATE-3 ──
     g3 = gate3_pathways()

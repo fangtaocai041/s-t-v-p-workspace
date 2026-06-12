@@ -154,12 +154,19 @@ class Coordinator:
                 return {"pathway_id": pathway_id, "status": "OK",
                         "cognitive_loaded": cog_ok, "domain_available": domain_ok}
             elif pathway_id == "P4_health_to_karma":
-                all_ok = all(
+                # eon-core is the kernel — verify by import check, not adapter health
+                eon_ok = False
+                try:
+                    from src.kernel.origin import OriginKernel
+                    eon_ok = True
+                except ImportError:
+                    pass
+                domain_ok = all(
                     self.health(p).get("status") in ("HEALTHY", "STANDBY")
-                    for p in ("eon", "fish", "cognitive", "porpoise", "coilia", "culter", "conflict")
+                    for p in ("fish", "cognitive", "porpoise", "coilia", "culter", "conflict")
                 )
                 return {"pathway_id": pathway_id, "status": "OK",
-                        "all_healthy": all_ok}
+                        "eon_core_loaded": eon_ok, "domain_healthy": domain_ok}
             elif pathway_id in ("P5_all_to_conflict", "P6_conflict_to_user"):
                 conflict_ok = self.health("conflict").get("status") in ("HEALTHY", "STANDBY")
                 return {"pathway_id": pathway_id, "status": "OK",
