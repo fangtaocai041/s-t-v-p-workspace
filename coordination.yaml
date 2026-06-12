@@ -92,3 +92,16 @@ coordination:
       role: "冲突仲裁层 (火🟥) — 多源保护推荐冲突检测, 可信度加权仲裁, 熔断, 中国物种区域策略"
       depends_on: ["fish_knowledge", "cognitive_engine"]
 
+# ═══════════════════════════════════════════════════════
+# 演化引擎配置
+# ═══════════════════════════════════════════════════════
+evolution:
+  enabled: true
+  cycle_period_sec: 3600
+  feedback_loop:
+    - { from: "cognitive-search-engine", to: "fish-ecology-assistant", trigger: "taxonomy_change", action: "sync_kb" }
+    - { from: "fish-ecology-assistant", to: "cognitive-search-engine", trigger: "kb_update", action: "refresh_graph" }
+  evolution_params:
+    satisfice_threshold: 8
+    ig_prune_threshold: 0.005
+
