@@ -99,7 +99,7 @@ class ExecutionTrace:
             elif self.pathway_id.startswith("P3"):
                 lines.append(f"  → 三(三角闭环) → 万物(派生赋能)")
             elif self.pathway_id.startswith("P4"):
-                lines.append(f"  → 三(三角闭环) → 万物(六道业力)")
+                lines.append(f"  → 三(三角闭环) → 万物(六道评控)")
         lines.append(f"──────────────────────────────────────────")
         if self.validate_message:
             lines.append(f"  验证: {self.validate_message}")
@@ -376,7 +376,7 @@ def _validate_p3(output: dict) -> Tuple[bool, str]:
     return True, "分析已执行"
 
 
-# ── 通路 P4: 健康状态→业力评估 ──
+# ── 通路 P4: 健康状态→评控评估 ──
 
 def _p4_check_health(_unused: Any = None) -> dict:
     """Step 1: 检查所有适配器的健康状态。"""
@@ -448,7 +448,7 @@ def _build_executors():
         ),
         "P4_health_to_karma": PathwayExecutor(
             pathway_id="P4_health_to_karma",
-            pathway_name="健康状态→业力评估",
+            pathway_name="健康状态→评控评估",
             steps=[
                 Step(name="全适配器健康检查", fn=_p4_check_health),
             ],

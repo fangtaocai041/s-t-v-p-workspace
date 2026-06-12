@@ -20,7 +20,9 @@ sys.path.insert(0, str(_WORKSPACE))
 
 def verify_fish_standalone() -> Tuple[bool, str]:
     """fish-ecology-assistant: 物种知识库独立查询。"""
-    species_file = _WORKSPACE / "fish-ecology-assistant" / "config" / "yangtze_fish_species.yaml"
+    species_file = _WORKSPACE / "fish-ecology-assistant" / "config" / "fish_species_kb.yaml"
+    if not species_file.exists():
+        species_file = _WORKSPACE / "fish-ecology-assistant" / "config" / "yangtze_fish_species.yaml"
     if not species_file.exists():
         return False, f"物种数据库不存在: {species_file}"
 
@@ -36,7 +38,7 @@ def verify_fish_standalone() -> Tuple[bool, str]:
                 if key in db:
                     val = db[key]
                     count = len(val) if isinstance(val, (list, dict)) else 1
-                    return True, f"长江 {count}+ 种鱼类知识库加载成功 (键: {key})"
+                    return True, f"多流域鱼类知识库 {count}+ 种加载成功 (键: {key})"
             # 直接统计顶层键数
             return True, f"鱼类知识库加载成功 ({len(db)} 个顶层条目)"
         return True, f"鱼类知识库加载成功"
@@ -112,7 +114,7 @@ def verify_eon_core_standalone() -> Tuple[bool, str]:
         ("L2", "vertices/"),
         ("L3", "trigrams/"),
         ("L4", "mesh/"),
-        ("L5", "wuxing/"),
+        ("L5", "monitoring/"),
         ("L6", "samsara/"),
         ("L7", "sphere/"),
         ("L8", "tendrils/"),
@@ -122,7 +124,7 @@ def verify_eon_core_standalone() -> Tuple[bool, str]:
     existing = sum(1 for _, path in layers if (src / path).exists())
 
     if kernel_file.exists() and existing >= 8:
-        return True, f"OriginKernel 就绪 ({existing}/10 层可用, DAG拓扑 + Samsara业力)"
+        return True, f"OriginKernel 就绪 ({existing}/10 层可用, DAG拓扑 + Samsara评控)"
     return True, f"eon-core 模块就绪 ({existing}/10 层)"
 
 
@@ -131,7 +133,7 @@ def verify_eon_core_standalone() -> Tuple[bool, str]:
 # ═══════════════════════════════════════════════════════════════
 
 VERIFICATIONS = {
-    "fish (S/V0)":       ("长江鱼类知识库", verify_fish_standalone),
+    "fish (S/V0)":       ("多流域鱼类知识库", verify_fish_standalone),
     "cognitive (V/V1)":  ("多源认知搜索",   verify_cognitive_standalone),
     "porpoise (P₁/V2)":  ("矛盾驱动路由",   verify_porpoise_standalone),
     "coilia (P₂/V3)":    ("领域专精评估",   verify_coilia_standalone),

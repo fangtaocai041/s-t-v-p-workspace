@@ -283,7 +283,7 @@ def _p3_cognitive_to_domain(species: str = "", domain: str = "", **kwargs) -> Di
 
 
 def _p4_health_to_karma(**kwargs) -> Dict[str, Any]:
-    """P4: 健康状态 → 业力评估
+    """P4: 健康状态 → 评控评估
 
     收集所有项目的健康状态, 返回聚合结果。
     """

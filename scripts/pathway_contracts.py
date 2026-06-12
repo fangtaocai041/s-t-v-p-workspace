@@ -14,7 +14,7 @@
   协调分发: O(协调源) — e项目→全项目 意图路由
 数据管道: P1(f→c) P2(c→f) — 知识库→搜索→写回
 赋 能:   E(c→P₁/P₂/P₃) — 搜索赋能领域专精
-反 馈:   F(各→e) — 健康→业力评估
+反 馈:   F(各→e) — 健康→评控评估
 仲 裁:   A(万物→仲裁) — 冲突检测
 报 告:   R(仲裁→用户) — 裁决输出
 
@@ -58,7 +58,7 @@ CORES: Dict[str, CoreCompetency] = {
         project="eon-core", vertex="Coordinator",
         function_name="route_event",
         signature="route_event(event: Event) → VertexChain",
-        one_liner="DAG拓扑路由 + 事件总线 + 业力引擎 (协调源点)",
+        one_liner="DAG拓扑路由 + 事件总线 + 评控引擎 (协调源点)",
         entry_point="eon-core/src/kernel/origin.py",
     ),
     # ═══ 执行层 (二): f项目(知识) + c项目(搜索) — 知识生产闭环 ═══
@@ -228,10 +228,10 @@ PATHWAYS: Dict[str, PathwayContract] = {
         verify_condition="analysis.findings IS NOT EMPTY AND analysis.phase IS NOT NULL",
     ),
 
-    # ═══ 通路 4: 健康状态 → 业力评估 ═══
+    # ═══ 通路 4: 健康状态 → 评控评估 ═══
     "P4_health_to_karma": PathwayContract(
         pathway_id="P4",
-        name="F 反馈: 各→e · 健康状态→业力评估",
+        name="F 反馈: 各→e · 健康状态→评控评估",
         source="所有适配器 (三角形 + 派生)",
         target="eon-core (Samsara Ring, 三角形内核)",
         source_call="adapter.health() → dict { status, uptime, error_count }",
@@ -341,7 +341,7 @@ WORKFLOWS: Dict[str, WorkflowContract] = {
     "WF_B_domain_conservation": WorkflowContract(
         workflow_id="WF_B",
         name="领域保护评估",
-        description="物种搜索 → 矛盾分析 → 保护建议 → 业力评估",
+        description="物种搜索 → 矛盾分析 → 保护建议 → 评控评估",
         pathway_sequence=["P1_fish_to_cognitive", "P3_cognitive_to_domain", "P4_health_to_karma"],
         entry_condition="user asks about conservation/threat/assessment",
         exit_criteria="contradiction analyzed AND recommendations generated",
@@ -359,7 +359,7 @@ class VolumeContract:
     """闭合反馈环 — 五项目全连接的体。
 
     体是整个系统的最高抽象：所有通路、所有工作流
-    在一个闭合的反馈环中运行，通过 Samsara 业力自我调节。
+    在一个闭合的反馈环中运行，通过 Samsara 评控自我调节。
     """
     volume_id: str = "V_eon_samsara_loop"
     name: str = "eon-core Samsara 闭合反馈环"
@@ -370,7 +370,7 @@ class VolumeContract:
         L8 Tendrils → L9 Evolution → (回到 L0)
     """
     layers: int = 10
-    cycle_period_sec: int = 60                     # 业力评估周期
+    cycle_period_sec: int = 60                     # 评控评估周期
     vertices: List[str] = field(default_factory=lambda: ["V0", "V1", "V2", "V3"])
     karma_states: List[str] = field(default_factory=lambda: [
         "DEVA", "HUMAN", "ASURA", "ANIMAL", "PRETA", "NARAKA"

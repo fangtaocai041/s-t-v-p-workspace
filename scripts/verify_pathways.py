@@ -212,7 +212,7 @@ def main():
     # 5. 体验证
     print(f"\n  ── 体 (Volume): eon-core 反馈环 ──")
     print(f"  ✅ {VOLUME.name}")
-    print(f"     {VOLUME.layers} 层 · {len(VOLUME.vertices)} 顶点 · {len(VOLUME.karma_states)} 业力状态")
+    print(f"     {VOLUME.layers} 层 · {len(VOLUME.vertices)} 顶点 · {len(VOLUME.karma_states)} 评控状态")
     print(f"     {len(VOLUME.invariants)} 条架构不变量")
 
     # 汇总
