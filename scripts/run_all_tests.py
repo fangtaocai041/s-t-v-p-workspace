@@ -71,7 +71,7 @@ def low_configs(result: TestResult):
         WORKSPACE / "coordination.yaml",
         PROJECTS["cognitive (V)"] / "config" / "agent.yaml",
         PROJECTS["fish (S)"] / "config" / "agent.yaml",
-        PROJECTS["fish (S)"] / "config" / "yangtze_fish_species.yaml",
+        PROJECTS["fish (S)"] / "config" / "fish_species_kb.yaml",
         PROJECTS["porpoise (P₁)"] / "config" / "agent.yaml",
         PROJECTS["coilia (P₂)"] / "config" / "agent.yaml",
         # meso-cosmos-agent deleted v7.1 — config check removed
@@ -137,10 +137,13 @@ def med_robustness(result: TestResult):
 
 def med_routing(result: TestResult):
     """通路路由验证 (通过 verify_pathways)."""
+    # 统计 CONNECTED 数量而非 ✅ 总数
     code, out = _run([sys.executable, str(WORKSPACE / "scripts" / "verify_pathways.py")])
-    result.total = 4
-    result.passed = out.count("✅") - 2  # 减去标题
-    result.failed = 4 - result.passed
+    result.total = 6
+    result.passed = out.count("CONNECTED")
+    if result.passed > result.total:
+        result.passed = result.total
+    result.failed = result.total - result.passed
 
 def med_cross_project(result: TestResult):
     """跨项目验证 8项."""
