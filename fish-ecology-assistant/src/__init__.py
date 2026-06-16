@@ -1,4 +1,4 @@
-﻿"""fish-ecology-assistant — 鱼类生态学知识供给引擎 (S/V0)
+"""fish-ecology-assistant — 鱼类生态学知识供给引擎 (S/V0)
 
 提供多流域鱼类物种知识库查询、两阶段文献搜索、三角验证评分能力。
 是 Triangle Core 的 S/V0 知识供给层。
