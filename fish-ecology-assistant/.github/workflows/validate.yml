@@ -18,7 +18,6 @@ jobs:
           if missing:
               print(f'❌ Missing sections: {missing}')
               sys.exit(1)
-          # Consistency checks
           vloop = c['verification_loop']['max_iterations']
           orch = c['orchestrator']['max_revision_rounds']
           assert vloop == orch, f'max_iterations ({vloop}) != max_revision_rounds ({orch})'
@@ -29,21 +28,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Validate Skills have PREFLIGHT
+      - name: Validate Skills (skip encrypted)
         run: |
           errors=0
           for skill in .reasonix/skills/*.md; do
             name=$(basename "$skill")
-            if ! grep -q 'PREFLIGHT\|config/agent.yaml' "$skill"; then
-              echo "⚠️  $name: no config reference"
+            # 跳过 Reasonix 加密文件（非纯文本）
+            if ! file "$skill" | grep -q 'ASCII\|UTF-8\|Unicode'; then
+              echo "🔒 $name: encrypted (skipped)"
+              continue
             fi
             if ! grep -q '^---$' "$skill"; then
               echo "❌ $name: missing frontmatter"
               errors=$((errors+1))
+            fi
+            if ! grep -q 'PREFLIGHT\|config/agent.yaml' "$skill"; then
+              echo "⚠️  $name: no config reference"
             fi
           done
           if [ $errors -gt 0 ]; then
             echo "❌ $errors Skill(s) with format errors"
             exit 1
           fi
-          echo '✅ All Skills validated'
+          echo '✅ All Skills validated (encrypted files skipped)'
