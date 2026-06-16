@@ -17,7 +17,6 @@ jobs:
         with:
           src: github/fangtaocai041
           dst: gitee/fangtaocai
-          dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
           dst_token: ${{ secrets.GITEE_TOKEN }}
           static_list: "fish-ecology-assistant,cognitive-search-engine,porpoise-agent,coilia-agent,culter-agent,eon-core,s-t-v-p-workspace"
           force_update: true
