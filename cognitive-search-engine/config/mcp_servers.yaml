@@ -39,6 +39,11 @@ servers:
     description: PubMed/NCBI 直连 — E-utilities API
 
 categories:
-  academic: 4
-  web: 2
-  total: 6
+  academic: 4      # ncbi + scholar + article + scholarly
+  chinese_academic: 5  # baidu_scholar + cnki_web + wanfang_web + cas_web + chinese_sweep
+  preprint: 2      # biorxiv + researchgate
+  web: 2           # tavily + exa
+  builtin: 1       # web_search + web_fetch
+  total_mcp: 6
+  total_native: 7
+  total: 13
