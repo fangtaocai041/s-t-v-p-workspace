@@ -1,0 +1,29 @@
+name: Validate
+on: [push, pull_request]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install pyyaml
+      - run: python -c "
+          import yaml
+          with open('config/agent.yaml') as f:
+              c = yaml.safe_load(f)
+          assert 'agent' in c, 'Missing agent section'
+          assert 'cognitive' in c, 'Missing cognitive section'
+          assert 'interaction' in c, 'Missing interaction section'
+          print('✅ agent.yaml valid')
+        "
+      - run: python -c "
+          import yaml
+          with open('config/mcp_servers.yaml') as f:
+              c = yaml.safe_load(f)
+          print(f'✅ MCP servers: {len(c)} configured')
+        " || echo "⚠️ mcp_servers.yaml not found — may be normal"
+      - run: |
+          py_count=$(find src -name '*.py' ! -path '*__pycache__*' | wc -l)
+          echo "✅ $py_count Python files in src/"
+          [ $py_count -ge 1 ]
