@@ -2,6 +2,11 @@
 
 **鱼类生态学知识供给引擎** — 26 个物种知识库 + 文献搜索 + 可信度评分。
 
+[![CI](https://github.com/fangtaocai041/fish-ecology-assistant/actions/workflows/validate.yml/badge.svg)](https://github.com/fangtaocai041/fish-ecology-assistant/actions)
+[![Python](https://img.shields.io/badge/python-3.10+-blue)](https://python.org)
+[![Species](https://img.shields.io/badge/species-26-green)]()
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+
 [English](README.md) · [更新日志](CHANGELOG.md)
 
 ---
