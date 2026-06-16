@@ -3,8 +3,8 @@ id: ochetobius_elongatus
 scientific: Ochetobius elongatus
 name: 鳤
 family: 鲤科
-last_updated: '2026-06-16'
-conservation: 无
+last_updated: '2026-06-17'
+conservation: CR
 status: 极罕见
 category: endangered_in_graph
 basins:
@@ -90,4 +90,62 @@ literature:
   year: 2010
   journal: IUCN Red List of Threatened Species
   category: conservation
+- doi: 10.3390/ani15192870
+  title: Revealing Phenotypic Differentiation in Ochetobius elongatus from the Middle Yangtze River Through Geometric Morphometrics
+  year: 2025
+  journal: Animals
+  authors:
+  - Fangtao Cai
+  - Zhiyuan Qi
+  - Zhiwu Hu
+  - Dongdong Zhai
+  - Yuanyuan Chen
+  - Feng Xiong
+  - Hongyan Liu
+  category: morphology
+- doi: 10.3390/ani16091369
+  title: Analysis of Ochetobibus elongatus (Kner) Dietary Habits Based on Digestive System Morphology, Histology, and Intestinal Content Sequencing Technology
+  year: 2026
+  journal: Animals
+  authors:
+  - Feng Gao
+  - Zheng Zuo
+  - Qing Wu
+  - Han Xiao
+  - Zhen Peng
+  - Liang Zou
+  - Gang Jiang
+  - Xin Tian
+  - Zhi Feng
+  - Xia Xie
+  - Li Tian
+  category: diet_physiology
+- doi: 10.1016/j.watbs.2025.100378
+  title: Non-native aquatic species in the Dongting Lake basin, China
+  year: 2025
+  journal: Water Biology and Security
+  authors:
+  - Wen Xiong
+  - Wei Zhang
+  - Lu Cai
+  - Peter A. Bowler
+  - Chuanxin Chao
+  - Baoqiang Wang
+  category: conservation
+- doi: 10.17520/biods.2025136
+  title: 长江中下游鳤不同群体的多变量形态学特征
+  year: 2025
+  journal: Biodiversity Science
+  authors:
+  - 蔡方陶
+  - 王生
+  - 胡兴坤
+  - 袁希平
+  - 翟东东
+  - 陈媛媛
+  - 阙延福
+  - 熊飞
+  - 刘红艳
+  - 段辛斌
+  category: morphology
 ---
