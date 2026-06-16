@@ -4,55 +4,55 @@
 
 # eon-workspace
 
-> **ÈýÉúÍòÎï v8.2 ¡ª ÁùÏîÄ¿Í³Ò»¹¤×÷¿Õ¼ä + ÎïÖÖÈ«¾°·ÖÎö¹ÜÏß**
-> µÀ(eon-core) ¡ú S(fishÖªÊ¶) + T(cognitiveÑéÖ¤) ¡ú ÍòÎï(P6®9porpoise½­ëà + P6¯0coiliaµ¶öÝ + P6¯1culter÷ˆÀà)
+> **ä¸‰ç”Ÿä¸‡ç‰© v8.2 â€” å…­é¡¹ç›®ç»Ÿä¸€å·¥ä½œç©ºé—´ + ç‰©ç§å…¨æ™¯åˆ†æžç®¡çº¿**
+> é“(eon-core) â†’ S(fishçŸ¥è¯†) + T(cognitiveéªŒè¯) â†’ ä¸‡ç‰©(Pâ‚porpoiseæ±Ÿè±š + Pâ‚‚coiliaåˆ€é²š + Pâ‚ƒculteré²Œç±»)
 
-## ¿ìËÙ¿ªÊ¼
+## å¿«é€Ÿå¼€å§‹
 
 ```bash
-# ÎïÖÖÈ«¾°·ÖÎö (¹ÜÏß Phase 0-5)
-python workspace/scripts/run_full_analysis.py "ÖéÐÇÈý¿éÓã" "Tribolodon brandti"
+# ç‰©ç§å…¨æ™¯åˆ†æž (ç®¡çº¿ Phase 0-5)
+python workspace/scripts/run_full_analysis.py "ç æ˜Ÿä¸‰å—é±¼" "Tribolodon brandti"
 
-# ÎïÖÖËÑË÷
-python eon-core/src/main.py search "ÖéÐÇÈý¿éÓã"
+# ç‰©ç§æœç´¢
+python eon-core/src/main.py search "ç æ˜Ÿä¸‰å—é±¼"
 
-# ÔËÐÐ²âÊÔ¼¯ (38Ïî)
+# è¿è¡Œæµ‹è¯•é›† (38é¡¹)
 python workspace/scripts/test_pipeline.py
 
-# Èý½ÇÑéÖ¤ÆÀ·Ö
-python fish-ecology-assistant/scripts/run_lit_search.py "ÖéÐÇÈý¿éÓã"
+# ä¸‰è§’éªŒè¯è¯„åˆ†
+python fish-ecology-assistant/scripts/run_lit_search.py "ç æ˜Ÿä¸‰å—é±¼"
 
-# ÖªÊ¶¿â¡úÍ¼Æ×Í¬²½
+# çŸ¥è¯†åº“â†’å›¾è°±åŒæ­¥
 python fish-ecology-assistant/scripts/kb_to_graph_sync.py
 ```
 
-## Ä¿Â¼½á¹¹
+## ç›®å½•ç»“æž„
 
 ```
-¸ùÄ¿Â¼/
-©À©¤©¤ eon-core/                  ¡ú µÀ: Ð­µ÷ÄÚºË
-©À©¤©¤ fish-ecology-assistant/    ¡ú S: ÖªÊ¶¹©¸ø
-©À©¤©¤ cognitive-search-engine/   ¡ú T: ËÑË÷ÑéÖ¤+ÖÙ²Ã
-©À©¤©¤ porpoise-agent/            ¡ú P6®9: ½­ëà
-©À©¤©¤ coilia-agent/              ¡ú P6¯0: µ¶öÝ
-©À©¤©¤ culter-agent/              ¡ú P6¯1: ÷ˆÀà
-©¸©¤©¤ workspace/                 ¡ú ÅäÖÃ/Êý¾Ý/ÎÄµµ/½Å±¾
-    ©À©¤©¤ config/                ¡ú coordination.yaml, VERSION.yaml
-    ©À©¤©¤ data/                  ¡ú Êý¾ÝÎÄ¼þ
-    ©À©¤©¤ scripts/               ¡ú ¹¤×÷¿Õ¼ä¼¶½Å±¾
-    ©À©¤©¤ logs/                  ¡ú ÔËÐÐÈÕÖ¾
-    ©¸©¤©¤ docs/                  ¡ú ¼Ü¹¹ÎÄµµ
+æ ¹ç›®å½•/
+â”œâ”€â”€ eon-core/                  â†’ é“: åè°ƒå†…æ ¸
+â”œâ”€â”€ fish-ecology-assistant/    â†’ S: çŸ¥è¯†ä¾›ç»™
+â”œâ”€â”€ cognitive-search-engine/   â†’ T: æœç´¢éªŒè¯+ä»²è£
+â”œâ”€â”€ porpoise-agent/            â†’ Pâ‚: æ±Ÿè±š
+â”œâ”€â”€ coilia-agent/              â†’ Pâ‚‚: åˆ€é²š
+â”œâ”€â”€ culter-agent/              â†’ Pâ‚ƒ: é²Œç±»
+â””â”€â”€ workspace/                 â†’ é…ç½®/æ•°æ®/æ–‡æ¡£/è„šæœ¬
+    â”œâ”€â”€ config/                â†’ coordination.yaml, VERSION.yaml
+    â”œâ”€â”€ data/                  â†’ æ•°æ®æ–‡ä»¶
+    â”œâ”€â”€ scripts/               â†’ å·¥ä½œç©ºé—´çº§è„šæœ¬
+    â”œâ”€â”€ logs/                  â†’ è¿è¡Œæ—¥å¿—
+    â””â”€â”€ docs/                  â†’ æž¶æž„æ–‡æ¡£
 ```
 
-## ÏîÄ¿Ò»ÀÀ
+## é¡¹ç›®ä¸€è§ˆ
 
-| ÏîÄ¿ | °æ±¾ | ½ÇÉ« |
+| é¡¹ç›® | ç‰ˆæœ¬ | è§’è‰² |
 |------|:----:|------|
-| eon-core | v8.1.0 | µÀ(Ð­µ÷ÄÚºË) |
-| fish-ecology-assistant | v6.4.0 | S(ÖªÊ¶¹©¸ø) |
-| cognitive-search-engine | v5.6.0 | T(ËÑË÷ÑéÖ¤+ÖÙ²Ã) |
-| porpoise-agent | v4.3.0 | P6®9(½­ëà) |
-| coilia-agent | v1.2.0 | P6¯0(µ¶öÝ) |
-| culter-agent | v2.0.0 | P6¯1(÷ˆÀà) |
+| eon-core | v8.1.0 | é“(åè°ƒå†…æ ¸) |
+| fish-ecology-assistant | v6.4.0 | S(çŸ¥è¯†ä¾›ç»™) |
+| cognitive-search-engine | v5.6.0 | T(æœç´¢éªŒè¯+ä»²è£) |
+| porpoise-agent | v4.3.0 | Pâ‚(æ±Ÿè±š) |
+| coilia-agent | v1.2.0 | Pâ‚‚(åˆ€é²š) |
+| culter-agent | v2.0.0 | Pâ‚ƒ(é²Œç±») |
 
-¾«¼ò: conflict-arbiter ¡ú cognitive ÄÚÇ¶¡£eon-core É¾³ý55¸ö½©Ê¬ÎÄ¼þ¡£
+ç²¾ç®€: conflict-arbiter â†’ cognitive å†…åµŒã€‚eon-core åˆ é™¤55ä¸ªåƒµå°¸æ–‡ä»¶ã€‚

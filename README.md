@@ -1,131 +1,131 @@
 <p align="center">
-  ”9“8”9”9 <a href="README.zh.md">ÖÐÎÄ</a>
+  ðŸ‡¨ðŸ‡³ <a href="README.zh.md">ä¸­æ–‡</a>
 </p>
 
 # eon-workspace
 
-> **ÈýÉúÍòÎï v8.2 ¡ª ÁùÏîÄ¿Í³Ò»¹¤×÷¿Õ¼ä + ÎïÖÖÈ«¾°·ÖÎö¹ÜÏß**
-> µÀ(eon-core) ¡ú S(fishÖªÊ¶) + T(cognitiveÑéÖ¤) ¡ú ÍòÎï(P6®9porpoise½­ëà + P6¯0coiliaµ¶öÝ + P6¯1culter÷ˆÀà)
-> conflict-arbiter ÒÑºÏ²¢µ½ cognitive-search-engine T²ã
+> **ä¸‰ç”Ÿä¸‡ç‰© v8.2 â€” å…­é¡¹ç›®ç»Ÿä¸€å·¥ä½œç©ºé—´ + ç‰©ç§å…¨æ™¯åˆ†æžç®¡çº¿**
+> é“(eon-core) â†’ S(fishçŸ¥è¯†) + T(cognitiveéªŒè¯) â†’ ä¸‡ç‰©(Pâ‚porpoiseæ±Ÿè±š + Pâ‚‚coiliaåˆ€é²š + Pâ‚ƒculteré²Œç±»)
+> conflict-arbiter å·²åˆå¹¶åˆ° cognitive-search-engine Tå±‚
 
-## Ä¿Â¼½á¹¹
+## ç›®å½•ç»“æž„
 
 ```
-¸ùÄ¿Â¼ (6ÏîÄ¿ + workspace/)
-©À©¤©¤ eon-core/                    ¡ú µÀ: Ð­µ÷ÄÚºË (OriginKernel + project_loader)
-©À©¤©¤ fish-ecology-assistant/      ¡ú S: ÖªÊ¶¹©¸ø (KB + lit-search v3.1)
-©À©¤©¤ cognitive-search-engine/     ¡ú T: ËÑË÷ÑéÖ¤ (credibility_scorer + species_graph + arbiter)
-©À©¤©¤ porpoise-agent/              ¡ú P6®9: ½­ëà×¨ÑÐ
-©À©¤©¤ coilia-agent/                ¡ú P6¯0: µ¶öÝ×¨ÑÐ
-©À©¤©¤ culter-agent/                ¡ú P6¯1: ÷ˆÀà×¨ÑÐ
-©À©¤©¤ workspace/                   ¡ú Í³Ò»Èë¿Ú + ÅäÖÃÎÄ¼þ + Êý¾Ý + ÎÄµµ
-©¦   ©À©¤©¤ config/                  ¡ú coordination.yaml, VERSION.yaml
-©¦   ©À©¤©¤ data/                    ¡ú CSV, ÏÂÔØÊý¾Ý
-©¦   ©À©¤©¤ scripts/                 ¡ú ¹¤×÷¿Õ¼ä¼¶½Å±¾
-©¦   ©À©¤©¤ logs/                    ¡ú ÔËÐÐÈÕÖ¾
-©¦   ©¸©¤©¤ docs/                    ¡ú ¼Ü¹¹ÎÄµµ
-©¸©¤©¤ .reasonix/                   ¡ú Reasonix ÔËÐÐÊ±ÅäÖÃ
+æ ¹ç›®å½• (6é¡¹ç›® + workspace/)
+â”œâ”€â”€ eon-core/                    â†’ é“: åè°ƒå†…æ ¸ (OriginKernel + project_loader)
+â”œâ”€â”€ fish-ecology-assistant/      â†’ S: çŸ¥è¯†ä¾›ç»™ (KB + lit-search v3.1)
+â”œâ”€â”€ cognitive-search-engine/     â†’ T: æœç´¢éªŒè¯ (credibility_scorer + species_graph + arbiter)
+â”œâ”€â”€ porpoise-agent/              â†’ Pâ‚: æ±Ÿè±šä¸“ç ”
+â”œâ”€â”€ coilia-agent/                â†’ Pâ‚‚: åˆ€é²šä¸“ç ”
+â”œâ”€â”€ culter-agent/                â†’ Pâ‚ƒ: é²Œç±»ä¸“ç ”
+â”œâ”€â”€ workspace/                   â†’ ç»Ÿä¸€å…¥å£ + é…ç½®æ–‡ä»¶ + æ•°æ® + æ–‡æ¡£
+â”‚   â”œâ”€â”€ config/                  â†’ coordination.yaml, VERSION.yaml
+â”‚   â”œâ”€â”€ data/                    â†’ CSV, ä¸‹è½½æ•°æ®
+â”‚   â”œâ”€â”€ scripts/                 â†’ å·¥ä½œç©ºé—´çº§è„šæœ¬
+â”‚   â”œâ”€â”€ logs/                    â†’ è¿è¡Œæ—¥å¿—
+â”‚   â””â”€â”€ docs/                    â†’ æž¶æž„æ–‡æ¡£
+â””â”€â”€ .reasonix/                   â†’ Reasonix è¿è¡Œæ—¶é…ç½®
 ```
 
-## ¿ìËÙ¿ªÊ¼
+## å¿«é€Ÿå¼€å§‹
 
 ```bash
-# ¼ÓÔØÈ«²¿ÊÊÅäÆ÷ (6/6)
+# åŠ è½½å…¨éƒ¨é€‚é…å™¨ (6/6)
 python -c "from scripts.project_loader import load_all; print(load_all())"
 
-# ÎïÖÖÈ«¾°·ÖÎö (¹ÜÏß Phase 0-5)
-python workspace/scripts/run_full_analysis.py "ÖéÐÇÈý¿éÓã" "Tribolodon brandti"
+# ç‰©ç§å…¨æ™¯åˆ†æž (ç®¡çº¿ Phase 0-5)
+python workspace/scripts/run_full_analysis.py "ç æ˜Ÿä¸‰å—é±¼" "Tribolodon brandti"
 
-# ÎïÖÖËÑË÷ (¾­ÓÉ eon-core ¡ú workspace)
-python eon-core/src/main.py search "ÖéÐÇÈý¿éÓã"
+# ç‰©ç§æœç´¢ (ç»ç”± eon-core â†’ workspace)
+python eon-core/src/main.py search "ç æ˜Ÿä¸‰å—é±¼"
 
-# ½¡¿µ¼ì²é
+# å¥åº·æ£€æŸ¥
 python eon-core/src/main.py health
 
-# ÔËÐÐ²âÊÔ¼¯ (38Ïî)
+# è¿è¡Œæµ‹è¯•é›† (38é¡¹)
 python workspace/scripts/test_pipeline.py
 
-# Èý½ÇÑéÖ¤ÆÀ·Ö
-python fish-ecology-assistant/scripts/run_lit_search.py "ÖéÐÇÈý¿éÓã"
+# ä¸‰è§’éªŒè¯è¯„åˆ†
+python fish-ecology-assistant/scripts/run_lit_search.py "ç æ˜Ÿä¸‰å—é±¼"
 
-# ÖªÊ¶¿â¡úÍ¼Æ×Í¬²½
+# çŸ¥è¯†åº“â†’å›¾è°±åŒæ­¥
 python fish-ecology-assistant/scripts/kb_to_graph_sync.py
 ```
 
-## ÏîÄ¿Ò»ÀÀ
+## é¡¹ç›®ä¸€è§ˆ
 
-| ÏîÄ¿ | °æ±¾ | ½ÇÉ« | ¹¦ÄÜ |
+| é¡¹ç›® | ç‰ˆæœ¬ | è§’è‰² | åŠŸèƒ½ |
 |------|:----:|:----:|------|
-| eon-core | v8.1.0 | µÀ(Ð­µ÷ÄÚºË) | OriginKernel + project_loader ¡ú workspace Î¯ÍÐ |
-| fish-ecology-assistant | v6.4.0 | S(Èý½Ç¡¤ÖªÊ¶) | fish_species_kb + lit-search v3.1 + 6½Å±¾ |
-| cognitive-search-engine | v5.6.0 | T(Èý½Ç¡¤ÑéÖ¤) | credibility_scorer + species_graph(48ÖÖ176Æª) + arbiter |
-| porpoise-agent | v4.3.0 | P6®9(½­ëà) | ÉùÑ§+ÖÖÈº½¨Ä£ |
-| coilia-agent | v1.2.0 | P6¯0(µ¶öÝ) | ¶úÊ¯Î¢»¯Ñ§+×ÊÔ´ÆÀ¹À |
-| culter-agent | v2.0.0 | P6¯1(÷ˆÀà) | Éú³¤+»ùÒò×é+ÓªÑø |
+| eon-core | v8.1.0 | é“(åè°ƒå†…æ ¸) | OriginKernel + project_loader â†’ workspace å§”æ‰˜ |
+| fish-ecology-assistant | v6.4.0 | S(ä¸‰è§’Â·çŸ¥è¯†) | fish_species_kb + lit-search v3.1 + 6è„šæœ¬ |
+| cognitive-search-engine | v5.6.0 | T(ä¸‰è§’Â·éªŒè¯) | credibility_scorer + species_graph(48ç§176ç¯‡) + arbiter |
+| porpoise-agent | v4.3.0 | Pâ‚(æ±Ÿè±š) | å£°å­¦+ç§ç¾¤å»ºæ¨¡ |
+| coilia-agent | v1.2.0 | Pâ‚‚(åˆ€é²š) | è€³çŸ³å¾®åŒ–å­¦+èµ„æºè¯„ä¼° |
+| culter-agent | v2.0.0 | Pâ‚ƒ(é²Œç±») | ç”Ÿé•¿+åŸºå› ç»„+è¥å…» |
 
-## ¼Ü¹¹
-
-```
-µÀ eon-core (Ð­µ÷ÄÚºË)
-©À©¤©¤ S fish-ecology-assistant (ÖªÊ¶¹©¸ø)
-©¦   ©À©¤©¤ fish_species_kb.yaml (27ÌõÄ¿)
-©¦   ©¸©¤©¤ lit-search v3.1 (12²ã¹ÜÏß + Èý½ÇÑéÖ¤ÆÀ·Ö)
-©À©¤©¤ T cognitive-search-engine (ËÑË÷ÑéÖ¤)
-©¦   ©À©¤©¤ species_graph.yaml (48ÎïÖÖ, 176ÂÛÎÄ)
-©¦   ©À©¤©¤ credibility_scorer.py (0-100ÆÀ·Ö)
-©¦   ©¸©¤©¤ arbiter.py (³åÍ»ÖÙ²Ã)
-©¸©¤©¤ ÍòÎïÑÜÉú
-    ©À©¤©¤ P6®9 porpoise-agent (½­ëà)
-    ©À©¤©¤ P6¯0 coilia-agent (µ¶öÝ)
-    ©¸©¤©¤ P6¯1 culter-agent (÷ˆÀà)
-
-¾«¼ò: conflict-arbiter ¡ú cognitive ÄÚÇ¶ (655ÐÐ)
-É¾³ý: 55¸ö½©Ê¬ÎÄ¼þ (vertices/trigrams/samsaraµÈ)
-```
-
-## Êý¾Ý½á¹¹
+## æž¶æž„
 
 ```
-species_graph.yaml    43ÎïÖÖ, 300+ÂÛÎÄ, 12¿Æ
-fish_species_kb.yaml  1ÌõÄ¿ (½ö¸»¼¯»­ÏñÓÃ£¬ÂÛÎÄÒÔÍ¼Æ×ÎªÖ÷)
-scripts/ (workspace ¹ÜÏß):
-  run_full_analysis.py     Ò»¼üÈ«Á¿·ÖÎö (Phase 0-5)   ”9‹5 v1.0
-  kb_loader.py             Í³Ò»Êý¾Ý¼ÓÔØ(Í¼Æ×Ö÷+KB¿ÉÑ¡) ”9‹5 v2.0
-  trend_analyzer.py        ÑÐ¾¿Ç÷ÊÆ·ÖÎö(4ÆÚÔ¾Ç¨)       ”9‹5 v1.0
-  gap_analyzer.py          ÑÐ¾¿¿Õ°×Ê¶±ð(¶àÎ¬)          ”9‹5 v1.0
-  cross_synthesis.py       ¿çÎïÖÖÓ¿ÏÖ(5¼ì²âÆ÷)         ”9‹5 v2.0
-  reasoning_engine.py      ÉúÌ¬¼ÙËµÍÆÀí(6¼ÙËµ)         ”9‹5 v3.1
-  search_species.py        CLI½»»¥Èë¿Ú                7¼3
-  test_pipeline.py         ¹ÜÏß²âÊÔ¼¯(38Ïî)            ”9‹5 v1.0
-  credibility_scorer.py    Èý½ÇÑéÖ¤ÆÀ·Ö                7¼3
-  self_evolve.py           ×Ô½ø»¯·´À¡                  7¼3
-  kb_to_graph_sync.py      KB6Ç2Í¼Æ×Í¬²½                7¼3
+é“ eon-core (åè°ƒå†…æ ¸)
+â”œâ”€â”€ S fish-ecology-assistant (çŸ¥è¯†ä¾›ç»™)
+â”‚   â”œâ”€â”€ fish_species_kb.yaml (27æ¡ç›®)
+â”‚   â””â”€â”€ lit-search v3.1 (12å±‚ç®¡çº¿ + ä¸‰è§’éªŒè¯è¯„åˆ†)
+â”œâ”€â”€ T cognitive-search-engine (æœç´¢éªŒè¯)
+â”‚   â”œâ”€â”€ species_graph.yaml (48ç‰©ç§, 176è®ºæ–‡)
+â”‚   â”œâ”€â”€ credibility_scorer.py (0-100è¯„åˆ†)
+â”‚   â””â”€â”€ arbiter.py (å†²çªä»²è£)
+â””â”€â”€ ä¸‡ç‰©è¡ç”Ÿ
+    â”œâ”€â”€ Pâ‚ porpoise-agent (æ±Ÿè±š)
+    â”œâ”€â”€ Pâ‚‚ coilia-agent (åˆ€é²š)
+    â””â”€â”€ Pâ‚ƒ culter-agent (é²Œç±»)
+
+ç²¾ç®€: conflict-arbiter â†’ cognitive å†…åµŒ (655è¡Œ)
+åˆ é™¤: 55ä¸ªåƒµå°¸æ–‡ä»¶ (vertices/trigrams/samsaraç­‰)
 ```
 
-## Skills ¡ª ËÑË÷Ð­Òé
+## æ•°æ®ç»“æž„
 
-`.reasonix/skills/` Óë `workspace/skills/` ÄÚÈÝÍ¬²½£¬Á½Ä¿Â¼¾ù¿Éµ÷ÓÃ£º
+```
+species_graph.yaml    43ç‰©ç§, 300+è®ºæ–‡, 12ç§‘
+fish_species_kb.yaml  1æ¡ç›® (ä»…å¯Œé›†ç”»åƒç”¨ï¼Œè®ºæ–‡ä»¥å›¾è°±ä¸ºä¸»)
+scripts/ (workspace ç®¡çº¿):
+  run_full_analysis.py     ä¸€é”®å…¨é‡åˆ†æž (Phase 0-5)   ðŸ†• v1.0
+  kb_loader.py             ç»Ÿä¸€æ•°æ®åŠ è½½(å›¾è°±ä¸»+KBå¯é€‰) ðŸ†• v2.0
+  trend_analyzer.py        ç ”ç©¶è¶‹åŠ¿åˆ†æž(4æœŸè·ƒè¿)       ðŸ†• v1.0
+  gap_analyzer.py          ç ”ç©¶ç©ºç™½è¯†åˆ«(å¤šç»´)          ðŸ†• v1.0
+  cross_synthesis.py       è·¨ç‰©ç§æ¶ŒçŽ°(5æ£€æµ‹å™¨)         ðŸ†• v2.0
+  reasoning_engine.py      ç”Ÿæ€å‡è¯´æŽ¨ç†(6å‡è¯´)         ðŸ†• v3.1
+  search_species.py        CLIäº¤äº’å…¥å£                âœ…
+  test_pipeline.py         ç®¡çº¿æµ‹è¯•é›†(38é¡¹)            ðŸ†• v1.0
+  credibility_scorer.py    ä¸‰è§’éªŒè¯è¯„åˆ†                âœ…
+  self_evolve.py           è‡ªè¿›åŒ–åé¦ˆ                  âœ…
+  kb_to_graph_sync.py      KBâ†”å›¾è°±åŒæ­¥                âœ…
+```
 
-| Skill | °æ±¾ | ÓÃÍ¾ |
+## Skills â€” æœç´¢åè®®
+
+`.reasonix/skills/` ä¸Ž `workspace/skills/` å†…å®¹åŒæ­¥ï¼Œä¸¤ç›®å½•å‡å¯è°ƒç”¨ï¼š
+
+| Skill | ç‰ˆæœ¬ | ç”¨é€” |
 |-------|:----:|------|
-| `graph-search-engine` | v4.1 | Í¼Æ×ÎïÖÖËÑË÷ ¡ª 7ÒýÇæ²¢ÐÐ + Pareto×îÓÅÂúÒâ + ×ÔÊÊÓ¦Éî¶È |
-| `cognitive-species-search` | v3.2 | ÈÏÖªÎïÖÖËÑË÷ ¡ª ·ûºÅÑ§+ÓïÑÔÑ§+ÓïÒôÑ§+Âß¼­ÍÆÀíÁ´ |
-| `chinese-academic-search` | v1.0 | ÖÐÎÄÆÚ¿¯ËÑË÷ ¡ª ÃÖ²¹ PubMed/Crossref ²»Ë÷ÒýÖÐÎÄÆÚ¿¯µÄÃ¤Çø |
-| `self-evolve` | v1.0 | ×Ô½ø»¯·´À¡ ¡ª ËÑË÷ºó×Ô¶¯µ÷²Î + Ö¸±êÇý¶¯½ø»¯ |
-| `parallel-farm` | ¡ª | ²¢ÐÐ×Ó agent ÅÉ·¢ ¡ª ¶à½Ç¶È¶ÀÁ¢µ÷²é»ã×Ü |
-| `meso-orchestrator` | v1.0 | ¿çÏîÄ¿Ð­µ÷ ¡ª Macro(BDI)¡úMeso(Route)¡úMicro(Execute) |
-| `auto-skill` | ¡ª | ×Ô¶¯¼¼ÄÜ³Áµí ¡ª ·ÇÆ½·²ÈÎÎñ×Ô¶¯Éú³É SKILL.md |
-| `ocr-solution-audit` | ¡ª | OCR ·½°¸Éó¼Æ ¡ª ÎåÎ¬¶Ô±ÈÍÆ¼ö×îÓÅÂ·¾¶ |
+| `graph-search-engine` | v4.1 | å›¾è°±ç‰©ç§æœç´¢ â€” 7å¼•æ“Žå¹¶è¡Œ + Paretoæœ€ä¼˜æ»¡æ„ + è‡ªé€‚åº”æ·±åº¦ |
+| `cognitive-species-search` | v3.2 | è®¤çŸ¥ç‰©ç§æœç´¢ â€” ç¬¦å·å­¦+è¯­è¨€å­¦+è¯­éŸ³å­¦+é€»è¾‘æŽ¨ç†é“¾ |
+| `chinese-academic-search` | v1.0 | ä¸­æ–‡æœŸåˆŠæœç´¢ â€” å¼¥è¡¥ PubMed/Crossref ä¸ç´¢å¼•ä¸­æ–‡æœŸåˆŠçš„ç›²åŒº |
+| `self-evolve` | v1.0 | è‡ªè¿›åŒ–åé¦ˆ â€” æœç´¢åŽè‡ªåŠ¨è°ƒå‚ + æŒ‡æ ‡é©±åŠ¨è¿›åŒ– |
+| `parallel-farm` | â€” | å¹¶è¡Œå­ agent æ´¾å‘ â€” å¤šè§’åº¦ç‹¬ç«‹è°ƒæŸ¥æ±‡æ€» |
+| `meso-orchestrator` | v1.0 | è·¨é¡¹ç›®åè°ƒ â€” Macro(BDI)â†’Meso(Route)â†’Micro(Execute) |
+| `auto-skill` | â€” | è‡ªåŠ¨æŠ€èƒ½æ²‰æ·€ â€” éžå¹³å‡¡ä»»åŠ¡è‡ªåŠ¨ç”Ÿæˆ SKILL.md |
+| `ocr-solution-audit` | â€” | OCR æ–¹æ¡ˆå®¡è®¡ â€” äº”ç»´å¯¹æ¯”æŽ¨èæœ€ä¼˜è·¯å¾„ |
 
-µ÷ÓÃ·½Ê½£º`/run_skill name:graph-search-engine arguments:"ËÑË÷ øA ÎÄÏ×"`
+è°ƒç”¨æ–¹å¼ï¼š`/run_skill name:graph-search-engine arguments:"æœç´¢ é³¤ æ–‡çŒ®"`
 
-Python ½Å±¾Èë¿Ú£º`python workspace/scripts/pipeline_search_species.py "¼ìË÷ÖéÐÇÈý¿éÓã"`
+Python è„šæœ¬å…¥å£ï¼š`python workspace/scripts/pipeline_search_species.py "æ£€ç´¢ç æ˜Ÿä¸‰å—é±¼"`
 
-## ÎÄµµ
+## æ–‡æ¡£
 
-| ÎÄµµ | Î»ÖÃ |
+| æ–‡æ¡£ | ä½ç½® |
 |------|------|
-| ¼Ü¹¹¹æ·¶ | `workspace/docs/root_docs/SANSHENG_WANWU.md` |
-| °æ±¾ºÅ | `workspace/config/VERSION.yaml` |
-| Ð­µ÷ÅäÖÃ | `workspace/config/coordination.yaml` |
-| ¹¤³ÌÓï·¨ (20Ìõ¹æÔò) | `fish-ecology-assistant/.reasonix/handbooks/engineering-grammar.md` |
+| æž¶æž„è§„èŒƒ | `workspace/docs/root_docs/SANSHENG_WANWU.md` |
+| ç‰ˆæœ¬å· | `workspace/config/VERSION.yaml` |
+| åè°ƒé…ç½® | `workspace/config/coordination.yaml` |
+| å·¥ç¨‹è¯­æ³• (20æ¡è§„åˆ™) | `fish-ecology-assistant/.reasonix/handbooks/engineering-grammar.md` |
