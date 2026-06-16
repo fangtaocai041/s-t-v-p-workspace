@@ -1,0 +1,25 @@
+# CODEOWNERS — 代码审查负责人
+# 每条规则匹配文件路径，后跟 @负责人
+
+# 默认所有者
+* @fangtaocai041
+
+# 基础设施模块
+/infrastructure/ @fangtaocai041
+
+# 各项目
+/fish-ecology-assistant/ @fangtaocai041
+/cognitive-search-engine/ @fangtaocai041
+/eon-core/ @fangtaocai041
+/porpoise-agent/ @fangtaocai041
+/coilia-agent/ @fangtaocai041
+/culter-agent/ @fangtaocai041
+/conflict-arbiter/ @fangtaocai041
+
+# CI/CD 配置
+/.github/ @fangtaocai041
+
+# 根配置文件
+/Makefile @fangtaocai041
+/.editorconfig @fangtaocai041
+/.gitignore @fangtaocai041

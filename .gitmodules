@@ -1,0 +1,3 @@
+[submodule "eon-core"]
+	path = eon-core
+	url = git@github.com:fangtaocai041/eon-core.git

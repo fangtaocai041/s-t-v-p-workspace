@@ -1,0 +1,19 @@
+# .dockerignore — 排除不需要复制到 Docker 镜像的文件
+**/__pycache__
+**/.pytest_cache
+**/.mypy_cache
+**/.ruff_cache
+**/*.pyc
+**/*.pyo
+.git
+.gitignore
+.env
+.env.*
+*.md
+*.csv
+*.zip
+*.exe
+logs/
+node_modules/
+.reasonix/truncated-results/
+workspace/
