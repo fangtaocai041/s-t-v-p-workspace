@@ -1,0 +1,63 @@
+# Species Variants Registry — 物种拼写变体预计算
+# 解决学术出版中物种名拼写错误的搜索盲区
+# Gemini 优势: 模糊匹配 → 我们的方案: 变体暴力覆盖
+
+species:
+  Ochetobius_elongatus:
+    genus: "Ochetobius"
+    species: "elongatus"
+    chinese_name: "鳤"
+    chinese_aliases: ["鳤鱼", "刁子", "麦秆刁"]
+    known_misspellings:
+      - "Ochetobibus elongatus"     # Animals 2026 — Gao et al. (已在论文标题中出现)
+      - "Ochetobius elongates"      # 常见词尾错误
+      - "Ochetobus elongatus"       # 单字母删除
+      - "Ochetoibius elongatus"     # 字母交换
+    target_journals:
+      - "Animals"
+      - "Scientific Data"
+      - "Mitochondrial DNA"
+      - "Conservation Genetics Resources"
+      - "生物多样性"
+      - "水生生物学报"
+      - "Biodiversity Science"
+
+  Neophocaena_asiaeorientalis:
+    genus: "Neophocaena"
+    species: "asiaeorientalis"
+    chinese_name: "长江江豚"
+    chinese_aliases: ["江豚", "finless porpoise"]
+    known_misspellings:
+      - "Neophocaena asiaeorientalis"
+      - "Neophocaena asiaorientalis"
+      - "Neophocoena asiaeorientalis"
+    target_journals:
+      - "Journal of the Acoustical Society of America"
+      - "Marine Mammal Science"
+      - "Endangered Species Research"
+
+  # 扩展: 添加更多目标物种
+  # Myxocyprinus_asiaticus:
+  #   genus: "Myxocyprinus"
+  #   species: "asiaticus"
+  #   chinese_name: "胭脂鱼"
+  #   ...
+
+# 通用变体生成规则 (算法化生成, 不需要手动列举)
+variant_rules:
+  # 规则 1: 单字符插入 (最常见错误类型)
+  single_insertion:
+    description: "Ochetobius → Ochetobibus (任何位置插入任意字母)"
+    max_variants: 5
+  # 规则 2: 单字符删除
+  single_deletion:
+    description: "Ochetobius → Ochetobus"
+    max_variants: 3
+  # 规则 3: 相邻字母交换
+  adjacent_swap:
+    description: "Ochetobius → Ochtoebius"
+    max_variants: 3
+  # 规则 4: 常见词尾错误
+  suffix_error:
+    description: "elongatus → elongates, elongatis, elongathus"
+    patterns: ["us→es", "us→is", "us→hs"]

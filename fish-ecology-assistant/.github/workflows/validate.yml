@@ -1,0 +1,49 @@
+name: Validate
+
+on: [push, pull_request]
+
+jobs:
+  config:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate agent.yaml structure
+        run: |
+          python -c "
+          import yaml, sys
+          with open('config/agent.yaml') as f:
+              c = yaml.safe_load(f)
+          required = ['contradiction_analysis', 'verification_loop', 'phased_strategy', 'research_balance']
+          missing = [s for s in required if s not in c]
+          if missing:
+              print(f'❌ Missing sections: {missing}')
+              sys.exit(1)
+          # Consistency checks
+          vloop = c['verification_loop']['max_iterations']
+          orch = c['orchestrator']['max_revision_rounds']
+          assert vloop == orch, f'max_iterations ({vloop}) != max_revision_rounds ({orch})'
+          print('✅ agent.yaml valid')
+          "
+
+  skills:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate Skills have PREFLIGHT
+        run: |
+          errors=0
+          for skill in .reasonix/skills/*.md; do
+            name=$(basename "$skill")
+            if ! grep -q 'PREFLIGHT\|config/agent.yaml' "$skill"; then
+              echo "⚠️  $name: no config reference"
+            fi
+            if ! grep -q '^---$' "$skill"; then
+              echo "❌ $name: missing frontmatter"
+              errors=$((errors+1))
+            fi
+          done
+          if [ $errors -gt 0 ]; then
+            echo "❌ $errors Skill(s) with format errors"
+            exit 1
+          fi
+          echo '✅ All Skills validated'
