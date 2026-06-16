@@ -26,7 +26,7 @@
 | 分层清晰度 | 10/10 | 五层独立目录 + 集成层，严格单向依赖 |
 | 循环依赖 | 10/10 | 零循环 — `utils → interaction → mapping → agents` 有向无环 |
 | 理论落地 | 10/10 | BDI/MDP/ReAct/ToT/GoT/Reflexion/MAS/RAG 八种理论均有对应模块 |
-| 接口一致性 | 9/10 | 8 核心 `__init__.py` 完整导出 |
+| 接口一致性 | 9/10 | 8 核心 `src/__init__.py` 完整导出 |
 | 降级鲁棒 | 9/10 | 三层检索降级 + 工具降级链 + ChromaDB fallback |
 | 工程语言化 | 9/10 | Config/Skill/Code/Prompt 四层经自检修复 |
 

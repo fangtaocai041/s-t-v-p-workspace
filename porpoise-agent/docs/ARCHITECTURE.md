@@ -21,13 +21,13 @@
 
 | 理论 | 对应组件 | 说明 |
 |------|----------|------|
-| **BDI Model** | `cognitive/bdi.py` | Belief-Desire-Intention 心智模型 |
-| **MDP / POMDP** | `cognitive/react_loop.py` | 离散时间决策过程形式化 |
-| **ReAct** | `cognitive/react_loop.py` | Think→Act→Observe→Reflect 闭环 |
-| **Tree/Graph of Thoughts** | `cognitive/decomposer.py`, `cognitive/search.py` | 树/图搜索推理路径 |
-| **Reflexion** | `cognitive/reflexion.py` | Critic 自我反思 + 信用分配 |
-| **Multi-Agent Topology** | `agents/topology.py` | 图论驱动的 MAS 通信架构 |
-| **RAG** | `memory/long_term.py` | 向量检索增强生成 |
+| **BDI Model** | `src/cognitive/bdi.py` | Belief-Desire-Intention 心智模型 |
+| **MDP / POMDP** | `src/cognitive/react_loop.py` | 离散时间决策过程形式化 |
+| **ReAct** | `src/cognitive/react_loop.py` | Think→Act→Observe→Reflect 闭环 |
+| **Tree/Graph of Thoughts** | `src/cognitive/decomposer.py`, `src/cognitive/search.py` | 树/图搜索推理路径 |
+| **Reflexion** | `src/cognitive/reflexion.py` | Critic 自我反思 + 信用分配 |
+| **Multi-Agent Topology** | `src/agents/topology.py` | 图论驱动的 MAS 通信架构 |
+| **RAG** | `src/memory/long_term.py` | 向量检索增强生成 |
 
 ## 2. 总体架构: 五层闭环反馈系统
 
@@ -122,9 +122,9 @@
 |----------|----------|----------|
 | **Belief (B)** | `memory/` STM+LTM 快照 + `observation_history` | 状态 S_t |
 | **Desire (D)** | System Prompt + `Desire` 配置 | 目标函数 G |
-| **Intention (I)** | `cognitive/decomposer.py` CoT 分解计划 | 策略 π |
+| **Intention (I)** | `src/cognitive/decomposer.py` CoT 分解计划 | 策略 π |
 | **信念更新** | `bdi.perceive(observation)` | B_{t+1} = update(B_t, O_t) |
-| **意图修正** | `bdi.revise_intention(new_plan)` | I_{t+1} = replan(I_t, B_{t+1}, D) |
+| **意图修正** | `src/cognitive/bdi.revise_intention(new_plan)` | I_{t+1} = replan(I_t, B_{t+1}, D) |
 
 ## 5. MDP 形式化
 

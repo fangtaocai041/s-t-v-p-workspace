@@ -126,6 +126,37 @@ knowledge_bases:
     count: 13
     description: "个人知识库 + 共享知识库"
 
+# ── CI 验证所需结构（porpoise-agent 兼容）──
+
+# 矛盾分析
+contradiction_analysis:
+  enabled: true
+  method: "stv_triangle"
+  max_iterations: 3
+
+# 验证循环
+verification_loop:
+  enabled: true
+  max_iterations: 3
+  feedback_sources:
+    - cross_project
+    - knowledge_base
+    - literature_synthesis
+
+# 阶段策略
+phased_strategy:
+  enabled: true
+  phases:
+    - name: "knowledge_first"
+      description: "先查本地知识库，不足再启动全量搜索"
+    - name: "user_decision"
+      description: "结果展示后由用户决策是否展开"
+
+# 研究平衡
+research_balance:
+  depth_vs_breadth: 0.6
+  exploration_vs_exploitation: 0.4
+
 # 涌现检测
 emergence:
   enabled: true

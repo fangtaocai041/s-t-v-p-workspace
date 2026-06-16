@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - uses: actions/setup-python@v5
         with:
@@ -21,7 +23,10 @@ jobs:
         run: pip install pyyaml
 
       - name: Feature scripts check (规则1)
-        run: python scripts/check_feature_scripts.py || echo "⚠️ 预存问题，不阻塞 CI"
+        run: python scripts/check_feature_scripts.py
+
+      - name: Git discipline check (规则6)
+        run: python scripts/check_git_discipline.py
 
       - name: Date accuracy check (规则5)
         run: python scripts/check_dates.py
@@ -38,6 +43,20 @@ jobs:
       - name: Install deps
         run: pip install pyyaml pytest
 
-      - name: Run tests
-        run: |
-          PYTHONPATH=fish-ecology-assistant/src:$PYTHONPATH python -m pytest fish-ecology-assistant/tests/ -v --ignore=fish-ecology-assistant/tests/test_project_hub.py || echo "⚠️ 部分测试依赖跨项目导入"
+      - name: Run fish-ecology-assistant tests
+        run: python -m pytest fish-ecology-assistant/tests/ -v
+
+  coilia-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install pyyaml pytest
+
+      - name: Run coilia-agent tests
+        run: python -m pytest coilia-agent/tests/ -v
