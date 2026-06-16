@@ -1,0 +1,41 @@
+name: Rule Checks
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+  workflow_dispatch:
+
+jobs:
+  enforce-rules:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run rule checks
+        run: python scripts/enforce_rules.py --json
+
+  fish-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install pyyaml pytest
+
+      - name: fish-ecology-assistant tests
+        run: python -m pytest fish-ecology-assistant/tests/ -v
+
+      - name: coilia-agent tests
+        run: python -m pytest coilia-agent/tests/ -v
