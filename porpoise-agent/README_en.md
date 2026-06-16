@@ -1,4 +1,4 @@
-﻿# Porpoise Agent 🐬
+# Porpoise Agent 🐬
 
 **P₁ 万物衍生** — Yangtze Finless Porpoise Research · Multi-Agent System · BDI Decision · 5 Cognitive Layers
 
@@ -204,36 +204,6 @@ porpoise-agent/
 
 MIT License © 2026 Liu Kai Research Group, FFRC
 
-## 🔗 Ecosystem
-
-> 🔥 Together infinite power, apart top expert engines.
-
-This project is the Porpoise Domain Expert Engine (P₁) in the SanShengWanWu ecosystem.
-
-```
-Triangle Core (sealed 3):
-  📦 fish-ecology-assistant    → Knowledge Supply (V0)
-  🔍 cognitive-search-engine   → Search Verification (V1)
-  ⚙️ eon-core                  → Coordinator
-
-Derived Projects (open N):
-  🐬 porpoise-agent    → Porpoise Research (P₁)
-  🐟 coilia-agent      → Coilia Research (P₂)
-  🐟 culter-agent      → Culter Research (P₃)
-  🔥 conflict-arbiter  → Conflict Arbitration (C)
-```
-
-| 🏗️ Project | 🔗 Vertex | 🎯 Role |
-|:-----------|:--------:|:--------|
-| [fish-ecology-assistant](../fish-ecology-assistant/) | V0 | 📦 Knowledge Supply |
-| [cognitive-search-engine](../cognitive-search-engine/) | V1 | 🔍 Search Verification |
-| [eon-core](../eon-core/) | Coord | ⚙️ Coordinator |
-| [porpoise-agent](../porpoise-agent/) | P₁ | 🐬 Porpoise Research |
-| [coilia-agent](../coilia-agent/) | P₂ | 🐟 Coilia Research |
-| [culter-agent](../culter-agent/) | P₃ | 🐟 Culter Research |
-| [conflict-arbiter](../conflict-arbiter/) | C | 🔥 Conflict Arbiter |
-
----
 ---
 
 > 🌊 Everything Flows · Panta Rhei
@@ -242,6 +212,6 @@ Derived Projects (open N):
 >
 > 💻 We say: You can't analyze today's porpoise data with last month's code.
 >
-> **📅 Last updated: 2026-06-17 · 🖥️ Reasonix Code · ⚡ Powered by DeepSeek**
+> **📅 Last updated: 2026-06-21 · 🖥️ Reasonix Code · ⚡ Powered by DeepSeek**
 
 [⬆ Back to top](#)
