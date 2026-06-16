@@ -59,4 +59,4 @@ jobs:
         run: pip install pyyaml pytest
 
       - name: Run coilia-agent tests
-        run: PYTHONPATH=coilia-agent python -m pytest coilia-agent/tests/ -v
+        run: python -m pytest --rootdir=coilia-agent coilia-agent/tests/ -v
