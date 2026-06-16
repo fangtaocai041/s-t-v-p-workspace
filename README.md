@@ -4,128 +4,149 @@
 
 # eon-workspace
 
-> **三生万物 v8.2 — 六项目统一工作空间 + 物种全景分析管线**
-> 道(eon-core) → S(fish知识) + T(cognitive验证) → 万物(P₁porpoise江豚 + P₂coilia刀鲚 + P₃culter鲌类)
-> conflict-arbiter 已合并到 cognitive-search-engine T层
+**鱼类生态学多项目研究平台** — 7 个协同项目 + 知识库 + 搜索引擎 + 文献分析管线。
 
-## 目录结构
+---
+
+## 项目结构
 
 ```
-根目录 (6项目 + workspace/)
-├── eon-core/                    → 道: 协调内核 (OriginKernel + project_loader)
-├── fish-ecology-assistant/      → S: 知识供给 (KB + lit-search v3.1)
-├── cognitive-search-engine/     → T: 搜索验证 (credibility_scorer + species_graph + arbiter)
-├── porpoise-agent/              → P₁: 江豚专研
-├── coilia-agent/                → P₂: 刀鲚专研
-├── culter-agent/                → P₃: 鲌类专研
-├── workspace/                   → 统一入口 + 配置文件 + 数据 + 文档
-│   ├── config/                  → coordination.yaml, VERSION.yaml
-│   ├── data/                    → CSV, 下载数据
-│   ├── scripts/                 → 工作空间级脚本
-│   ├── logs/                    → 运行日志
-│   └── docs/                    → 架构文档
-└── .reasonix/                   → Reasonix 运行时配置
+eon-workspace/
+├── eon-core/                    # 协调内核 — EventBus · DAG路由 · 健康监控
+├── fish-ecology-assistant/      # 鱼类知识供给 — 26物种知识库 + KB-First搜索 + 可信度评分
+├── cognitive-search-engine/     # 认知搜索引擎 — 20引擎并行 + 图谱遍历 + 冲突仲裁
+├── porpoise-agent/              # P₁ 江豚专研 — NBHF声学 · 种群建模 · 威胁评估
+├── coilia-agent/                # P₂ 刀鲚专研 — 耳石微化学 · 洄游生态 · 资源评估
+├── culter-agent/                # P₃ 鲌类专研 — 基因组 · 年龄生长 · 同位素 · 同域共存
+├── conflict-arbiter/            # 冲突仲裁 — 多源保护级别冲突检测与加权裁决
+├── infrastructure/              # 涌现检测引擎 — 跨物种模式发现
+├── scripts/                     # 工作空间级脚本（31个）
+├── config/                      # 全局配置
+├── docs/                        # 架构文档
+└── skills/                      # Reasonix 技能定义
 ```
+
+---
 
 ## 快速开始
 
 ```bash
-# 加载全部适配器 (6/6)
+# 加载全部项目适配器
 python -c "from scripts.project_loader import load_all; print(load_all())"
 
-# 物种全景分析 (管线 Phase 0-5)
-python workspace/scripts/run_full_analysis.py "珠星三块鱼" "Tribolodon brandti"
+# KB-First 物种查询（零网络开销）
+python -c "from fish_ecology_assistant.src import get_orchestrator; \
+  o = get_orchestrator(); print(o.kb_first_lookup(query='鳤').summary_text)"
 
-# 物种搜索 (经由 eon-core → workspace)
-python eon-core/src/main.py search "珠星三块鱼"
-
-# 健康检查
-python eon-core/src/main.py health
-
-# 运行测试集 (38项)
-python workspace/scripts/test_pipeline.py
-
-# 三角验证评分
+# 文献搜索 + 三角验证评分
 python fish-ecology-assistant/scripts/run_lit_search.py "珠星三块鱼"
 
-# 知识库→图谱同步
-python fish-ecology-assistant/scripts/kb_to_graph_sync.py
+# 跨项目健康检查
+python -c "from scripts.coordinator import coordinator; print(coordinator.health())"
+
+# 全量测试
+python scripts/run_all_tests.py
 ```
+
+---
 
 ## 项目一览
 
-| 项目 | 版本 | 角色 | 功能 |
-|------|:----:|:----:|------|
-| eon-core | v8.1.0 | 道(协调内核) | OriginKernel + project_loader → workspace 委托 |
-| fish-ecology-assistant | v6.4.0 | S(三角·知识) | fish_species_kb + lit-search v3.1 + 6脚本 |
-| cognitive-search-engine | v5.6.0 | T(三角·验证) | credibility_scorer + species_graph(48种176篇) + arbiter |
-| porpoise-agent | v4.3.0 | P₁(江豚) | 声学+种群建模 |
-| coilia-agent | v1.2.0 | P₂(刀鲚) | 耳石微化学+资源评估 |
-| culter-agent | v2.0.0 | P₃(鲌类) | 生长+基因组+营养 |
+| 项目 | 语言 | 描述 |
+|------|:--:|------|
+| **eon-core** | 12 py | 协调内核：OriginKernel · EventBus · DAG路由 · 健康监控 · 10层同心架构 |
+| **fish-ecology-assistant** | 12 py | 知识供给：26物种知识库 · KB-First两阶段搜索 · 期刊白名单可信度评分 · 分类变更回写 |
+| **cognitive-search-engine** | 3 py | 搜索验证：20引擎并行搜索 · 物种图谱(48种/176篇) · 三角验证 · BDI+ReAct |
+| **porpoise-agent** | 54 py | 江豚专研(P₁)：NBHF声学分析 · 栖息地建模 · 种群评估 · 威胁分析 |
+| **coilia-agent** | 22 py | 刀鲚专研(P₂)：耳石Sr同位素 · 洄游推断 · 资源评估 · 9-phase管线 |
+| **culter-agent** | 10 py | 鲌类专研(P₃)：6种鲌类 · 基因组分析 · von Bertalanffy生长 · δ¹³C/δ¹⁵N同位素 |
+| **conflict-arbiter** | 3 py | 冲突仲裁：IUCN/红色名录/省级保护多源冲突检测 · 加权裁决 · 熔断 |
+| **infrastructure** | 3 py | 涌现检测：跨物种模式发现 · 5检测器 · 34/34测试通过 |
+
+---
+
+## 数据资产
+
+| 数据 | 位置 | 规模 |
+|------|------|------|
+| 鱼类物种知识库 | `fish-ecology-assistant/config/fish_species_kb.yaml` | 26 物种（长江 15 优势种 + 7 保护种 + 三块鱼跨国分布） |
+| 物种文献图谱 | `cognitive-search-engine/config/species_graph.yaml` | 48 物种 / 176 篇论文 |
+| 长江调查数据 | `fish_species_kb.yaml` metadata | 443 历史种 / 323 采集种 (2017-2021) |
+| 物种拼写变体 | `C:\Users\小陶\.reasonix\config\species_variants.yaml` | 鳤/鯮/鱤 OCR 变体 + 同义名 |
+
+---
+
+## 搜索引擎
+
+cognitive-search-engine 提供以下搜索能力：
+
+| 引擎 | 覆盖 |
+|------|------|
+| PubMed E-utilities | 生物医学文献 |
+| Crossref | 学术元数据 |
+| OpenAlex | 开放学术图谱 |
+| Semantic Scholar | AI增强文献 |
+| Google Scholar | 综合学术搜索 |
+| CNKI / 万方 / 百度学术 | 中文期刊（弥补 PubMed 盲区） |
+| Europe PMC | 全文 + 引用 |
+| arXiv | 预印本 |
+
+---
+
+## GitHub 仓库
+
+全部 7 个项目均为公开仓库：
+
+| 仓库 | URL |
+|------|-----|
+| eon-workspace | https://github.com/fangtaocai041/s-t-v-p-workspace |
+| eon-core | https://github.com/fangtaocai041/eon-core |
+| cognitive-search-engine | https://github.com/fangtaocai041/cognitive-search-engine |
+| fish-ecology-assistant | https://github.com/fangtaocai041/fish-ecology-assistant |
+| porpoise-agent | https://github.com/fangtaocai041/porpoise-agent |
+| coilia-agent | https://github.com/fangtaocai041/coilia-agent |
+| culter-agent | https://github.com/fangtaocai041/culter-agent |
+
+---
 
 ## 架构
 
 ```
-道 eon-core (协调内核)
-├── S fish-ecology-assistant (知识供给)
-│   ├── fish_species_kb.yaml (27条目)
-│   └── lit-search v3.1 (12层管线 + 三角验证评分)
-├── T cognitive-search-engine (搜索验证)
-│   ├── species_graph.yaml (48物种, 176论文)
-│   ├── credibility_scorer.py (0-100评分)
-│   └── arbiter.py (冲突仲裁)
-└── 万物衍生
-    ├── P₁ porpoise-agent (江豚)
-    ├── P₂ coilia-agent (刀鲚)
-    └── P₃ culter-agent (鲌类)
-
-精简: conflict-arbiter → cognitive 内嵌 (655行)
-删除: 55个僵尸文件 (vertices/trigrams/samsara等)
+eon-core (协调内核 · 路由+调度)
+    ├── fish-ecology-assistant (S: 知识供给 · 静态)
+    │       ↕ 两阶段搜索 + 可信度评分反馈
+    ├── cognitive-search-engine (V: 搜索验证 · 动态)
+    │       ↕ 冲突检测 + 分类变更回写
+    ├── porpoise-agent (P₁: 江豚 · 声学+种群)
+    ├── coilia-agent   (P₂: 刀鲚 · 耳石+洄游)
+    ├── culter-agent    (P₃: 鲌类 · 基因组+营养)
+    └── conflict-arbiter (C: 仲裁 · 熔断)
 ```
 
-## 数据结构
+---
 
-```
-species_graph.yaml    43物种, 300+论文, 12科
-fish_species_kb.yaml  1条目 (仅富集画像用，论文以图谱为主)
-scripts/ (workspace 管线):
-  run_full_analysis.py     一键全量分析 (Phase 0-5)   🆕 v1.0
-  kb_loader.py             统一数据加载(图谱主+KB可选) 🆕 v2.0
-  trend_analyzer.py        研究趋势分析(4期跃迁)       🆕 v1.0
-  gap_analyzer.py          研究空白识别(多维)          🆕 v1.0
-  cross_synthesis.py       跨物种涌现(5检测器)         🆕 v2.0
-  reasoning_engine.py      生态假说推理(6假说)         🆕 v3.1
-  search_species.py        CLI交互入口                ✅
-  test_pipeline.py         管线测试集(38项)            🆕 v1.0
-  credibility_scorer.py    三角验证评分                ✅
-  self_evolve.py           自进化反馈                  ✅
-  kb_to_graph_sync.py      KB↔图谱同步                ✅
-```
+## 核心脚本
 
-## Skills — 搜索协议
+| 脚本 | 用途 |
+|------|------|
+| `scripts/coordinator.py` | 跨项目协调器 — 路由 + 健康监控 |
+| `scripts/project_loader.py` | 统一项目加载器 — importlib 零进程加载 |
+| `scripts/pathway_contracts.py` | 通路合约 — P0-P7 跨项目通路定义 |
+| `scripts/quality_gate.py` | 质量门控 — 5项检查 |
+| `scripts/run_all_tests.py` | 全量测试运行器 |
+| `scripts/verify_pathways.py` | 通路验证 — 25/25 |
+| `fish-ecology-assistant/scripts/run_lit_search.py` | 文献搜索 CLI — 图谱→评分→交互展开 |
+| `fish-ecology-assistant/src/dao_engine.py` | Dao 引擎 CLI — 道→一→二→三→万物 |
 
-`.reasonix/skills/` 与 `workspace/skills/` 内容同步，两目录均可调用：
-
-| Skill | 版本 | 用途 |
-|-------|:----:|------|
-| `graph-search-engine` | v4.1 | 图谱物种搜索 — 7引擎并行 + Pareto最优满意 + 自适应深度 |
-| `cognitive-species-search` | v3.2 | 认知物种搜索 — 符号学+语言学+语音学+逻辑推理链 |
-| `chinese-academic-search` | v1.0 | 中文期刊搜索 — 弥补 PubMed/Crossref 不索引中文期刊的盲区 |
-| `self-evolve` | v1.0 | 自进化反馈 — 搜索后自动调参 + 指标驱动进化 |
-| `parallel-farm` | — | 并行子 agent 派发 — 多角度独立调查汇总 |
-| `meso-orchestrator` | v1.0 | 跨项目协调 — Macro(BDI)→Meso(Route)→Micro(Execute) |
-| `auto-skill` | — | 自动技能沉淀 — 非平凡任务自动生成 SKILL.md |
-| `ocr-solution-audit` | — | OCR 方案审计 — 五维对比推荐最优路径 |
-
-调用方式：`/run_skill name:graph-search-engine arguments:"搜索 鳤 文献"`
-
-Python 脚本入口：`python workspace/scripts/pipeline_search_species.py "检索珠星三块鱼"`
+---
 
 ## 文档
 
 | 文档 | 位置 |
 |------|------|
-| 架构规范 | `workspace/docs/root_docs/SANSHENG_WANWU.md` |
-| 版本号 | `workspace/config/VERSION.yaml` |
-| 协调配置 | `workspace/config/coordination.yaml` |
-| 工程语法 (20条规则) | `fish-ecology-assistant/.reasonix/handbooks/engineering-grammar.md` |
+| 架构总览 | `ARCHITECTURE.md` |
+| 速查表 | `CHEATSHEET.md` |
+| 迁移指南 | `MIGRATION.md` |
+| 路线图 | `ROADMAP.md` |
+| 安全策略 | `SECURITY.md` |
+| 全局配置 | `VERSION.yaml` / `coordination.yaml` |
