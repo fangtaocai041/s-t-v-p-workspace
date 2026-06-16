@@ -143,6 +143,27 @@ species:
     - 中国
     basins:
     - 长江流域
+  literature:
+  - doi: 10.3390/ani15233434
+    title: Otolith Sr Isotope Reveals Mixed Life Histories of Coilia brachygnathus
+    year: 2025
+    journal: Animals
+    category: ecology
+    authors:
+    - Xuan Z
+    - Liu K
+    group: 刘凯课题组
+    added_at: '2026-06-16'
+  - doi: 10.1002/mbo3.874
+    title: The Intestinal Microbiota of Lake Anchovy in Taihu Lake
+    year: 2019
+    journal: MicrobiologyOpen
+    category: microbiome
+    authors:
+    - Jiang M
+    - Liu K
+    group: 刘凯课题组
+    added_at: '2026-06-16'
 - id: silurus_asotus
   name: 鲇
   scientific: Silurus asotus
@@ -208,6 +229,19 @@ species:
     - 中国
     basins:
     - 长江流域
+  literature:
+  - doi: 10.3390/biom16010083
+    title: Telomere-to-Telomere Genome Assembly of Two Hemiculter Species
+    year: 2026
+    journal: Biomolecules
+    category: genomics
+    authors:
+    - Liu J
+    - Yin D
+    - Ma F
+    - Liu K
+    group: 刘凯课题组
+    added_at: '2026-06-16'
 - id: siniperca_chuatsi
   name: 鳜
   scientific: Siniperca chuatsi
@@ -260,6 +294,19 @@ species:
     - 中国
     basins:
     - 长江流域
+  literature:
+  - doi: 10.1002/ece3.72775
+    title: Evaluating Fishing Ban Effectiveness Through Spatiotemporal Changes in Genetic Diversity of Parabramis pekinensis
+    year: 2026
+    journal: Ecol Evol
+    category: genetics
+    authors:
+    - Wang Z
+    - Yin D
+    - Liu J
+    - Liu K
+    group: 刘凯课题组
+    added_at: '2026-06-16'
 - id: aristichthys_nobilis
   name: 鳙
   scientific: Aristichthys nobilis
@@ -506,6 +553,81 @@ species:
   - 禁捕后种群规模有望稳中有升
   research_group: 淡水渔业研究中心 刘凯研究员课题组
   dedicated_agent: porpoise-agent
+  literature:
+  - doi: 10.3390/ani15172603
+    title: Tetranucleotide Repeat Microsatellite Markers in Yangtze Finless Porpoise
+    year: 2025
+    journal: Animals
+    category: genetics
+    authors:
+    - Tang M
+    - Yin D
+    - Liu K
+    group: 刘凯课题组
+    added_at: '2026-06-16'
+  - doi: 10.3390/ani15131838
+    title: Genetic Diversity of Yangtze Finless Porpoise in Poyang Lake
+    year: 2025
+    journal: Animals
+    category: genetics
+    authors:
+    - Zhang H
+    - Yin D
+    - Liu K
+    group: 刘凯课题组
+    added_at: '2026-06-16'
+  - doi: 10.1093/gigascience/giae067
+    title: T2T Gap-free Genome of Endangered Yangtze Finless Porpoise
+    year: 2024
+    journal: Gigascience
+    category: genomics
+    authors:
+    - Yin D
+    - Liu K
+    group: 刘凯课题组
+    added_at: '2026-06-16'
+  - doi: 10.3390/ani14020199
+    title: Comparative Blood Transcriptome of Yangtze Finless Porpoise
+    year: 2023
+    journal: Animals
+    category: transcriptomics
+    authors:
+    - Liu W
+    - Yin D
+    - Liu K
+    group: 刘凯课题组
+    added_at: '2026-06-16'
+  - doi: 10.3389/fmicb.2022.1006251
+    title: Bacteria of Yangtze Finless Porpoise Are Site-Specific
+    year: 2022
+    journal: Front Microbiol
+    category: microbiome
+    authors:
+    - Zhang X
+    - Ying C
+    - Liu K
+    group: 刘凯课题组
+    added_at: '2026-06-16'
+  - doi: 10.1016/j.cbpb.2021.110635
+    title: Integrated Analysis of Blood mRNAs and microRNAs in Yangtze Finless Porpoise
+    year: 2021
+    journal: Comp Biochem Physiol B
+    category: transcriptomics
+    authors:
+    - Yin D
+    - Liu K
+    group: 刘凯课题组
+    added_at: '2026-06-16'
+  - doi: 10.1371/journal.pone.0221120
+    title: Investigating Distribution of Yangtze Finless Porpoise Using eDNA
+    year: 2019
+    journal: PLoS One
+    category: ecology
+    authors:
+    - Ma X
+    - Liu K
+    group: 刘凯课题组
+    added_at: '2026-06-16'
 - id: tribolodon_brandti
   name: 三块鱼
   aliases:
@@ -579,6 +701,89 @@ species:
     new_value: Coilia_nasus
     note: 通过 P₂ 刀鲚专研补充 — cognitive-species-search v3.2
   species_graph_id: Coilia_nasus
+  literature:
+  - doi: 10.3390/ani16050840
+    title: Gut Microbiome Signatures Across Migratory, Sedentary, and Aquaculture Ecotypes of Coilia nasus
+    year: 2026
+    journal: Animals
+    category: microbiome
+    authors:
+    - Liu X
+    - Ying C
+    - Ma F
+    - Liu K
+    group: 刘凯课题组
+    added_at: '2026-06-16'
+  - doi: 10.1002/ece3.72815
+    title: Population Genomics Provides Novel Insights Into Evolutionary Relationships of Two Ecotypes Coilia nasus
+    year: 2025
+    journal: Ecol Evol
+    category: genomics
+    authors:
+    - Ma F
+    - Liu K
+    group: 刘凯课题组
+    added_at: '2026-06-16'
+  - doi: 10.3390/biology14091211
+    title: Spatial and Sex-Specific Growth Variations of Migratory Coilia nasus
+    year: 2025
+    journal: Biology
+    category: ecology
+    authors:
+    - Guo H
+    - Liu K
+    group: 刘凯课题组
+    added_at: '2026-06-16'
+  - doi: 10.1016/j.cbd.2024.101261
+    title: Hepatic Immune Response of Coilia nasus Infected with Anisakidae
+    year: 2024
+    journal: Comp Biochem Physiol D
+    category: immunology
+    authors:
+    - Ying C
+    - Liu K
+    group: 刘凯课题组
+    added_at: '2026-06-16'
+  - doi: 10.1016/j.cbd.2022.100995
+    title: A Proteomics Approach Reveals Digestive Responses in Coilia nasus
+    year: 2022
+    journal: Comp Biochem Physiol D
+    category: proteomics
+    authors:
+    - Ma F
+    - Liu K
+    group: 刘凯课题组
+    added_at: '2026-06-16'
+  - doi: 10.1111/jfb.15027
+    title: Anisakidae Parasitism Activated Immune Response in Coilia nasus
+    year: 2022
+    journal: J Fish Biol
+    category: immunology
+    authors:
+    - Ying C
+    - Liu K
+    group: 刘凯课题组
+    added_at: '2026-06-16'
+  - doi: 10.1007/s00284-020-02088-y
+    title: Variations of Gut Prokaryotic Microbiome During Spawning Migration in Coilia nasus
+    year: 2021
+    journal: Curr Microbiol
+    category: microbiome
+    authors:
+    - Ying C
+    - Liu K
+    group: 刘凯课题组
+    added_at: '2026-06-16'
+  - doi: 10.1016/j.ygeno.2020.05.027
+    title: Metabolic Mechanisms of Coilia nasus in Food Intake During Migration
+    year: 2020
+    journal: Genomics
+    category: metabolism
+    authors:
+    - Yin D
+    - Liu K
+    group: 刘凯课题组
+    added_at: '2026-06-16'
 - id: culter_mongolicus
   name: 蒙古鲌
   scientific: Culter mongolicus
