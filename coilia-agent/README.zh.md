@@ -1,160 +1,189 @@
 <p align="center">
-  🇬🇧 <a href="README.md">English</a>
+  🇨🇳 <a href="#chinese">中文</a> · 🇬🇧 <a href="README.md">English</a>
 </p>
 
 <div align="center">
   <h1>🐟 Coilia Agent — 刀鲚专研 (P₂)</h1>
-  <p><strong>三角闭环衍生项目 · P₂ 刀鲚专研 · 淡水渔业研究中心 刘凯研究员课题组</strong></p>
-  <p>3 Skills · DirectLoader 认知搜索 · 知识库 · Panta Rhei 哲学</p>
-  <p>🤝 姊妹项目: <a href="https://github.com/fangtaocai041/porpoise-agent">porpoise-agent (P₁ 江豚)</a> · 🧠 协调器: <a href="https://github.com/fangtaocai041/eon-core">eon-core</a></p>
-  <p>🌊 Panta Rhei · 万物皆变</p>
+  <p><strong>三角闭环衍生项目 · 刀鲚 (Coilia nasus) 专研</strong></p>
+  <p>8 分析脚本 · 5 SKILLs · 5 测试套件 · DirectLoader · 知识库</p>
 </div>
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="License"></a>
-  <a href="#"><img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python" alt="Python"></a>
-  <a href="#"><img src="https://img.shields.io/badge/DeepSeek-V3%2BR1-6366f1?style=flat-square" alt="DeepSeek"></a>
-  <a href="#"><img src="https://img.shields.io/badge/skills-3-f59e0b?style=flat-square" alt="Skills:3"></a>
-  <a href="#"><img src="https://img.shields.io/badge/知识库-Coilia_nasus-8b5cf6?style=flat-square" alt="知识库"></a>
-  <a href="config/agent.yaml"><img src="https://img.shields.io/badge/agent-v1.3.0-ec4899?style=flat-square" alt="Agent:v1.3.0"></a>
+  <a href="#"><img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square" alt="Python"></a>
+  <a href="#"><img src="https://img.shields.io/badge/version-1.3.0-ec4899?style=flat-square" alt="v1.3.0"></a>
+  <a href="#"><img src="https://img.shields.io/badge/scripts-8-f59e0b?style=flat-square" alt="Scripts:8"></a>
+  <a href="#"><img src="https://img.shields.io/badge/skills-5-8b5cf6?style=flat-square" alt="Skills:5"></a>
+  <a href="#"><img src="https://img.shields.io/badge/tests-5_suites-22c55e?style=flat-square" alt="Tests:5"></a>
 </p>
 
-## 🧠 由 eon-core 智能协调
+---
 
-> P₂ (衍生自三角闭环) 由 [eon-core](https://github.com/fangtaocai041/eon-core) (三角闭环协调器) 智能协调：**混沌增强路由** · **六道轮回业力引擎** · **DAG拓扑路由**。
+## 目录
 
-## 🔺 架构角色: **衍生项目 P₂ (刀鲚专研)**
+- [项目简介](#项目简介)
+- [快速开始](#快速开始)
+- [核心功能](#核心功能)
+- [分析脚本](#分析脚本)
+- [CLI 命令](#cli-命令)
+- [API 参考](#api-参考)
+- [项目架构](#项目架构)
+- [知识库](#知识库)
+- [关联项目](#关联项目)
+- [贡献指南](#贡献指南)
+- [许可证](#许可证)
 
-> 三角闭环: fish(知识供给) + cognitive(验证引擎) + eon-core(协调内核)
-> P₂ 从三角派生，依赖三角提供物种知识和文献搜索能力。
-> 刀鲚专研: 耳石微化学、洄游生态、资源评估。
-> **姊妹项目**: [porpoise-agent (P₁)](https://github.com/fangtaocai041/porpoise-agent) — 江豚专研, 同级衍生项目, 同课题组。
+---
 
-## 研究背景
+## 项目简介
 
-刀鲚（长江刀鱼）是长江流域最重要的经济鱼类之一，也是"长江三鲜"之首。
-由于过度捕捞、水利工程阻断洄游通道、栖息地退化，刀鲚资源量急剧下降。
-2019年起农业农村部停止发放刀鲚专项捕捞许可证，2021年长江十年禁捕全面实施。
+**Coilia Agent** 是三角闭环的 **P₂ 衍生项目**，专研刀鲚 *Coilia nasus*（长江刀鱼）——"长江三鲜"之首。提供 8 个纯 Python 实现的分析脚本，覆盖群体遗传学、耳石微化学、洄游生态、食性分析、资源评估等研究方向。
 
-## 🔗 关联项目 (S-T-V-P₁-P₂ 生态系统)
+### 核心能力
 
-| 项目 | 角色 | 技术栈 | 说明 |
-|------|:--:|--------|------|
-| **eon-core** | **协调器** | Python · 10层内核 | EventBus · 六道轮回 · DAG路由 · 自愈 |
-| **porpoise-agent** | **衍生 P₁** (Porpoise) | Python · 18 skills | 姊妹项目 — NBHF声学 · 栖息地建模 (同课题组) |
-| **fish-ecology-assistant** | **S / V0** (State) | Reasonix Skills · 21 MCP | 知识供给 — 长江 443 种鱼类数据库 |
-| **cognitive-search-engine** | **V / V1** (Validation) | Python · BDI+ReAct | 验证引擎 — 文献搜索 · 权威评分 |
-| **culter-agent** | **衍生 P₃** (Culter) | Python · 8 skills | 鲌类专研 — 基因组学 · 年龄生长 · 同位素 |
-| **conflict-arbiter** | **衍生 C** (Conflict) | Python | 冲突仲裁 — 加权裁决 · 熔断 |
-
-> **DirectLoader 协议**: cognitive-search-engine 通过 `importlib` 从 `D:\Reasonix\cognitive-search-engine\src\` 加载 — 引擎更新自动生效，零 MCP 开销。
-> 完整规范: workspace 根目录 `coordination.yaml`。
-
-## 核心研究方向
-
-| 方向 | 说明 |
+| 能力 | 说明 |
 |------|------|
-| 🧬 群体遗传学 | 刀鲚洄游群体遗传结构、地理种群分化 |
-| 🏷️ 耳石微化学 | Sr/Ca比分析洄游履历、生境履历重建 |
-| 📐 形态学 | 刀鲚与近缘种(短颌鲚、凤鲚)的形态鉴别 |
-| 🌊 洄游生态 | 溯河洄游路线、时间节律、环境驱动因子 |
-| 📊 资源评估 | 禁捕后资源恢复监测、种群动态模型 |
-| 🍽️ 食性分析 | 刀鲚摄食生态、营养级位置 |
-
-## 📊 自我评价
-
-| 维度 | 评分 | 说明 |
-|------|:--:|------|
-| 🐟 领域深度 | ⭐⭐⭐⭐⭐ | 刀鲚完整知识库：生物学、洄游特性、耳石微化学、资源评估 |
-| 🔬 研究方法 | ⭐⭐⭐⭐☆ | 3 个核心 Skill 定义完整 (文献检索/洄游分析/资源评估) |
-| 🔗 生态位整合 | ⭐⭐⭐⭐⭐ | 衍生项目 P₂，与 P₁(江豚) 同级衍生，统一由 eon-core 调度 |
-| 📡 可执行性 | ⭐⭐⭐☆☆ | 当前为 delegation stub 架构，实际搜索通过 DirectLoader 调用 cognitive-search-engine |
-| 🚀 可扩展性 | ⭐⭐⭐⭐⭐ | 与 porpoise-agent 共享 P 层模板，3 步复制出新物种 Agent |
-
-> **核心优势**: 长江刀鲚（三鲜之首）专属研究 Agent。与 P₁ 江豚 Agent 共享刘凯研究员课题组方向，形成长江水生生物"豚-鱼"双专研体系。
-> **待改进**: Skills 从 delegation stub 升级为可执行搜索逻辑。
+| 🧬 群体遗传学 | 微卫星 + 线粒体 + SNP，纯 Python 实现 |
+| 🏷️ 耳石微化学 | Sr/Ca 比洄游履历重建，淡水/半咸水/海水三态分类 |
+| 🌊 洄游生态 | 溯河路线重建、水利工程影响评估、产卵场适宜性评分 |
+| 🍽️ 食性分析 | 胃含物 + 稳定同位素 + 营养级 + 生态位宽度 |
+| 📊 资源评估 | CPUE 标准化 + Schaefer 剩余产量模型 + MSY 计算 |
+| 🔍 6 步文献搜索 | 精确名→宽网→OCR 变体→合并去重→5 方向分类→格式化 |
 
 ---
 
-## 🧠 技能模块
+## 快速开始
 
-| 技能 | 角色 | 说明 |
-|:------|:-----|:------------|
-| 🔍 `search-literature` | 📚 文献检索 | 通过 cognitive-search-engine DirectLoader 中英双语搜索 |
-| 🏷️ `analyze-migration` | 🌊 洄游分析 | 耳石 Sr/Ca 剖面 + 洄游路线重建 |
-| 📊 `assess-stock` | 📊 资源评估 | CPUE 分析 + 种群动态建模 |
+### 安装
 
----
-
-## 📡 搜索基础设施
-
-**DirectLoader 协议** — 搜索通过 `importlib` 路由到 cognitive-search-engine：
-
-```
-CoiliaAgent.search(query, genus="Coilia", species="nasus")
-  └─ CognitiveSearchAdapter.search("Coilia", "nasus", full_pipeline=False)
-       ├─ variant_generator.generate()    → OCR 变体生成
-       ├─ build_search_queries()          → 精确名 + 变体 + 中文名
-       └─ ParallelSearch.search_all()     → PubMed × Crossref × OpenAlex
+```bash
+git clone https://github.com/fangtaocai041/coilia-agent.git
+cd coilia-agent
+pip install -e .
 ```
 
-> 引擎路径: `D:\Reasonix\cognitive-search-engine\src\` · 适配器: `src/adapter.py`
+### CLI 基本用法
+
+```bash
+coilia run --query "刀鲚洄游群体遗传结构"
+coilia --help
+```
+
+### 验证安装
+
+```python
+from coilia_agent.src.adapter import get_adapter
+
+adapter = get_adapter()
+print(adapter.health())
+```
 
 ---
 
-## 📁 项目结构
+## 核心功能
+
+### 群体遗传学分析
+
+```python
+from scripts.genetics_analysis import analyze_microsatellite
+
+ms_result = analyze_microsatellite(loci=["Coil-1", "Coil-2", "Coil-3"],
+    genotypes={"POP_A": [...], "POP_B": [...]})
+print(f"Ho={ms_result.ho:.3f}, He={ms_result.he:.3f}, Fst={ms_result.fst:.3f}")
+```
+
+### 耳石微化学与洄游履历
+
+```python
+from scripts.migration_analysis import analyze_otolith_sr_ca
+
+result = analyze_otolith_sr_ca(
+    sr_ca_ratios=[0.8, 1.2, 2.1, 3.5, 4.2, 3.8, 1.5, 0.9],
+    distance_from_core_mm=[0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5])
+print(f"淡水相: {result.freshwater_pct:.1f}%")
+```
+
+### 食性与营养生态位
+
+```python
+from scripts.feeding_analysis import calculate_trophic_level
+
+trophic = calculate_trophic_level(d15n_value=15.2, baseline=8.5, tef=3.4)
+print(f"营养级: {trophic.level:.1f}")
+```
+
+### 资源评估
+
+```python
+from scripts.stock_assessment import schaefer_model
+
+result = schaefer_model(cpue_ts=cpue_data, r_init=0.5, k_init=5000)
+print(f"MSY={result.msy:.1f}")
+```
+
+### 6 步文献搜索
+
+```bash
+python scripts/literature_search.py --query "Coilia nasus otolith"
+python scripts/literature_search.py --query "刀鲚洄游" --theme migration --json --output results.json
+```
+
+---
+
+## 分析脚本
+
+| 脚本 | 用途 | 运行方式 |
+|:-----|:-----|:---------|
+| `literature_search.py` | 6 步搜索协议 | `--query "..."` |
+| `migration_analysis.py` | 洄游生态 + 耳石微化学 | `--example` |
+| `genetics_analysis.py` | 群体遗传学 | `--example` |
+| `feeding_analysis.py` | 食性 + 稳定同位素 | `--example` |
+| `stock_assessment.py` | CPUE + Schaefer MSY | `--cpue data.csv` |
+| `early_life_analysis.py` | 早期资源 + 产卵场 | `--example` |
+| `species_kb.py` | 知识库查询 | `--theme genetics` |
+| `fish_kb_add_species.py` | 知识入库 → f 项目 | `--dry-run` |
+
+---
+
+## 项目架构
 
 ```
 coilia-agent/
-├── README.md                 ← English
-├── README.zh.md              ← 中文
-├── coilia.bat                ← CLI 启动器
-│
-├── config/
-│   ├── agent.yaml            ← Agent 行为配置
-│   ├── component_registry.yaml
-│   └── component_registry.yaml
-│
-├── src/
-│   ├── main.py               ← CLI 入口
-│   ├── adapter.py             ← CognitiveSearchAdapter (DirectLoader)
-│   ├── agent/
-│   │   └── orchestrator.py   ← 查询路由 + 流水线
-│   ├── prompts/
-│   │   └── system_prompts.py ← Panta Rhei 哲学提示词
-│   └── skills/
-│       ├── search-literature/    ← 双语文献检索
-│       ├── analyze-migration/    ← 耳石微化学分析
-│       └── assess-stock/         ← 资源评估建模
-│
-└── data/
-    └── knowledge_base/
-        └── species/           ← Coilia nasus 知识条目
+├── src/                          ← Python 源码
+│   ├── adapter.py                ← 跨项目接口 (IProjectAdapter)
+│   ├── main.py                   ← CLI 入口
+│   └── agent/orchestrator.py     ← 领域分析引擎
+├── scripts/                      ← 8 个独立可执行分析脚本
+├── data/knowledge_base/          ← 刀鲚物种知识库
+├── config/                       ← agent.yaml + component_registry.yaml
+├── skills/                       ← 5 个 SKILL.md
+├── tests/                        ← 5 个测试套件
+├── Dockerfile                    ← 容器化
+└── pyproject.toml                ← 项目元数据
 ```
 
 ---
 
-## 📋 README 变更记录
+## 知识库
 
-| 版本 | 日期 | 主题 | 变更内容 |
-|:------|:-----|:------|:-------------|
-| **v1.3.0** | 2026-06-09 | 跨项目同步 | + 徽标行, + S-T-V 角色 (P₂/V3), + eon-core 协调, + 技能表, + 搜索基础设施, + 项目结构, + README 变更记录 |
-| **v1.2.0** | 2026-06-08 | ☯️ TAO + Monitoring | + TAO (水·润下) + Monitoring + 独立 DirectLoader 搜索 |
-| **v1.1.0** | 2026-06-08 | 双模式 | 独立/集成双模式 |
-| **v1.0.0** | 2026-06-08 | 初始版本 | P₂ 刀鲚专研 · 3 Skills · 知识库 |
+`data/knowledge_base/species/coilia-nasus.md` 包含刀鲚完整物种档案：
 
----
-
-## 📜 许可证
-
-MIT License © 2026 fangtaocai041
+| 字段 | 内容 |
+|------|------|
+| 保护等级 | IUCN 濒危(EN), 中国红皮书名录濒危 |
+| 生物学 | 最大体长 41cm, 寿命 4-5 年, 溯河洄游 |
+| 洄游 | 溯河期 2-4 月, 关键障碍 三峡/葛洲坝 |
+| 近缘种 | 短颌鲚 (淡水定居), 凤鲚 (沿海) |
+| 资源趋势 | 1973 年 3750t 峰值 → 当前仅 1-3% |
 
 ---
 
-## ⚡ 快速开始
+## 运行测试
 
 ```bash
-cd coilia-agent
-pip install -e .
-coilia run --query "刀鲚洄游路线 长江"
+python -m pytest tests/ -v
 ```
+
+## 许可证
+
+MIT

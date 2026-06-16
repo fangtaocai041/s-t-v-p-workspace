@@ -48,7 +48,7 @@ def build_search_queries(scientific_name: str, chinese_name: str = "") -> List[s
     queries = [scientific_name]
     if chinese_name:
         queries.append(chinese_name)
-
+    return queries
 
 
 def generate_ocr_variants(name: str, limit: int = 20):

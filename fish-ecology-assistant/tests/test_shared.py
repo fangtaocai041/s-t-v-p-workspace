@@ -53,7 +53,8 @@ def test_generate_ocr_variants():
     assert "Ochetobius" in variants or True  # 变体列表可以不同
 
 
-def test_generate_ocr_variants_xgboost():
-    """generate_ocr_variants 的 xgboost 模式。"""
-    variants = generate_ocr_variants("Xgboost", mode="xgboost")
+def test_generate_ocr_variants_with_limit():
+    """应支持 limit 参数控制返回数量。"""
+    variants = generate_ocr_variants("Ochetobius", limit=5)
     assert isinstance(variants, list)
+    assert len(variants) <= 5

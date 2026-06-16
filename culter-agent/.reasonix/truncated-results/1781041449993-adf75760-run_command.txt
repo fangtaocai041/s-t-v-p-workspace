@@ -1,0 +1,368 @@
+$ python -c "
+from src.knowledge_base import KnowledgeBase
+kb = KnowledgeBase()
+
+original_pl = kb._parse_lines
+call_depth = [0]
+def traced_pl(lines):
+    depth = call_depth[0]
+    call_depth[0] += 1
+    prefix = '  ' * depth
+    print(f'{prefix}_parse_lines called with {len(lines)} lines')
+    if lines:
+        firsts = [l.strip()[:60] for l in lines[:5] if l.strip()]
+        print(f'{prefix}  first non-blank: {firsts}')
+    
+    result = {}
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        if not line.strip():
+            i += 1
+            continue
+        indent = kb._indent(line)
+        key, value = kb._parse_kv(line)
+        if key is None:
+            i += 1
+            continue
+        print(f'{prefix}  i={i} key={key!r} val={value!r} indent={indent}')
+        
+        if value is not None:
+            result[key] = value
+            i += 1
+        else:
+            child_lines, next_i = kb._collect_children(lines, i, indent)
+            print(f'{prefix}    children: {len(child_lines)} lines, next_i={next_i}')
+            if child_lines:
+                first_child = child_lines[0].strip()[:60] if child_lines[0].strip() else '(blank)'
+                is_list = child_lines[0].strip().startswith('- ')
+                print(f'{prefix}    first_child={first_child!r} is_list={is_list}')
+                if is_list:
+                    result[key] = kb._parse_list(child_lines)
+                else:
+                    call_depth[0] += 1
+                    result[key] = traced_pl(child_lines)
+                    call_depth[0] -= 1
+            else:
+                result[key] = None
+            i = next_i
+    
+    call_depth[0] -= 1
+    print(f'{prefix}  -> returning {len(result)} keys: {list(result.keys())[:5]}')
+    return result if result else None
+
+kb._parse_lines = traced_pl
+
+from pathlib import Path
+import re
+path = Path('data/knowledge_base/species/culter-alburnus.md')
+lines = path.read_text(encoding='utf-8').splitlines()
+stripped = []
+for line in lines:
+    if re.match(r'^#[^#]', line) or line.strip() == '#':
+        continue
+    stripped.append(line)
+print(f'Total stripped lines: {len(stripped)}')
+parsed = kb._parse_lines(stripped)
+print(f'Final keys: {list(parsed.keys()) if parsed else \"None\"}')
+" 2>&1
+[exit 0]
+Total stripped lines: 235
+_parse_lines called with 235 lines
+  first non-blank: ['species:', 'id: "Culter_alburnus"', 'chinese: "翘嘴鲌"', 'common_names: ["翘嘴", "白鱼", "大白鱼", "翘壳", "topmouth culter", "']
+  i=1 key='species' val=None indent=0
+    children: 193 lines, next_i=195
+    first_child='id: "Culter_alburnus"' is_list=False
+    _parse_lines called with 193 lines
+      first non-blank: ['id: "Culter_alburnus"', 'chinese: "翘嘴鲌"', 'common_names: ["翘嘴", "白鱼", "大白鱼", "翘壳", "topmouth culter", "', 'scientific: "Culter alburnus"', 'family: "鲤科 (Cyprinidae)"']
+      i=0 key='id' val='Culter_alburnus' indent=2
+      i=1 key='chinese' val='翘嘴鲌' indent=2
+      i=2 key='common_names' val=['翘嘴', '白鱼', '大白鱼', '翘壳', 'topmouth culter', 'white culter'] indent=2
+      i=3 key='scientific' val='Culter alburnus' indent=2
+      i=4 key='family' val='鲤科 (Cyprinidae)' indent=2
+      i=5 key='subfamily' val='鲌亚科 (Cultrinae)' indent=2
+      i=6 key='order' val='鲤形目 (Cypriniformes)' indent=2
+      i=7 key='genus' val='Culter (鲌属)' indent=2
+      i=10 key='conservation' val=None indent=2
+        children: 5 lines, next_i=16
+        first_child='iucn: "未评估 (NE) / 部分水域种群下降"' is_list=False
+        _parse_lines called with 5 lines
+          first non-blank: ['iucn: "未评估 (NE) / 部分水域种群下降"', 'china_status: "重要经济鱼类，长江禁捕范围内"', 'yangtze_fishing_ban: "2021年起长江干流及重要支流全面禁捕"', 'concerns: "过度捕捞 + 栖息地破碎化 + 水利工程阻隔产卵洄游"']
+          i=0 key='iucn' val='未评估 (NE) / 部分水域种群下降' indent=4
+          i=1 key='china_status' val='重要经济鱼类，长江禁捕范围内' indent=4
+          i=2 key='yangtze_fishing_ban' val='2021年起长江干流及重要支流全面禁捕' indent=4
+          i=3 key='concerns' val='过度捕捞 + 栖息地破碎化 + 水利工程阻隔产卵洄游' indent=4
+          -> returning 4 keys: ['iucn', 'china_status', 'yangtze_fishing_ban', 'concerns']
+      i=17 key='biology' val=None indent=2
+        children: 12 lines, next_i=30
+        first_child='max_length: "105 cm"' is_list=False
+        _parse_lines called with 12 lines
+          first non-blank: ['max_length: "105 cm"', 'common_length: "30-60 cm"', 'max_weight: "15 kg"', 'common_weight: "0.5-3 kg"', 'lifespan: "15-20 年"']
+          i=0 key='max_length' val='105 cm' indent=4
+          i=1 key='common_length' val='30-60 cm' indent=4
+          i=2 key='max_weight' val='15 kg' indent=4
+          i=3 key='common_weight' val='0.5-3 kg' indent=4
+          i=4 key='lifespan' val='15-20 年' indent=4
+          i=5 key='growth_rate' val='中等偏快 — 1龄达 15-25 cm，3龄达 30-45 cm' indent=4
+          i=6 key='feeding' val=None indent=4
+            children: 5 lines, next_i=12
+            first_child='type: "凶猛肉食性 (piscivorous)"' is_list=False
+            _parse_lines called with 5 lines
+              first non-blank: ['type: "凶猛肉食性 (piscivorous)"', 'juvenile_diet: "浮游动物 + 水生昆虫"', 'adult_diet: "小型鱼类 (餐条、鰟鮍等) + 虾类"', 'feeding_habit: "中上层掠食，视觉捕食为主"']
+              i=0 key='type' val='凶猛肉食性 (piscivorous)' indent=6
+              i=1 key='juvenile_diet' val='浮游动物 + 水生昆虫' indent=6
+              i=2 key='adult_diet' val='小型鱼类 (餐条、鰟鮍等) + 虾类' indent=6
+              i=3 key='feeding_habit' val='中上层掠食，视觉捕食为主' indent=6
+              -> returning 4 keys: ['type', 'juvenile_diet', 'adult_diet', 'feeding_habit']
+          -> returning 7 keys: ['max_length', 'common_length', 'max_weight', 'common_weight', 'lifespan']
+      i=31 key='reproduction' val=None indent=2
+        children: 8 lines, next_i=40
+        first_child='maturity_age: "♀ 3-4 龄, ♂ 2-3 龄"' is_list=False
+        _parse_lines called with 8 lines
+          first non-blank: ['maturity_age: "♀ 3-4 龄, ♂ 2-3 龄"', 'spawning_season: "5-7月 (水温 20-28°C)"', 'spawning_type: "分批产卵 (batch spawner)"', 'spawning_habitat: "静水或缓流、有水生植物的浅水区"', 'fecundity: "5-60万粒 (体长依赖性)"']
+          i=0 key='maturity_age' val='♀ 3-4 龄, ♂ 2-3 龄' indent=4
+          i=1 key='spawning_season' val='5-7月 (水温 20-28°C)' indent=4
+          i=2 key='spawning_type' val='分批产卵 (batch spawner)' indent=4
+          i=3 key='spawning_habitat' val='静水或缓流、有水生植物的浅水区' indent=4
+          i=4 key='fecundity' val='5-60万粒 (体长依赖性)' indent=4
+          i=5 key='egg_type' val='粘性卵，附着于水草或基质' indent=4
+          i=6 key='incubation' val='2-4天 (水温相关)' indent=4
+          -> returning 7 keys: ['maturity_age', 'spawning_season', 'spawning_type', 'spawning_habitat', 'fecundity']
+      i=41 key='habitat' val=None indent=2
+        children: 13 lines, next_i=55
+        first_child='water_body_types: ["湖泊", "水库", "河流缓流段", "通江湖泊"]' is_list=False
+        _parse_lines called with 13 lines
+          first non-blank: ['water_body_types: ["湖泊", "水库", "河流缓流段", "通江湖泊"]', 'depth_preference: "中上层 (0-5m)，夜间可至表层"', 'temperature_range: "4-32°C (最适 22-28°C)"', 'distribution_native:', '- "长江水系 (中下游及附属湖泊)"']
+          i=0 key='water_body_types' val=['湖泊', '水库', '河流缓流段', '通江湖泊'] indent=4
+          i=1 key='depth_preference' val='中上层 (0-5m)，夜间可至表层' indent=4
+          i=2 key='temperature_range' val='4-32°C (最适 22-28°C)' indent=4
+          i=3 key='distribution_native' val=None indent=4
+            children: 4 lines, next_i=8
+            first_child='- "长江水系 (中下游及附属湖泊)"' is_list=True
+          i=8 key='introduced_areas' val=None indent=4
+            children: 4 lines, next_i=13
+            first_child='- "云南高原湖泊 (滇池、洱海等)"' is_list=True
+          _parse_lines called with 1 lines
+            first non-blank: []
+            -> returning 0 keys: []
+          -> returning 5 keys: ['water_body_types', 'depth_preference', 'temperature_range', 'distribution_native', 'introduced_areas']
+      i=56 key='fishery' val=None indent=2
+        children: 8 lines, next_i=65
+        first_child='historical_importance: "长江中下游重要经济鱼类，太湖\'三白\'之一"' is_list=False
+        _parse_lines called with 8 lines
+          first non-blank: ['historical_importance: "长江中下游重要经济鱼类，太湖\'三白\'之一"', 'catch_trend: "野生资源量显著下降（鄱阳湖、洞庭湖尤为明显）"', 'aquaculture: "规模化人工养殖已成功，苗种人工繁殖技术成熟"', 'management:', '- "长江流域: 禁捕 (2021年起)"']
+          i=0 key='historical_importance' val="长江中下游重要经济鱼类，太湖'三白'之一" indent=4
+          i=1 key='catch_trend' val='野生资源量显著下降（鄱阳湖、洞庭湖尤为明显）' indent=4
+          i=2 key='aquaculture' val='规模化人工养殖已成功，苗种人工繁殖技术成熟' indent=4
+          i=3 key='management' val=None indent=4
+            children: 4 lines, next_i=8
+            first_child='- "长江流域: 禁捕 (2021年起)"' is_list=True
+          _parse_lines called with 1 lines
+            first non-blank: []
+            -> returning 0 keys: []
+          -> returning 4 keys: ['historical_importance', 'catch_trend', 'aquaculture', 'management']
+      i=68 key='genomics' val=None indent=2
+        children: 19 lines, next_i=88
+        first_child='genome_size: "~1.0-1.2 Gb (估算，基于近缘鲤科鱼类)"' is_list=False
+        _parse_lines called with 19 lines
+          first non-blank: ['genome_size: "~1.0-1.2 Gb (估算，基于近缘鲤科鱼类)"', 'chromosome_number: "2n = 48 (鲤科典型)"', 'sequencing_status: "已有简化基因组 (RAD-seq/GBS) 和线粒体全基因组数据"', 'whole_genome_status: "全基因组组装尚未公开报道 (截至 2025)"', 'mitogenome:']
+          i=0 key='genome_size' val='~1.0-1.2 Gb (估算，基于近缘鲤科鱼类)' indent=4
+          i=1 key='chromosome_number' val='2n = 48 (鲤科典型)' indent=4
+          i=2 key='sequencing_status' val='已有简化基因组 (RAD-seq/GBS) 和线粒体全基因组数据' indent=4
+          i=3 key='whole_genome_status' val='全基因组组装尚未公开报道 (截至 2025)' indent=4
+          i=4 key='mitogenome' val=None indent=4
+            children: 3 lines, next_i=8
+            first_child='size: "~16.6 kb (典型脊椎动物线粒体基因组)"' is_list=False
+            _parse_lines called with 3 lines
+              first non-blank: ['size: "~16.6 kb (典型脊椎动物线粒体基因组)"', 'genes: "13 PCGs + 22 tRNA + 2 rRNA + D-loop"', 'available_for: ["Culter alburnus", "Culter mongolicus", "Cha']
+              i=0 key='size' val='~16.6 kb (典型脊椎动物线粒体基因组)' indent=6
+              i=1 key='genes' val='13 PCGs + 22 tRNA + 2 rRNA + D-loop' indent=6
+              i=2 key='available_for' val=['Culter alburnus', 'Culter mongolicus', 'Chanodichthys erythropterus'] indent=6
+              -> returning 3 keys: ['size', 'genes', 'available_for']
+          i=8 key='genomic_resources' val=None indent=4
+            children: 4 lines, next_i=13
+            first_child='- "RAD-seq: 群体遗传结构、适应性分化扫描"' is_list=True
+          i=13 key='key_questions' val=None indent=4
+            children: 5 lines, next_i=19
+            first_child='- "鲌亚科 (Cultrinae) 系统发育基因组位置不明确"' is_list=True
+          _parse_lines called with 1 lines
+            first non-blank: []
+            -> returning 0 keys: []
+          -> returning 7 keys: ['genome_size', 'chromosome_number', 'sequencing_status', 'whole_genome_status', 'mitogenome']
+      i=91 key='stable_isotopes' val=None indent=2
+        children: 25 lines, next_i=117
+        first_child='commonly_used:' is_list=False
+        _parse_lines called with 25 lines
+          first non-blank: ['commonly_used:', '- isotope: "δ¹³C"', 'tissue: "肌肉 (白肌)"', 'turnover: "数月 (慢转换组织)"', 'interpretation: "碳源示踪 — 沿岸带 (高δ¹³C) vs 湖心带 (低δ¹³C) 饵料贡献比例"']
+          i=0 key='commonly_used' val=None indent=4
+            children: 11 lines, next_i=12
+            first_child='- isotope: "δ¹³C"' is_list=True
+          _parse_lines called with 3 lines
+            first non-blank: ['tissue: "肌肉 (白肌)"', 'turnover: "数月 (慢转换组织)"', 'interpretation: "碳源示踪 — 沿岸带 (高δ¹³C) vs 湖心带 (低δ¹³C) 饵料贡献比例"']
+            i=0 key='tissue' val='肌肉 (白肌)' indent=8
+            i=1 key='turnover' val='数月 (慢转换组织)' indent=8
+            i=2 key='interpretation' val='碳源示踪 — 沿岸带 (高δ¹³C) vs 湖心带 (低δ¹³C) 饵料贡献比例' indent=8
+            -> returning 3 keys: ['tissue', 'turnover', 'interpretation']
+          _parse_lines called with 3 lines
+            first non-blank: ['tissue: "肌肉 (白肌)"', 'turnover: "数月"', 'interpretation: "营养级估算 — 每升高 1 营养级 δ¹⁵N 富集 2.5-3.4‰"']
+            i=0 key='tissue' val='肌肉 (白肌)' indent=8
+            i=1 key='turnover' val='数月' indent=8
+            i=2 key='interpretation' val='营养级估算 — 每升高 1 营养级 δ¹⁵N 富集 2.5-3.4‰' indent=8
+            -> returning 3 keys: ['tissue', 'turnover', 'interpretation']
+          _parse_lines called with 2 lines
+            first non-blank: ['tissue: "肌肉"', 'interpretation: "区分淡水/海水来源 (辅助洄游研究)"']
+            i=0 key='tissue' val='肌肉' indent=8
+            i=1 key='interpretation' val='区分淡水/海水来源 (辅助洄游研究)' indent=8
+            -> returning 2 keys: ['tissue', 'interpretation']
+          i=12 key='baseline_organisms' val=None indent=4
+            children: 2 lines, next_i=15
+            first_child='- "初级消费者: 螺类 (Bellamya) — 沿岸带基线"' is_list=True
+          i=15 key='analytical_methods' val=None indent=4
+            children: 3 lines, next_i=19
+            first_child='- "EA-IRMS: 元素分析仪-同位素比质谱"' is_list=True
+          i=19 key='typical_values' val=None indent=4
+            children: 3 lines, next_i=23
+            first_child='culter_alburnus_δ13C: "-24‰ ~ -20‰ (淡水湖泊)"' is_list=False
+            _parse_lines called with 3 lines
+              first non-blank: ['culter_alburnus_δ13C: "-24‰ ~ -20‰ (淡水湖泊)"', 'culter_alburnus_δ15N: "12‰ ~ 16‰ (对应营养级 3.5-4.5)"', 'trophic_position: "3.5-4.5 (次级消费者→顶级捕食者，视水体而异)"']
+              i=2 key='trophic_position' val='3.5-4.5 (次级消费者→顶级捕食者，视水体而异)' indent=6
+              -> returning 1 keys: ['trophic_position']
+          i=23 key='ontogenetic_shift' val='体长 > 30 cm 后 δ¹⁵N 显著升高，反映食性由昆虫/浮游向纯鱼类转换' indent=4
+          -> returning 5 keys: ['commonly_used', 'baseline_organisms', 'analytical_methods', 'typical_values', 'ontogenetic_shift']
+      i=120 key='trophic_niche' val=None indent=2
+        children: 22 lines, next_i=143
+        first_child='feeding_guild: "顶级捕食者 (apex predator in lacustrine food webs' is_list=False
+        _parse_lines called with 22 lines
+          first non-blank: ['feeding_guild: "顶级捕食者 (apex predator in lacustrine food webs', 'prey_spectrum:', 'fish:', '- "餐条 (Hemiculter leucisculus)"', '- "鰟鮍 (Rhodeus spp.)"']
+          i=0 key='feeding_guild' val='顶级捕食者 (apex predator in lacustrine food webs)' indent=4
+          i=1 key='prey_spectrum' val=None indent=4
+            children: 10 lines, next_i=12
+            first_child='fish:' is_list=False
+            _parse_lines called with 10 lines
+              first non-blank: ['fish:', '- "餐条 (Hemiculter leucisculus)"', '- "鰟鮍 (Rhodeus spp.)"', '- "麦穗鱼 (Pseudorasbora parva)"', '- "棒花鱼 (Abbottina rivularis)"']
+              i=0 key='fish' val=None indent=6
+                children: 5 lines, next_i=6
+                first_child='- "餐条 (Hemiculter leucisculus)"' is_list=True
+              i=6 key='crustaceans' val=None indent=6
+                children: 2 lines, next_i=9
+                first_child='- "日本沼虾 (Macrobrachium nipponense)"' is_list=True
+              i=9 key='insects' val='水生昆虫幼虫 (蜻蜓目/蜉蝣目) — 幼鱼阶段主要饵料' indent=6
+              -> returning 3 keys: ['fish', 'crustaceans', 'insects']
+          i=12 key='niche_metrics' val=None indent=4
+            children: 2 lines, next_i=15
+            first_child='levin_index: "0.3-0.6 (中等食性宽度，不同水体差异大)"' is_list=False
+            _parse_lines called with 2 lines
+              first non-blank: ['levin_index: "0.3-0.6 (中等食性宽度，不同水体差异大)"', 'pianka_overlap: "与蒙古鲌重叠 0.5-0.7 (同域分布时)"']
+              i=0 key='levin_index' val='0.3-0.6 (中等食性宽度，不同水体差异大)' indent=6
+              i=1 key='pianka_overlap' val='与蒙古鲌重叠 0.5-0.7 (同域分布时)' indent=6
+              -> returning 2 keys: ['levin_index', 'pianka_overlap']
+          i=15 key='dietary_shift' val=None indent=4
+            children: 4 lines, next_i=20
+            first_child='stage_1: "仔鱼期 (< 2 cm): 轮虫 + 枝角类"' is_list=False
+            _parse_lines called with 4 lines
+              first non-blank: ['stage_1: "仔鱼期 (< 2 cm): 轮虫 + 枝角类"', 'stage_2: "稚鱼期 (2-10 cm): 桡足类 + 水生昆虫幼虫"', 'stage_3: "幼鱼期 (10-30 cm): 虾类 + 小型鱼类"', 'stage_4: "成鱼期 (> 30 cm): 纯鱼类为主"']
+              i=0 key='stage_1' val='仔鱼期 (< 2 cm): 轮虫 + 枝角类' indent=6
+              i=1 key='stage_2' val='稚鱼期 (2-10 cm): 桡足类 + 水生昆虫幼虫' indent=6
+              i=2 key='stage_3' val='幼鱼期 (10-30 cm): 虾类 + 小型鱼类' indent=6
+              i=3 key='stage_4' val='成鱼期 (> 30 cm): 纯鱼类为主' indent=6
+              -> returning 4 keys: ['stage_1', 'stage_2', 'stage_3', 'stage_4']
+          i=20 key='seasonal_variation' val='春季摄食强度高 (繁殖前能量积累)，冬季摄食降低但不停食' indent=4
+          -> returning 5 keys: ['feeding_guild', 'prey_spectrum', 'niche_metrics', 'dietary_shift', 'seasonal_variation']
+      i=146 key='sympatric_coexistence' val=None indent=2
+        children: 33 lines, next_i=180
+        first_child='co_occurring_culter_species:' is_list=False
+        _parse_lines called with 33 lines
+          first non-blank: ['co_occurring_culter_species:', '- pair: "翘嘴鲌 (C. alburnus) ↔ 蒙古鲌 (C. mongolicus)"', 'water_bodies: ["洞庭湖", "鄱阳湖", "太湖", "梁子湖"]', 'coexistence_mechanisms:', '- "空间生态位分化: 翘嘴鲌偏好开阔水域中上层，蒙古鲌偏好近岸带中下层"']
+          i=0 key='co_occurring_culter_species' val=None indent=4
+            children: 16 lines, next_i=17
+            first_child='- pair: "翘嘴鲌 (C. alburnus) ↔ 蒙古鲌 (C. mongolicus)"' is_list=True
+          _parse_lines called with 5 lines
+            first non-blank: ['water_bodies: ["洞庭湖", "鄱阳湖", "太湖", "梁子湖"]', 'coexistence_mechanisms:', '- "空间生态位分化: 翘嘴鲌偏好开阔水域中上层，蒙古鲌偏好近岸带中下层"', '- "饵料大小分化: 翘嘴鲌捕食较大体型鱼类 (体长 > 8 cm)，蒙古鲌偏好较小个体 (< 6 cm)"', '- "摄食时间分化: 翘嘴鲌晨昏活动高峰，蒙古鲌昼夜均有摄食"']
+            i=0 key='water_bodies' val=['洞庭湖', '鄱阳湖', '太湖', '梁子湖'] indent=8
+            i=1 key='coexistence_mechanisms' val=None indent=8
+              children: 3 lines, next_i=5
+              first_child='- "空间生态位分化: 翘嘴鲌偏好开阔水域中上层，蒙古鲌偏好近岸带中下层"' is_list=True
+            -> returning 2 keys: ['water_bodies', 'coexistence_mechanisms']
+          _parse_lines called with 4 lines
+            first non-blank: ['water_bodies: ["长江中上游干支流"]', 'coexistence_mechanisms:', '- "微生境分区: 翘嘴鲌占据主流，尖头鲌偏好回流区"', '- "体型差异导致饵料谱分化"']
+            i=0 key='water_bodies' val=['长江中上游干支流'] indent=8
+            i=1 key='coexistence_mechanisms' val=None indent=8
+              children: 2 lines, next_i=4
+              first_child='- "微生境分区: 翘嘴鲌占据主流，尖头鲌偏好回流区"' is_list=True
+            -> returning 2 keys: ['water_bodies', 'coexistence_mechanisms']
+          _parse_lines called with 4 lines
+            first non-blank: ['water_bodies: ["长江中下游", "珠江"]', 'coexistence_mechanisms:', '- "红鳍原鲌食性更广 (杂食偏动物性)，营养级略低于翘嘴鲌"', '- "红鳍原鲌对低氧耐受更强，可利用翘嘴鲌回避的缺氧区"']
+            i=0 key='water_bodies' val=['长江中下游', '珠江'] indent=8
+            i=1 key='coexistence_mechanisms' val=None indent=8
+              children: 2 lines, next_i=4
+              first_child='- "红鳍原鲌食性更广 (杂食偏动物性)，营养级略低于翘嘴鲌"' is_list=True
+            -> returning 2 keys: ['water_bodies', 'coexistence_mechanisms']
+          i=17 key='niche_partitioning_axes' val=None indent=4
+            children: 9 lines, next_i=27
+            first_child='- axis: "空间 (spatial)"' is_list=True
+          _parse_lines called with 2 lines
+            first non-blank: ['description: "垂直分层 (上层 vs 中下层)、水平分布 (开阔区 vs 近岸带)"', 'evidence_strength: "强 — 多篇胃含物 + 同位素联合研究支持"']
+            i=0 key='description' val='垂直分层 (上层 vs 中下层)、水平分布 (开阔区 vs 近岸带)' indent=8
+            i=1 key='evidence_strength' val='强 — 多篇胃含物 + 同位素联合研究支持' indent=8
+            -> returning 2 keys: ['description', 'evidence_strength']
+          _parse_lines called with 2 lines
+            first non-blank: ['description: "饵料大小选择、鱼类 vs 虾类比例、δ¹³C 碳源差异"', 'evidence_strength: "强 — 稳定同位素 + 胃含物双验证"']
+            i=0 key='description' val='饵料大小选择、鱼类 vs 虾类比例、δ¹³C 碳源差异' indent=8
+            i=1 key='evidence_strength' val='强 — 稳定同位素 + 胃含物双验证' indent=8
+            -> returning 2 keys: ['description', 'evidence_strength']
+          _parse_lines called with 2 lines
+            first non-blank: ['description: "摄食节律差异、繁殖期错峰"', 'evidence_strength: "中等 — 行为观察数据有限，需水下声学/摄像验证"']
+            i=0 key='description' val='摄食节律差异、繁殖期错峰' indent=8
+            i=1 key='evidence_strength' val='中等 — 行为观察数据有限，需水下声学/摄像验证' indent=8
+            -> returning 2 keys: ['description', 'evidence_strength']
+          i=27 key='research_gaps' val=None indent=4
+            children: 5 lines, next_i=33
+            first_child='- "多物种共存 (>3 种鲌类) 的生态位网络尚不清楚"' is_list=True
+          _parse_lines called with 1 lines
+            first non-blank: []
+            -> returning 0 keys: []
+          -> returning 3 keys: ['co_occurring_culter_species', 'niche_partitioning_axes', 'research_gaps']
+      i=181 key='key_research_themes' val=None indent=2
+        children: 11 lines, next_i=193
+        first_child='- "年龄与生长: 鳞片/耳石/脊椎骨轮纹鉴定，von Bertalanffy 生长方程"' is_list=True
+      _parse_lines called with 2 lines
+        first non-blank: []
+        -> returning 0 keys: []
+      -> returning 18 keys: ['id', 'chinese', 'common_names', 'scientific', 'family']
+  i=195 key='related_species' val=None indent=0
+    children: 39 lines, next_i=235
+    first_child='(blank)' is_list=False
+    _parse_lines called with 39 lines
+      first non-blank: ['- id: "Culter_mongolicus"', 'chinese: "蒙古鲌 (蒙古红鲌)"', 'scientific: "Culter mongolicus"', 'distinguishing: "体侧扁、吻尖、各鳍呈橙红色，体长可达 65 cm"']
+      i=2 key='chinese' val='蒙古鲌 (蒙古红鲌)' indent=4
+      i=3 key='scientific' val='Culter mongolicus' indent=4
+      i=4 key='distinguishing' val='体侧扁、吻尖、各鳍呈橙红色，体长可达 65 cm' indent=4
+      i=5 key='distribution' val='长江、珠江及北方水系' indent=4
+      i=6 key='feeding' val='肉食性 — 小型鱼类、虾类' indent=4
+      i=7 key='reproduction' val='5-7月产卵，粘性卵' indent=4
+      i=8 key='status' val='经济鱼类，部分水域种群下降' indent=4
+      i=11 key='chinese' val='尖头鲌' indent=4
+      i=12 key='scientific' val='Culter oxycephalus' indent=4
+      i=13 key='distinguishing' val='头显著尖长，体长可达 50 cm' indent=4
+      i=14 key='distribution' val='长江中上游及附属水体' indent=4
+      i=15 key='status' val='分布较窄，关注度较低' indent=4
+      i=18 key='chinese' val='红鳍原鲌 (红鳍鲌)' indent=4
+      i=19 key='scientific' val='Chanodichthys erythropterus' indent=4
+      i=20 key='note' val='原归鲌属 (Culter)，现置于原鲌属 (Chanodichthys)' indent=4
+      i=21 key='distinguishing' val='胸鳍/腹鳍/臀鳍呈橙红色，体长可达 102 cm' indent=4
+      i=22 key='distribution' val='东亚广泛分布 (中国、俄罗斯、朝鲜半岛、越南)' indent=4
+      i=23 key='reproduction' val='6-7月产卵' indent=4
+      i=24 key='status' val='适应力强，分布广泛，经济价值中等' indent=4
+      i=27 key='chinese' val='达氏鲌' indent=4
+      i=28 key='scientific' val='Culter dabryi' indent=4
+      i=29 key='distinguishing' val='体较小，体长一般 < 30 cm' indent=4
+      i=30 key='distribution' val='长江、钱塘江等水系' indent=4
+      i=31 key='status' val='小型鲌类，经济价值低于翘嘴鲌' indent=4
+      i=34 key='chinese' val='拟尖头鲌' indent=4
+      i=35 key='scientific' val='Culter oxycephaloides' indent=4
+      i=36 key='distinguishing' val='与尖头鲌相似，但吻稍短' indent=4
+      i=37 key='distribution' val='长江中游' indent=4
+      i=38 key='status' val='分布局限，关注度低' indent=4
+      -> returning 8 keys: ['chinese', 'scientific', 'distinguishing', 'distribution', 'feeding']
+  -> returning 2 keys: ['species', 'related_species']
+Final keys: ['species', 'related_species']

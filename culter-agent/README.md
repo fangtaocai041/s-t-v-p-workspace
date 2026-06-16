@@ -4,272 +4,319 @@
 
 <div align="center">
   <h1>🐟 Culter Agent — 鲌类专研 (P₃)</h1>
-  <p><strong>三角闭环衍生项目 · P₃ 鲌类专研 · 基因组与遗传·年龄生长·同位素·同域共存·资源评估</strong></p>
-  <p>8 Skills · DirectLoader cognitive search · 9-phase pipeline · 6 target species</p>
-  <p>🤝 Sister agents: <a href="https://github.com/fangtaocai041/porpoise-agent">porpoise-agent (P₁ 江豚)</a> · <a href="https://github.com/fangtaocai041/coilia-agent">coilia-agent (P₂ 刀鲚)</a></p>
-  <p>🧠 Coordinator: <a href="https://github.com/fangtaocai041/eon-core">eon-core</a></p>
-  <p>🌊 Panta Rhei · Everything Flows</p>
+  <p><strong>三角闭环衍生项目 · 鲌类 (Culter) 专研</strong></p>
+  <p>8 Skills · 9-Phase Pipeline · 6 Target Species · Knowledge Base</p>
 </div>
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="License"></a>
-  <a href="#"><img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python" alt="Python"></a>
-  <a href="#"><img src="https://img.shields.io/badge/DeepSeek-V3%2BR1-6366f1?style=flat-square" alt="DeepSeek"></a>
+  <a href="#"><img src="https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square" alt="Python"></a>
+  <a href="#"><img src="https://img.shields.io/badge/version-2.0.0-ec4899?style=flat-square" alt="v2.0.0"></a>
   <a href="#"><img src="https://img.shields.io/badge/skills-8-f59e0b?style=flat-square" alt="Skills:8"></a>
   <a href="#"><img src="https://img.shields.io/badge/pipeline-9_phase-22c55e?style=flat-square" alt="Pipeline:9"></a>
-  <a href="#"><img src="https://img.shields.io/badge/rules-18-8b5cf6?style=flat-square" alt="Rules:18"></a>
-  <a href="config/agent.yaml"><img src="https://img.shields.io/badge/agent-v2.0.0-ec4899?style=flat-square" alt="Agent:v2.0.0"></a>
-  <a href="#"><img src="https://img.shields.io/badge/dynamic_worldview-core-ec4899?style=flat-square" alt="Dynamic Worldview"></a>
+  <a href="#"><img src="https://img.shields.io/badge/species-6-8b5cf6?style=flat-square" alt="Species:6"></a>
 </p>
 
 ---
 
-## 🧠 Powered by eon-core Intelligent Coordination
+## Table of Contents
 
-> P₃ (derived from Triangle Core) coordinated by [eon-core](https://github.com/fangtaocai041/eon-core) (Triangle Core coordinator): **Chaos-enhanced routing** (Rössler + wildcard) · **Scholarly stopping** (Rule of Three) · **DeepSeek MoE gating** · **Samsara karma engine**.
-
-## 🔺 Architecture Role: **Derived Project P₃ (Culter Specialist)**
-
-> **Triangle Core**: fish(Knowledge V0) + cognitive(Validation V1) + eon-core(Coordinator T) — sealed_set(3)
-> **P₃** derived from Triangle Core, depends on triangle for species knowledge and literature search.
-> **P₁(porpoise) / P₂(coilia) / P₃(culter)** 为同级平行衍生项目，均由三角核心派生。
-> **Sister agent**: [porpoise-agent (P₁)](https://github.com/fangtaocai041/porpoise-agent) · [coilia-agent (P₂)](https://github.com/fangtaocai041/coilia-agent)
-
----
-
-## 📊 Self-Assessment
-
-| Dimension | Rating | Notes |
-|-----------|:-----:|-------|
-| 🧬 Genomics Depth | ⭐⭐⭐⭐⭐ | 全基因组/简化基因组/比较基因组/系统发育基因组分析管线 |
-| 📐 Age & Growth | ⭐⭐⭐⭐☆ | 鳞片/耳石轮纹鉴定 + von Bertalanffy 生长模型 |
-| 🌿 Trophic Ecology | ⭐⭐⭐⭐⭐ | δ¹³C/δ¹⁵N 稳定同位素 + MixSIAR 混合模型 + 营养级 |
-| 🔗 Coexistence Analysis | ⭐⭐⭐⭐☆ | 生态位重叠量化 + 同域共存机制建模 |
-| 📊 Resource Assessment | ⭐⭐⭐⭐☆ | CPUE 标准化 + MSY 估算 + YPR 分析 |
-| 🔬 Species Coverage | ⭐⭐⭐⭐⭐ | 6 种鲌亚科鱼类（翘嘴鲌/蒙古鲌/尖头鲌/红鳍原鲌/达氏鲌/拟尖头鲌） |
-| 🔗 Ecosystem Integration | ⭐⭐⭐⭐⭐ | Derived P₃, coordinated by eon-core Triangle Core |
+- [Introduction](#introduction)
+- [Quick Start](#quick-start)
+- [Pipeline](#pipeline)
+- [Skills](#skills)
+- [CLI](#cli)
+- [API Reference](#api-reference)
+- [Architecture](#architecture)
+- [Knowledge Base](#knowledge-base)
+- [Related Projects](#related-projects)
+- [Contributing](#contributing)
+- [License](#license)
 
 ---
 
-## 🎯 Target Species
+## Introduction
 
-| Species | Chinese | Family | Status |
-|---------|---------|--------|:------:|
-| *Culter alburnus* | 翘嘴鲌 (白鱼/翘壳) | Cyprinidae > Cultrinae | ⭐ Primary |
-| *Culter mongolicus* | 蒙古鲌 (蒙古红鲌) | Cyprinidae > Cultrinae | ⭐ Primary |
-| *Culter oxycephalus* | 尖头鲌 | Cyprinidae > Cultrinae | ⭐ Primary |
-| *Chanodichthys erythropterus* | 红鳍原鲌 | Cyprinidae > Cultrinae | 🔵 Related |
-| ***Chanodichthys dabryi*** | **达氏鲌 (青梢红鲌)** | **Cyprinidae > Cultrinae** | **🆕 Added** |
-| *Culter oxycephaloides* | 拟尖头鲌 | Cyprinidae > Cultrinae | 🔵 Related |
+**Culter Agent** is the **P₃** derivative project of the Triangle Core, specializing in *Culter* genus fishes (鲌属), particularly **Culter alburnus** (翘嘴鲌). It provides an 9-phase analysis pipeline with 8 domain skills covering genomics, genetics, age-growth, trophic ecology, coexistence modeling, habitat assessment, and resource evaluation.
 
-> **达氏鲌** (*Chanodichthys dabryi*, syn. *Culter dabryi* / *Erythroculter dabryi*) — 别名大眼红鲌、青梢红鲌。分布于黑龙江、辽河、黄河、长江、珠江水系。体长可达 53.1 cm，多栖居于静水湖泊。
+### Target Species
 
----
+| Species | Chinese Name | Status |
+|---------|-------------|--------|
+| *Culter alburnus* | 翘嘴鲌 (大白鱼) | Primary — full knowledge base |
+| *Culter mongolicus* | 蒙古鲌 | Related |
+| *Culter oxycephalus* | 尖头鲌 | Related |
+| *Chanodichthys erythropterus* | 红鳍原鲌 | Related |
+| *Culter dabryi* | 达氏鲌 | Related |
+| *Culter oxycephaloides* | 拟尖头鲌 | Related |
 
-## 🧬 9-Phase Pipeline
+### Capabilities
 
-```
-Phase 1: 文献调研 (Literature Review)
-    └─ 中英双语 → cognitive-search-engine DirectLoader
-Phase 2: 年龄与生长 (Age & Growth)
-    └─ 鳞片/耳石轮纹 → VBGF 拟合 → 生长参数比较
-Phase 3: 基因组学 (Genomics)
-    └─ 全基因组/简化基因组 → 组装注释 → 比较基因组
-Phase 4: 群体遗传与谱系地理 (Population Genetics)
-    └─ 遗传多样性 → 种群结构 → 基因流 → 谱系地理
-Phase 5: 同位素与营养生态位 (Trophic Ecology)
-    └─ δ¹³C/δ¹⁵N → MixSIAR → 营养级 → 摄食生态
-Phase 6: 同域共存 (Sympatric Coexistence)
-    └─ 生态位分化 → 资源分割 → 种间竞争
-Phase 7: 资源评估 (Stock Assessment)
-    └─ CPUE → MSY → YPR → 种群动态
-Phase 8: 栖息地模型 (Habitat Modeling)
-    └─ HSI → 环境因子 → 产卵场评估
-Phase 9: 报告生成 (Report Generation)
-    └─ 综合 → 出版级图表
-```
+| Capability | Description |
+|------------|-------------|
+| 🧬 **Genomics** | Genome assembly, RAD-seq/GBS, transcriptome, mitogenome analysis |
+| 🧬 **Genetics** | SSR/mtDNA/SNP, population structure, phylogeography |
+| 📐 **Age-Growth** | VBGF fitting, scale/otolith annuli, growth parameters |
+| 🍽️ **Trophic Ecology** | Stable isotopes (δ¹³C/δ¹⁵N), MixSIAR, SIBER, gut content |
+| 🌿 **Coexistence** | Niche partitioning, Pianka overlap, null models |
+| 🏠 **Habitat Modeling** | HSI (3 methods), spawning ground assessment |
+| 📊 **Resource Assessment** | CPUE standardization, surplus production, MSY |
+| 🔍 **Literature Search** | Multi-engine parallel species literature search |
 
 ---
 
-## 🧠 Skills (8)
+## Quick Start
 
-| Skill | Description |
-|:------|:------------|
-| 🔍 `search-literature` | 鲌类中英双语文献检索 — 通过 cognitive-search-engine DirectLoader |
-| 📏 `analyze-growth` | 年龄鉴定与生长建模 — 鳞片/耳石轮纹、VBGF 拟合、生长参数比较 |
-| 🧬 `analyze-genomics` | 基因组学分析 — 全基因组/简化基因组、组装注释、比较基因组、系统发育基因组 |
-| 🧬 `analyze-genetics` | 群体遗传与谱系地理 — 遗传多样性、种群结构、基因流、谱系地理、种群历史 |
-| 🌿 `analyze-trophic` | 同位素与营养生态位 — δ¹³C/δ¹⁵N 稳定同位素、MixSIAR 混合模型、营养级 |
-| 🔗 `model-coexistence` | 同域共存建模 — 生态位分化量化、资源分割、种间竞争评估 |
-| 📊 `assess-resource` | 资源评估 — CPUE 标准化、剩余产量模型、YPR 分析、MSY 估算 |
-| 🏞️ `model-habitat` | 栖息地适宜性建模 — HSI 模型、环境因子关联分析、产卵场评估 |
-
----
-
-## 📡 Search Infrastructure
-
-**DirectLoader Protocol** — searches routed to cognitive-search-engine via `importlib`:
-
-```
-CulterAgent.search(query, genus="Culter", species="alburnus")
-  └─ CognitiveSearchAdapter.search("Culter", "alburnus", full_pipeline=False)
-       ├─ variant_generator.generate()    → OCR variants
-       ├─ build_search_queries()          → exact + variants + Chinese names
-       └─ ParallelSearch.search_all()     → PubMed × Crossref × OpenAlex
-```
-
-> Engine path: `../cognitive-search-engine/src/` · Adapter: `src/adapter.py`
-
----
-
-## 🧠 Dual-Core Philosophy
-
-> 🧠 **Panta Rhei** (worldview) — knowledge is dynamic, provisional, emergent.
-> 🧠 **Systems Thinking** (methodology) — analyze contradictions, concentrate force, advance in phases.
-
-All philosophy mapped to executable code via [Engineering Grammar](docs/ENGINEERING_GRAMMAR.md).
-
-### DeepSeek Efficiency Principles
-
-| ID | Principle | Code Mapping |
-|:---|-----------|-------------|
-| **DS-1** | **Entropy Budget** — compute proportional to question importance | `pipeline.phases[].activation` |
-| **DS-2** | **Sparse Activation** — MoE routing, ~2-4/8 skills active per request | `pipeline.phases[].activation` |
-| **DS-3** | **Differential Verification** — P(stale) scoring only changed methods | `verify-stats-handbook` |
-| **DS-4** | **Information-Gain Routing** — exact match first → stop on hit | `ima-smart-search` |
-
----
-
-## 🔗 Linked Projects (Triangle Core + Derived)
-
-| Project | Layer | Role | Description |
-|---------|:-----:|------|-------------|
-| **eon-core** | **Triangle (T)** | Coordinator | EventBus · Samsara karma · DAG routing · 10-layer kernel |
-| **fish-ecology-assistant** | **Triangle V0** | Knowledge | Multi-basin fish DB (Yangtze 443 + Tumen + Suifen) |
-| **cognitive-search-engine** | **Triangle V1** | Validation | BDI+ReAct · literature search · authority scoring |
-| **porpoise-agent** | **Derived P₁** | Porpoise domain | NBHF acoustics · habitat modeling (sister) |
-| **coilia-agent** | **Derived P₂** | Coilia domain | Otolith microchemistry · migration ecology (sister) |
-| **conflict-arbiter** | **Derived C** | Conflict arbitration | Multi-source protection-level arbitration |
-
-> **DirectLoader Protocol**: cognitive-search-engine loaded via `importlib` — engine updates auto-propagate, zero MCP overhead.
-> Full spec: workspace root `coordination.yaml`.
-
-### 🧠 eon-core Unified Kernel (Workspace Level)
-
-> **10-layer concentric architecture** — OriginKernel → YinYang → 6 Vertices → 8 Trigrams → Tetrahedron → Monitoring → Samsara → Sphere → Tendrils → Evolution.
-> Unified coordination by [eon-core](https://github.com/fangtaocai041/eon-core).
-
-```
-UNDERSTAND → ROUTE → EXECUTE → VALIDATE → SYNTHESIZE → EVOLVE
- (Macro)     (Meso)   (Micro)   (Cross)     (Merge)     (Feedback)
-```
-
----
-
-## ⚡ Quick Start
+### Installation
 
 ```bash
-# Standalone
-python culter-agent/src/main.py --query "翘嘴鲌 年龄与生长"
+git clone https://github.com/fangtaocai041/culter-agent.git
+cd culter-agent
+pip install -e .
+```
 
-# Via workspace project_loader
-python -c "from scripts.project_loader import get_culter; a=get_culter(); print(a.info())"
+### CLI Usage
 
-# Via coordinator
-python -c "from scripts.coordinator import coordinator; print(coordinator.health('culter'))"
+```bash
+# Run a query through the 9-phase pipeline
+culter run --query "翘嘴鲌 年龄 生长参数"
+
+# Or in English
+culter run --query "Culter alburnus growth parameters"
+```
+
+### Verify Installation
+
+```python
+from culter_agent.src.adapter import CulterAdapter, get_adapter
+
+adapter = get_adapter()
+print(adapter.health())
+# {'status': 'HEALTHY', 'species': 'Culter alburnus', ...}
+
+info = adapter.info()
+print(f"Capabilities: {info['capabilities']}")
 ```
 
 ---
 
-## 📁 Project Structure
+## Pipeline
+
+The 9-phase analysis pipeline operates in two modes:
+
+| Phase | Name | Focus |
+|:-----:|------|-------|
+| 1 | 🎯 **Species Detection** | Identify target species from query text |
+| 2 | 🔍 **Literature Search** | Multi-engine parallel literature search |
+| 3 | 🧬 **Genomics Analysis** | Genome assembly, sequencing strategies |
+| 4 | 🧬 **Genetics Analysis** | Population genetics, SSR/mtDNA/SNP |
+| 5 | 📐 **Age-Growth** | VBGF parameters, annuli interpretation |
+| 6 | 🍽️ **Trophic Ecology** | Stable isotopes, MixSIAR, niche metrics |
+| 7 | 🌿 **Coexistence** | Niche partitioning, overlap, null models |
+| 8 | 🏠 **Habitat** | HSI modeling, environmental factors |
+| 9 | 📊 **Resource Assessment** | CPUE, YPR, MSY models |
+
+```python
+from culter_agent.src.agent.orchestrator import CulterOrchestrator
+
+orch = CulterOrchestrator()
+
+# Auto-detect mode: standalone or integrated (via eon-core)
+result = orch.run("翘嘴鲌 稳定同位素 营养生态位")
+
+print(result["mode"])           # "standalone" or "integrated"
+print(result["species"])        # "Culter alburnus"
+print(result["phases"])         # ["trophic_ecology", "coexistence"]
+print(result["synthesis"])      # Analysis summary text
+```
+
+---
+
+## Skills
+
+Each skill is defined as a `SKILL.md` playbook in `src/skills/<name>/`:
+
+| Skill | Description |
+|-------|-------------|
+| `search-literature` | Multi-engine parallel search for culter species |
+| `analyze-genomics` | Genome assembly, RAD-seq/GBS, transcriptome analysis |
+| `analyze-genetics` | SSR/mtDNA/SNP population genetics |
+| `analyze-growth` | Age determination, VBGF, von Bertalanffy parameters |
+| `analyze-trophic` | Stable isotopes (δ¹³C/δ¹⁵N), MixSIAR, SIBER |
+| `model-coexistence` | Niche partitioning, Pianka overlap, null models |
+| `model-habitat` | HSI (3 methods), habitat suitability modeling |
+| `assess-resource` | CPUE standardization, surplus production, MSY |
+
+---
+
+## CLI
+
+```bash
+culter run --query "研究问题"   # or -q "研究问题"
+culter --help                   # Auto-generated argparse help
+```
+
+**Output (standalone mode)**:
+```json
+{
+  "agent": "CulterAgent",
+  "species": "Culter alburnus",
+  "phases_executed": ["trophic_ecology"],
+  "total_papers": 18,
+  "synthesis": "..."
+}
+```
+
+**Output (integrated mode via eon-core)**:
+```json
+{
+  "agent": "CulterAgent",
+  "phase": "trophic_ecology",
+  "skill": "analyze-trophic",
+  "delegate": "..."
+}
+```
+
+---
+
+## API Reference
+
+### `src/adapter.py`
+
+| Method | Description |
+|--------|-------------|
+| `search(query, **kwargs)` | Map query to pipeline execution |
+| `health()` | Health status check |
+| `info()` | Capability listing |
+
+### `src/agent/orchestrator.py`
+
+| Method | Description |
+|--------|-------------|
+| `run(question)` | 9-phase pipeline entry — auto-detect mode, route by keyword |
+| `run_phase(phase, query)` | Execute single phase |
+
+### `src/knowledge_base.py`
+
+| Method | Description |
+|--------|-------------|
+| `get_species(name)` | Look up species by Chinese/common name |
+| `find_by_scientific(name)` | Look up by scientific name |
+| `find_by_chinese(name)` | Look up by Chinese name |
+
+---
+
+## Architecture
 
 ```
 culter-agent/
-├── README.md                 ← English
-├── README.zh.md              ← 中文
-│
-├── config/
-│   ├── agent.yaml            ← Agent behavior (v2.0.0)
-│   └── component_registry.yaml
+├── README.md / README.zh.md     ← Documentation
+├── pyproject.toml                ← Project metadata + CLI entry
 │
 ├── src/
-│   ├── main.py               ← CLI entry point
-│   ├── adapter.py             ← IProjectAdapter → CulterAdapter
-│   ├── knowledge_base.py     ← Species knowledge retrieval
+│   ├── __init__.py               ← Package marker
+│   ├── main.py                   ← CLI entry (culter run)
+│   ├── adapter.py                ← CulterAdapter (IProjectAdapter)
+│   ├── knowledge_base.py         ← Species knowledge base loader
+│   │
 │   ├── agent/
-│   │   └── orchestrator.py   ← 9-phase pipeline orchestrator
+│   │   └── orchestrator.py       ← CulterOrchestrator — 9-phase pipeline
+│   │
 │   ├── prompts/
-│   │   └── system_prompts.py ← Panta Rhei philosophy prompts
-│   └── skills/               ← 8 skill modules (SKILL.md each)
-│       ├── search-literature/
-│       ├── analyze-growth/
-│       ├── analyze-genomics/
+│   │   └── system_prompts.py     ← Per-phase pipeline prompts
+│   │
+│   └── skills/                   ← 8 x SKILL.md playbooks
 │       ├── analyze-genetics/
+│       ├── analyze-genomics/
+│       ├── analyze-growth/
 │       ├── analyze-trophic/
-│       ├── model-coexistence/
 │       ├── assess-resource/
-│       └── model-habitat/
+│       ├── model-coexistence/
+│       ├── model-habitat/
+│       └── search-literature/
+│
+├── config/
+│   ├── agent.yaml                ← 18 rules, 8 skills, 9-phase pipeline
+│   └── component_registry.yaml   ← 11 components with expiry tracking
 │
 ├── data/
-│   └── knowledge_base/
-│       └── species/          ← Species knowledge entries
+│   └── knowledge_base/species/
+│       └── culter-alburnus.md    ← Full species profile (400+ lines)
 │
-└── scripts/
-    └── shared_types.py       ← Shared type definitions
+├── scripts/
+│   └── shared_types.py           ← Shared type definitions
+│
+├── CHANGELOG.md
+├── CONTRIBUTING.md
+├── Dockerfile
+└── LICENSE
+```
+
+### Module Responsibilities
+
+| Module | Responsibility |
+|--------|---------------|
+| `src/adapter.py` | Cross-project protocol — implements `IProjectAdapter` |
+| `src/agent/orchestrator.py` | Pipeline orchestrator — 9-phase execution, mode detection |
+| `src/knowledge_base.py` | Species knowledge base — zero-dependency parser |
+| `src/skills/` | 8 domain-specific playbooks for agent execution |
+| `config/agent.yaml` | Agent configuration — rules, skills, pipeline, species mapping |
+
+---
+
+## Knowledge Base
+
+### `data/knowledge_base/species/culter-alburnus.md`
+
+Full species profile with 12 sections:
+
+| Section | Content |
+|---------|---------|
+| Conservation | IUCN NE, China status, Yangtze fishing ban |
+| Biology | Max 105cm/15kg, lifespan 15-20yr, feeding ecology |
+| Reproduction | Maturity at age 2-3, spawning May-Jul, fecundity 5-60万 |
+| Habitat | Lakes/reservoirs/rivers, 0-30m depth, 15-30°C |
+| Fishery | Historical importance, aquaculture, catch trends |
+| Genomics | ~1.0-1.2Gb, 2n=48, sequencing status, key questions |
+| Stable Isotopes | δ¹³C/δ¹⁵N/δ³⁴S, tissues, EA-IRMS, MixSIAR |
+| Trophic Niche | 4-stage dietary shift, Levin 0.3-0.6, Pianka 0.5-0.7 |
+| Coexistence | 3 co-occurring pairs, spatial/dietary/temporal partitioning |
+| Related Species | 5 related species with comparison data |
+
+---
+
+## Related Projects
+
+| Project | Role | Relationship |
+|---------|------|--------------|
+| **fish-ecology-assistant** | Knowledge V0 | Species knowledge base provider |
+| **cognitive-search-engine** | Search V1 | Literature search engine |
+| **eon-core** | Coordinator | Pipeline routing and coordination |
+| **porpoise-agent** | P₁ Porpoise | Sister project |
+| **coilia-agent** | P₂ Coilia | Sister project |
+
+---
+
+## Contributing
+
+```bash
+# Install dev dependencies
+pip install -e .
+
+# Run tests (when available)
+python -m pytest tests/ -v
+
+# Code style
+pip install ruff
+ruff check src/
 ```
 
 ---
 
-## 🤝 Human-AI Responsibility Boundary
+## License
 
-> Execution is mine. Final judgment is yours.
-
-AI does: search · analyze · generate · flag emergence · suggest revisions
-Human does: judge truth · choose methods · set direction · own published results
-
-## 🌱 Panta Rhei · Everything Flows
-
-> Heraclitus: No man ever steps in the same river twice.
->
-> We say:
-> Lakes change. Fish populations shift. Methods evolve.
-> Yesterday's growth parameter is today's baseline. Today's unknown is tomorrow's discovery.
-> Our eyes never rest on what is already known.
-> Our steps will reach the vast expanse where the stars gather.
-
-## 🗺️ 演进方向 (Personalized Roadmap)
-
-| # | 方向 | 痛点 | 优先级 |
-|:--:|------|------|:----:|
-| 1 | **鲌类文献双语搜索增强** | 翘嘴鲌/达氏鲌文献分散中英文 | 自动中英双语检索 + 分类学同义名展开 | 🔴 P0 |
-| 2 | **基因组分析自动化** | 全基因组/简化基因组数据处理手工 | 自动流水线：质控→组装→注释→比较基因组 | 🔴 P0 |
-| 3 | **稳定同位素生态位建模** | δ¹³C/δ¹⁵N 数据手工处理 | 自动 MixSIAR → 营养级 → 生态位重叠量化 | 🟡 P1 |
-| 4 | **达氏鲌专题知识库** | 达氏鲌文献分散 | 专门知识库 + 文献集（同义名展开确保全覆盖） | 🟡 P1 |
-| 5 | **同域共存量化** | 多种鲌类共存机制不明确 | 生态位分化 + 资源分割 + 时间/空间维度 | 🟢 P2 |
+MIT License © 2026
 
 ---
 
-## 📋 Version History
-
-| Version | Date | Changes |
-|---------|------|---------|
-| **v2.1.0** | 2026-06-10 | 🐟 新增达氏鲌 (*Chanodichthys dabryi*), README 全面升级 — 补齐所有标准区块 |
-| **v2.0.0** | 2026-06-09 | Initial release — 8 skills · 9-phase pipeline · 5 target species |
-
-> **Latest**: v2.1.0 · 2026-06-10
-> **Running on Reasonix Code · Powered by DeepSeek**
-
----
-
-## 📋 README Changelog
-
-| Version | Date | Theme | What Changed |
-|:--------|:-----|:------|:-------------|
-| **v2.1** | 2026-06-10 | 全面升级 | + 达氏鲌物种表, + Panta Rhei哲学, + Self-Assessment, + Linked Projects, + Version History, + README Changelog, + Roadmap, + DeepSeek效率原则, + 全部 badge |
-| **v2.0** | 2026-06-09 | Initial | 初始版本 · 8 skills · 9-phase pipeline · 5 species |
-
----
-
-## 📜 License
-
-MIT License © 2026 fangtaocai041
+<p align="right">(<a href="#readme-top">back to top</a>)</p>

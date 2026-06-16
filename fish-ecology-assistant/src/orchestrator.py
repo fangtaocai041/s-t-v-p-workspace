@@ -517,6 +517,15 @@ class FishEcologyOrchestrator:
 
 
 
+_orchestrator_instance: Optional[FishEcologyOrchestrator] = None
+
+
 def get_orchestrator() -> FishEcologyOrchestrator:
-    """Factory function."""
-    return FishEcologyOrchestrator()
+    """Factory function — 返回（缓存的）单例。
+
+    同一进程中多次调用返回同一实例。
+    """
+    global _orchestrator_instance
+    if _orchestrator_instance is None:
+        _orchestrator_instance = FishEcologyOrchestrator()
+    return _orchestrator_instance
