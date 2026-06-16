@@ -16,6 +16,7 @@ components:
     - { name: "assess-stock", version: "1.0.0", last_verified: "2026-06-07", expiry: { type: "manual_review", max_age_days: 90 } }
     - { name: "analyze-genetics", version: "1.0.0", last_verified: "2026-06-07", expiry: { type: "manual_review", max_age_days: 90 } }
     - { name: "analyze-feeding", version: "1.0.0", last_verified: "2026-06-07", expiry: { type: "manual_review", max_age_days: 90 } }
+    - { name: "analyze-early-life", version: "1.0.0", last_verified: "2026-06-11", expiry: { type: "manual_review", max_age_days: 90 } }
 
   configs:
     agent_yaml: { version: "1.0.0", last_verified: "2026-06-07", expiry: { type: "manual_review", max_age_days: 90 } }
@@ -30,7 +31,7 @@ components:
 
 living_system:
   born: "2026-06-07"
-  total_components: 8  # 1 core + 5 skills + 1 config + 1 KB
+  total_components: 9  # 1 core + 6 skills + 1 config + 1 KB
   health_score: 100
   last_health_check: "2026-06-07"
   sister_agent: "porpoise-agent (P₁)"

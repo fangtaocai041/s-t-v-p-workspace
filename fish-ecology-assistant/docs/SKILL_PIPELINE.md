@@ -1,6 +1,9 @@
-# fish-ecology-assistant Skill 管线逻辑分类索引
+# fish-ecology-assistant Skill 管线逻辑分类索引 (v6.5.3)
 
-> 28 个 Reasonix Skill (markdown)，按 5 阶段管线分组
+> 28 个 Reasonix Skill (markdown)，按 5 阶段管线分组。
+> 注: Skill 管线是 Reasonix 运行时的调度层，与 `src/` Python 模块的
+>      KB-First 两阶段搜索架构是互补关系 — Python 层处理知识库查询，
+>      Skill 层处理全量文献搜索与分析。
 
 ## 管线总览
 
@@ -91,6 +94,8 @@ Python 入口:
 |-----------|---------|
 | `src/orchestrator.py` | `research-orchestrator.md` (主调度) |
 | `src/adapter.py` | 对外暴露 IProjectAdapter 接口 |
+| `src/project_hub.py` | 跨项目协调中枢 |
 | `config/agent.yaml` | 全局配置 + 管线参数 |
-| `config/yangtze_fish_species.yaml` | 长江鱼类物种知识库 |
-| `scripts/project_loader.py` | 统一 DirectLoader 入口 |
+| `config/fish_species_index.yaml` | 新格式物种索引 |
+| `config/knowledge_base/species/*.md` | 30 个物种 .md 档案 |
+| `scripts/search_species.py` | CLI 三步管线入口 |

@@ -1,10 +1,24 @@
 #!/usr/bin/env python3
 """
-verify_architecture.py — 全架构验证脚本
+[DEPRECATED] verify_architecture.py — 全架构验证脚本
 
-验证 f项目 (V0) + c项目 (V1) + conflict-arbiter (V4) 的协调一致性。
+⚠️ 此脚本已过时 (认知过时 / functionally outdated)。
+   不应再通过跨项目导入 cognitive-search-engine 来验证本项目。
 
-用法:
+委托方向:
+  - 本项目的验证应使用 `src.orchestrator.get_orchestrator().health()`
+    和 `src.orchestrator.get_orchestrator().kb_first_lookup()`
+  - 三角核心一致性验证由 `src.project_hub.get_hub().is_triangle_complete()`
+    和 `hub.triangle_status()` 负责
+  - cognitive-search-engine 是三角之 V，fish-ecology-assistant 是三角之 S，
+    数据流方向为 S → V，不应反向耦合
+
+保留此文件供参考，但不再作为 CI 入口使用。
+
+原描述:
+  验证 f项目 (V0) + c项目 (V1) + conflict-arbiter (V4) 的协调一致性。
+
+原用法:
   python scripts/verify_architecture.py           # 从 fish-ecology-assistant 目录
   python D:\\Reasonix\\fish-ecology-assistant\\scripts\\verify_architecture.py  # 任意路径
 """

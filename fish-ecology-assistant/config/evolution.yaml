@@ -104,7 +104,7 @@ evolution:
   # ===== 跨项目进化数据共享 =====
   cross_project:
     enabled: true
-    coordination_ref: "D:\\Reasonix\\coordination.yaml"
+    coordination_ref: "${REASONIX_HOME:-D:\\Reasonix}/coordination.yaml"
     shared_metrics:
       - verification_pass_rate
       - contradiction_resolution_rate

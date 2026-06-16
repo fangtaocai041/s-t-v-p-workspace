@@ -18,8 +18,10 @@ coordination:
   last_sync: "2026-07-11"
   changelog:
     - "v5.0.0 (2026-07-11): Unified all 7 projects. +culter-agent (P₃), +conflict-arbiter to derived_projects. Removed duplicate coordination.yaml (3 copies), meso_agent.yaml (2 copies). Removed deprecated workspace.py. coordinator.py now routes to all 6 adapters."
+    - "v5.0.0 (2026-07-11): Hybrid MCP->HTTP dispatch - 19 engines all dual-path. MCP first, HTTP fallback 5 retries/60s. +7 HTTP providers: crossref_direct, semantic_scholar, baidu_scholar, cnki_web, wanfang_web, biorxiv_medrxiv, researchgate. parallel_search 5->9 providers. ENGINE_GROUPS: full 7->15, chinese 3->7."
     - "v4.2.1 (2026-07-11): Europe PMC integration — NCBI 500 failover."
     - "v4.2.0 (2026-07-11): Search engine expansion 12→19 engines."
+    - "v5.0.0 (2026-07-11): Hybrid MCP->HTTP dispatch - 19 engines all dual-path. MCP first, HTTP fallback 5 retries/60s. +7 HTTP providers: crossref_direct, semantic_scholar, baidu_scholar, cnki_web, wanfang_web, biorxiv_medrxiv, researchgate. parallel_search 5->9 providers. ENGINE_GROUPS: full 7->15, chinese 3->7."
     - "v4.2.1 (2026-07-11): Europe PMC integration — NCBI 500 failover. +search_europe_pmc provider, rule_engine PubMed→Europe PMC auto-fallback, meso_agent volume estimation dual-source (NCBI + Europe PMC). 20 engines total."
     - "v4.2.0 (2026-07-11): Search engine expansion 12→19 engines. +5 Chinese academic engines (baidu_scholar/cnki_web/wanfang_web/cas_web/chinese_sweep), +2 preprint engines (biorxiv_api/researchgate_web). ENGINE_GROUPS expanded: chinese 3→7, full 7→9, +preprint group. Native HTTP providers in parallel_search.py."
     - "v4.1.0 (2026-07-11): Exclusive search gateway — cognitive-search-engine declared as the sole external search entry point for the entire workspace. +search_gateway section in coordination.yaml, +.reasonix/config.yaml, +agent.yaml gateway role."

@@ -16,7 +16,7 @@
 coordination:
   version: "7.0.0"
   philosophy: "Dao begets One, One begets Two, Two begets Three, Three begets the Myriad"
-  root: "D:\\Reasonix"
+  root: "${REASONIX_HOME:-D:\\Reasonix}"
   last_sync: "2026-06-20"
   changelog:
     - "v7.0.0 (2026-06-20): 道→一→二→三→万物 完整哲学链。英文修正: Myriad Things (非 Ten Thousand Species)。"
@@ -59,7 +59,7 @@ coordination:
         symbol: "V/V1"
         project: "cognitive-search-engine"
         role: "搜索验证 · 阳"
-        engine_path: "D:\\Reasonix\\cognitive-search-engine\\"
+        engine_path: "${REASONIX_HOME:-D:\\Reasonix}/cognitive-search-engine/"
         loader: "importlib (DirectLoader)"
       eon:
         symbol: "Coordinator"

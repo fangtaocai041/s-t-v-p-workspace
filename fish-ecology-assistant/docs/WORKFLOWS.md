@@ -1,196 +1,255 @@
-# 🔄 Fish Ecology Assistant 工作流设计
+# Fish Ecology Assistant 工作流 (v6.5.3)
 
-> 借鉴 porpoise-agent 的五阶段状态机，适配鱼类生态学研究的实际工作流。
-
----
-
-## 状态机
-
-```
-                    ┌─────────┐
-                    │  START  │
-                    └────┬────┘
-                         │
-                    ┌────▼────┐
-              ┌─────│ PLANNING│
-              │     └────┬────┘
-              │          │ 输出: 研究计划 + 双语关键词
-              │     ┌────▼────┐
-              │     │SEARCHING│ ← 可并行 (多个子主题)
-              │     └────┬────┘
-              │          │ 输出: 源数据库
-              │     ┌────▼────┐
-              │     │ANALYZING│ ← 涌现检测
-              │     └────┬────┘
-              │          │ 输出: 分析报告
-              │     ┌────▼────┐
-              │     │ WRITING │
-              │     └────┬────┘
-              │          │ 输出: 文档草稿
-              │     ┌────▼────┐
-              │     │REVIEWING│
-              │     └────┬────┘
-              │          │
-              │   ┌──────┼──────┐
-              │   │      │      │
-              │  ✅    🔄     ❌
-              │ PASS  REVISE  FAIL
-              │   │      │      │
-              │   │   ┌──┘      │
-              │   │   │ (≤3轮)  │
-              │   │   └──►WRITING
-              │   │
-              │   ▼
-              │  END
-              │
-              └── 快速查询路线 (跳过搜索/分析/写作/评审)
-                   直接回答 → END
-```
+> 三角核心 S/V0 层的搜索与协调工作流。
 
 ---
 
-## 工作流 1: 完整研究流水线
+## 工作流 1: KB-First 两阶段搜索
 
-**触发词**: "Research [topic], run full pipeline"
+**入口**: `scripts/search_species.py "<species>"` 或 `orchestrator.kb_first_lookup()`
 
 ```
-用户: "Research effects of Yangtze fishing ban on fish communities, full pipeline"
-    │
-    ▼
-[Planner] 拆解问题
-    ├── 子主题 1: 禁渔前后鱼类群落结构变化
-    ├── 子主题 2: 功能性群落的响应
-    └── 子主题 3: 经济鱼类的恢复模式
-    │
-    ▼
-[Executor] 并行搜索 (5 引擎)
-    ├── English: "Yangtze fishing ban fish community structure 2022-2025"
-    ├── English: "functional diversity Yangtze fish post-ban"
-    └── 中文: "长江十年禁渔 鱼类群落 恢复"
-    │
-    ▼
-[Analyst] 分类 + 涌现检测
-    ├── 分类: 群落结构 / 功能多样性 / 经济物种
-    ├── 时间轴: 2021(禁渔开始) → 2023 → 2025
-    └── 涌现: ≥3 源独立报告"鳤鱼种群快速恢复" → 标记
-    │
-    ▼
-[Writer] 结构化综述
-    ├── ✅ 已验证: 禁渔后鱼类总丰度提升 (5 源一致)
-    ├── ⚠️ 推断: 顶级捕食者恢复可能滞后
-    └── ❓ 不确定: 支流与干流的响应差异
-    │
-    ▼
-[Reviewer] 4 维度评分
-    ├── 完整性: 4/5
-    ├── 准确性: 5/5
-    ├── 格式: 4/5
-    └── 语言: 4/5
-    │
-    ▼
-  ✅ Pass → 保存到 research_output/
+用户输入 "鳤"
+  │
+  ▼
+[Stage 1] 查知识库 (零 token 成本)
+  │
+  ├── load_kb()
+  │     ├── 优先: orchestrator (新格式 index.yaml + .md profiles)
+  │     └── 回退: fish_species_kb.yaml (旧格式 flat YAML)
+  │
+  ├── find_species_in_kb()
+  │     ├── 精确匹配: query == 学名/中文名
+  │     ├── 别名匹配: query in aliases[]
+  │     ├── 同义名匹配: query in synonyms[]
+  │     └── 模糊匹配: query 子串 in 名称 → 分数降序候选列表
+  │
+  └── kb_summary()
+        ├── 优先: orchestrator 的 summary_text (含别名/分类/生态/分布)
+        └── 回退: 手工组装 (旧格式字段)
+  │
+  ├── ✅ 命中 → 展示摘要
+  │              ├── 用户决策：[y] 继续搜索 → Stage 2
+  │              │             [n] 留在 KB → 结束
+  │              │             [q] 退出
+  │              └── 自动模式 (--auto): 直接进入 Stage 2
+  │
+  └── ❌ 未命中 → 展示候选列表 → 推荐 Stage 2
+                      │
+                      ▼
+[Stage 2] 全量搜索 (cognitive-search-engine)
+  │
+  ├── call_c_search()
+  │     └── subprocess → cognitive-search-engine/scripts/search_api.py
+  │           ├── 并行引擎: tavily / exa / scholar / article / scholarly
+  │           ├── 分类学不一致检测
+  │           └── 结果去重 + 可信度评分
+  │
+  └── update_kb()
+        ├── 追加 literature (按 DOI 去重)
+        ├── 追加 taxonomy_log (分类变更记录)
+        ├── 追加 change_log (操作审计)
+        └── save_kb() → fish_species_kb.yaml
+```
+
+### CLI 参数
+
+```bash
+python scripts/search_species.py "鳤"                    # 交互模式
+python scripts/search_species.py "鳤" --auto             # 自动全量 + 回写
+python scripts/search_species.py "鳤" --kb-only          # 仅查 KB
+python scripts/search_species.py "鳤" --auto --dry-run   # 预览（不回写）
+python scripts/search_species.py "鳤" --kb-only --json   # JSON 输出
+python scripts/search_species.py "鳤" --max 30           # 每引擎最大结果
 ```
 
 ---
 
-## 工作流 2: 快速文献查询
+## 工作流 2: 跨项目协调
 
-**触发词**: "Search for [topic]"
-
-```
-用户: "Search for latest Culter alburnus genetic diversity studies"
-    │
-    ▼
-[Planner] → 子主题 1 个
-    │
-    ▼
-[Executor] 搜索
-    ├── scholar: "Culter alburnus genetic diversity population"
-    ├── tavily: "Culter alburnus RAD-seq phylogeography"
-    └── scholarly: "Culter alburnus microsatellite genetic structure"
-    │
-    ▼
-跳过 Analyst/Writer/Reviewer
-    → 直接输出源数据库给用户
-```
-
----
-
-## 工作流 3: 博士研究提案
-
-**触发词**: "/skill phd-proposal-writer Research direction: [topic]"
+**入口**: `ProjectHub` (`src/project_hub.py`)
 
 ```
-用户: "PhD proposal: drivers of sympatric coexistence of Culter species"
-    │
-    ▼
-[phd-proposal-writer] 直接调用
-    ├── 搜索: 领域背景文献
-    ├── 结构化: 五章提案模板
-    │   ├── 一、立项依据
-    │   ├── 二、研究目标与内容
-    │   ├── 三、研究方案与技术路线
-    │   ├── 四、创新点与预期成果
-    │   └── 五、研究计划与进度安排
-    └── 参考文献 (≤40, 近 5 年)
+三角核心 (sealed 3):
+  hub.fish        → self (S/V0 知识供给)
+  hub.cognitive   → V/V1 搜索验证引擎 [importlib DirectLoader]
+  hub.eon         → Coordinator 协调内核 [importlib]
+
+万物衍生 (open N):
+  hub.porpoise    → P₁ 江豚专研
+  hub.coilia      → P₂ 刀鲚专研（当前焦点）
+  hub.conflict    → C 冲突仲裁
+```
+
+```python
+from src import get_hub
+
+hub = get_hub()
+
+# 三角完整性检查（密闭集合铁律）
+assert hub.is_triangle_complete()  # fish + cognitive + eon 全部可用
+
+# 统一搜索
+result = hub.search_species("鳤", mode="kb_first")
+
+# 委托衍生项目
+hub.delegate_to("coilia", "Coilia nasus otolith Sr/Ca data analysis")
+hub.delegate_to("porpoise", "NBHF acoustic detection range")
 ```
 
 ---
 
-## 工作流 4: 统计手册验证
+## 工作流 3: 物种知识库查询 (Python API)
 
-**触发词**: "/skill verify-stats-handbook [章节号]"
+**入口**: `orchestrator.kb_first_lookup()` (`src/orchestrator.py`)
 
-```
-[verify-stats-handbook] 自动执行
-    ├── ① 读取手册 → 提取包列表
-    ├── ② CRAN 版本检查 → 比对最新版本
-    ├── ③ 官方文档比对 → 检查 API 变更
-    ├── ④ 概率陈旧评分
-    │   P(stale) = 0.4*f(频率) + 0.35*g(破坏性) + 0.25*h(依赖度)
-    └── ⑤ 生成验证报告 + 建议复查日期
-```
+```python
+from src import get_orchestrator
 
----
+orch = get_orchestrator()
 
-## 人类审批关卡
+# ── 已知物种 ──
+r = orch.kb_first_lookup(query="鳤")
+r.found              # True
+r.chinese_name       # "鳤"
+r.scientific_name     # "Ochetobius elongatus"
+r.family             # "鲤科"
+r.summary_text       # 人类可读摘要
+r.search_recommendation  # "stay_in_kb"（已有足够数据）
 
-借鉴 porpoise-agent 的显式 human_in_loop 配置：
+# ── 别名匹配 ──
+r = orch.kb_first_lookup(query="珠星三块鱼")
+r.found              # True
+r.chinese_name       # "三块鱼"（正名）
+r.matched_by_alias   # True
 
-| 场景 | 审批要求 | 配置位置 |
-|:-----|:---------|:---------|
-| 野外调查方案 | 必须审批 | `config/agent.yaml` |
-| 保护管理建议 | 必须审批 | `config/agent.yaml` |
-| 数据删除操作 | 必须审批 | `config/agent.yaml` |
-| 外部 API 写入 | 必须审批 | `config/agent.yaml` |
-| 发表级草稿 | 建议审批 | `config/agent.yaml` |
+# ── 未知物种 ──
+r = orch.kb_first_lookup(query="NonExistentFish")
+r.found              # False
+r.all_candidates     # []（模糊候选列表）
+r.search_recommendation  # "continue_to_c"
 
----
-
-## 错误处理与降级
-
-```
-MCP 工具不可用:
-  scholar → tavily → web_search
-  任一工具失败 → 跳过并标注 → 不阻塞流水线
-
-搜索无结果:
-  自动切换引擎重试 (最多 3 次)
-  仍无结果 → 明确报告 "0 results" → 不编造
-
-子智能体超时:
-  使用已有结果继续
-  通知用户部分完成
-
-评审 3 轮仍未通过:
-  输出当前版本 + "Failed final review"
-  标记给用户人工判断
+# ── 综合搜索 ──
+r = orch.search_species("鳤", mode="kb_first")
+# stage: "kb_check"（KB 命中）
+# needs_user_decision: True
 ```
 
 ---
 
-## 参考
+## 工作流 4: 道→一→二→三→万物 执行链
 
-- porpoise-agent: `docs/WORKFLOWS.md` — 五阶段状态机设计
-- fish-ecology-assistant: `GUIDE.md` — 完整使用指南
-- fish-ecology-assistant: `config/agent.yaml` — 流水线配置
+**入口**: `DaoEngine` (`src/dao_engine.py`)
+
+```
+CLI:
+  python src/dao_engine.py "鳤"
+  python src/dao_engine.py "鳤" --search  (自动全量)
+  python src/dao_engine.py "鳤" --json    (JSON 输出)
+```
+
+```python
+from src.dao_engine import DaoEngine, DaoQuery
+
+engine = DaoEngine()
+
+# 道: 外部输入
+dao = DaoQuery(raw="鳤", species_hint="鳤")
+
+# 执行: 道→一→二→三→万物
+result = engine.execute(dao)
+# result = {
+#   "dao": DaoQuery,       # 道
+#   "one": OneEntry,       # 一 (太极)
+#   "two": YinYangDuality, # 二 (阴 S + 阳 V)
+#   "three": TriangleCore, # 三 (三角验证)
+#   "myriad": MyriadManifest,  # 万物 (输出)
+# }
+
+print(engine.render(result))
+```
+
+输出示例:
+```
+══════════════════════════════════════════════════════
+  道生一 · 一生二 · 二生三 · 三生万物
+  Dao → One → Two → Three → the Myriad
+══════════════════════════════════════════════════════
+
+┌─ L0: 道 (Dao) ─────────────────────────────
+│ 输入: "鳤"
+│ 物种: 鳤
+└──────────────────────────────────────────
+
+┌─ L1: 一 (One) · 太极 ────────────────────
+│ hub 加载: ✅
+│ orch 就绪: ✅
+└──────────────────────────────────────────
+
+┌─ L2: 二 (Two) · 太极生两仪 ──────────────
+│ 阴(S/知识): ✅ 鳤 (Ochetobius elongatus)
+│ 阳(V/验证): 未发 (留步于阴)
+│ 矛盾: 阴主导 — 知识库已足够, 阳未发
+└──────────────────────────────────────────
+
+┌─ L3: 三 (Three) · 三角密闭 ──────────────
+│ ☯️ S/V0          阴·静
+│ ☯️ V/V1          阳·动
+│ ☯️ Coordinator   太极点
+│ 三角完整: ✅
+└──────────────────────────────────────────
+
+┌─ L4: 万物 (Myriad) · 一切输出 ────────────
+│ 总耗时: 12ms
+│ 万物非一万种, 而是一切可能。
+└──────────────────────────────────────────
+```
+
+---
+
+## 工作流 5: 工程维护
+
+### 测试
+
+```bash
+# 全量测试
+python -m pytest tests/ -v
+
+# 单模块
+python -m pytest tests/test_orchestrator.py -v
+
+# 适配器验证
+python -c "
+from src import FishEcologyAdapter
+a = FishEcologyAdapter()
+print(a.search_species('鳤').get('known_species'))
+"
+```
+
+### 架构验证
+
+```python
+from src import get_hub, get_orchestrator
+
+# 三角完整性
+hub = get_hub()
+assert hub.is_triangle_complete()
+
+# 物种数据一致性
+orch = get_orchestrator()
+r = orch.kb_first_lookup(query="鳤")
+assert r.found
+assert r.family == "鲤科"
+```
+
+### 路径配置
+
+```bash
+# Windows (默认)
+set REASONIX_HOME=D:\Reasonix
+
+# Linux / 容器
+export REASONIX_HOME=/app/reasonix
+
+# 不设置 → 自动检测上级目录
+```

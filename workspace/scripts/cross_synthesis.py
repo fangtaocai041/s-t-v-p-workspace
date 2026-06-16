@@ -129,7 +129,16 @@ class CrossSynthesis:
 
     def load_papers(self, species_name: str) -> List[dict]:
         """从统一数据源加载论文"""
-        from scripts.kb_loader import get_papers
+        import importlib.util as _iu
+        _kb_path = Path(__file__).resolve().parent / "kb_loader.py"
+        _spec = _iu.spec_from_file_location("workspace_kb_loader", str(_kb_path))
+        if _spec and _spec.loader:
+            _mod = _iu.module_from_spec(_spec)
+            sys.modules["workspace_kb_loader"] = _mod
+            _spec.loader.exec_module(_mod)
+            get_papers = _mod.get_papers
+        else:
+            raise RuntimeError(f"kb_loader not found at {_kb_path}")
         papers = get_papers(species_name)
         # 确保 category/region 字段
         for p in papers:

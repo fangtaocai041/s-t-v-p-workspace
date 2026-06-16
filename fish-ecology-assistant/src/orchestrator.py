@@ -220,12 +220,13 @@ class FishEcologyOrchestrator:
     def _match_species(query: str, chinese: str, s_name: str, c_name: str) -> bool:
         """Check if query matches a species by scientific or Chinese name.
 
-        鐭ヨ瘑搴撶簿纭尮閰嶈鍒?(f椤圭洰涓嶅仛妯＄硦):
-          1. query == 瀛﹀悕 (澶у皬鍐欎笉鏁忔劅) 鈫?浼樺厛
-          2. query == 涓枃鍚?鈫?绮剧‘
-          3. chinese 鍙傛暟 == 涓枃鍚?鈫?璺ㄩ」鐩皟鐢?          4.瀛﹀悕瀛愪覆鍖归厤 鈫?鏀寔閮ㄥ垎鎷変竵鍚嶆煡璇㈠ "Ochetobius"
+        知识库精确匹配规则(f项目不做模糊):
+          1. query == 学名 (大小写不敏感) → 优先
+          2. query == 中文名 → 精确
+          3. chinese 参数 == 中文名 → 跨项目调用
+          4. 学名字串匹配 → 支持部分拉丁名查询如 "Ochetobius"
 
-        ⚠️ 鏃犱腑鏂囧悕瀛椾覆鍖归厤 —妯＄硦鎼滅储鏄?c椤圭洰鐨勮亴璐?        """
+        ⚠️ 无中文名字串匹配 — 模糊搜索是c项目的职责        """
         q = query.strip().lower()
         s = s_name.lower() if s_name else ""
         c = c_name.lower() if c_name else ""
@@ -273,7 +274,7 @@ class FishEcologyOrchestrator:
                 for alias in aliases:
                     if self._match_species(scientific, chinese, "", alias):
                         return {
-                            "chinese_name": alias,
+                            "chinese_name": c_name,
                             "scientific_name": s_name,
                             "aliases": aliases,
                             "synonyms": synonyms,
@@ -503,7 +504,10 @@ class FishEcologyOrchestrator:
         summary = "\n".join(lines)
 
         # Recommendation: if KB has rich data, suggest staying; otherwise suggest c
-        has_rich_data = bool(family and (dist or species_data.get("ecology")))
+        # Rich data = has family AND (distribution/basins OR ecology/summary)
+        has_basins = bool(dist.get("basins", []) or species_data.get("basins", []))
+        has_ecology = bool(species_data.get("ecology", "") or species_data.get("summary_text", ""))
+        has_rich_data = bool(family and (has_basins or has_ecology))
         recommendation = (
             "stay_in_kb" if has_rich_data else "continue_to_c"
         )

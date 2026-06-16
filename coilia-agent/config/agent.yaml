@@ -41,9 +41,10 @@ agent:
       - name: "analyze-feeding"
         description: "食性与营养生态 — 胃含物、稳定同位素、DNA宏条形码"
         path: "src/skills/analyze-feeding/SKILL.md"
+      - name: "analyze-early-life"
+        description: "早期资源与繁殖 — 产卵场评估、仔鱼资源量、补充群体动态"
+        path: "src/skills/analyze-early-life/SKILL.md"
     inline_phases:
-      - name: "genetics-analysis"
-        description: "群体遗传学 — 微卫星/线粒体/SNP分析 (内联管线阶段)"
       - name: "report-generation"
         description: "综合报告生成 — 合并所有阶段发现 (内联管线阶段)"
 

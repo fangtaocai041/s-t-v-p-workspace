@@ -15,6 +15,16 @@ jobs:
             python -c "import ast; ast.parse(open('$f').read()); print(f'✅ $f')"
           done
 
+      # 脚本导入检查 (语法 + 模块可导入性)
+      - run: |
+          for f in scripts/literature_search.py scripts/migration_analysis.py \
+                 scripts/genetics_analysis.py scripts/feeding_analysis.py \
+                 scripts/stock_assessment.py scripts/early_life_analysis.py; do
+            echo "Checking $f..."
+            python -c "import ast; ast.parse(open('$f').read())"
+          done
+          echo "✅ 6 analysis scripts passed syntax check"
+
       # YAML 验证
       - run: python -c "import yaml; yaml.safe_load(open('config/agent.yaml')); print('✅ agent.yaml')"
 
@@ -22,11 +32,11 @@ jobs:
       - run: |
           skills=$(ls src/skills/*/SKILL.md 2>/dev/null | wc -l)
           echo "✅ $skills SKILL.md files"
-          [ $skills -ge 2 ]
+          [ $skills -ge 5 ]
 
       # 测试语法检查 (import 依赖 D:/Reasonix 层, CI 中仅做语法验证)
       - run: |
-          for f in tests/test_coilia.py tests/triangle_flow.py; do
+          for f in tests/test_coilia.py tests/triangle_flow.py tests/test_scripts.py tests/test_analysis_scripts.py; do
             python -c "import ast; ast.parse(open('$f').read()); print(f'✅ $f')"
           done
 

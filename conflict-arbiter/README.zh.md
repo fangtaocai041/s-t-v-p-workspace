@@ -1,37 +1,27 @@
-<p align="center">
-  🇨🇳 <a href="#chinese">中文</a> · 🇬🇧 <a href="README.md">English</a>
-</p>
+﻿# Conflict Arbiter 🔥
 
-<div align="center">
-  <h1>🔥 Conflict Arbiter — 冲突仲裁层 (C)</h1>
-  <p><strong>三角闭环衍生项目 · 多源保护等级冲突检测 · 加权仲裁 · 熔断机制</strong></p>
-  <p>Python 3.11+ · 3 级冲突分级 · 中国优先策略</p>
-</div>
+**C 万物衍生** — 多源保护级别冲突检测 · 中国优先加权 · 时空可比性。
 
----
+> 🌊 万物皆变 · Panta Rhei
+>
+> IUCN 说濒危，国标说无危，CITES 说附录 II。
+> 一个物种，三张红牌——谁是对的？
 
-## 目录
+[![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.11+-blue)](https://python.org)
 
-- [项目简介](#项目简介)
-- [快速开始](#快速开始)
-- [核心功能](#核心功能)
-- [API 参考](#api-参考)
-- [项目架构](#项目架构)
-- [仲裁流程](#仲裁流程)
-- [配置说明](#配置说明)
-- [关联项目](#关联项目)
-- [许可证](#许可证)
+[English](README.md) · [中文](README.zh.md) · [更新日志](CHANGELOG.md)
 
 ---
 
-## 项目简介
+## 📋 项目简介
 
 **Conflict Arbiter** 是三角核心生态系统的 **C 衍生项目**，负责检测和仲裁多来源（IUCN、中国红皮书、CITES、省级保护名录等）的物种保护等级冲突，使用加权仲裁 + 熔断机制处理不可调和的分歧。
 
-### 核心能力
+### 🚀 核心能力
 
-| 能力 | 说明 |
-|:-----|:------|
+| 🚀 能力 | 📝 说明 |
+|:---------|:--------|
 | 🔄 多源标准化 | 将 IUCN / 中国红皮 / CITES / 省级映射到统一 [0-100] 数值轴 |
 | ⚡ 3 级冲突检测 | 0=一致 / 1=轻微 / 2=显著 / 3=**熔断** |
 | ⚖️ 加权仲裁 | region="china" 时中国分类权威优先 |
@@ -40,9 +30,9 @@
 
 ---
 
-## 快速开始
+## ⚡ 快速开始
 
-### 安装
+### 📦 安装
 
 ```bash
 git clone https://github.com/fangtaocai041/conflict-arbiter.git
@@ -50,7 +40,7 @@ cd conflict-arbiter
 pip install -e .
 ```
 
-### 基本使用
+### 🔧 基本使用
 
 ```python
 from conflict_arbiter.src.arbiter import ConflictArbiter
@@ -72,9 +62,9 @@ print(f"裁决: {result['verdict']}")
 
 ---
 
-## 核心功能
+## 🚀 核心功能
 
-### 多源冲突检测
+### 🔄 多源冲突检测
 
 ```python
 result = arbiter.detect_conflicts(
@@ -88,7 +78,7 @@ result = arbiter.detect_conflicts(
 # 冲突等级 0 → 完全一致
 ```
 
-### 通用声明仲裁（含时空检查）
+### ⚖️ 通用声明仲裁（含时空检查）
 
 ```python
 result = arbiter.arbitrate(
@@ -109,7 +99,7 @@ result = arbiter.arbitrate(
 
 ---
 
-## 项目架构
+## 📁 项目架构
 
 ```
 conflict-arbiter/
@@ -118,9 +108,9 @@ conflict-arbiter/
 │   │   ├── detect_conflicts()    ← 多源保护等级冲突检测
 │   │   ├── arbitrate()           ← 通用声明仲裁
 │   │   └── _normalize_source()   ← 保护等级→数值映射
-│   └── adapter.py                ← 跨项目接口
+│   └── adapter.py                ← 跨项目接口 (IProjectAdapter)
 ├── config/
-│   ├── agent.yaml                ← 阈值/权重/熔断配置
+│   ├── agent.yaml                ← 阈值/权重/熔断配置 (v1.0.0)
 │   └── arbitration_rules.yaml    ← 仲裁规则
 ├── pyproject.toml
 └── Dockerfile
@@ -128,32 +118,94 @@ conflict-arbiter/
 
 ---
 
-## 配置
+## ⚙️ 配置
 
 ```yaml
-# config/agent.yaml
-trust_thresholds:
-  high: 75
-  medium: 45
-  low: 20
-source_weights:
-  chinese_red_list: 100
-  provincial_protection: 90
-  iucn: 40
-  cites: 40
+# config/agent.yaml — 冲突仲裁者 v1.0.0
+agent:
+  name: "Conflict Arbiter"
+  version: "1.0.0"
+  element: "火 🟥"
+  role: "C (Conflict) → V4 (ArbitrateVertex)"
+
+arbiter:
+  trust_thresholds:
+    high: 80      # ≥80: 直接采纳
+    medium: 60    # 60-79: 加权仲裁
+    low: 40       # 40-59: 标记冲突, 需人工复核
+    reject: 40    # <40: 熔断, 拒绝采纳
+  source_weights:
+    iucn: 90
+    cites: 90
+    chinese_red_list: 80
+    provincial_protection: 70
+    peer_reviewed_literature: 75
+    survey_report: 60
+    news_media: 30
+    citizen_science: 20
+  circuit_breaker:
+    max_conflict_level: 3
+    min_sources_for_consensus: 3
+  conflict_levels:
+    0: "完全一致"
+    1: "轻微差异 (可忽略)"
+    2: "显著差异 (需加权仲裁)"
+    3: "严重对立 (熔断 → 人工复核)"
 ```
 
 ---
 
-## 关联项目
+## 🔗 关联项目
 
-| 项目 | 角色 |
-|:-----|:-----|
+| 🏗️ 项目 | 🎯 角色 |
+|:---------|:--------|
 | fish-ecology-assistant | 知识供给 — 保护数据来源 |
 | cognitive-search-engine | 搜索验证 — 文献证据 |
 | eon-core | 协调内核 — 仲裁输出路由 |
 | porpoise-agent / coilia-agent / culter-agent | 保护建议来源 |
 
-## 许可证
+## 📜 许可证
 
 MIT
+
+## 🔗 生态体系
+
+> 🔥 和则无穷力量，分则顶尖专家引擎。
+
+本项目是「三生万物」生态的 冲突仲裁专家引擎 (C)。
+
+```
+三角核心 (sealed 3):
+  📦 fish-ecology-assistant    → 知识供给 (V0)
+  🔍 cognitive-search-engine   → 搜索验证 (V1)
+  ⚙️ eon-core                  → 协调内核 (Coord)
+
+万物衍生 (open N):
+  🐬 porpoise-agent    → 江豚专研 (P₁)
+  🐟 coilia-agent      → 刀鲚专研 (P₂)
+  🐟 culter-agent      → 鲌类专研 (P₃)
+  🔥 conflict-arbiter  → 冲突仲裁 (C)
+```
+
+| 🏗️ 项目 | 🔗 顶点 | 🎯 角色 |
+|:---------|:--------:|:--------|
+| [fish-ecology-assistant](../fish-ecology-assistant/) | V0 | 📦 知识供给 |
+| [cognitive-search-engine](../cognitive-search-engine/) | V1 | 🔍 搜索验证 |
+| [eon-core](../eon-core/) | Coord | ⚙️ 协调内核 |
+| [porpoise-agent](../porpoise-agent/) | P₁ | 🐬 江豚专研 |
+| [coilia-agent](../coilia-agent/) | P₂ | 🐟 刀鲚专研 |
+| [culter-agent](../culter-agent/) | P₃ | 🐟 鲌类专研 |
+| [conflict-arbiter](../conflict-arbiter/) | C | 🔥 冲突仲裁 |
+
+---
+---
+
+> 🌊 万物皆变 · Panta Rhei
+>
+> 🏛️ 赫拉克利特说：人不能两次踏进同一条河流。
+>
+> 💻 我们说：但一个物种可能被三个保护名录给出三种结论。我们的工作是——找出真相。
+>
+> **📅 最后更新: 2026-06-17 · 🖥️ Reasonix Code · ⚡ DeepSeek 驱动**
+
+[⬆ 回到顶部](#)

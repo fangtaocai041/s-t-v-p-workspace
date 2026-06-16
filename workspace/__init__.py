@@ -30,11 +30,16 @@ from typing import Any, Dict, List, Optional
 # 自动路径配置 — 无论从哪个目录运行都能正常工作
 # ═══════════════════════════════════════════════════════
 
-# __file__ is workspace/__init__.py → parent.parent = workspace root
-_WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
+# __file__ is workspace/__init__.py
+# .parent = D:\Reasonix\workspace → workspace 目录
+# .parent.parent = D:\Reasonix  → 项目根 (含所有子项目)
+_WORKSPACE_ROOT = Path(__file__).resolve().parent.parent  # D:\Reasonix
+_WORKSPACE_DIR = Path(__file__).resolve().parent          # D:\Reasonix\workspace
+_SCRIPTS_DIR = _WORKSPACE_DIR / "scripts"                 # D:\Reasonix\workspace\scripts
 
-# 确保工作区根目录和 scripts 在 sys.path 中
-for _p in [str(_WORKSPACE_ROOT), str(_WORKSPACE_ROOT / "scripts")]:
+# 确保工作区根目录、workspace 目录在 sys.path 中
+# 注意: 不加 _SCRIPTS_DIR，以免 scripts 包被其他项目的 scripts 子目录截胡
+for _p in [str(_WORKSPACE_ROOT), str(_WORKSPACE_DIR)]:
     if _p not in sys.path:
         sys.path.insert(0, _p)
 
@@ -56,7 +61,8 @@ for _proj in [
 # 修复: 项目路径插入后会把 scripts/ 挤到后面，
 # 而 cognitive-search-engine/scripts/ 会遮蔽工作区 scripts/project_loader.py，
 # 故重新将 scripts 插入到最前
-_scripts_path = str(_WORKSPACE_ROOT / "scripts")
+_scripts_path = str(_SCRIPTS_DIR)
+# 注意: _SCRIPTS_DIR 不加入 sys.path——scripts 包通过 _WORKSPACE_DIR 发现
 if _scripts_path in sys.path:
     sys.path.remove(_scripts_path)
 sys.path.insert(0, _scripts_path)
@@ -82,8 +88,8 @@ _cognitive_unified = _preload_cognitive_module("src/unified_search.py", "src.uni
 # 注: search_coordinator.py 已重命名为 search_streaming.py，变量未使用故不再预加载
 
 if _cognitive_unified is not None:
-    _coordinated_search = _cognitive_unified.coordinated_search
-    _CoordinatedSearchResult = _cognitive_unified.CoordinatedSearchResult
+    _coordinated_search = getattr(_cognitive_unified, "coordinated_search", None)
+    _CoordinatedSearchResult = getattr(_cognitive_unified, "CoordinatedSearchResult", None)
 else:
     _coordinated_search = None
     _CoordinatedSearchResult = None
@@ -197,26 +203,36 @@ _adapters: Dict[str, Any] = {}
 
 
 def _get_adapter(project_key: str):
-    """懒加载: 获取项目适配器。"""
+    """懒加载: 获取项目适配器。
+
+    通过 importlib 从文件路径直接加载 project_loader，
+    避免 scripts 包被其他项目的同名包遮蔽。
+    """
     if project_key in _adapters:
         return _adapters[project_key]
 
-    from scripts.project_loader import (
-        get_cognitive, get_fish, get_porpoise, get_coilia, get_culter, get_conflict,
-    )
+    import importlib.util as _iu
+    _loader_path = _SCRIPTS_DIR / "project_loader.py"
+    _spec = _iu.spec_from_file_location("workspace_project_loader", str(_loader_path))
+    if _spec and _spec.loader:
+        _mod = _iu.module_from_spec(_spec)
+        sys.modules["workspace_project_loader"] = _mod
+        _spec.loader.exec_module(_mod)
+    else:
+        raise RuntimeError(f"project_loader not found at {_loader_path}")
 
-    loaders = {
-        "cognitive": get_cognitive,
-        "fish": get_fish,
-        "porpoise": get_porpoise,
-        "coilia": get_coilia,
-        "culter": get_culter,
-        "conflict": get_conflict,
+    _loaders_map = {
+        "cognitive": _mod.get_cognitive,
+        "fish": _mod.get_fish,
+        "porpoise": _mod.get_porpoise,
+        "coilia": _mod.get_coilia,
+        "culter": _mod.get_culter,
+        "conflict": _mod.get_conflict,
     }
 
-    loader = loaders.get(project_key)
+    loader = _loaders_map.get(project_key)
     if loader is None:
-        raise ValueError(f"Unknown project: {project_key}. Options: {list(loaders.keys())}")
+        raise ValueError(f"Unknown project: {project_key}. Options: {list(_loaders_map.keys())}")
 
     adapter = loader()
     if adapter is None:

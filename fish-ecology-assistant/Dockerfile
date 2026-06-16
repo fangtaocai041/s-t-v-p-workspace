@@ -1,15 +1,20 @@
-# Fish Ecology Assistant — Docker Deployment
-FROM node:22-alpine
+FROM python:3.12-slim
 
 WORKDIR /app
 
-# Copy project files
-COPY .reasonix/ .reasonix/
+# 安装依赖
+COPY pyproject.toml .
+RUN pip install --no-cache-dir pyyaml && pip install --no-cache-dir fastapi uvicorn
+
+# 复制源码
+COPY fish_ecology_assistant/ fish_ecology_assistant/
 COPY config/ config/
-COPY package.json package-lock.json ./
+COPY standalone.py .
 
-# Install dependencies
-RUN npm install --production
+# 迁移知识库
+RUN python standalone.py migrate
 
-# Default command: IMA knowledge base server
-CMD ["node", ".reasonix/mcp-servers/ima-server.mjs"]
+# 暴露 API 端口
+EXPOSE 8000
+
+CMD ["python", "standalone.py", "serve"]

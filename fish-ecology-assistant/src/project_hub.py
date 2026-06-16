@@ -32,6 +32,7 @@ ProjectHub — 多项目协调中枢
 from __future__ import annotations
 
 import logging
+import os
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -167,7 +168,9 @@ class ProjectHub:
 
     def __init__(self) -> None:
         self._root = Path(__file__).resolve().parent.parent  # fish-ecology-assistant/
-        self._workspace = self._root.parent                   # D:\Reasonix\
+        # REASONIX_HOME 环境变量覆盖，fallback 到当前项目的上层目录
+        _env_home = os.environ.get("REASONIX_HOME", "")
+        self._workspace = Path(_env_home) if _env_home else self._root.parent
         self._loaded: Dict[str, Any] = {}
         self._errors: Dict[str, str] = {}
 

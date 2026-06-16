@@ -12,22 +12,62 @@ Usage:
 
     hub = get_hub()
     print(hub.is_triangle_complete())
+
+    # 道→一→二→三→万物 执行引擎 (需显式导入)
+    from src.dao_engine import DaoEngine, DaoQuery
+
+    # 类型系统
+    from src.types import PipelinePhase, ConfidenceLevel, ResearchContext
 """
 
-__version__ = "6.5.0"
+__version__ = "6.5.3"
 
+# ── 核心编排器与协调中枢 ──
 from .orchestrator import FishEcologyOrchestrator, KbFirstResult, get_orchestrator
 from .project_hub import ProjectHub, get_hub, TriangleMember, DerivedMember
+
+# ── 跨项目适配器 ──
 from .adapter import FishEcologyAdapter
 
+# ── 类型系统 ──
+from .types import (
+    PipelinePhase,
+    ConfidenceLevel,
+    EvidenceQuality,
+    ReviewResult,
+    ResearchContext,
+    SourceEntry,
+    AnalysisFinding,
+    EmergenceSignal,
+    ReviewReport,
+    PipelineStats,
+    SessionResult,
+)
+
 __all__ = [
+    # Core orchestrator
     "FishEcologyOrchestrator",
     "KbFirstResult",
+    "get_orchestrator",
+    # Project hub
     "ProjectHub",
-    "FishEcologyAdapter",
+    "get_hub",
     "TriangleMember",
     "DerivedMember",
-    "get_orchestrator",
-    "get_hub",
+    # Adapter
+    "FishEcologyAdapter",
+    # Types
+    "PipelinePhase",
+    "ConfidenceLevel",
+    "EvidenceQuality",
+    "ReviewResult",
+    "ResearchContext",
+    "SourceEntry",
+    "AnalysisFinding",
+    "EmergenceSignal",
+    "ReviewReport",
+    "PipelineStats",
+    "SessionResult",
+    # Version
     "__version__",
 ]

@@ -48,7 +48,31 @@ DEFAULT_C_PROJECT = FISH_ROOT.parent / "cognitive-search-engine"
 # ═══════════════════════════════════════════════════════
 
 def load_kb() -> Dict[str, Any]:
-    """加载 fish_species_kb.yaml。"""
+    """
+    加载物种知识库。
+
+    优先尝试 orchestrator (新格式 fish_species_index.yaml + .md profiles)，
+    失败则回退到 fish_species_kb.yaml (旧格式 flat YAML)。
+
+    注意: 写回操作 (update_kb → save_kb) 仍使用旧格式 fish_species_kb.yaml。
+          双向同步需 v6.6.0 KB 迁移计划。
+    """
+    try:
+        # 确保项目根在 sys.path 中 (CLI 运行时 sys.path[0]=scripts/)
+        _root = str(FISH_ROOT)
+        if _root not in sys.path:
+            sys.path.insert(0, _root)
+        from src.orchestrator import get_orchestrator
+        orch = get_orchestrator()
+        # 通过 health() 验证 orchestrator 可用
+        h = orch.health()
+        if h.get("status") == "HEALTHY" and h.get("species_db_size", 0) > 0:
+            # 返回一个兼容 find_species_in_kb 的包装结构
+            return {"_orchestrator": orch, "_species_db_size": h["species_db_size"]}
+    except Exception:
+        pass
+
+    # Fallback: old format
     try:
         import yaml
         with open(KB_PATH, encoding="utf-8") as f:
@@ -62,8 +86,34 @@ def find_species_in_kb(kb: Dict, query: str) -> Tuple[Optional[Dict], Optional[s
     在知识库中查找物种条目。
 
     返回: (species_dict, entry_id)
-      匹配策略: query 与 id / scientific / name / aliases / synonyms 比对
+      匹配策略:
+        - 新格式 (orchestrator): 通过 kb_first_lookup() 精确/别名/同义名匹配
+        - 旧格式 (flat YAML): query 与 id / scientific / name / aliases / synonyms 比对
     """
+    # ── 新格式: 委托 orchestrator ──
+    orch = kb.get("_orchestrator")
+    if orch is not None:
+        result = orch.kb_first_lookup(query=query)
+        if result.found:
+            # 将 KbFirstResult 转换为旧格式兼容的 dict
+            entry = {
+                "id": result.scientific_name.lower().replace(" ", "_"),
+                "scientific": result.scientific_name,
+                "name": result.chinese_name,
+                "family": result.family,
+                "order": result.order,
+                "conservation": result.conservation,
+                "ecology": result.ecology,
+                "aliases": list(result.aliases),
+                "synonyms": list(result.synonyms),
+                "distribution": dict(result.distribution),
+                "matched_by_alias": result.matched_by_alias,
+                "_orchestrator_summary": result.summary_text,
+            }
+            return entry, entry["id"]
+        return None, None
+
+    # ── 旧格式: 精确匹配 ──
     query_lower = query.lower().strip()
     species_list = kb.get("species", [])
 
@@ -88,7 +138,25 @@ def find_species_in_kb(kb: Dict, query: str) -> Tuple[Optional[Dict], Optional[s
 
 
 def kb_summary(species: Dict) -> str:
-    """生成知识库摘要文本。"""
+    """生成知识库摘要文本。
+
+    优先使用 orchestrator 生成的 summary_text (新格式)，
+    回退到旧格式手工组装。
+    """
+    # ── 新格式: orchestrator 已生成完整摘要 ──
+    orch_summary = species.get("_orchestrator_summary")
+    if orch_summary:
+        lines = [orch_summary]
+        # 追加兼容字段
+        literature = species.get("literature", [])
+        if literature:
+            lines.append(f"   📄 已有文献: {len(literature)} 篇")
+        tax_log = species.get("taxonomy_log", [])
+        if tax_log:
+            lines.append(f"   ⚠️ 分类变更记录: {len(tax_log)} 条")
+        return "\n".join(lines)
+
+    # ── 旧格式: 手工组装 ──
     lines = []
     name = species.get("name", "?")
     sci = species.get("scientific", "?")
@@ -117,19 +185,16 @@ def kb_summary(species: Dict) -> str:
         if basins:
             lines.append(f"   流域: {', '.join(basins[:5])}")
 
-    # 文献
     literature = species.get("literature", [])
     if literature:
         lines.append(f"   📄 已有文献: {len(literature)} 篇")
     else:
         lines.append(f"   📄 已有文献: 无")
 
-    # 分类变更
     tax_log = species.get("taxonomy_log", [])
     if tax_log:
         lines.append(f"   ⚠️ 分类变更记录: {len(tax_log)} 条")
 
-    # 异名
     synonyms = species.get("synonyms", [])
     if synonyms:
         lines.append(f"   🔄 异名: {', '.join(synonyms[:5])}")

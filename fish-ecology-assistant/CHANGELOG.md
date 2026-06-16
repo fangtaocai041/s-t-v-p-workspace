@@ -4,6 +4,25 @@
 
 ---
 
+## v6.5.3 — 2026-06-21
+
+### 🔧 6 项工程缺陷修复 + 3 个隐性 Bug
+
+- 修复 `_match_species()` docstring 编码损坏 (GBK→UTF-8 乱码)
+- 测试扩展 9→18 个，新增真实物种硬断言（鳤/刀鲚/长江江豚/别名/模糊候选/边界）
+- 标记 `scripts/verify_architecture.py` 为 DEPRECATED（架构耦合倒挂）
+- `adapter.py` 去重：删除独立 `yangtze_fish_species.yaml` 加载，委托 orchestrator
+- 路径硬编码消除：`project_hub.py` + `coordination.yaml` + `evolution.yaml` → `$REASONIX_HOME` env var
+- `src/__init__.py` 导出 6→19 个符号（含全部类型系统）
+- 修复 `_build_kb_hit_result` has_rich_data 遗漏 basins 字段
+- 修复 `_find_species` 别名匹配返回别名值而非正名
+- `scripts/search_species.py` 重构：`load_kb()` 优先委托 orchestrator（新格式），sys.path 自动注入
+- `README.md` + `README.zh.md` 全面更新（v6.5.3 API 参考 + 两阶段搜索说明 + 三角架构）
+- `RE.md` 跨会话重构：会话 1 + 会话 2 完整审计链 + 技术债务清单
+- 33/33 测试全量通过
+
+---
+
 ## v6.5.2 — 2026-06-17
 
 ### 📝 RE.md 工程优化记录

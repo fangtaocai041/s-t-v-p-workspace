@@ -80,8 +80,8 @@ species:
 - id: cyprinus_carpio
   name: 鲤
   scientific: Cyprinus carpio
-  family: 鲤科
-  conservation: 无
+  family: Cyprinidae
+  conservation: LC
   category: dominant
   distribution:
     continents:
@@ -94,8 +94,8 @@ species:
 - id: carassius_auratus
   name: 鲫
   scientific: Carassius auratus
-  family: 鲤科
-  conservation: 无
+  family: Cyprinidae
+  conservation: LC
   category: dominant
   distribution:
     continents:
@@ -107,8 +107,8 @@ species:
 - id: hypophthalmichthys_molitrix
   name: 鲢
   scientific: Hypophthalmichthys molitrix
-  family: 鲤科
-  conservation: 无
+  family: Xenocyprididae
+  conservation: LC
   category: dominant
   distribution:
     continents:
@@ -120,8 +120,8 @@ species:
 - id: pelteobagrus_fulvidraco
   name: 黄颡鱼
   scientific: Pelteobagrus fulvidraco
-  family: 鲿科
-  conservation: 无
+  family: Bagridae
+  conservation: LC
   category: dominant
   distribution:
     continents:
@@ -133,7 +133,7 @@ species:
 - id: coilia_brachygnathus
   name: 短颌鲚
   scientific: Coilia brachygnathus
-  family: 鳀科
+  family: Engraulidae
   conservation: 无
   category: dominant
   distribution:
@@ -167,8 +167,8 @@ species:
 - id: silurus_asotus
   name: 鲇
   scientific: Silurus asotus
-  family: 鲇科
-  conservation: 无
+  family: Siluridae
+  conservation: LC
   category: dominant
   distribution:
     continents:
@@ -180,8 +180,8 @@ species:
 - id: saurogobio_dabryi
   name: 蛇鮈
   scientific: Saurogobio dabryi
-  family: 鲤科
-  conservation: 无
+  family: Cyprinidae
+  conservation: LC
   category: dominant
   distribution:
     continents:
@@ -193,7 +193,7 @@ species:
 - id: ctenopharyngodon_idellus
   name: 草鱼
   scientific: Ctenopharyngodon idellus
-  family: 鲤科
+  family: Xenocyprididae
   conservation: 无
   category: dominant
   distribution:
@@ -206,7 +206,7 @@ species:
 - id: pelteobagrus_nitidus
   name: 光泽黄颡鱼
   scientific: Pelteobagrus nitidus
-  family: 鲿科
+  family: Bagridae
   conservation: 无
   category: dominant
   distribution:
@@ -219,7 +219,7 @@ species:
 - id: hemiculter_leucisculus
   name: 䱗
   scientific: Hemiculter leucisculus
-  family: 鲤科
+  family: Cyprinidae
   conservation: 无
   category: dominant
   distribution:
@@ -245,8 +245,8 @@ species:
 - id: siniperca_chuatsi
   name: 鳜
   scientific: Siniperca chuatsi
-  family: 鳜科
-  conservation: 无
+  family: Percichthyidae
+  conservation: LC
   category: dominant
   distribution:
     continents:
@@ -258,8 +258,8 @@ species:
 - id: coreius_heterodon
   name: 铜鱼
   scientific: Coreius heterodon
-  family: 鲤科
-  conservation: 无
+  family: Cyprinidae
+  conservation: DD
   category: dominant
   distribution:
     continents:
@@ -271,8 +271,8 @@ species:
 - id: culter_alburnus
   name: 翘嘴鲌
   scientific: Culter alburnus
-  family: 鲤科
-  conservation: 无
+  family: Xenocyprididae
+  conservation: LC
   category: dominant
   distribution:
     continents:
@@ -284,7 +284,7 @@ species:
 - id: parabramis_pekinensis
   name: 鳊
   scientific: Parabramis pekinensis
-  family: 鲤科
+  family: Cyprinidae
   conservation: 无
   category: dominant
   distribution:
@@ -296,7 +296,8 @@ species:
     - 长江流域
   literature:
   - doi: 10.1002/ece3.72775
-    title: Evaluating Fishing Ban Effectiveness Through Spatiotemporal Changes in Genetic Diversity of Parabramis pekinensis
+    title: Evaluating Fishing Ban Effectiveness Through Spatiotemporal Changes in
+      Genetic Diversity of Parabramis pekinensis
     year: 2026
     journal: Ecol Evol
     category: genetics
@@ -310,8 +311,8 @@ species:
 - id: aristichthys_nobilis
   name: 鳙
   scientific: Aristichthys nobilis
-  family: 鲤科
-  conservation: 无
+  family: Xenocyprididae
+  conservation: LC
   category: dominant
   distribution:
     continents:
@@ -323,7 +324,7 @@ species:
 - id: acipenser_sinensis
   name: 中华鲟
   scientific: Acipenser sinensis
-  family: 鲟科
+  family: Acipenseridae
   protection_level: 国家一级
   status: 多年未见自然繁殖
   iucn: 极危(CR)
@@ -335,10 +336,11 @@ species:
     - 中国
     basins:
     - 长江流域
+  conservation: CR
 - id: acipenser_dabryanus
   name: 长江鲟
   scientific: Acipenser dabryanus
-  family: 鲟科
+  family: Acipenseridae
   protection_level: 国家一级
   status: IUCN认定野外灭绝(EW)
   iucn: 野外灭绝(EW)
@@ -350,10 +352,11 @@ species:
     - 中国
     basins:
     - 长江流域
+  conservation: CR
 - id: myxocyprinus_asiaticus
   name: 胭脂鱼
   scientific: Myxocyprinus asiaticus
-  family: 胭脂鱼科
+  family: Catostomidae
   protection_level: 国家二级
   status: 多年未见自然繁殖
   category: protected_recorded
@@ -364,10 +367,11 @@ species:
     - 中国
     basins:
     - 长江流域
+  conservation: CR
 - id: trachidermus_fasciatus
   name: 松江鲈
   scientific: Trachidermus fasciatus
-  family: 杜父鱼科
+  family: Cottidae
   protection_level: 国家二级
   status: 多年未见自然繁殖
   category: protected_recorded
@@ -378,10 +382,11 @@ species:
     - 中国
     basins:
     - 长江流域
+  conservation: EN
 - id: psephurus_gladius
   name: 白鲟
   scientific: Psephurus gladius
-  family: 匙吻鲟科
+  family: Polyodontidae
   protection_level: 国家一级
   status: IUCN认定灭绝(EX)
   iucn: 灭绝(EX)
@@ -393,10 +398,11 @@ species:
     - 中国
     basins:
     - 长江流域
+  conservation: CR
 - id: luciobrama_macrocephalus
   name: 鯮
   scientific: Luciobrama macrocephalus
-  family: 鲤科
+  family: Xenocyprididae
   protection_level: 国家二级
   status: 多年未见野生个体
   category: protected_missing
@@ -407,10 +413,11 @@ species:
     - 中国
     basins:
     - 长江流域
+  conservation: CR
 - id: tenualosa_reevesii
   name: 鲥
   scientific: Tenualosa reevesii
-  family: 鲱科
+  family: Clupeidae
   protection_level: 国家一级
   status: 多年未见野生个体
   category: protected_missing
@@ -421,10 +428,11 @@ species:
     - 中国
     basins:
     - 长江流域
+  conservation: CR
 - id: ochetobius_elongatus
   name: 鳤
   scientific: Ochetobius elongatus
-  family: 鲤科
+  family: Cyprinidae
   conservation: 无
   status: 极罕见
   category: endangered_in_graph
@@ -439,7 +447,8 @@ species:
     - 长江流域
   literature:
   - doi: 10.1007/s12686-018-1075-3
-    title: Development and characterization of 26 SNP markers in Ochetobius elongatus based on RAD-seq
+    title: Development and characterization of 26 SNP markers in Ochetobius elongatus
+      based on RAD-seq
     year: 2018
     journal: Conservation Genetics Resources
     authors:
@@ -460,8 +469,8 @@ species:
     - Fang Min Shuai
     category: genetics
   - doi: 10.17520/biods.2018121
-    title: Genetic diversity and population demographic history of Ochetobius elongatus in the middle and lower reaches of
-      the Xijiang River
+    title: Genetic diversity and population demographic history of Ochetobius elongatus
+      in the middle and lower reaches of the Xijiang River
     year: 2018
     journal: Biodiversity Science
     authors:
@@ -472,7 +481,8 @@ species:
     - Xinhui Li
     category: genetics
   - doi: 10.1038/s41597-024-04223-x
-    title: A chromosome-level genome assembly of critically endangered Ochetobius elongatus
+    title: A chromosome-level genome assembly of critically endangered Ochetobius
+      elongatus
     year: 2024
     journal: Scientific Data
     authors:
@@ -483,7 +493,8 @@ species:
     - Jianguo Lü
     category: genomics
   - doi: 10.3390/ani15030433
-    title: 'Post-Fishing Ban Period: The Fish Diversity and Community Structure in the Poyang Lake Basin'
+    title: 'Post-Fishing Ban Period: The Fish Diversity and Community Structure in
+      the Poyang Lake Basin'
     year: 2025
     journal: Animals
     authors:
@@ -494,7 +505,8 @@ species:
     - Xiaoling Gong
     category: ecology
   - doi: 10.1016/j.gene.2020.145351
-    title: Temporal species-level composition of larvae resources in the lower Pearl River drainage
+    title: Temporal species-level composition of larvae resources in the lower Pearl
+      River drainage
     year: 2020
     journal: Gene
     authors:
@@ -505,7 +517,8 @@ species:
     - Xinhui Li
     category: ecology
   - doi: 10.3724/issn1000-3207-1999-6-662-l
-    title: STATUS OF FISHERIES IN THE SECTION BELOW THE GEZHOUBA DAM OF THE YANGTZE RIVER
+    title: STATUS OF FISHERIES IN THE SECTION BELOW THE GEZHOUBA DAM OF THE YANGTZE
+      RIVER
     year: 1999
     journal: Acta Hydrobiologica Sinica
     authors:
@@ -521,8 +534,8 @@ species:
 - id: elopichthys_bambusa
   name: 鳡
   scientific: Elopichthys bambusa
-  family: 鲤科
-  conservation: 无
+  family: Xenocyprididae
+  conservation: NT
   status: 濒危
   category: endangered_in_graph
   distribution:
@@ -639,13 +652,14 @@ species:
   synonyms:
   - Leuciscus brandti
   - Pseudaspius brandti
-  family: 鲤科
+  family: Leuciscidae
   subfamily: 雅罗鱼亚科
   order: 鲤形目
   conservation: 无
   ecology: 溯河洄游鱼类
   max_length_cm: 50
-  description: '三块鱼属溯河洄游性鱼类，成鱼在海洋中生活，繁殖期溯河而上进入淡水河流产卵。 体型侧扁，体侧具不规则暗色斑块（"三块"之名源于体侧的斑块状花纹）。 是东北亚地区特有的经济鱼类和生态指示种。
+  description: '三块鱼属溯河洄游性鱼类，成鱼在海洋中生活，繁殖期溯河而上进入淡水河流产卵。 体型侧扁，体侧具不规则暗色斑块（"三块"之名源于体侧的斑块状花纹）。
+    是东北亚地区特有的经济鱼类和生态指示种。
 
     '
   economic_value: 东北亚重要经济鱼类，在日本被称作ウグイ (Ugui)
@@ -674,7 +688,7 @@ species:
   - 刀鱼
   - 长颌鲚
   - tapertail anchovy
-  family: 鳀科 (Engraulidae)
+  family: Engraulidae
   conservation: 濒危(EN)
   category: dominant
   distribution:
@@ -703,7 +717,8 @@ species:
   species_graph_id: Coilia_nasus
   literature:
   - doi: 10.3390/ani16050840
-    title: Gut Microbiome Signatures Across Migratory, Sedentary, and Aquaculture Ecotypes of Coilia nasus
+    title: Gut Microbiome Signatures Across Migratory, Sedentary, and Aquaculture
+      Ecotypes of Coilia nasus
     year: 2026
     journal: Animals
     category: microbiome
@@ -715,7 +730,8 @@ species:
     group: 刘凯课题组
     added_at: '2026-06-16'
   - doi: 10.1002/ece3.72815
-    title: Population Genomics Provides Novel Insights Into Evolutionary Relationships of Two Ecotypes Coilia nasus
+    title: Population Genomics Provides Novel Insights Into Evolutionary Relationships
+      of Two Ecotypes Coilia nasus
     year: 2025
     journal: Ecol Evol
     category: genomics
@@ -765,7 +781,8 @@ species:
     group: 刘凯课题组
     added_at: '2026-06-16'
   - doi: 10.1007/s00284-020-02088-y
-    title: Variations of Gut Prokaryotic Microbiome During Spawning Migration in Coilia nasus
+    title: Variations of Gut Prokaryotic Microbiome During Spawning Migration in Coilia
+      nasus
     year: 2021
     journal: Curr Microbiol
     category: microbiome
@@ -787,9 +804,9 @@ species:
 - id: culter_mongolicus
   name: 蒙古鲌
   scientific: Culter mongolicus
-  family: 鲤科
+  family: Xenocyprididae
   order: 鲤形目
-  conservation: 无
+  conservation: LC
   aliases: []
   ecology: 中上层鱼类，栖息于江河湖泊敞水区，以小鱼、虾为食
   economic_value: 经济鱼类
@@ -807,9 +824,9 @@ species:
 - id: culter_oxycephalus
   name: 尖头鲌
   scientific: Culter oxycephalus
-  family: 鲤科
+  family: Xenocyprididae
   order: 鲤形目
-  conservation: 无
+  conservation: LC
   aliases: []
   ecology: 中上层凶猛鱼类，栖息于湖泊、水库等静水水体
   economic_value: 经济鱼类
@@ -826,9 +843,9 @@ species:
 - id: coilia_mystus
   name: 凤鲚
   scientific: Coilia mystus
-  family: 鳀科
+  family: Engraulidae
   order: 鲱形目
-  conservation: 无
+  conservation: LC
   aliases:
   - 凤尾鱼
   - 烤子鱼
@@ -846,6 +863,5206 @@ species:
     - 东海岸
   literature: []
   species_graph_id: Coilia_mystus
+- id: acipenser_schrenckii
+  name: 史氏鲟
+  scientific: Acipenser schrenckii
+  family: Acipenseridae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: anguilla_japonica
+  name: 鳗鲡
+  scientific: Anguilla japonica
+  family: Anguillidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: anguilla_mauritiana
+  name: 花鳗鲡
+  scientific: Anguilla mauritiana
+  family: Anguillidae
+  conservation: EN
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: konosirus_punctatus
+  name: 斑鰶
+  scientific: Konosirus punctatus
+  family: Dorosomatidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: zacco_platypus
+  name: 宽鳍鱲
+  scientific: Zacco platypus
+  family: Xenocyprididae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: zacco_chengtui
+  name: 成都鱲
+  scientific: Zacco chengtui
+  family: Xenocyprididae
+  conservation: EN
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: opsariichthys_bidens
+  name: 马口鱼
+  scientific: Opsariichthys bidens
+  family: Xenocyprididae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: aphyocypris_chinensis
+  name: 中华细鲫
+  scientific: Aphyocypris chinensis
+  family: Xenocyprididae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: gobiocypris_rarus
+  name: 稀有鲫
+  scientific: Gobiocypris rarus
+  family: Xenocyprididae
+  conservation: EN
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: mylopharyngodon_piceus
+  name: 青鱼
+  scientific: Mylopharyngodon piceus
+  family: Xenocyprididae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: atrilinea_macrolepis
+  name: 大鳞黑线䱗
+  scientific: Atrilinea macrolepis
+  family: Xenocyprididae
+  conservation: CR
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: atrilinea_roulei
+  name: 黑线䱗
+  scientific: Atrilinea roulei
+  family: Xenocyprididae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: rhynchocypris_oxycephalus
+  name: 尖头大吻鱥
+  scientific: Rhynchocypris oxycephalus
+  family: Xenocyprididae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: rhynchocypris_lagowskii
+  name: 拉氏大吻鱥
+  scientific: Rhynchocypris lagowskii
+  family: Xenocyprididae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: tinca_tinca
+  name: 丁鱥
+  scientific: Tinca tinca
+  family: Xenocyprididae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: squaliobarbus_curriculus
+  name: 赤眼鳟
+  scientific: Squaliobarbus curriculus
+  family: Xenocyprididae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pseudolaubuca_sinensis
+  name: 飘鱼
+  scientific: Pseudolaubuca sinensis
+  family: Xenocyprididae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pseudolaubuca_engraulis
+  name: 寡鳞飘鱼
+  scientific: Pseudolaubuca engraulis
+  family: Xenocyprididae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: sinibrama_macrops
+  name: 大眼华鳊
+  scientific: Sinibrama macrops
+  family: Xenocyprididae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: sinibrama_taeniatus
+  name: 四川华鳊
+  scientific: Sinibrama taeniatus
+  family: Xenocyprididae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: sinibrama_wui
+  name: 伍氏华鳊
+  scientific: Sinibrama wui
+  family: Xenocyprididae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: sinibrama_longianalis
+  name: 长臀华鳊
+  scientific: Sinibrama longianalis
+  family: Xenocyprididae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: ancherythroculter_kurematsui
+  name: 高体近红鲌
+  scientific: Ancherythroculter kurematsui
+  family: Xenocyprididae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: ancherythroculter_wangi
+  name: 汪氏近红鲌
+  scientific: Ancherythroculter wangi
+  family: Xenocyprididae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: ancherythroculter_nigrocauda
+  name: 黑尾近红鲌
+  scientific: Ancherythroculter nigrocauda
+  family: Xenocyprididae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: anabarilius_liui
+  name: 雅砻白鱼
+  scientific: Anabarilius liui
+  family: Xenocyprididae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: anabarilius_qionghaiensis
+  name: 邛海白鱼
+  scientific: Anabarilius qionghaiensis
+  family: Xenocyprididae
+  conservation: CR
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: anabarilius_songmingensis
+  name: 嵩明白鱼
+  scientific: Anabarilius songmingensis
+  family: Xenocyprididae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: anabarilius_xundianensis
+  name: 寻甸白鱼
+  scientific: Anabarilius xundianensis
+  family: Xenocyprididae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: anabarilius_polylepis
+  name: 多鳞白鱼
+  scientific: Anabarilius polylepis
+  family: Xenocyprididae
+  conservation: EN
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: anabarilius_alburnops
+  name: 银白鱼
+  scientific: Anabarilius alburnops
+  family: Xenocyprididae
+  conservation: EN
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: anabarilius_brevianalis
+  name: 短臀白鱼
+  scientific: Anabarilius brevianalis
+  family: Xenocyprididae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: hemiculterella_sauvagei
+  name: 半䱗
+  scientific: Hemiculterella sauvagei
+  family: Xenocyprididae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: toxabramis_swinhonis
+  name: 似鱎
+  scientific: Toxabramis swinhonis
+  family: Xenocyprididae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: hemiculter_tchangi
+  name: 张氏䱗
+  scientific: Hemiculter tchangi
+  family: Xenocyprididae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: hemiculter_bleekeri
+  name: 贝氏䱗
+  scientific: Hemiculter bleekeri
+  family: Xenocyprididae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pseudohemiculter_dispar
+  name: 南方拟䱗
+  scientific: Pseudohemiculter dispar
+  family: Xenocyprididae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pseudohemiculter_hainanensis
+  name: 海南拟䱗
+  scientific: Pseudohemiculter hainanensis
+  family: Xenocyprididae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pseudohemiculter_kweichowensis
+  name: 贵州拟䱗
+  scientific: Pseudohemiculter kweichowensis
+  family: Xenocyprididae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: cultrichthys_erythropterus
+  name: 红鳍原鲌
+  scientific: Cultrichthys erythropterus
+  family: Xenocyprididae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: culter_dabryi
+  name: 达氏鲌
+  scientific: Culter dabryi
+  family: Xenocyprididae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: culter_oxycephaloides
+  name: 拟尖头鲌
+  scientific: Culter oxycephaloides
+  family: Xenocyprididae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: megalobrama_pellegrini
+  name: 厚颌鲂
+  scientific: Megalobrama pellegrini
+  family: Xenocyprididae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: megalobrama_elongata
+  name: 长体鲂
+  scientific: Megalobrama elongata
+  family: Xenocyprididae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: megalobrama_mantschuricus
+  name: 鲂
+  scientific: Megalobrama mantschuricus
+  family: Xenocyprididae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: megalobrama_amblycephala
+  name: 团头鲂
+  scientific: Megalobrama amblycephala
+  family: Xenocyprididae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: megalobrama_terminalis
+  name: 三角鲂
+  scientific: Megalobrama terminalis
+  family: Xenocyprididae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: xenocypris_argentea
+  name: 银鲴
+  scientific: Xenocypris argentea
+  family: Xenocyprididae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: xenocypris_davidi
+  name: 黄尾鲴
+  scientific: Xenocypris davidi
+  family: Xenocyprididae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: xenocypris_yunnanensis
+  name: 云南鲴
+  scientific: Xenocypris yunnanensis
+  family: Xenocyprididae
+  conservation: CR
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: xenocypris_fangi
+  name: 方氏鲴
+  scientific: Xenocypris fangi
+  family: Xenocyprididae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: xenocypris_microlepis
+  name: 细鳞鲴
+  scientific: Xenocypris microlepis
+  family: Xenocyprididae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: xenocypris_hupeinensis
+  name: 湖北鲴
+  scientific: Xenocypris hupeinensis
+  family: Xenocyprididae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: distoechodon_tumirostris
+  name: 圆吻鲴
+  scientific: Distoechodon tumirostris
+  family: Xenocyprididae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: distoechodon_macrophthalmus
+  name: 大眼圆吻鲴
+  scientific: Distoechodon macrophthalmus
+  family: Xenocyprididae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pseudobrama_simoni
+  name: 似鳊
+  scientific: Pseudobrama simoni
+  family: Xenocyprididae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: hemibarbus_labeo
+  name: 唇䱻
+  scientific: Hemibarbus labeo
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: hemibarbus_maculatus
+  name: 花䱻
+  scientific: Hemibarbus maculatus
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: hemibarbus_medius
+  name: 间䱻
+  scientific: Hemibarbus medius
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: belligobio_nummifer
+  name: 似䱻
+  scientific: Belligobio nummifer
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: belligobio_pengxianensis
+  name: 彭县似䱻
+  scientific: Belligobio pengxianensis
+  family: Cyprinidae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pseudorasbora_parva
+  name: 麦穗鱼
+  scientific: Pseudorasbora parva
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pseudorasbora_elongata
+  name: 长麦穗鱼
+  scientific: Pseudorasbora elongata
+  family: Cyprinidae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: sarcocheilichthys_sinensis
+  name: 华鳈
+  scientific: Sarcocheilichthys sinensis
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: sarcocheilichthys_nigripinnis
+  name: 黑鳍鳈
+  scientific: Sarcocheilichthys nigripinnis
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: sarcocheilichthys_davidi
+  name: 川西鳈
+  scientific: Sarcocheilichthys davidi
+  family: Cyprinidae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: sarcocheilichthys_parvus
+  name: 小鳈
+  scientific: Sarcocheilichthys parvus
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: sarcocheilichthys_kiangsiensis
+  name: 江西鳈
+  scientific: Sarcocheilichthys kiangsiensis
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: gnathopogon_herzensteini
+  name: 嘉陵颌须
+  scientific: Gnathopogon herzensteini
+  family: Cyprinidae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: gnathopogon_imberbis
+  name: 短须颌须
+  scientific: Gnathopogon imberbis
+  family: Cyprinidae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: gnathopogon_nicholsi
+  name: 隐须颌须
+  scientific: Gnathopogon nicholsi
+  family: Cyprinidae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: squalidus_argentatus
+  name: 银
+  scientific: Squalidus argentatus
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: squalidus_nitens
+  name: 亮银
+  scientific: Squalidus nitens
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: squalidus_wolterstorffi
+  name: 点纹银
+  scientific: Squalidus wolterstorffi
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: coreius_guichenoti
+  name: 圆口铜鱼
+  scientific: Coreius guichenoti
+  family: Cyprinidae
+  conservation: CR
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: rhinogobio_typus
+  name: 吻
+  scientific: Rhinogobio typus
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: rhinogobio_cylindricus
+  name: 圆筒吻
+  scientific: Rhinogobio cylindricus
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: rhinogobio_ventralis
+  name: 长鳍吻
+  scientific: Rhinogobio ventralis
+  family: Cyprinidae
+  conservation: EN
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: rhinogobio_hunanensis
+  name: 湖南吻
+  scientific: Rhinogobio hunanensis
+  family: Cyprinidae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: platysmacheilus_nudiventris
+  name: 裸腹片唇
+  scientific: Platysmacheilus nudiventris
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: platysmacheilus_longibarbatus
+  name: 长须片唇
+  scientific: Platysmacheilus longibarbatus
+  family: Cyprinidae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: platysmacheilus_exiguus
+  name: 片唇
+  scientific: Platysmacheilus exiguus
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: platysmacheilus_zhenjiangensis
+  name: 镇江片唇
+  scientific: Platysmacheilus zhenjiangensis
+  family: Cyprinidae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: abbottina_rivularis
+  name: 棒花鱼
+  scientific: Abbottina rivularis
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: abbottina_obtusirostris
+  name: 钝吻棒花鱼
+  scientific: Abbottina obtusirostris
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: microphysogobio_kiatingensis
+  name: 乐山小鳔
+  scientific: Microphysogobio kiatingensis
+  family: Cyprinidae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: microphysogobio_fukiensis
+  name: 福建小鳔
+  scientific: Microphysogobio fukiensis
+  family: Cyprinidae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: microphysogobio_microstomus
+  name: 小口小鳔
+  scientific: Microphysogobio microstomus
+  family: Cyprinidae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: microphysogobio_tungtingensis
+  name: 洞庭小鳔
+  scientific: Microphysogobio tungtingensis
+  family: Cyprinidae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: microphysogobio_nudiventris
+  name: 裸腹小鳔
+  scientific: Microphysogobio nudiventris
+  family: Cyprinidae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pseudogobio_vaillanti
+  name: 似
+  scientific: Pseudogobio vaillanti
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: paracanthobrama_guichenoti
+  name: 似刺鳊
+  scientific: Paracanthobrama guichenoti
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: saurogobio_dumerili
+  name: 长蛇
+  scientific: Saurogobio dumerili
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: saurogobio_gymnocheilus
+  name: 光唇蛇
+  scientific: Saurogobio gymnocheilus
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: saurogobio_punctatus
+  name: 斑点蛇
+  scientific: Saurogobio punctatus
+  family: Cyprinidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: saurogobio_gracilicaudatus
+  name: 细尾蛇
+  scientific: Saurogobio gracilicaudatus
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: saurogobio_xiangjiangensis
+  name: 湘江蛇
+  scientific: Saurogobio xiangjiangensis
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: gobiobotia_abbreviata
+  name: 短身鳅鮀
+  scientific: Gobiobotia abbreviata
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: gobiobotia_filifer
+  name: 宜昌鳅鮀
+  scientific: Gobiobotia filifer
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: gobiobotia_meridionalis
+  name: 南方鳅鮀
+  scientific: Gobiobotia meridionalis
+  family: Cyprinidae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: gobiobotia_brevirostris
+  name: 短吻鳅鮀
+  scientific: Gobiobotia brevirostris
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: gobiobotia_tungi
+  name: 董氏鳅鮀
+  scientific: Gobiobotia tungi
+  family: Cyprinidae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: xenophysogobio_boulengeri
+  name: 异鳔鳅鮀
+  scientific: Xenophysogobio boulengeri
+  family: Cyprinidae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: xenophysogobio_nudicorpa
+  name: 裸体异鳔鳅鮀
+  scientific: Xenophysogobio nudicorpa
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: rhodeus_sinensis
+  name: 中华鳑鲏
+  scientific: Rhodeus sinensis
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: rhodeus_ocellatus
+  name: 高体鳑鲏
+  scientific: Rhodeus ocellatus
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: rhodeus_lighti
+  name: 彩石鳑鲏
+  scientific: Rhodeus lighti
+  family: Cyprinidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: rhodeus_fangi
+  name: 方氏鳑鲏
+  scientific: Rhodeus fangi
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: rhodeus_albomarginatus
+  name: 白边鳑鲏
+  scientific: Rhodeus albomarginatus
+  family: Cyprinidae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: acheilognathus_macropterus
+  name: 大鳍鱊
+  scientific: Acheilognathus macropterus
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: acheilognathus_elongatus
+  name: 长身鱊
+  scientific: Acheilognathus elongatus
+  family: Cyprinidae
+  conservation: CR
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: acheilognathus_omeiensis
+  name: 峨嵋鱊
+  scientific: Acheilognathus omeiensis
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: acheilognathus_tonkinensis
+  name: 越南鱊
+  scientific: Acheilognathus tonkinensis
+  family: Cyprinidae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: acheilognathus_barbtus
+  name: 须鱊
+  scientific: Acheilognathus barbtus
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: acheilognathus_babatulus
+  name: 短须鱊
+  scientific: Acheilognathus babatulus
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: acheilognathus_hypselonotus
+  name: 寡鳞鱊
+  scientific: Acheilognathus hypselonotus
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: acheilognathus_gracilis
+  name: 无须鱊
+  scientific: Acheilognathus gracilis
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: acheilognathus_chankaensis
+  name: 兴凯鱊
+  scientific: Acheilognathus chankaensis
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: acheilognathus_taenianalis
+  name: 斑条鱊
+  scientific: Acheilognathus taenianalis
+  family: Cyprinidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: acheilognathus_tabira
+  name: 巨口鱊
+  scientific: Acheilognathus tabira
+  family: Cyprinidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: acheilognathus_polylepis
+  name: 多鳞鱊
+  scientific: Acheilognathus polylepis
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: acheilognathus_striatus
+  name: 条纹鱊
+  scientific: Acheilognathus striatus
+  family: Cyprinidae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: paracheilognathus_imberbis
+  name: 彩副鱊
+  scientific: Paracheilognathus imberbis
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: paracheilognathus_himantegus
+  name: 革条副鱊
+  scientific: Paracheilognathus himantegus
+  family: Cyprinidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: barbodes_polylepis
+  name: 多鳞四须鲃
+  scientific: Barbodes polylepis
+  family: Cyprinidae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: linichthys_laticeps
+  name: 宽头林鲃
+  scientific: Linichthys laticeps
+  family: Cyprinidae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: luciobarbus_capito
+  name: 大鳞鲃
+  scientific: Luciobarbus capito
+  family: Cyprinidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: spinibarbus_hollandi
+  name: 光倒刺鲃
+  scientific: Spinibarbus hollandi
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: spinibarbus_sinensis
+  name: 中华倒刺鲃
+  scientific: Spinibarbus sinensis
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: percocypris_pingi
+  name: 鲈鲤
+  scientific: Percocypris pingi
+  family: Cyprinidae
+  conservation: EN
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: percocypris_regani
+  name: 花鲈鲤
+  scientific: Percocypris regani
+  family: Cyprinidae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: sinocyclocheilus_multipunctatus
+  name: 多斑金线鲃
+  scientific: Sinocyclocheilus multipunctatus
+  family: Cyprinidae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: sinocyclocheilus_grahami
+  name: 滇池金线鲃
+  scientific: Sinocyclocheilus grahami
+  family: Cyprinidae
+  conservation: CR
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: sinocyclocheilus_wumengshanensis
+  name: 乌蒙山金线鲃
+  scientific: Sinocyclocheilus wumengshanensis
+  family: Cyprinidae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: sinocyclocheilus_huizeensis
+  name: 会泽金线鲃
+  scientific: Sinocyclocheilus huizeensis
+  family: Cyprinidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: acrossocheilus_monticolus
+  name: 宽口光唇鱼
+  scientific: Acrossocheilus monticolus
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: acrossocheilus_yunnanensis
+  name: 云南光唇鱼
+  scientific: Acrossocheilus yunnanensis
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: acrossocheilus_paradoxus
+  name: 台湾光唇鱼
+  scientific: Acrossocheilus paradoxus
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: acrossocheilus_fasciatus
+  name: 光唇鱼
+  scientific: Acrossocheilus fasciatus
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: acrossocheilus_jishouensis
+  name: 吉首光唇鱼
+  scientific: Acrossocheilus jishouensis
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: acrossocheilus_kreyenbergii
+  name: 薄颌光唇鱼
+  scientific: Acrossocheilus kreyenbergii
+  family: Cyprinidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: onychostoma_macrolepis
+  name: 多鳞白甲鱼
+  scientific: Onychostoma macrolepis
+  family: Cyprinidae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: onychostoma_sima
+  name: 白甲鱼
+  scientific: Onychostoma sima
+  family: Cyprinidae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: onychostoma_angustistomata
+  name: 四川白甲鱼
+  scientific: Onychostoma angustistomata
+  family: Cyprinidae
+  conservation: EN
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: onychostoma_daduensis
+  name: 大渡白甲鱼
+  scientific: Onychostoma daduensis
+  family: Cyprinidae
+  conservation: CR
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: onychostoma_brevis
+  name: 短身白甲鱼
+  scientific: Onychostoma brevis
+  family: Cyprinidae
+  conservation: EN
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: onychostoma_barbata
+  name: 粗须白甲鱼
+  scientific: Onychostoma barbata
+  family: Cyprinidae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: onychostoma_rara
+  name: 稀有白甲鱼
+  scientific: Onychostoma rara
+  family: Cyprinidae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: onychostoma_ovalis
+  name: 珠江卵形白甲鱼
+  scientific: Onychostoma ovalis
+  family: Cyprinidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: onychostoma_lini
+  name: 小口白甲鱼
+  scientific: Onychostoma lini
+  family: Cyprinidae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: onychostoma_barbatula
+  name: 台湾白甲鱼
+  scientific: Onychostoma barbatula
+  family: Cyprinidae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: onychostoma_virgulatum
+  name: 侧纹白甲鱼
+  scientific: Onychostoma virgulatum
+  family: Cyprinidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: folifer_brevifilis
+  name: 瓣结鱼
+  scientific: Folifer brevifilis
+  family: Cyprinidae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: sinilabeo_hummeli
+  name: 赫氏华鲮
+  scientific: Sinilabeo hummeli
+  family: Cyprinidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: bangana_rendahli
+  name: 伦氏孟加拉鲮
+  scientific: Bangana rendahli
+  family: Cyprinidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: bangana_tungting
+  name: 洞庭孟加拉鲮
+  scientific: Bangana tungting
+  family: Cyprinidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: rectoris_luxiensis
+  name: 泸溪直口鲮
+  scientific: Rectoris luxiensis
+  family: Cyprinidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: rectoris_mutabilis
+  name: 变形直口鲮
+  scientific: Rectoris mutabilis
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: protolabeo_protolabeo
+  name: 原鲮
+  scientific: Protolabeo protolabeo
+  family: Cyprinidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: cirrhinus_molitorella
+  name: 鲮
+  scientific: Cirrhinus molitorella
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: cirrhhina_mrigala
+  name: 麦瑞加拉鲮
+  scientific: Cirrhhina mrigala
+  family: Cyprinidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: labeo_rohita
+  name: 露斯塔野鲮
+  scientific: Labeo rohita
+  family: Cyprinidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: paraqianlabeo_lineatus
+  name: 条纹异黔鲮
+  scientific: Paraqianlabeo lineatus
+  family: Cyprinidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pseudogyrinocheilus_procheilus
+  name: 泉水鱼
+  scientific: Pseudogyrinocheilus procheilus
+  family: Cyprinidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: sinocrossocheilus_guizhouensis
+  name: 华缨鱼
+  scientific: Sinocrossocheilus guizhouensis
+  family: Cyprinidae
+  conservation: EN
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: sinocrossocheilus_labiata
+  name: 宽唇华缨鱼
+  scientific: Sinocrossocheilus labiata
+  family: Cyprinidae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: garra_imberba
+  name: 墨头鱼
+  scientific: Garra imberba
+  family: Cyprinidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: discogobio_yunnanensis
+  name: 云南盘
+  scientific: Discogobio yunnanensis
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: discogobio_brachyphysallidos
+  name: 短鳔盘
+  scientific: Discogobio brachyphysallidos
+  family: Cyprinidae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: fu_et
+  name: 隐鳞裂腹鱼
+  scientific: Fu et
+  family: 未知
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: ye_et
+  name: 异唇裂腹鱼
+  scientific: Ye et
+  family: 未知
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: zhang_et
+  name: 厚唇裂腹鱼
+  scientific: Zhang et
+  family: 未知
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: ptychobarbus_kaznakovi
+  name: 裸腹叶须鱼
+  scientific: Ptychobarbus kaznakovi
+  family: Cyprinidae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: ptychobarbus_chungtienensis
+  name: 中甸叶须鱼
+  scientific: Ptychobarbus chungtienensis
+  family: Cyprinidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: gymnodiptychus_pachycheilus
+  name: 厚唇裸重唇鱼
+  scientific: Gymnodiptychus pachycheilus
+  family: Cyprinidae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: gymnocypris_potanini
+  name: 松潘裸鲤
+  scientific: Gymnocypris potanini
+  family: Cyprinidae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: schizopygopsis_malacanthus
+  name: 软刺裸裂尻鱼
+  scientific: Schizopygopsis malacanthus
+  family: Cyprinidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: schizopygopsis_kialingensis
+  name: 嘉陵裸裂尻鱼
+  scientific: Schizopygopsis kialingensis
+  family: Cyprinidae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: herzensteinia_microcephalus
+  name: 小头高原鱼
+  scientific: Herzensteinia microcephalus
+  family: Cyprinidae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: procypris_rabaudi
+  name: 岩原鲤
+  scientific: Procypris rabaudi
+  family: Cyprinidae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: cyprinus_multitaeniata
+  name: 三角鲤
+  scientific: Cyprinus multitaeniata
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: cyprinus_chilia
+  name: 杞麓鲤
+  scientific: Cyprinus chilia
+  family: Cyprinidae
+  conservation: EN
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: cyprinus_qionghaiensdis
+  name: 邛海鲤
+  scientific: Cyprinus qionghaiensdis
+  family: Cyprinidae
+  conservation: CR
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: carassioides_acuminatus
+  name: 须鲫
+  scientific: Carassioides acuminatus
+  family: Cyprinidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: yunnanilus_pleurotaenia
+  name: 侧纹云南鳅
+  scientific: Yunnanilus pleurotaenia
+  family: Balitoridae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: yunnanilus_nigromaculatus
+  name: 黑斑云南鳅
+  scientific: Yunnanilus nigromaculatus
+  family: Balitoridae
+  conservation: EN
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: yunnanilus_longibulla
+  name: 长鳔云南鳅
+  scientific: Yunnanilus longibulla
+  family: Balitoridae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: yunnanilus_caohaiensis
+  name: 草海云南鳅
+  scientific: Yunnanilus caohaiensis
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: yunnanilus_ganheensis
+  name: 干河云南鳅
+  scientific: Yunnanilus ganheensis
+  family: Balitoridae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: yunnanilus_niulanensis
+  name: 牛栏云南鳅
+  scientific: Yunnanilus niulanensis
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: yunnanilus_spanisbripes
+  name: 横斑云南鳅
+  scientific: Yunnanilus spanisbripes
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: yunnanilus_sichuanensis
+  name: 四川云南鳅
+  scientific: Yunnanilus sichuanensis
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: paracobitis_variegatus
+  name: 红尾副鳅
+  scientific: Paracobitis variegatus
+  family: Balitoridae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: paracobitis_potanini
+  name: 短体副鳅
+  scientific: Paracobitis potanini
+  family: Balitoridae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: paracobitis_wujiangensis
+  name: 乌江副鳅
+  scientific: Paracobitis wujiangensis
+  family: Balitoridae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: schistura_fasciolata
+  name: 横纹南鳅
+  scientific: Schistura fasciolata
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: schistura_pseudofasciolata
+  name: 似横纹南鳅
+  scientific: Schistura pseudofasciolata
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: schistura_niulanjiangensis
+  name: 牛栏江南鳅
+  scientific: Schistura niulanjiangensis
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: schistura_dabryi
+  name: 小眼戴氏南鳅
+  scientific: Schistura dabryi
+  family: Balitoridae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: nemacheilus_huapingensis
+  name: 华坪条鳅
+  scientific: Nemacheilus huapingensis
+  family: Balitoridae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: barbatula_nuda
+  name: 北方须鳅
+  scientific: Barbatula nuda
+  family: Balitoridae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_robusta
+  name: 粗壮高原鳅
+  scientific: Triplophysa robusta
+  family: Balitoridae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_orientalis
+  name: 东方高原鳅
+  scientific: Triplophysa orientalis
+  family: Balitoridae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_tanggulaensis
+  name: 唐古拉高原鳅
+  scientific: Triplophysa tanggulaensis
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_stewarti
+  name: 异尾高原鳅
+  scientific: Triplophysa stewarti
+  family: Balitoridae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_microps
+  name: 小眼高原鳅
+  scientific: Triplophysa microps
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_obscura
+  name: 黑体高原鳅
+  scientific: Triplophysa obscura
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_grahami
+  name: 昆明高原鳅
+  scientific: Triplophysa grahami
+  family: Balitoridae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_xichangensis
+  name: 西昌高原鳅
+  scientific: Triplophysa xichangensis
+  family: Balitoridae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_venusta
+  name: 秀丽高原鳅
+  scientific: Triplophysa venusta
+  family: Balitoridae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_daqiaoensis
+  name: 大桥高原鳅
+  scientific: Triplophysa daqiaoensis
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_brevibarba
+  name: 短须高原鳅
+  scientific: Triplophysa brevibarba
+  family: Balitoridae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_pseudoscleroptera
+  name: 拟硬刺高原鳅
+  scientific: Triplophysa pseudoscleroptera
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_angeli
+  name: 安氏高原鳅
+  scientific: Triplophysa angeli
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_anterodorsalis
+  name: 前鳍高原鳅
+  scientific: Triplophysa anterodorsalis
+  family: Balitoridae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_brevicauda
+  name: 短尾高原鳅
+  scientific: Triplophysa brevicauda
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_bleekeri
+  name: 贝氏高原鳅
+  scientific: Triplophysa bleekeri
+  family: Balitoridae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_leptosoma
+  name: 修长高原鳅
+  scientific: Triplophysa leptosoma
+  family: Balitoridae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_toliczkae
+  name: 斯氏高原鳅
+  scientific: Triplophysa toliczkae
+  family: Balitoridae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_crassilabris
+  name: 粗唇高原鳅
+  scientific: Triplophysa crassilabris
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_tenura
+  name: 细尾高原鳅
+  scientific: Triplophysa tenura
+  family: Balitoridae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_yaopeizhii
+  name: 姚氏高原鳅
+  scientific: Triplophysa yaopeizhii
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_ninglangensis
+  name: 宁蒗高原鳅
+  scientific: Triplophysa ninglangensis
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_rotundiventris
+  name: 圆腹高原鳅
+  scientific: Triplophysa rotundiventris
+  family: Balitoridae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_polyfasciata
+  name: 多带高原鳅
+  scientific: Triplophysa polyfasciata
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_pseudostenura
+  name: 拟细尾高原鳅
+  scientific: Triplophysa pseudostenura
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_lixianensis
+  name: 理县高原鳅
+  scientific: Triplophysa lixianensis
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_xiqiensis
+  name: 西溪高原鳅
+  scientific: Triplophysa xiqiensis
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_daochengensis
+  name: 稻城高原鳅
+  scientific: Triplophysa daochengensis
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_rosa
+  name: 玫瑰高原鳅
+  scientific: Triplophysa rosa
+  family: Balitoridae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_xiangxiensis
+  name: 湘西盲高原鳅
+  scientific: Triplophysa xiangxiensis
+  family: Balitoridae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: triplophysa_bashanensis
+  name: 巴山高原鳅
+  scientific: Triplophysa bashanensis
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: sphaerophysa_dianchiensis
+  name: 滇池球鳔鳅
+  scientific: Sphaerophysa dianchiensis
+  family: Balitoridae
+  conservation: CR
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: botia_superciliaris
+  name: 中华沙鳅
+  scientific: Botia superciliaris
+  family: Cobitidae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: botia_reevesae
+  name: 宽体沙鳅
+  scientific: Botia reevesae
+  family: Cobitidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: parabotia_fasciata
+  name: 花斑副沙鳅
+  scientific: Parabotia fasciata
+  family: Cobitidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: parabotia_bimaculata
+  name: 双斑副沙鳅
+  scientific: Parabotia bimaculata
+  family: Cobitidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: parabotia_maculosa
+  name: 点面副沙鳅
+  scientific: Parabotia maculosa
+  family: Cobitidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: parabotia_banarescu
+  name: 武昌副沙鳅
+  scientific: Parabotia banarescu
+  family: Cobitidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: leptobotia_elongata
+  name: 长薄鳅
+  scientific: Leptobotia elongata
+  family: Cobitidae
+  conservation: EN
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: leptobotia_taeniops
+  name: 紫薄鳅
+  scientific: Leptobotia taeniops
+  family: Cobitidae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: leptobotia_pellegrini
+  name: 薄鳅
+  scientific: Leptobotia pellegrini
+  family: Cobitidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: leptobotia_microphthalma
+  name: 小眼薄鳅
+  scientific: Leptobotia microphthalma
+  family: Cobitidae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: leptobotia_rubrilabris
+  name: 红唇薄鳅
+  scientific: Leptobotia rubrilabris
+  family: Cobitidae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: leptobotia_orientalis
+  name: 东方薄鳅
+  scientific: Leptobotia orientalis
+  family: Cobitidae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: leptobotia_tietaiensis
+  name: 汉水扁尾薄鳅
+  scientific: Leptobotia tietaiensis
+  family: Cobitidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: leptobotia_hengyangensis
+  name: 衡阳薄鳅
+  scientific: Leptobotia hengyangensis
+  family: Cobitidae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: cobitis_sinensis
+  name: 中华花鳅
+  scientific: Cobitis sinensis
+  family: Cobitidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: cobitis_sibirica
+  name: 北方花鳅
+  scientific: Cobitis sibirica
+  family: Cobitidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: cobitis_macrostigma
+  name: 大斑花鳅
+  scientific: Cobitis macrostigma
+  family: Cobitidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: cobitis_rarus
+  name: 稀有花鳅
+  scientific: Cobitis rarus
+  family: Cobitidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: misgurnus_anguillicaudatus
+  name: 泥鳅
+  scientific: Misgurnus anguillicaudatus
+  family: Cobitidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: misgurnus_mohoity
+  name: 北方泥鳅
+  scientific: Misgurnus mohoity
+  family: Cobitidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: paramisgurnus_dabryanus
+  name: 大鳞副泥鳅
+  scientific: Paramisgurnus dabryanus
+  family: Cobitidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: vanmanenia_pseudoatriata
+  name: 拟横斑原缨口鳅
+  scientific: Vanmanenia pseudoatriata
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: vanmanenia_maculata
+  name: 大斑原缨口鳅
+  scientific: Vanmanenia maculata
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: vanmanenia_pingchowensis
+  name: 平舟原缨口鳅
+  scientific: Vanmanenia pingchowensis
+  family: Balitoridae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: vanmanenia_stenosoma
+  name: 原缨口鳅
+  scientific: Vanmanenia stenosoma
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: paraprotomyzon_mutlifasciatus
+  name: 似原吸鳅
+  scientific: Paraprotomyzon mutlifasciatus
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: paraprotomyzon_lungkowensis
+  name: 龙口似原吸鳅
+  scientific: Paraprotomyzon lungkowensis
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pseudogastromyzon_fangi
+  name: 珠江拟腹吸鳅
+  scientific: Pseudogastromyzon fangi
+  family: Balitoridae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: beaufortia_liui
+  name: 侧沟爬岩鳅
+  scientific: Beaufortia liui
+  family: Balitoridae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: beaufortia_szechuanensis
+  name: 四川爬岩鳅
+  scientific: Beaufortia szechuanensis
+  family: Balitoridae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: beaufortia_niulanensis
+  name: 牛栏爬岩鳅
+  scientific: Beaufortia niulanensis
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: lepturichthys_fimbriata
+  name: 犁头鳅
+  scientific: Lepturichthys fimbriata
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: hemimyzon_yaotanensis
+  name: 窑滩间吸鳅
+  scientific: Hemimyzon yaotanensis
+  family: Balitoridae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: jinshaia_abbreviata
+  name: 短身金沙鳅
+  scientific: Jinshaia abbreviata
+  family: Balitoridae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: jinshaia_sinensis
+  name: 中华金沙鳅
+  scientific: Jinshaia sinensis
+  family: Balitoridae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: sinogastromyzon_sichangensis
+  name: 西昌华吸鳅
+  scientific: Sinogastromyzon sichangensis
+  family: Balitoridae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: sinogastromyzon_szechuanensis
+  name: 四川华吸鳅
+  scientific: Sinogastromyzon szechuanensis
+  family: Balitoridae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: sinogastromyzon_hsiashiensis
+  name: 下司华吸鳅
+  scientific: Sinogastromyzon hsiashiensis
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: sinogastromyzon_dezeensis
+  name: 德泽华吸鳅
+  scientific: Sinogastromyzon dezeensis
+  family: Balitoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: metahomaloptera_omeiensis
+  name: 汉水后平鳅
+  scientific: Metahomaloptera omeiensis
+  family: Balitoridae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: piaractus_brachypomus
+  name: 短盖巨脂鲤
+  scientific: Piaractus brachypomus
+  family: Serrasalmidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: hypostomus_plecostomus
+  name: 下口鲇
+  scientific: Hypostomus plecostomus
+  family: Loricariidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: silurus_mento
+  name: 昆明鲇
+  scientific: Silurus mento
+  family: Siluridae
+  conservation: CR
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: silurus_meridionalis
+  name: 南方鲇
+  scientific: Silurus meridionalis
+  family: Siluridae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pelteobagrus_eupogon
+  name: 长须黄颡鱼
+  scientific: Pelteobagrus eupogon
+  family: Bagridae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pelteobagrus_vachelli
+  name: 瓦氏黄颡鱼
+  scientific: Pelteobagrus vachelli
+  family: Bagridae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: leiocassis_longirostris
+  name: 长吻鮠
+  scientific: Leiocassis longirostris
+  family: Bagridae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: leiocassis_crassilabris
+  name: 粗唇鮠
+  scientific: Leiocassis crassilabris
+  family: Bagridae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: leiocassis_longibarbus
+  name: 长须鮠
+  scientific: Leiocassis longibarbus
+  family: Bagridae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: leiocassis_tenuifurcatus
+  name: 叉尾鮠
+  scientific: Leiocassis tenuifurcatus
+  family: Bagridae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: leiocassis_argentivittatus
+  name: 纵带鮠
+  scientific: Leiocassis argentivittatus
+  family: Bagridae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pseudobagrus_tenuis
+  name: 圆尾拟鲿
+  scientific: Pseudobagrus tenuis
+  family: Bagridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pseudobagrus_ussuriensis
+  name: 乌苏拟鲿
+  scientific: Pseudobagrus ussuriensis
+  family: Bagridae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pseudobagrus_medianalis
+  name: 中臀拟鲿
+  scientific: Pseudobagrus medianalis
+  family: Bagridae
+  conservation: CR
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pseudobagrus_truncatus
+  name: 切尾拟鲿
+  scientific: Pseudobagrus truncatus
+  family: Bagridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pseudobagrus_emarginatus
+  name: 凹尾拟鲿
+  scientific: Pseudobagrus emarginatus
+  family: Bagridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pseudobagrus_pratti
+  name: 细体拟鲿
+  scientific: Pseudobagrus pratti
+  family: Bagridae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pseudobagrus_brevicaudatus
+  name: 短尾拟鲿
+  scientific: Pseudobagrus brevicaudatus
+  family: Bagridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pseudobagrus_adiposalis
+  name: 长脂拟鲿
+  scientific: Pseudobagrus adiposalis
+  family: Bagridae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pseudobagrus_styani
+  name: 盎堂拟鲿
+  scientific: Pseudobagrus styani
+  family: Bagridae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pseudobagrus_albomarginatus
+  name: 白边拟鲿
+  scientific: Pseudobagrus albomarginatus
+  family: Bagridae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pseudobagrus_analis
+  name: 长臀拟鲿
+  scientific: Pseudobagrus analis
+  family: Bagridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pseudobagrus_fui
+  name: 富氏拟鲿
+  scientific: Pseudobagrus fui
+  family: Bagridae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: mystus_macropterus
+  name: 大鳍鳠
+  scientific: Mystus macropterus
+  family: Bagridae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: liobagrus_marginatus
+  name: 白缘䱀
+  scientific: Liobagrus marginatus
+  family: Amblycipitidae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: liobagrus_kingi
+  name: 金氏䱀
+  scientific: Liobagrus kingi
+  family: Amblycipitidae
+  conservation: EN
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: liobagrus_nigricauda
+  name: 黑尾䱀
+  scientific: Liobagrus nigricauda
+  family: Amblycipitidae
+  conservation: CR
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: liobagrus_marginatoides
+  name: 拟缘䱀
+  scientific: Liobagrus marginatoides
+  family: Amblycipitidae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: liobagrus_styani
+  name: 司氏䱀
+  scientific: Liobagrus styani
+  family: Amblycipitidae
+  conservation: CR
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: liobagrus_anguillicauda
+  name: 鳗尾䱀
+  scientific: Liobagrus anguillicauda
+  family: Amblycipitidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: glyptothorax_fokiensis
+  name: 福建纹胸
+  scientific: Glyptothorax fokiensis
+  family: Sisoridae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: glyptothorax_sinensis
+  name: 中华纹胸
+  scientific: Glyptothorax sinensis
+  family: Sisoridae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: euchiloglanis_kishinouyei
+  name: 黄石爬
+  scientific: Euchiloglanis kishinouyei
+  family: Sisoridae
+  conservation: EN
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: euchiloglanis_davidi
+  name: 青石爬
+  scientific: Euchiloglanis davidi
+  family: Sisoridae
+  conservation: EN
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: euchiloglanis_longibarbatus
+  name: 长须石爬
+  scientific: Euchiloglanis longibarbatus
+  family: Sisoridae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pareuchiloglanis_sinensis
+  name: 中华
+  scientific: Pareuchiloglanis sinensis
+  family: Sisoridae
+  conservation: EN
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pareuchiloglanis_anteanalis
+  name: 前臀
+  scientific: Pareuchiloglanis anteanalis
+  family: Sisoridae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pareuchiloglanis_sichuanensis
+  name: 四川
+  scientific: Pareuchiloglanis sichuanensis
+  family: Sisoridae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pareuchiloglanis_tianquanensis
+  name: 天全
+  scientific: Pareuchiloglanis tianquanensis
+  family: Sisoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pareuchiloglanis_robustus
+  name: 壮体
+  scientific: Pareuchiloglanis robustus
+  family: Sisoridae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pareuchiloglanis_feae
+  name: 短鳍
+  scientific: Pareuchiloglanis feae
+  family: Sisoridae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: paraeuchiloglanis_changyangensis
+  name: 长阳
+  scientific: Paraeuchiloglanis changyangensis
+  family: Sisoridae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: clarias_fusus
+  name: 胡子鲇
+  scientific: Clarias fusus
+  family: Clariidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: clarias_batrachus
+  name: 蟾胡子鲇
+  scientific: Clarias batrachus
+  family: Clariidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: clarias_gariepinus
+  name: 革胡子鲇
+  scientific: Clarias gariepinus
+  family: Clariidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: ictalurus_punctatus
+  name: 斑点叉尾鮰
+  scientific: Ictalurus punctatus
+  family: Ictaluridae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: ameiurus_nebulosus
+  name: 云斑鮰
+  scientific: Ameiurus nebulosus
+  family: Ictaluridae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: phractocephalus_hemioliopterus
+  name: 红尾护头鲿
+  scientific: Phractocephalus hemioliopterus
+  family: Pimelodidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: hucho_bleekeri
+  name: 川陕哲罗鲑
+  scientific: Hucho bleekeri
+  family: Salmonidae
+  conservation: CR
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: brachymystax_lenok
+  name: 秦岭细鳞鲑
+  scientific: Brachymystax lenok
+  family: Salmonidae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: plecoglossus_altivelis
+  name: 香鱼
+  scientific: Plecoglossus altivelis
+  family: Plecoglossidae
+  conservation: EN
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: protosalanx_hyalocranius
+  name: 大银鱼
+  scientific: Protosalanx hyalocranius
+  family: Salangidae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: hemisalanx_brachyrostralis
+  name: 短吻间银鱼
+  scientific: Hemisalanx brachyrostralis
+  family: Salangidae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: neosalanx_tangkahkeii
+  name: 陈氏新银鱼
+  scientific: Neosalanx tangkahkeii
+  family: Salangidae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: neosalanx_oligodontis
+  name: 寡齿新银鱼
+  scientific: Neosalanx oligodontis
+  family: Salangidae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: neosalanx_taihuensis
+  name: 太湖新银鱼
+  scientific: Neosalanx taihuensis
+  family: Salangidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: neosalanx_anderssoni
+  name: 安氏新银鱼
+  scientific: Neosalanx anderssoni
+  family: Salangidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: salanx_prognathus
+  name: 前颌间银鱼
+  scientific: Salanx prognathus
+  family: Salangidae
+  conservation: CR
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: salanx_ariakensis
+  name: 有明银鱼
+  scientific: Salanx ariakensis
+  family: Salangidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: odontobutis_potamophila
+  name: 河川沙塘鳢
+  scientific: Odontobutis potamophila
+  family: Eleotridae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: bostrychus_sinensis
+  name: 中华乌塘鳢
+  scientific: Bostrychus sinensis
+  family: Eleotridae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: eleotris_oxycephala
+  name: 尖头塘鳢
+  scientific: Eleotris oxycephala
+  family: Eleotridae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: micropercops_swinhonis
+  name: 小黄䱂鱼
+  scientific: Micropercops swinhonis
+  family: Eleotridae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: rhinogobius_giurinus
+  name: 子陵吻虾虎鱼
+  scientific: Rhinogobius giurinus
+  family: Oxudercidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: rhinogobius_brunneus
+  name: 褐吻虾虎鱼
+  scientific: Rhinogobius brunneus
+  family: Oxudercidae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: rhinogobius_szechuanensis
+  name: 四川吻虾虎鱼
+  scientific: Rhinogobius szechuanensis
+  family: Oxudercidae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: rhinogobius_cliffordpopei
+  name: 波氏吻虾虎鱼
+  scientific: Rhinogobius cliffordpopei
+  family: Oxudercidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: rhinogobius_shennongensis
+  name: 神农吻虾虎鱼
+  scientific: Rhinogobius shennongensis
+  family: Oxudercidae
+  conservation: VU
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: rhinogobius_liui
+  name: 刘氏吻虾虎鱼
+  scientific: Rhinogobius liui
+  family: Oxudercidae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: rhinogobius_leavelli
+  name: 李氏吻虾虎鱼
+  scientific: Rhinogobius leavelli
+  family: Oxudercidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: mugilogobius_myxodermus
+  name: 粘皮鲻虾虎鱼
+  scientific: Mugilogobius myxodermus
+  family: Oxudercidae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: mugilogobius_abei
+  name: 阿部鲻虾虎鱼
+  scientific: Mugilogobius abei
+  family: Oxudercidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: acanthogobius_elongata
+  name: 长体刺虾虎鱼
+  scientific: Acanthogobius elongata
+  family: Oxudercidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: acanthogobius_ommaturus
+  name: 斑尾刺虾虎鱼
+  scientific: Acanthogobius ommaturus
+  family: Oxudercidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: chaeturichthys_stigmatias
+  name: 矛尾虾虎鱼
+  scientific: Chaeturichthys stigmatias
+  family: Oxudercidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: glossogobius_giuris
+  name: 舌虾虎鱼
+  scientific: Glossogobius giuris
+  family: Oxudercidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: tridentiger_trigonocephalus
+  name: 纹缟虾虎鱼
+  scientific: Tridentiger trigonocephalus
+  family: Oxudercidae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: tridentiger_barbatus
+  name: 髭缟虾虎鱼
+  scientific: Tridentiger barbatus
+  family: Oxudercidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: taenioides_cirratus
+  name: 须鳗虾虎鱼
+  scientific: Taenioides cirratus
+  family: Oxudercidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: trypauchen_vagina
+  name: 孔虾虎鱼
+  scientific: Trypauchen vagina
+  family: Oxudercidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: boleophthalmus_pectinirostris
+  name: 大弹涂鱼
+  scientific: Boleophthalmus pectinirostris
+  family: Oxudercidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: periophthalmus_magnuspinnatus
+  name: 大鳍弹涂鱼
+  scientific: Periophthalmus magnuspinnatus
+  family: Oxudercidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: periophthalmus_modestus
+  name: 弹涂鱼
+  scientific: Periophthalmus modestus
+  family: Oxudercidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: scartelaos_histophorus
+  name: 青弹涂鱼
+  scientific: Scartelaos histophorus
+  family: Oxudercidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: luciogobius_guttatus
+  name: 竿虾虎鱼
+  scientific: Luciogobius guttatus
+  family: Oxudercidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: mugil_cephalus
+  name: 鲻
+  scientific: Mugil cephalus
+  family: Mugilidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: liza_haematocheila
+  name: 鮻
+  scientific: Liza haematocheila
+  family: Mugilidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: liza_carinatus
+  name: 梭鮻
+  scientific: Liza carinatus
+  family: Mugilidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: oreochromis_niloticus
+  name: 尼罗罗非鱼
+  scientific: Oreochromis niloticus
+  family: Cichlidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: oryzias_latipes
+  name: 青鳉
+  scientific: Oryzias latipes
+  family: Adrianichthyidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: hyporamphus_intermedius
+  name: 间下鱵
+  scientific: Hyporamphus intermedius
+  family: Hemiramphidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: gambusia_affimis
+  name: 食蚊鱼
+  scientific: Gambusia affimis
+  family: Poeciliidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: monopterus_albus
+  name: 黄鳝
+  scientific: Monopterus albus
+  family: Synbranchidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: mastacembelus_sinensis
+  name: 中华刺鳅
+  scientific: Mastacembelus sinensis
+  family: Mastacembelidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: mastacembelus_armatus
+  name: 大刺鳅
+  scientific: Mastacembelus armatus
+  family: Mastacembelidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: macropodus_chinensis
+  name: 圆尾斗鱼
+  scientific: Macropodus chinensis
+  family: Osphronemidae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: macropodus_opercularis
+  name: 叉尾斗鱼
+  scientific: Macropodus opercularis
+  family: Osphronemidae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: channa_argus
+  name: 乌鳢
+  scientific: Channa argus
+  family: Channidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: channa_asiatica
+  name: 月鳢
+  scientific: Channa asiatica
+  family: Channidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: channa_maculata
+  name: 斑鳢
+  scientific: Channa maculata
+  family: Channidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: cynoglossus_gracilis
+  name: 窄体舌鳎
+  scientific: Cynoglossus gracilis
+  family: Cynoglossidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: cynoglossus_abbreviatus
+  name: 短吻三线舌鳎
+  scientific: Cynoglossus abbreviatus
+  family: Cynoglossidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: cynoglossus_purpureomaculatus
+  name: 紫斑舌鳎
+  scientific: Cynoglossus purpureomaculatus
+  family: Cynoglossidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: cynoglossus_semilaevis
+  name: 半滑舌鳎
+  scientific: Cynoglossus semilaevis
+  family: Cynoglossidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: cynoglossus_joyneri
+  name: 短吻红舌鳎
+  scientific: Cynoglossus joyneri
+  family: Cynoglossidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: cynoglossus_robustus
+  name: 宽体舌鳎
+  scientific: Cynoglossus robustus
+  family: Cynoglossidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: repomucenus_olidus
+  name: 香斜棘䲗
+  scientific: Repomucenus olidus
+  family: Callionymidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: lateolabrax_maculatus
+  name: 中国花鲈
+  scientific: Lateolabrax maculatus
+  family: Percichthyidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: micropterus_salmoides
+  name: 大口黑鲈
+  scientific: Micropterus salmoides
+  family: Centrarchidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: siniperca_kneri
+  name: 大眼鳜
+  scientific: Siniperca kneri
+  family: Percichthyidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: siniperca_scherzeri
+  name: 斑鳜
+  scientific: Siniperca scherzeri
+  family: Percichthyidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: siniperca_undulata
+  name: 波纹鳜
+  scientific: Siniperca undulata
+  family: Percichthyidae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: siniperca_roulei
+  name: 长身鳜
+  scientific: Siniperca roulei
+  family: Percichthyidae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: siniperca_obscura
+  name: 暗鳜
+  scientific: Siniperca obscura
+  family: Percichthyidae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: coreoperca_loona
+  name: 漓江少鳞鳜
+  scientific: Coreoperca loona
+  family: Percichthyidae
+  conservation: NT
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: sander_lucioperca
+  name: 梭鲈
+  scientific: Sander lucioperca
+  family: Percidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: eleutheronema_tetradactylum
+  name: 四指马鲅
+  scientific: Eleutheronema tetradactylum
+  family: Polynemidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: takifugu_ocellatus
+  name: 弓斑东方鲀
+  scientific: Takifugu ocellatus
+  family: Tetraodontidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: takifugu_fasciatus
+  name: 暗纹东方鲀
+  scientific: Takifugu fasciatus
+  family: Tetraodontidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: takifugu_flavidus
+  name: 菊黄东方鲀
+  scientific: Takifugu flavidus
+  family: Tetraodontidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: takifugu_vermicularis
+  name: 虫纹东方鲀
+  scientific: Takifugu vermicularis
+  family: Tetraodontidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: takifugu_xanthopterus
+  name: 黄鳍东方鲀
+  scientific: Takifugu xanthopterus
+  family: Tetraodontidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: takifugu_bimaculatus
+  name: 双斑东方鲀
+  scientific: Takifugu bimaculatus
+  family: Tetraodontidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: takifugu_coronoidus
+  name: 暗环东方鲀
+  scientific: Takifugu coronoidus
+  family: Tetraodontidae
+  conservation: NE
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: chanodichthys_abramoides
+  name: 壮体鲌
+  scientific: Chanodichthys abramoides
+  family: Xenocyprididae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: pseudaspius_hakonensis
+  name: 珠星三块鱼
+  scientific: Pseudaspius hakonensis
+  family: Leuciscidae
+  conservation: LC
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+- id: culter_compressocorpus
+  name: 扁体鲌
+  scientific: Culter compressocorpus
+  family: Xenocyprididae
+  conservation: DD
+  category: yangtze
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
 exotic_species_note: '2017-2021年长江调查新采集到15种外来鱼类。主要来源为养殖逃逸、 观赏鱼放生等。外来种对长江本土鱼类群落的影响需持续监测。
 
   '

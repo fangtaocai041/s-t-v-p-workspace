@@ -1,45 +1,114 @@
-# Porpoise Agent 🐬
+﻿# Porpoise Agent 🐬
 
-**江豚研究智能体 (P₁)** — 声学分析 + 种群建模 + 威胁评估。
+**P₁ 万物衍生** — 长江江豚专研 · NBHF 声学 · 种群评估 · 栖息地建模。
 
-[English](README.md) · [更新日志](CHANGELOG.md)
+> 🌊 万物皆变 · Panta Rhei
+>
+> 江豚在长江里游了 2500 万年。
+> 我们的代码，是试图理解它们的另一种语言。
+
+[![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.11+-blue)](https://python.org)
+
+[English](README.md) · [中文版](README.zh.md) · [更新日志](CHANGELOG.md)
 
 ---
 
-## 快速开始
+## 🎯 核心哲学
+
+> 世界是动态的，知识是暂时的，涌现是常态。
+
+P₁ 是从三角核心衍生的第一个项目。它不重新发明轮子——S/V0 提供物种知识，V/V1 提供搜索验证，Coordinator 提供协调调度。P₁ 只做一件事：**研究江豚**。
+
+### 🔗 在万物中的角色
+
+```
+三生万物架构：
+  三角核心 (sealed 3)             → 基础能力
+    ├── S/V0  fish-ecology-assistant
+    ├── V/V1  cognitive-search-engine
+    └── Coord eon-core
+  
+  万物衍生 (open N):
+    P₁  porpoise-agent  → 江豚专研  ← 你在这里
+    P₂  coilia-agent    → 刀鲚专研
+    C   conflict-arbiter → 冲突仲裁
+```
+
+---
+
+## 🧩 这个项目是什么
+
+长江江豚（*Neophocaena asiaeorientalis*）是长江里唯一的哺乳动物。2017 年种群调查约 1012 头，2022 年约 1249 头——禁渔后第一次止跌回升。
+
+这个项目追踪它们的声学信号（NBHF，100-180kHz）、建模栖息地分布、评估种群动态。26 个文件的知识库，全部为江豚而生。
+
+> 赫拉克利特说：人不能两次踏进同一条河流。
+>
+> 我们说：你也不能用去年的种群数据预测今年的江豚分布。
+
+---
+
+## ⚡ 快速上手
 
 ```bash
-# CLI 入口
-python src/cli.py --help
-
-# 分析物种
+# 分析江豚
 python src/cli.py analyze --species "Neophocaena asiaeorientalis"
+
+# 健康检查
+python -c "from src import get_adapter; print(get_adapter().health())"
 ```
 
-```python
-from src.cli import main
-# 或直接调用核心模块
+---
+
+## 🚀 核心能力
+
+| 🚀 能力 | 📝 说明 |
+|:-----|:------|
+| **NBHF 声学检测** | 100-180 kHz 窄带高频信号 |
+| **栖息地建模** | 长江干流 + 洞庭湖 + 鄱阳湖 |
+| **种群评估** | 2017 / 2022 / 2025 年对比 |
+| **威胁评估** | 航运 / 渔业 / 水利工程 / 污染 |
+| **MoE 知识库** | 26 文件，江豚专属 |
+
+## 🔗 生态体系
+
+> 🔥 和则无穷力量，分则顶尖专家引擎。
+
+本项目是「三生万物」生态的 江豚领域专家引擎 (P₁)。
+
+```
+三角核心 (sealed 3):
+  📦 fish-ecology-assistant    → 知识供给 (V0)
+  🔍 cognitive-search-engine   → 搜索验证 (V1)
+  ⚙️ eon-core                  → 协调内核 (Coord)
+
+万物衍生 (open N):
+  🐬 porpoise-agent    → 江豚专研 (P₁)
+  🐟 coilia-agent      → 刀鲚专研 (P₂)
+  🐟 culter-agent      → 鲌类专研 (P₃)
+  🔥 conflict-arbiter  → 冲突仲裁 (C)
 ```
 
-## 项目结构
+| 🏗️ 项目 | 🔗 顶点 | 🎯 角色 |
+|:---------|:--------:|:--------|
+| [fish-ecology-assistant](../fish-ecology-assistant/) | V0 | 📦 知识供给 |
+| [cognitive-search-engine](../cognitive-search-engine/) | V1 | 🔍 搜索验证 |
+| [eon-core](../eon-core/) | Coord | ⚙️ 协调内核 |
+| [porpoise-agent](../porpoise-agent/) | P₁ | 🐬 江豚专研 |
+| [coilia-agent](../coilia-agent/) | P₂ | 🐟 刀鲚专研 |
+| [culter-agent](../culter-agent/) | P₃ | 🐟 鲌类专研 |
+| [conflict-arbiter](../conflict-arbiter/) | C | 🔥 冲突仲裁 |
 
-```
-porpoise-agent/
-├── src/
-│   ├── cli.py           ← 命令行入口
-│   ├── agent/           ← 智能体核心
-│   ├── cognitive/       ← 认知模块
-│   ├── mapping/         ← 分布制图
-│   └── execution/       ← 流水线执行
-├── data/                # 知识库
-├── scripts/             # 工具脚本
-└── tests/
-```
+---
+---
 
-## 角色
+> 🌊 万物皆变 · Panta Rhei
+>
+> 🏛️ 赫拉克利特说：人不能两次踏进同一条河流。
+>
+> 💻 我们说：你也不能用去年的种群数据预测今年的江豚分布。
+>
+> **📅 最后更新: 2026-06-17 · 🖥️ Reasonix Code · ⚡ DeepSeek 驱动**
 
-三角核心的 **T (Transition)** 层，P₁ 江豚专研。
-
-## 许可证
-
-MIT © 2026 fangtaocai041
+[⬆ 回到顶部](#)
