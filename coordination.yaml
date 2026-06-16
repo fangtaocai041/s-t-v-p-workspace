@@ -14,7 +14,7 @@
 
 coordination:
   version: "5.0.0"
-  root: "D:\\Reasonix"
+  root: "${WORKSPACE_ROOT}"
   last_sync: "2026-07-11"
   changelog:
     - "v5.0.0 (2026-07-11): Unified all 7 projects. +culter-agent (P₃), +conflict-arbiter to derived_projects. Removed duplicate coordination.yaml (3 copies), meso_agent.yaml (2 copies). Removed deprecated workspace.py. coordinator.py now routes to all 6 adapters."
@@ -31,8 +31,8 @@ coordination:
   # ===== Meso-Cosmos Agent (Workspace Level) =====
   meso_cosmos:
     enabled: true
-    config: "D:\\Reasonix\\config\\meso_agent.yaml"
-    skill: "D:\\Reasonix\\skills\\meso-orchestrator.md"
+    config: "${WORKSPACE_ROOT}/config/meso_agent.yaml"
+    skill: "${WORKSPACE_ROOT}/skills/meso-orchestrator.md"
     architecture: "Macro(BDI意图) → Meso(跨项目协调) → Micro(项目执行)"
     description: "统一入口 — 解析研究问题 → 路由到三角+万物(7项目) → 协调管线执行 → 交叉验证 → 进化反馈"
     pipeline:
