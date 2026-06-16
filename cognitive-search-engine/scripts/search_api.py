@@ -167,6 +167,81 @@ def classify_papers(papers: List[Dict]) -> List[Dict]:
     return papers
 
 
+def search_mcp_priority(queries: List[str], limit: int = 20) -> List[Dict]:
+    """MCP 优先搜索：先尝试 McpClient 并行搜索，失败回退 HTTP。
+
+    管线:
+      1. 初始化 McpClient，warmup 所有服务器
+      2. 对每个学名查询调用 scholar/article/ncbi MCP
+      3. 结果去重 + 返回
+      4. MCP 不可用时回退 search_http
+    """
+    papers: List[Dict] = []
+
+    try:
+        from src.mcp_client import McpClient
+        client = McpClient()
+
+        # 预热 MCP 服务器（scholar + article + ncbi 最相关）
+        started = client.warmup(["scholar", "article", "ncbi"])
+        if started:
+            logger = logging.getLogger(__name__)
+            logger.info(f"MCP warmup succeeded: {started}")
+
+            # 并行搜索所有查询
+            for q in queries[:3]:
+                # scholar MCP
+                if "scholar" in started:
+                    try:
+                        results = client.call_tool("scholar", {
+                            "query": q,
+                            "limit": min(limit, 15),
+                        })
+                        for r in results:
+                            text = r.get("text", "")
+                            if text and isinstance(text, str):
+                                try:
+                                    parsed = json.loads(text)
+                                    if isinstance(parsed, list):
+                                        papers.extend(parsed)
+                                except (json.JSONDecodeError, TypeError):
+                                    pass
+                    except Exception:
+                        pass
+
+                # article MCP
+                if "article" in started:
+                    try:
+                        results = client.call_tool("article", {
+                            "keyword": q,
+                            "max_results": min(limit, 15),
+                            "search_type": "comprehensive",
+                        })
+                        for r in results:
+                            text = r.get("text", "")
+                            if text and isinstance(text, str):
+                                try:
+                                    parsed = json.loads(text)
+                                    if isinstance(parsed, list):
+                                        papers.extend(parsed)
+                                except (json.JSONDecodeError, TypeError):
+                                    pass
+                    except Exception:
+                        pass
+
+            client.stop_all()
+    except Exception:
+        pass
+
+    # MCP 无结果 → 回退 HTTP
+    if not papers:
+        return search_http(queries, limit)
+
+    # 去重
+    from src.parallel_search import _deduplicate
+    return _deduplicate(papers)
+
+
 def run_search(species_name: str, max_results: int = 20,
                group: str = "standard") -> Dict[str, Any]:
     """
@@ -175,7 +250,7 @@ def run_search(species_name: str, max_results: int = 20,
     管线:
       1. 分类学检查 → 获取所有变体
       2. 跨项目不一致检测
-      3. 并行 HTTP 搜索 (PubMed + Europe PMC + Crossref + OpenAlex + CN)
+      3. MCP 优先搜索 (scholar/article/scholarly/ncbi) → 失败回退 HTTP
       4. DOI 去重 + 分类 + 语言标注
     """
     t0 = time.perf_counter()
@@ -193,7 +268,7 @@ def run_search(species_name: str, max_results: int = 20,
     # Step 3: 跨项目不一致检测
     taxonomy_gap = detect_taxonomy_gap(scientific_name)
 
-    # Step 4: 搜索
+    # Step 4: MCP 优先搜索，失败回退 HTTP
     search_queries = list(variants[:3])  # 最多3个学名变体
     if chinese_name and chinese_name not in search_queries:
         search_queries.append(chinese_name)
@@ -202,7 +277,7 @@ def run_search(species_name: str, max_results: int = 20,
         search_queries.append(f"{scientific_name} ecology")
         search_queries.append(f"{scientific_name} genetics morphology")
 
-    papers = search_http(search_queries, max_per_query=max_results)
+    papers = search_mcp_priority(search_queries, max_results)
 
     # Step 5: DOI去重
     seen_doi: set = set()
