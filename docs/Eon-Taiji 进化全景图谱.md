@@ -1,0 +1,819 @@
+# 🧬 Eon-Taiji 进化全量图谱 v7.2
+
+> **五项目十层同心**：eon-core(内核) + fish(S/V0) + cognitive(V/V1) + porpoise(P₁/V2) + coilia(P₂/V3)
+> **时间跨度**：2026-06-05 → 2026-06-08（4 天，从 1 项目到 5 项目 + 统一内核）
+> **核心命题**：独立 AI 工具 → 三体生态系统 → 五项目十层同心 → 六道轮回自进化
+> **架构代号**：Eon-Taiji（永恒太极）
+
+---
+
+## 📐 〇、进化总纲：S-T-V 刚性三角形
+
+> **Meso-Cosmos Agent 归属**：配置在 workspace 根目录（`config/meso_agent.yaml`），实现在 porpoise（`orchestrator.py` + D₃模块）和 cognitive（`meso_agent.py`）。非独立项目，是跨 S-T-V 的协调层。
+
+```
+                        ┌──────────────────────────────┐
+                        │                              │
+                        │   🌐 Meso-Cosmos Agent        │
+                        │   Macro(BDI)→Meso(Route)     │
+                        │        →Micro(Execute)        │
+                        │                              │
+                        └──────────┬───────────────────┘
+                                   │ 统一协调
+          ┌────────────────────────┼────────────────────────┐
+          │                        │                        │
+          ▼                        ▼                        ▼
+┌─────────────────┐    ┌─────────────────────┐    ┌─────────────────────┐
+│                 │    │                     │    │                     │
+│  🐟 fish-       │───▶│  🐬 porpoise-       │───▶│  🧠 cognitive-      │
+│  ecology-       │    │  agent              │    │  search-engine      │
+│  assistant      │◀───│                     │◀───│                     │
+│                 │    │                     │    │                     │
+│  S (State)      │    │  T (Transition)     │    │  V (Validation)     │
+│  知识供给层      │    │  核心执行层          │    │  验证引擎层          │
+│                 │    │                     │    │                     │
+│  D₁→D₂          │    │  D₁→D₂→D₃           │    │  D₁→D₂→D₃           │
+│  多Agent辩论网格 │    │  自愈式动态生态       │    │  线性→图谱→世界模型  │
+│                 │    │                     │    │                     │
+└─────────────────┘    └─────────────────────┘    └─────────────────────┘
+          │                        │                        │
+          └────────────────────────┼────────────────────────┘
+                                   │
+                          ┌────────▼────────┐
+                          │  DirectLoader    │
+                          │  importlib       │
+                          │  零MCP跨进程调用  │
+                          └─────────────────┘
+```
+
+| 角色 | 项目 | 维度 | 职责 |
+|:--:|------|:----:|------|
+| **S** | fish-ecology-assistant | D₁→D₂ | 知识供给：12 搜索引擎 + 5 阶段研究流水线 |
+| **T** | porpoise-agent | D₁→D₂→D₃ | 核心执行：5 阶段状态机 + 自愈监控体 |
+| **V** | cognitive-search-engine | D₁→D₂→D₃ | 验证引擎：BDI 认知架构 + WorldModel 预测（v4.0前含D₁线性阶段） |
+
+---
+
+## 📜 一、六大进化主线（三项目共通）
+
+```
+哲学原则 ──→ 形式逻辑 ──→ WHEN→THEN 规则 ──→ agent.yaml ──→ orchestrator.py
+   │              │              │                  │               │
+   │         ┌────┘              │                  │               │
+   │         │                   │                  │               │
+   ▼         ▼                   ▼                  ▼               ▼
+ Panta   系统论7原则      18条工程规则         config单一真相源    Python可执行
+ Rhei   矛盾·实践·阶段·集中   condition+action+path   自动校验一致性    方法链
+```
+
+| # | 进化维度 | 起点 | 终点 | 关键机制 |
+|:-:|---------|------|------|---------|
+| 1 | **哲学→代码翻译链** | 自然语言描述 | WHEN→THEN 可执行规则 | `engineering-grammar.md` 18 条 |
+| 2 | **单体→三体协同** | 3 个独立项目 | S-T-V 刚性三角形 | `coordination.yaml` + git submodule |
+| 3 | **静态→活系统** | 无状态调用 | 组件注册(出生/过期/体检) | `component_registry.yaml` + `evolution.yaml` |
+| 4 | **MCP + DirectLoader 双轨制** | 进程级 MCP 调用 | `importlib` 零进程加载 + MCP HTTP 共存 | `cognitive-search-engine/src/` 直接引用 + `mcp_client.py` |
+| 5 | **2源→3源验证** | 交叉验证 (2源) | 三角验证 (min 3 independent) | D₂ 辩论验证网格 |
+| 6 | **单一→双语图谱** | pinyin/汉字分离 | ZN/EN 自动填充 | `graph_updater.py` v2.0 |
+
+---
+
+## 🧠 二、cognitive-search-engine：从字符串匹配到认知重建
+
+### 2.1 核心思想
+
+> **不匹配字符串，重建"所指"。** 不把物种名当文本搜索，而是从多条"能指路径"（精确名、OCR变体、作者网络、引用图、中文名、音形码）同时逼近同一个"所指"（物种本身）。
+
+```
+传统搜索:  "Ochetobius elongatus" ──→ 字符串匹配 ──→ 7篇 (漏检 Ochetobibus)
+认知搜索:  "鳤" ──→ OCR变体生成 ──→ 多能指并行 ──→ 引用图回溯 ──→ 13篇 (全量)
+              │
+              ├── Ochetobius elongatus  (精确)
+              ├── Ochetobibus elongatus (OCR u→b)
+              ├── Ochetobius elongatu   (尾脱落)
+              ├── 鳤                     (中文名)
+              └── 杨计平/Yang Jiping    (作者网络)
+```
+
+### 2.2 核心技术栈
+
+| 层 | 技术 | 文件 | 创新点 |
+|:--:|------|------|--------|
+| **L1 感知** | SearchRuleEngine | `src/rule_engine.py` | YAML 定义→Python 执行，3 模式(HTTP/MCP/Mock) |
+| **L2 认知** | CognitiveAgent + ReAct | `src/agent_core.py` | Think→Act→Observe→Reflect 循环，BDI 策略选择 π(B,D)→I |
+| **L3 记忆** | MemorySystem | `src/memory_layer.py` | ContextTracker(短期) + GraphMemory(长期)，M_{t+1}=Φ(M_t,O_t,A_t) |
+| **L4 映射** | search_rules.yaml | `config/search_rules.yaml` | 意图→工具序列化，JSON Schema 兼容多 LLM |
+| **L5 执行** | ParallelSearch + MCP | `src/parallel_search.py` | PubMed×Crossref×OpenAlex 并发，15s 超时 |
+| **图谱** | Hub-and-Spoke | `config/species_graph.yaml` | 学科 Hub + 引用 Spoke，按需加载子图 |
+| **变体** | OCR 错误模型 | `src/variant_generator.py` | 插入/删除/替换/元音混淆/双写/Soundex/Metaphone |
+| **评分** | 权威可信度 | 内嵌评分公式 | 50 + 30(SCI) + 25(CSCD) + 10(DOI) + 10(PMID) - 30(preprint) - 100(predatory) |
+
+### 2.3 进化时间线（v4.0 → v5.2.1）
+
+```
+v4.0 ──── v4.1 ──── v4.2 ──── v4.3 ──── v4.4 ──── v5.2 ★ ──── v5.2 ──── v5.2 ──── v5.2.1
+图谱引擎  自适应深度  活系统    工程语言化  OCR变体   认知架构    Hub-Spoke   Meso-Cosmos S-T-V三角
+```
+
+| 版本 | 转折点 | 核心变化 | 效果 |
+|:----:|--------|---------|------|
+| **v4.0** | 图谱引擎 | 图遍历替代平面穷举，"满意即止" `min_papers_satisfice=8` | 搜索从枚举变为遍历 |
+| **v4.1** | 自适应深度 | 搜索前 `estimate_literature_volume()`，三模式选择 | 大领域不再暴力穷举 |
+| **v4.2** | 活系统 | 12 组件注册(出生/验证/过期)，`evolution.yaml` 4 参数 | 引擎获得自检能力 |
+| **v4.3** | 工程语言化 | 全部转 YAML/JSON/Python，机器可读可执行 | 跨 LLM 兼容 |
+| **v4.4** | OCR 变体预生成 | OCR 变体预生成 + 新论文检测（12 层协议），Letter-by-letter 错误模型 | 补全 OCR 变体安全网，新论文自动标记 |
+| **v5.2 ★** | **认知架构** | BDI WorldModel + ReAct + MemorySystem，7 新模块 | 从"规则引擎"跃迁为"认知 Agent" |
+| **v5.2** | Hub-Spoke | 3 阶段并行替代 14 层串行，权威可信度评分 | 调用量 15+→~10，中文期刊纳入评分 |
+| **v5.2** | Meso-Cosmos | ZN/EN 双语图谱自动填充，跨项目协调层 | 解决 pinyin/汉字分离问题 |
+| **v5.2.1** | S-T-V 三角 | 三项目刚性三角形 + 三角验证 (min 3 源) | 单引擎→三体验证闭环 |
+
+### 2.4 ★ 最大转折点：v5.2 认知架构跃迁
+
+```
+v4.3 之前 (规则引擎):
+  input → rule_engine.execute() → phase1 → phase2 → ... → phase12 → output
+
+v5.2 之后 (认知 Agent):
+  input → Perception(L1) → BDI Policy(L2) → Memory(L3) → Mapping(L4) → Execution(L5)
+            │                   │                │             │            │
+            │              ┌────┘                │             │            │
+            │              │                     │             │            │
+            ▼              ▼                     ▼             ▼            ▼
+        变体生成     Belief(文献量信念)    ContextTracker  意图→工具      HTTP/MCP
+        名正规化     Desire(目标意图)      GraphMemory    序列化        并发调用
+        查询构建     Intention(执行计划)   转移函数Φ
+                            │
+                     Think→Act→Observe→Reflect (ReAct 循环)
+```
+
+**核心突破**：引擎不再"执行固定的 12 步搜索规则"，而是**持有信念**(Belief)、**形成意图**(Desire)、**规划执行**(Intention)，在执行中观察(Observe)结果并反思(Reflect)调整。
+
+---
+
+## 🐟 三、fish-ecology-assistant：从功能列表到哲学操作系统
+
+### 3.1 核心思想
+
+> **将通用编码智能体变身为博士级鱼类生态学研究团队。** 双核哲学引擎贯穿全部组件：Panta Rhei（万物皆变，知识是暂态）+ 系统论（矛盾分析·实践验证·阶段推进·集中兵力）。执行归 AI，决策归人。
+
+```
+                    ┌──────────────────────────────┐
+                    │   🧘 双核哲学引擎              │
+                    │                              │
+                    │  Panta Rhei    系统论          │
+                    │  ·万物皆变      ·矛盾分析       │
+                    │  ·知识暂态      ·实践验证       │
+                    │  ·涌现常态      ·阶段推进       │
+                    │                 ·集中兵力       │
+                    └──────────┬───────────────────┘
+                               │ 染色全部组件
+          ┌────────────────────┼────────────────────┐
+          │                    │                    │
+          ▼                    ▼                    ▼
+   ┌────────────┐     ┌────────────┐     ┌────────────────┐
+   │ 18条工程规则│     │ 53组件活系统│     │ 12引擎搜索矩阵 │
+   │ WHEN→THEN  │     │ 出生/过期   │     │ GS优先+中文源  │
+   └────────────┘     └────────────┘     └────────────────┘
+```
+
+### 3.2 核心技术栈
+
+| 技术 | 规模 | 关键创新 |
+|------|:---:|---------|
+| **MCP 服务** | 22 个 | scholar/article/scholarly/tavily/exa/rplay/echarts/ocr×2/zotero/obsidian/ncbi...
+| **AI Skills** | 28 个 | 11 研究 + 3 分析 + 3 验证 + 4 维护 + 4 跨项目 + 3 自进化 |
+| **搜索引擎** | 12 个 | Google Scholar 优先级 1 + 百度学术/知网/万方/中科院 + cognitive DirectLoader (web_search site: 零 MCP) |
+| **知识库** | 13 个 | ima 知识库按领域智能路由，一次搜多库 |
+| **工程规则** | 18 条 | FB/CP/SM/WF/PT/EH/MO/DS 八大类，每条 condition+action+config path |
+| **组件注册** | 53 个 | 出生日期 + 最后验证 + 过期策略 + 自动健康评分 |
+| **自适应参数** | 6 个 | 7 个触发条件，post-pipeline 自动调整 |
+
+### 3.3 进化时间线（3 天 7 版本）
+
+```
+06-05 ─────── 06-06 中午 ──── 06-06 下午 ──── 06-06 晚上 ──── 06-07 凌晨 ──── 06-07 ──── 06-07 最终
+初始架构     ★双核哲学     工程语法       活系统         S-T-V三角      GS+中文源    Meso-Cosmos
+```
+
+| 转折点 | 时间 | 主题 | 核心变化 |
+|:--:|------|------|---------|
+| **1** | 06-05 | 初始架构 | 5 阶段研究流水线 + 13 Skills + 16 MCP。首份报告：长江禁渔生态评估 |
+| **2 ★** | 06-06 中午 | **双核哲学** | Panta Rhei + 系统论 7 原则确立。从此所有组件被哲学"染色"——不是装饰，是运行时约束 |
+| **3** | 06-06 下午 | 工程语法 | 18 条 WHEN→THEN 规则 + CI/CD + Karpathy Guard。从"AI 工具集"蜕变为"工程系统" |
+| **4** | 06-06 晚上 | 活系统 | 53 组件注册(出生日期/验证/过期) + `LIVING_SYSTEM.md` + 健康评分 |
+| **5** | 06-07 凌晨 | S-T-V 三角 | 三项目协同 + D₂ 辩论验证 (3-Agent 网状辩论，2 源→3 源) |
+| **6** | 06-07 | GS 优先 | 搜索引擎 5→11，中文源零 MCP 开销，`chinese_priority: true` |
+| **7** | 06-07 最终 | Meso-Cosmos | cognitive-search-engine DirectLoader + 自进化跨项目部署 |
+
+### 3.4 ★ 最大转折点：双核哲学引擎（06-06 中午）
+
+```
+转折前 (功能列表):
+  "我有 5 阶段流水线、13 个 Skills、16 个 MCP 服务..."
+
+转折后 (哲学操作系统):
+  矛盾分析 → 决定搜索策略 (主要矛盾=文献稀缺 → 穷举模式)
+  实践验证 → 决定交叉验证强度 (min_sources: 2→3)
+  阶段推进 → 决定何时停止 (diminishing returns → STOP)
+  集中兵力 → 决定 token 分配优先级 (GS 优先级 1，中文源次之)
+
+  Panta Rhei → 知识暂态 → 论文都有过期时间
+             → 涌现常态 → 新方向自动检测
+```
+
+**核心突破**：哲学不再是 README 里的装饰性引用，而是**运行时决策逻辑**——矛盾分析决定搜索策略，阶段论决定停止条件，集中兵力决定资源分配。
+
+---
+
+## 🐬 四、porpoise-agent：从单物种助手到三体执行中枢
+
+### 4.1 核心思想
+
+> 长江江豚研究的 AI 智能体，定位为 S-T-V 三角中的 **T（Transition）**——连接知识供给与验证引擎的**核心执行层**（内部 T/P 双层：orchestrator 为通用协调层，skills 为江豚专研层）。26 文件 MoE 知识库（~85 篇论文，8 物种，11 饵料鱼），NBHF click 声学检测（110-150 kHz）。
+
+```
+┌──────────────────────────────────────────────────────┐
+│                  🐬 Porpoise Agent                    │
+│                                                      │
+│  ┌──────────┐  ┌──────────┐  ┌──────────────────┐   │
+│  │ 文献分析  │  │ 声学检测  │  │ 栖息地评估        │   │
+│  │ ~85篇    │  │ 110-150  │  │ 水文+遥感         │   │
+│  │ MoE知识库│  │ kHz NBHF │  │                   │   │
+│  └────┬─────┘  └────┬─────┘  └────────┬──────────┘   │
+│       │             │                │               │
+│       └─────────────┼────────────────┘               │
+│                     │                                │
+│          ┌──────────▼──────────┐                     │
+│          │  5阶段编排状态机     │                     │
+│          │  文献→分析→调查      │                     │
+│          │  →评估→报告         │                     │
+│          │  门控/退却/审批     │                     │
+│          └──────────┬──────────┘                     │
+│                     │                                │
+│          ┌──────────▼──────────┐                     │
+│          │  D₃ 自愈监控体       │                     │
+│          │  熵值→熔断→拓扑重构  │                     │
+│          └─────────────────────┘                     │
+└──────────────────────────────────────────────────────┘
+```
+
+### 4.2 核心技术栈
+
+| 技术 | 说明 | 创新点 |
+|------|------|--------|
+| **5 阶段编排** | 文献→分析→调查→评估→报告，含门控/战略退却/人工审批 | 矛盾检测门控，死胡同自动退却 |
+| **NBHF 声学** | Butterworth 滤波 + RF 分类，110-150 kHz | 窄带高频 click 检测，江豚特有 |
+| **MoE 知识库** | 25 文件混合专家架构 | 零依赖自动化 (add_literature.py + check_scihub.py) |
+| **D₃ 自愈监控** | 点(D₀)→线(D₁)→面(D₂)→体(D₃) 严格包含层次 | 熵值监控 + 自动复位 + 拓扑重构 |
+| **DirectLoader** | 跨进程引擎调用 | ReAct 失败自动回退 linear |
+| **18 MCP 工具** | scholar/article/scholarly/tavily/exa/rplay/echarts/ocr×2/playwright/github/zotero/obsidian/ncbi... | 覆盖全科研流程 |
+
+### 4.3 进化时间线（2025-06-05 → 2026-06-07）
+
+```
+v1 ────────── v2 ★ ──────── v3 ────────── v4 ★ ──────── v4.1
+原始框架      Panta Rhei   知识系统      双核哲学      协同进化
+6 Agent      完整重写      MoE知识库     系统论7原则    S-T-V三角
+```
+
+| 阶段 | 时间 | 主题 | 核心变化 |
+|:--:|------|------|---------|
+| **v1** | 2025-06-05 | 原始框架 | 6 专业 Agent (文献/声学/生态/保护/遗传/野外) + 基础 MCP。首个代码提交，项目愿景确立 |
+| **v2 ★** | 2025-06-05 | **Panta Rhei** | 完整重写。引入"世界动态·知识暂态·涌现常态"三条根基，标注进代码。从工具集合升格为"活的系统" |
+| **v3** | 2025-06-05 | 知识系统 | 25 文件 MoE 知识库 (文献 12+物种 5+饵料鱼 2+图片 2+自动化脚本)。声学管道图 |
+| **v4 ★** | 2026-06-06 | **双核哲学** | 系统论 7 原则→18 条 WHEN→THEN 工程规则。Orchestrator 获得矛盾分析、阶段门控、战略退却、验证标签、涌现检测 |
+| **v4.1** | 2026-06-07 | 协同进化 | cognitive-search-engine git submodule 集成。S-T-V 三角确立。D₃ 自愈监控体接入 orchestrator.run() |
+
+> **因果链**: porpoise v4★ 双核哲学（06-06）为 cognitive v5.2★ 认知架构（06-07）提供了 contradiction-driven 方法论基础。porpoise 的 `ContradictionType` 枚举 + `_analyze_contradiction()` 模式被 cognitive 的 `meso_agent._analyze_contradiction()` 借鉴。
+
+### 4.4 密集进化期：30 次提交爆发（06-06 晚 → 06-07 早）
+
+```
+22:40  集成 cognitive-search-engine submodule + 自适应路由
+22:55→23:40  连续 10+ 次引擎同步 + multi-provider + YAML 合规
+00:07  S-T-V 三角验证：min_sources 2→3 (2源=PENDING, 3源=VERIFIED)
+00:12  D₃ SelfHealingMonitor —— 熵值监控 + 自动复位
+00:16  将 SelfHealingMonitor 接入 orchestrator.run() 循环
+00:22  增加 S-T-V Triangle Role 文档
+02:30  cognitive-search-engine submodule → v4.4 (12 层搜索协议)
+03:58  coordination.yaml v2.0 + 12 引擎并行注册表
+06:32  P0-1 DirectLoader —— importlib 加载认知引擎，零 MCP 开销
+06:39  工程语言化 —— 移除执行层哲学引用，补类型标注，+stop_conditions
+06:41  CI/CD —— GitHub Actions 验证流水线 (5 job)
+06:52  DirectLoader 加固 —— ReAct 失败自动回退 linear
+10:57  跨项目协同进化 v4.0 —— evolution.yaml + component_registry.yaml + self-evolve
+11:18  修复物种路由 bug
+11:21→29  细粒度 badge 修正 + meso-orchestrator skill 新增
+```
+
+---
+
+## 🔄 五、进化引擎本身：自进化系统
+
+### 5.1 活系统机制
+
+```
+┌─────────────────────────────────────────────────────┐
+│                 🧬 自进化闭环                         │
+│                                                     │
+│   Pipeline执行 ──→ 6指标评估 ──→ 7触发器检测          │
+│        ↑                              │              │
+│        │                              ▼              │
+│        │                    ┌─────────────────┐      │
+│        │                    │ 触发条件满足?     │      │
+│        │                    │ ·pipeline_failure│      │
+│        │                    │ ·contradiction   │      │
+│        │                    │ ·emergence_noise │      │
+│        │                    │ ·recall_drop     │      │
+│        │                    └────────┬────────┘      │
+│        │                             │ YES           │
+│        │                             ▼               │
+│        └────────── 自动调参 ◀────────┘               │
+│                  ·contradiction_budget_multiplier     │
+│                  ·verification_min_sources            │
+│                  ·max_revision_rounds                 │
+│                  ·emergence_threshold                 │
+│                  ·dead_end_retreat_threshold          │
+│                                                     │
+│  进化日志: logs/evolution-log.jsonl                  │
+│  {timestamp, param, old_value, new_value, trigger,   │
+│   pre_metric, post_metric}                           │
+└─────────────────────────────────────────────────────┘
+```
+
+### 5.2 三项目进化能力矩阵
+
+| 能力 | 🧠 cognitive | 🐟 fish | 🐬 porpoise |
+|------|:-----------:|:------:|:----------:|
+| 组件注册表 | ✅ 12 组件 | ✅ 53 组件 | ✅ 44 组件 |
+| 健康检查 | ✅ self-evolve | ✅ health-check | ✅ living_system_report |
+| 自适应参数 | ✅ 4 参数 | — | ✅ 5 规则阈值 |
+| 自动修复 | — | ✅ auto-fix | ✅ auto_fix |
+| 进化日志 | ✅ evolution-log | — | ✅ audit |
+| 搜索反馈 | ✅ post-search | — | — |
+| 矛盾检测 | — | ✅ contradiction | ✅ contradiction_gate |
+
+### 5.3 Meso-Cosmos Agent：6 阶段统一管线 (v4.0)
+
+```
+UNDERSTAND → ROUTE → EXECUTE → VALIDATE → SYNTHESIZE → EVOLVE
+ (Macro)     (Meso)   (Micro)   (Cross)     (Merge)     (Feedback)
+
+Phase 0  UNDERSTAND   Macro-BDI          解析问题 → 识别领域 → 形成意图
+Phase 1  ROUTE        Meso-Coordination  路由到 S/T/V 项目 → 资源分配
+Phase 2  EXECUTE      Micro-Execution    委派到项目 agent → 并行监控
+Phase 3  VALIDATE     Cross-Verification 权威评分 → 三角验证 → 矛盾检测
+Phase 4  SYNTHESIZE   Merge              多项目结果合并 → 统一报告
+Phase 5  EVOLVE       Feedback           评估 → 触发跨项目进化
+```
+
+| 共享指标 | 流向 | 用途 |
+|---------|------|------|
+| `verification_pass_rate` | 三项目双向 | 三角验证通过率，过低→增加 min_sources |
+| `contradiction_resolution_rate` | fish↔porpoise | 矛盾解决率，过低→增加 budget_multiplier |
+| `false_positive_rate` | cognitive→fish | 搜索误报率，过高→收紧 OCR 变体阈值 |
+
+### 5.4 协同进化路径
+
+```
+cognitive 进化 ──→ submodule update ──→ fish/porpoise 自动获取:
+  · 新搜索层 (Phase 1.6 引用验证)
+  · 优化后的自适应参数
+  · 扩展的物种知识图谱
+
+fish/porpoise 使用 cognitive 搜索 ──→ 反馈效果数据:
+  · recall rate (实际 vs 预估)
+  · false positive rate
+  · 新发现的拼写错误 → species_graph.yaml variants
+  → cognitive 根据反馈进化参数
+
+交叉进化:
+  fish 发现新物种 ──→ cognitive 图谱扩展
+  porpoise 发现新作者 ──→ cognitive 作者节点
+  cognitive 优化搜索 ──→ fish/porpoise 搜索质量提升
+```
+
+---
+
+## 📊 六、进化指标总览
+
+### 6.1 三项目规模增长
+
+| 指标 | 起点 (06-05) | 终点 (06-07) | 增幅 |
+|------|:-----------:|:-----------:|:---:|
+| **总项目数** | 1 (porpoise) | 3 | 3× |
+| **MCP 服务数** | 16 | 22 | +38% |
+| **Skills 总数** | 13 | 28 | +115% |
+| **搜索引擎数** | 5 | 12 | +140% |
+| **中文数据源** | 0 | 4 | ∞ |
+| **组件注册数** | 0 | 53 | 新增53个 |
+| **工程规则数** | 0 | 18 | ∞ |
+| **验证源数** | 2 | 3 (三角验证) | +50% |
+| **知识库文件** | 0 | 39 (fish 13 + porpoise 26) | 新增39个 |
+| **跨项目协议** | 无 | S-T-V + Meso-Cosmos | ∞ |
+
+### 6.2 进化质量指标
+
+| 指标 | 当前值 | 目标 | 测量方式 |
+|------|:----:|:----:|---------|
+| 搜索 recall | ~95% | ≥ 98% | post_search_evaluation |
+| Token 效率 | ~2000/search | ≤ 1500/search | papers/1000tokens |
+| 拼写错误捕获率 | 100% (known) | 100% (all) | variant search coverage |
+| 引用验证准确率 | — (new) | ≥ 90% | verification pass rate |
+| 参数自适应频率 | — | ≥ 1/week | evolution log count |
+| 图谱增长率 | — | ≥ 5%/month | graph node delta |
+
+---
+
+## 🗺️ 七、维度进化全景：D₀→D₁→D₂→D₃
+
+```
+D₀ (点): 原子操作 — 单次 SQL/API/工具调用
+D₁ (线): 因果轨迹 — Pipeline/Workflow/CoT
+D₂ (面): 拓扑网格 — 多 Agent 协同/交叉验证/图谱遍历
+D₃ (体): 闭环实体 — 自愈生态/世界模型/数字孪生
+
+项目维度分配:
+  fish-ecology-assistant:    D₁(线) → D₂(面) — 多 Agent 网状交叉验证
+  porpoise-agent:            D₁(线) → D₂(面) → D₃(体) — 自愈式动态生态
+  cognitive-search-engine:   D₂(面) → D₃(体) — 世界模型 + 预测仿真
+```
+
+| 维度 | 🐟 fish-ecology | 🐬 porpoise | 🧠 cognitive |
+|:----:|---------------|-----------|------------|
+| **D₀ 点** | `stats-assistant` 单次 R 代码 | `_invoke_skill()` 单次工具调用 | `search_exact()` 单次搜索 |
+| **D₁ 线** | Pipeline: plan→search→analyze→write→review | Orchestrator: 5-phase FSM | 11-layer search protocol |
+| **D₂ 面** | 🆕 多 Agent 辩论网格 (统计学家+数学家+审计) | 🆕 网状拓扑 + 动态路由 | Graph traversal + review mining |
+| **D₃ 体** | 🆕 自主知识图谱 + 闭环实验 | 🆕 自愈监控体 + 熵值熔断 | 🆕 世界模型 + Pre-search 仿真 |
+
+```
+"点动成线，线动成面，面动成体。"
+ D₁(fish 线) → D₂(fish 面+porpoise 面) → D₃(porpoise 体+cognitive 体)
+ 三个项目沿 S-T-V 轨迹运动，从线性流水线进化为三维闭环生态系统。
+```
+
+---
+
+## 🏁 八、总结
+
+### 三条进化法则
+
+| 法则 | 内涵 | 证据 |
+|------|------|------|
+| **哲学即代码** | Panta Rhei + 系统论不是装饰，是运行时约束 | 18 条 WHEN→THEN 规则，每条有精确 condition + action + config path |
+| **协同即能力** | 单体工具 → S-T-V 三角 → Meso-Cosmos 自进化 | 3 天从 1 项目到 3 项目闭环生态系统 |
+| **进化即常态** | 每个组件有出生/验证/过期，系统自我调参 | `evolution.yaml` + `self-evolve` 跨 3 项目部署 |
+
+### 关键数据
+
+| 指标 | 数值 |
+|------|:---:|
+| 总时间跨度 | **3 天**（2026-06-05 → 2026-06-07） |
+| 总版本转折点 | **8 个** |
+| 最大单日提交 | **30 次**（porpoise 06-06 晚→06-07 早） |
+| 核心研究产出 | 长江禁渔评估 + 鳤全量图谱(13篇) + 江豚声学检测 |
+| 技术栈规模 | 22 MCP + 28 Skills + 12 搜索引擎 + 13 知识库 + R 4.6.0 |
+
+---
+
+> **"活的系统"不是比喻 — 是可度量的自进化。** 每个组件有出生、体检、衰老、进化。三个项目通过 submodule + DirectLoader + coordination.yaml 共享进化成果，形成 S-T-V 刚性三角形闭环。
+
+**创建日期**: 2026-06-07 &nbsp;|&nbsp; **更新**: 同日同步最新 README
+**基于**: cognitive-search-engine v5.2 / fish-ecology-assistant v2.0.0 / porpoise-agent v4.1 / coilia-agent v1.0 / meso-cosmos-agent v1.0
+
+---
+
+## 🆕 九、meso-cosmos-agent：从内部分层到独立项目 (v5.2)
+
+### 9.1 诞生背景
+
+porpoise-agent 的 `orchestrator.py`（1713行）中约 90% 是通用协调逻辑（contradiction routing、phase gating、self-healing），仅 10% 是江豚领域代码。将 T 层提取为独立项目，porpoise-agent 回归江豚专研角色。
+
+### 9.2 核心架构
+
+```
+meso-cosmos-agent/
+├── src/pipeline/orchestrator.py    # 6-phase 管线 (UNDERSTAND→ROUTE→EXECUTE→VALIDATE→SYNTHESIZE→EVOLVE)
+├── src/monitor/validator.py        # 三角验证 + 跨项目独立性检查
+├── src/monitor/evolution_executor.py # 7 触发器 + 参数自适应 + YAML 持久化
+├── src/monitor/health_check.py     # S-T-V-P 健康检查
+└── config/coordination.yaml        # 5 项目注册 + 智能路由规则
+```
+
+### 9.3 智能路由
+
+| 查询特征 | 路由目标 |
+|---------|---------|
+| 江豚/Neophocaena/NBHF | P₁ (porpoise-agent) |
+| 刀鲚/Coilia nasus/洄游 | P₂ (coilia-agent) |
+| 长江/禁捕/资源量/水质 | S (fish-ecology-assistant) |
+| 文献/综述/review | V (cognitive-search-engine) |
+| 特定濒危鱼名 | V + S 协同 |
+
+---
+
+## 🆕 十、P 层可扩展架构：从江豚到刀鲚
+
+### 10.1 P₁: porpoise-agent (长江江豚)
+
+- **课题组**: 淡水渔业研究中心 刘凯研究员
+- **方向**: NBHF click 声学检测、栖息地建模、种群评估
+- **知识库**: 26 文件 MoE (~85 篇论文)
+
+### 10.2 P₂: coilia-agent (刀鲚/长江刀鱼)
+
+- **课题组**: 淡水渔业研究中心 刘凯研究员（与 P₁ 同级）
+- **方向**: 洄游生态、耳石微化学 (Sr/Ca)、资源评估、群体遗传
+- **背景**: 长江三鲜之首，资源量仅为历史峰值(1973年3750t)的1-3%
+
+### 10.3 P 层扩展模板
+
+```
+新物种 Agent = 复制 porpoise-agent 结构，替换:
+  1. data/knowledge_base/species/   → 目标物种知识库
+  2. src/prompts/system_prompts.py  → 物种系统提示词
+  3. src/skills/                    → 领域 Skills
+  4. config/agent.yaml              → 激活关键词
+  5. meso-cosmos 路由规则            → 注册新 P 实例
+```
+
+### 10.4 S-T-V-P 五项目关系
+
+```
+用户问题 → meso-cosmos-agent (T)
+              │
+    ┌─────────┼─────────┬─────────┐
+    ▼         ▼         ▼         ▼
+   fish      porp     coilia   cognitive
+   (S)       (P₁)     (P₂)     (V)
+  知识供给   江豚专研  刀鲚专研  验证引擎
+```
+
+---
+
+## 📎 附录：8 个版本转折点 Git Commit 对照表
+
+| 转折点 | 日期 | 项目 | Commit | 主题 |
+|:--:|------|------|--------|------|
+| 1 | 06-05 | porpoise | `21eb3b9` | Porpoise Agent 初始框架 |
+| 2★ | 06-06 中午 | porpoise | `3e1745a` | dual-core philosophy — Panta Rhei + Systems Thinking |
+| 3 | 06-06 下午 | porpoise | `06954e9` | Engineering Grammar — philosophy-to-code translation |
+| 4 | 06-06 晚上 | cognitive | `35d0f22` | living system + self-evolution |
+| 5 | 06-07 凌晨 | porpoise | `c25ae98` | S-T-V triangulation — min_sources 2→3 |
+| 6 | 06-07 | fish | `328b81a` | README v6.1 — 搜索引擎 5→12 |
+| 7 | 06-07 最终 | cognitive | `9b5c3e2` | workspace-level Meso-Cosmos Agent v4.0 |
+
+> **注**: 多个转折点可在同一 commit 中体现（如 #4 活系统同时涉及 cognitive/fish/porpoise）。以上列出的是各转折点的标志性 commit。
+
+---
+
+## 🆕 十一、三层智能优化架构 (v5.2 — 2026-06-08)
+
+### 11.1 设计哲学
+
+> "以精巧的架构设计，换取极致的计算效率" — DeepSeek 核心哲学
+
+三层互补：**DeepSeek 层节能** (减少无效计算) + **学者层置信** (统计停止保证) + **混沌层探索** (避免局部最优)。
+
+### 11.2 架构总览
+
+| 层 | 模块 | 核心技术 | 理论来源 |
+|:--:|------|------|------|
+| ⚡ DeepSeek | `search_optimizer.py` | MoE 门控 · KV 结果缓存 · CSA/HCA 分层搜索 · 满意即止 | DeepSeek V2→V4 |
+| 🎓 Scholar | `search_optimizer.py` | Rule of Three 统计停止 · Simon 有限理性 · 熵驱动方向 | Hanley (1983) · Simon (1955) · NOAA (2023) |
+| 🦋 Chaos | `chaos_engine.py` | Rössler 吸引子 · Logistic 探索 · 临界耦合 · EntropyGuard | Langton (1990) · Chen & Aihara (1995) |
+
+### 11.3 DeepSeek 技术映射
+
+| DeepSeek 技术 | 五项目落地 | 效果 |
+|:--|------|------|
+| MoE 稀疏激活 | MoEGate — 鳤→仅V, 江豚→V+P₁, 刀鲚→V+P₂ | 算力精准分配 |
+| MLA KV 压缩 | ResultCache — 缓存命中 0 token 0ms | 避免重复搜索 |
+| MTP 并行预测 | 多引擎并行 + 首个达标即停 | 不等所有引擎 |
+| GRPO 相对优化 | SatisficingStopper — IG < ε → STOP | 相对信息增益 |
+| Aux-loss-free | 门控无惩罚路由 | P₁/P₂ 按物种分布激活 |
+| DualPipe | Config 热加载 + DirectLoader 缓存 | 224× 加速 |
+
+### 11.4 学者级统计停止
+
+```
+Rule of Three (Hanley & Lippman-Hand, 1983):
+  连续 k 篇不相关 → 剩余文献中相关率 ≤ 3/k (95%CI)
+  k=30 → ≤10% → 停止
+  k=20 → ≤15% → 结合 Simon 满意即止判断
+
+Simon 有限理性 (1955, 1978 Nobel):
+  token/时间/筛选量 三重硬约束
+  不求最优解, 只求在约束内达到满意解
+
+NOAA 熵驱动 (2023):
+  优先搜索信息增益最大的方向
+  高不确定性方向优先 (中文数据库、引用图)
+```
+
+### 11.5 混沌增强智能体
+
+```
+Rössler 吸引子 (Langton 1990):
+  状态轨迹 [x,y,z] 连续驱动路由偏置
+  路由置信度 ±0.02 非重复扰动
+  避免确定性路径依赖
+
+Logistic 混沌探索 (Chen & Aihara 1995):
+  μ=4 遍历 [0,1] 区间
+  ~5% 概率触发 wildcard 意外搜索方向
+  促发偶然发现 (serendipity)
+
+混沌边缘耦合 (Beggs & Plenz 2003):
+  S-T-V-P₁-P₂ 交互矩阵谱半径≈1
+  临界态涌现协同行为
+
+EntropyGuard (Takahashi 2018):
+  熵值超标 → 衰减混沌耦合 → 回退确定性基线
+  硬性裁剪 + 稳定基线 fallback
+```
+
+---
+
+## 🆕 十二、五项目自我评价矩阵
+
+| 项目 | 架构 | 能效 | 学术 | 探索 | 测试 | 综合 |
+|------|:--:|:--:|:--:|:--:|:--:|:--:|
+| meso-cosmos (T) | ⭐5 | ⭐4 | ⭐5 | ⭐4 | ⭐5 | **4.6** |
+| cognitive (V) | ⭐5 | ⭐4 | ⭐5 | — | ⭐5 | **4.8** |
+| fish (S) | ⭐5 | ⭐5 | ⭐5 | — | ⭐4 | **4.8** |
+| porpoise (P₁) | ⭐5 | ⭐4 | ⭐5 | — | ⭐5 | **4.8** |
+| coilia (P₂) | ⭐5 | ⭐3 | ⭐5 | — | ⭐4 | **4.2** |
+
+> **整体评价**: 5 项目平均 4.6/5.0。核心优势在于 S-T-V-P₁-P₂ 架构完整性 + 三层智能优化 + 251 项测试覆盖。coilia-agent (P₂) 需将 Skills 从 delegation stub 升级为可执行逻辑。
+
+---
+
+---
+
+## 🆕 十四、TAO 架构哲学 — 一生二·二生三·三生万物
+
+### 14.1 道 (Tao) — 不可变的架构原则
+
+> *Tao begets One · One begets Two · Two begets Three · Three begets all things*
+> — 道德经 · 第四十二章
+
+S-T-V 三角形是"道"的工程化表达：三角形是最少线段构成的稳定平面，
+任意两个顶点之间都有直接通路。这是不可变的核心架构。
+
+### 14.2 一生二 — 阴阳两极
+
+| 极 | 项目 | 特性 |
+|:--:|------|------|
+| ☀️ 阳 | fish (S) | 知识供给 — 主动、外展、扩展 |
+| 🌙 阴 | cognitive (V) | 验证引擎 — 收敛、批判、校验 |
+
+S 向外搜寻、扩展知识边界；V 向内收敛、验证真伪。
+两者独立时均不完整 — S 无 V 则真假难辨，V 无 S 则无物可验。
+
+### 14.3 二生三 — 三角稳定结构
+
+T (meso-cosmos) 是"中"——连接 S 与 V，使两极产生交互。S-T-V 三个顶点
+构成的最小稳定三角形，是 Agent 协同的基本单元。
+
+### 14.4 三生万物 — 无限衍生
+
+三角形一旦确立，从任意顶点可衍生出无限子节点：
+P₁(江豚)、P₂(刀鲚)、P₃(中华鲟)... Pₙ(任意物种)
+
+**五项目的三层本质**:
+
+| 层次 | 道学映射 | 项目 |
+|:--:|------|------|
+| 一 | 道 | S-T-V 三角形 (不可变原则) |
+| 二 | 阴阳 | S(fish) + V(cognitive) |
+| 三 | 中 | T(meso-cosmos) |
+| 万物 | 衍生 | P₁(porpoise) + P₂(coilia) + ... |
+
+---
+
+## 🆕 十五、五行相生相克 — 动态流转
+
+### 15.1 五项目 · 五行映射
+
+| 五行 | 项目 | 特性 | 工程含义 |
+|:--:|------|------|------|
+| 🪵 木 | cognitive (V) | 生长·扩展 | 搜索如木之生长，向四面八方延伸 |
+| 🔥 火 | meso-cosmos (T) | 升腾·驱动 | 协调如火之升腾，驱动全局流转 |
+| 🪨 土 | fish (S) | 承载·化育 | 知识如土之承载，化育万物 |
+| ⚔️ 金 | porpoise (P₁) | 收敛·肃降 | 专研如金之收敛，精纯不杂 |
+| 💧 水 | coilia (P₂) | 流动·润下 | 洄游如水之流动，润下不息 |
+
+### 15.2 相生 — 数据流转
+
+```
+🪵木(V)生🔥火(T): 搜索结果驱动路由决策
+🔥火(T)生🪨土(S): 协调结果丰富知识库
+🪨土(S)生⚔️金(P₁): 知识供给支撑江豚专研
+⚔️金(P₁)生💧水(P₂): 研究方法惠及刀鲚专研
+💧水(P₂)生🪵木(V): 新发现触发新搜索
+```
+
+### 15.3 相克 — 制衡校验
+
+```
+🪵木(V)克🪨土(S): 验证约束知识质量
+🪨土(S)克💧水(P₂): 知识范围限制专研边界
+💧水(P₂)克🔥火(T): 专精深度制约协调广度
+🔥火(T)克⚔️金(P₁): 路由控制专研自主性
+⚔️金(P₁)克🪵木(V): 专精挑战验证通用性
+```
+
+### 15.4 五行平衡监控
+
+每个项目内置 `config/wuxing.yaml` + `WuxingMonitor` (meso-cosmos)，
+实时监控五行健康指标，任一过强或过弱触发调节建议。
+
+---
+
+---
+
+## 🆕 十六、Eon-Taiji v7.2 — 十层同心统一内核 (2026-06-08)
+
+> **从 6 项目到 5 项目，从刚性三角形到十层同心活体**
+
+### 关键跃迁
+
+| 维度 | v5.2 (旧) | v7.2 (新) |
+|------|----------|----------|
+| 项目数 | 6 (含 meso-cosmos) | 5 (meso 删除, 功能迁至 eon-core) |
+| 协调层 | meso-cosmos (T, 1714行单体) | eon-core OriginKernel (DAG拓扑+EventBus) |
+| 跨项目调用 | 3种 DirectLoader 路径 (相对/绝对/env) | 统一 project_loader.py |
+| Agent 状态管理 | 无 | ☸️ 六道轮回 (Karma+Samsara) |
+| 拓扑保证 | 无 | DAG (nx.is_directed_acyclic_graph) |
+| 架构形态 | 2D K₃ 完全图 | 3D 十层同心 |
+| fish 项目 | 纯 Reasonix 技能 (无 Python 入口) | +adapter.py +orchestrator.py |
+| coilia 地位 | P₂ 同级项目 | P₂ 同级项目 (保持, 未合并) |
+
+### eon-core 十层结构
+
+```
+☯️ L0: OriginKernel (EventBus + DAG)
+☀️🌙 L1: YinYang Poles (类型安全)
+△ L2: 4 Vertices (V0 fish / V1 cognitive / V2 porpoise / V3 coilia)
+☰ L3: 8 Trigrams (功能子模块)
+△³ L4: TetrahedronMesh (谱分析)
+⬟ L5: WuXing (五行流转)
+☸️ L6: Samsara (六道轮回) ← 核心创新
+○ L7: SphereGateway (API网关)
+〰️ L8: Tendrils (12探针)
+🦋 L9: Evolution (混沌+优化)
+```
+
+### 六道轮回核心机制
+
+- **KarmaEngine**: 内嵌每个顶点/八卦, 12条善业恶业评分规则
+- **SamsaraRing**: 每60秒全局评估, 六道状态自动流转
+- **KarmaCourt**: 独立仲裁, 防止天道过度集中
+- **ReincarnationProtocol**: 7步原子转生, 快照回滚
+- **NirvanaProtocol**: 连续3次天道+零恶业 → 只读 Oracle
+
+---
+
+## 📋 文档版本历史
+
+| 版本 | 日期 | 变更 |
+|------|------|------|
+| **v7.3** | 2026-06-09 | 🗄️ 活系统数据库目录 (61库/8领域/4层级/自进化) + 图谱路由器 |
+| **v7.2** | 2026-06-08 | 🆕 Eon-Taiji 十层同心统一内核 + 六道轮回 + 5项目精简 |
+| **v5.2** | 2026-06-08 | ☯️ TAO 架构哲学 + 🔥 五行相生相克 |
+| **v5.2** | 2026-06-08 | 三层智能优化 + 混沌增强 + 自我评价矩阵 |
+| **v5.2** | 2026-06-08 | S-T-V → S-T-V-P₁-P₂ · 新增 meso-cosmos + coilia |
+| **v4.0** | 2026-06-07 | 三项目进化 · 8个版本转折点 · S-T-V 刚性三角形 |
+
+> **最新**: v7.3.0 · 2026-06-09 · cognitive v5.4.0 / eon-core v7.2.0
+
+---
+
+## 🗄️ v7.3: 活系统数据库目录 — 从"拍脑袋选库"到"图谱路由+自进化"
+
+> **cognitive-search-engine v5.4.0** — 新增 `catalog_loader.py` (870行) + `database_catalog.yaml` (61库/8领域/4层级)
+
+### 核心突破
+
+| 能力 | 之前 | v7.3 |
+|------|------|------|
+| 数据库选择 | 手动指定 | `graph_route(query)` 加权拓扑路由 |
+| 搜索策略 | 全量并行 | `progressive_route()` 综合入口→可展开专业库 |
+| 领域匹配 | 布尔触发词 | `score_domains()` 计数归一化 + context_rules 重加权 |
+| 意图检测 | 无 | `detect_intent()` → 文献/数据/学位论文/全量 |
+| 数据库健康 | 无感知 | `health_aware=True` → 触手健康降权 ×0.2 |
+| 权重更新 | 手工调 | `apply_feedback()` ≥3样本自动 ±0.02~0.05 |
+| 新领域发现 | 人工定义 | `emerge_domains()` 从搜索行为涌现 |
+| 分类学搜索 | 一层 | `taxonomic_unfold()` L1(物种)→L2(属)→L3(科)→L4(中文) |
+
+### 四层架构
+
+```
+意图层: detect_intent(q) → {文献|数据|学位论文|全量}
+  ↓
+路由层: score_domains → graph_route(topology+tendril) → progressive_route(tiers)
+  ↓
+控制层: should_continue_phase(SM-2 retreat) + taxonomic_unfold
+  ↓
+生长层: record_search_result → apply_feedback → emerge_domains
+```
