@@ -25,6 +25,7 @@ sys.path.insert(0, str(_SCRIPTS))
 import yaml
 
 from credibility_scorer import score_papers
+from search_dispatcher import SearchDispatcher, EngineGroup
 
 
 def load_graph() -> dict:
@@ -102,7 +103,27 @@ def cli():
     parser.add_argument("--n", type=int, default=10, help="展示论文数")
     parser.add_argument("--format", choices=["summary", "table", "json", "all"], default="summary")
     parser.add_argument("--output", help="输出到文件")
+    parser.add_argument("--engines", choices=["quick","standard","full","chinese","all"], default=None,
+                        help="走 11 引擎矩阵搜索（替代图谱缓存）")
+    parser.add_argument("--matrix", action="store_true", help="显示搜索引擎矩阵")
     args = parser.parse_args()
+
+    if args.matrix:
+        sd = SearchDispatcher()
+        sd.print_matrix()
+        return
+
+    if args.engines:
+        sd = SearchDispatcher()
+        group = EngineGroup(args.engines)
+        print(f"\n🔍 搜索引擎矩阵搜索: \"{args.query}\" ({group.value})")
+        print(f"   正在调用 {len(sd.list_engines())} 个引擎...\n")
+        report = sd.search(args.query, group=group)
+        print(f"   ✅ {report.total_papers} papers from {report.engines_used} engines ({report.elapsed_total_ms:.0f}ms)")
+        for r in report.results:
+            icon = "✅" if r.status == "ok" else "❌"
+            print(f"      {icon} {r.engine:15s} {len(r.papers):3d} papers")
+        return
 
     graph = load_graph()
     species, species_id = find_species(graph, args.query)

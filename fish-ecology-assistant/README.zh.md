@@ -1,4 +1,4 @@
-﻿# Fish Ecology Assistant 🌊
+# Fish Ecology Assistant 🌊
 
 > 🌊 万物皆变 · Panta Rhei
 >
@@ -154,14 +154,14 @@ fish-ecology-assistant/
 │       └── 📖 learning-guide.md        学习指南
 ├── 📁 research_output/                 生成的分析报告
 └── ⚡ setup.ps1                        一键安装脚本
-```
+```---
 
 
 ## 🔗 生态体系
 
 > 🔥 和则无穷力量，分则顶尖专家引擎。
 
-本项目是「三生万物」生态的 知识供给核心 (V0)。
+本项目是「三生万物」生态的 V0。
 
 ```
 三角核心 (sealed 3):
@@ -174,7 +174,7 @@ fish-ecology-assistant/
   🐟 coilia-agent      → 刀鲚专研 (P₂)
   🐟 culter-agent      → 鲌类专研 (P₃)
   🔥 conflict-arbiter  → 冲突仲裁 (C)
-```---
+```
 
 > 🌊 万物皆变 · Panta Rhei
 >

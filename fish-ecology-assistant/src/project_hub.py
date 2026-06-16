@@ -1,4 +1,4 @@
-"""
+﻿"""
 ProjectHub — 多项目协调中枢
 
 架构: 三角核心 (sealed 3) + 衍生项目 (open N)
@@ -132,6 +132,16 @@ DERIVED: List[DerivedMember] = [
         description="第二衍生: 刀鲚(三鲜之首)。三角赋能耳石+洄游。",
     ),
     DerivedMember(
+        key="culter",
+        name="culter-agent",
+        symbol="P₃",
+        role="鲌类专研 — 基因组学, 年龄生长, 稳定同位素营养生态位, 同域共存, 资源评估, 栖息地建模",
+        directory="culter-agent",
+        adapter_module="src/adapter.py",
+        adapter_class="CulterAdapter",
+        description="第三衍生: 鲌类(翘嘴鲌/蒙古鲌/尖头鲌)。三角赋能基因组+同位素。",
+    ),
+    DerivedMember(
         key="conflict",
         name="conflict-arbiter",
         symbol="C",
@@ -159,6 +169,7 @@ class ProjectHub:
     万物衍生 (open N):
       hub.porpoise   — P₁ 江豚专研
       hub.coilia     — P₂ 刀鲚专研
+      hub.culter     — P₃ 鲌类专研
       hub.conflict   — C  冲突仲裁
 
     铁律:
@@ -210,6 +221,11 @@ class ProjectHub:
     def coilia(self):
         """coilia-agent — P₂ 刀鲚专研 [衍生可选]。"""
         return self._ensure_derived("coilia")
+
+    @property
+    def culter(self):
+        """culter-agent — P₃ 鲌类专研 [衍生可选]."""
+        return self._ensure_derived("culter")
 
     @property
     def conflict(self):
