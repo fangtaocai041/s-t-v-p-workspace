@@ -1,0 +1,11 @@
+# 🪨 土·承载·化育
+wuxing:
+  element: "土"
+  phase: "化育"
+  generates: "金"
+  controls: "水"
+  generated_by: "火"
+  controlled_by: "木"
+  health:
+    metric: "knowledge.coverage"
+    normal_range: [0.4, 0.9]

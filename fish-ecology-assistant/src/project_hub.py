@@ -1,51 +1,38 @@
 """
-ProjectHub — 道生万物 · 统一项目中枢
+ProjectHub — 三生万物架构 · 统一项目中枢
 
-  道生一，一生二，二生三，三生万物。
-  Dao begets One, One begets Two, Two begets Three, Three begets the Myriad.
+三生万物 = 三角核心 (sealed 3) + 万物衍生 (open N)
 
-道 (Dao) — 外界。用户的研究问题，真实世界的生态学疑问。
-  物种从哪里来？往哪里去？资源如何变化？—— 一切始于外部世界的发问。
+  三 (Triangle Core · 密闭三元素):
+    fish-ecology-assistant     S/V0 — 知识供给 (self)
+    cognitive-search-engine    V/V1 — 搜索验证
+    eon-core                   Coordinator — 协调内核
 
-一 (One) — 命令。用户输入进入模型项目的那一刻。
-  一个查询字符串，一道指令，一次意图的投射。
-  "检索珠星三块鱼" — 道化为形，进入系统。
-
-二 (Two) — 对立。太极生两仪，矛盾与统一。
-  S (fish · 知识供给 · 静态) ↔ V (cognitive · 搜索验证 · 动态)
-  知识是凝滞的过去，验证是流动的当下。阴阳相推，而生变化。
-
-三 (Three) — 三角。矛盾统一的闭合结构。
-  fish(S/V0) + cognitive(V/V1) + eon-core(Coordinator)
-  三角形是最小的封闭图形——两点只能对峙，三点才能围合出空间。
-  密闭三元组：缺一则结构崩塌。
-
-万物 (Myriad) — 一切事物。无限衍生。
-  porpoise(P₁) + coilia(P₂) + conflict(C) + P₃, P₄, P₅ ...
-  不是一万个物种，不是一万个项目——而是一切可能的输出。
-  论文、分析报告、声学检测、种群评估、冲突裁决……无穷尽也。
+  万物 (Derived · 开放衍生):
+    porpoise-agent    P₁ — 江豚专研
+    coilia-agent      P₂ — 刀鲚专研
+    conflict-arbiter  C  — 冲突仲裁
+    ...               Pₙ — 未来可无限扩展
 
 铁律:
-  - 道在外，不在内。系统的意义来自外部世界的问题。
-  - 三角形密闭: 三元素缺一不可。少一个角，结构崩塌。
-  - 万物开放: 三角不依赖任何衍生。衍生缺失，三角照样运转。
-  - 道 → 一 → 二 → 三 → 万物：单向流动，不可逆。
-
+  - 三角核心密闭: 正好3个, 缺一不可, 三项目共同进化
+  - 万物开放: 0到N, 三角不依赖任何衍生项目
+  - 三角提供基础能力 (知识+验证+协调), 衍生项目在此基础上执行
 
 用法:
   from src.project_hub import get_hub
 
   hub = get_hub()
-  hub.cognitive.search("Ochetobius elongatus")    # 二: 阴阳之阳(动)
-  hub.porpoise.health()                            # 万物: P₁
-  hub.is_triangle_complete()                       # 三: 结构完整性
-  result = hub.search_species("珠星三块鱼")         # 一→二→三
+  hub.cognitive.search("Ochetobius elongatus")    # 三角: 搜索验证
+  hub.porpoise.health()                            # 衍生: 江豚状态
+  hub.is_triangle_complete()                       # → True/False
+  result = hub.search_species("珠星三块鱼")         # 统一入口
 """
 
 from __future__ import annotations
 
 import logging
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -53,21 +40,21 @@ logger = logging.getLogger(__name__)
 
 
 # ═══════════════════════════════════════════════════════
-# 三 · Triangle Core (sealed set of 3)
+# 三角核心 · 密闭三元素 (sealed set of 3)
 # ═══════════════════════════════════════════════════════
 
 @dataclass
 class TriangleMember:
-    """三角之一角 — 密闭集合的元素。"""
+    """三角核心成员 — 密闭集合，缺一不可。"""
     key: str
     name: str
     symbol: str          # "S/V0" | "V/V1" | "Coordinator"
-    pole: str            # "Yin" | "Yang" | "Synthesis"
     role: str
     directory: str
     adapter_module: str
     adapter_class: str
     factory: str = "get_adapter"
+    description: str = ""
 
 
 TRIANGLE: List[TriangleMember] = [
@@ -75,42 +62,42 @@ TRIANGLE: List[TriangleMember] = [
         key="fish",
         name="fish-ecology-assistant",
         symbol="S/V0",
-        pole="Yin",
-        role="知识供给 (Knowledge) — 多流域物种库, 矛盾分析, 可信度评分. 阴: 凝滞的过去, 静态的知识.",
+        role="知识供给 — 多流域物种知识库 (Yangtze 443+), 矛盾分析, KB-First搜索, 可信度评分",
         directory="fish-ecology-assistant",
         adapter_module="src/adapter.py",
         adapter_class="FishEcologyAdapter",
+        description="三角之S: 状态与知识。万物皆从此出。",
     ),
     TriangleMember(
         key="cognitive",
         name="cognitive-search-engine",
         symbol="V/V1",
-        pole="Yang",
-        role="搜索验证 (Validation) — BDI+ReAct多源搜索, OCR变体, 引用回溯, 三角验证. 阳: 流动的当下, 动态的求证.",
+        role="搜索验证 — BDI+ReAct多源搜索, OCR变体, 引用回溯, 权威评分, 三角验证(enforce_independence)",
         directory="cognitive-search-engine",
         adapter_module="src/adapter.py",
         adapter_class="CognitiveSearchAdapter",
+        description="三角之V: 验证与搜索。万物经此验证。",
     ),
     TriangleMember(
         key="eon",
         name="eon-core",
         symbol="Coordinator",
-        pole="Synthesis",
-        role="协调内核 (Coordinator) — 10层同心架构, DAG拓扑, Samsara评控, 健康监控. 合: 阴阳交汇, 矛盾统一.",
+        role="协调内核 — 10层同心架构, DAG拓扑路由, Samsara业力引擎(6道轮回), EventBus, WuXing健康监控",
         directory="eon-core",
         adapter_module="src/adapter.py",
         adapter_class="EonCoreAdapter",
+        description="三角之Coordinator: 协调与演化。万物由此调度。",
     ),
 ]
 
 
 # ═══════════════════════════════════════════════════════
-# 万物 · Myriad Things (open set, P₁..Pₙ)
+# 万物衍生 · 开放集合 (open set, P₁..Pₙ)
 # ═══════════════════════════════════════════════════════
 
 @dataclass
 class DerivedMember:
-    """万物之一物 — 开放集合的元素。三角赋能而生。"""
+    """衍生项目成员 — 开放集合，三角不依赖。"""
     key: str
     name: str
     symbol: str          # "P₁" | "P₂" | "C" | "Pₙ"
@@ -119,6 +106,7 @@ class DerivedMember:
     adapter_module: str
     adapter_class: str
     factory: str = "get_adapter"
+    description: str = ""
 
 
 DERIVED: List[DerivedMember] = [
@@ -126,138 +114,135 @@ DERIVED: List[DerivedMember] = [
         key="porpoise",
         name="porpoise-agent",
         symbol="P₁",
-        role="江豚专研 — NBHF声学, 栖息地建模, 种群评估. 三角赋能: 知识+验证→声学保育.",
+        role="江豚专研 — NBHF声学检测(100-180kHz), 栖息地建模, 种群评估, 26文件MoE知识库",
         directory="porpoise-agent",
         adapter_module="src/adapter.py",
         adapter_class="PorpoiseAdapter",
+        description="第一衍生: 长江江豚。三角赋能声学+保育。",
     ),
     DerivedMember(
         key="coilia",
         name="coilia-agent",
         symbol="P₂",
-        role="刀鲚专研 — 耳石微化学, 洄游生态, 资源评估. 三角赋能: 知识+验证→耳石+洄游.",
+        role="刀鲚专研 — 耳石微化学(Sr/Ca), 洄游生态, 资源评估, CPUE分析",
         directory="coilia-agent",
         adapter_module="src/adapter.py",
         adapter_class="CoiliaAdapter",
+        description="第二衍生: 刀鲚(三鲜之首)。三角赋能耳石+洄游。",
     ),
     DerivedMember(
         key="conflict",
         name="conflict-arbiter",
         symbol="C",
-        role="冲突仲裁 — 多源保护级别冲突检测, 加权裁决. 三角赋能: 矛盾分析→司法裁决.",
+        role="冲突仲裁 — 多源保护级别冲突检测, 中国优先加权, 时空可比性检查",
         directory="conflict-arbiter",
         adapter_module="src/adapter.py",
         adapter_class="ConflictArbiterAdapter",
+        description="仲裁衍生: 多源冲突裁决。三角的司法分支。",
     ),
 ]
 
 
 # ═══════════════════════════════════════════════════════
-# ProjectHub — 道→一→二→三→万物
+# ProjectHub
 # ═══════════════════════════════════════════════════════
 
 class ProjectHub:
-    """道生万物架构 · 统一项目中枢。
+    """三生万物架构 · 统一项目中枢。
 
-    道 (Dao)
-      └─ 一 (One): 用户命令 → fish-ecology-assistant
-           └─ 二 (Two): Yin(fish·知识) ↔ Yang(cognitive·验证)
-                └─ 三 (Three): Triangle Core — 密闭三元组
-                     └─ 万物 (Myriad): P₁, P₂, C, Pₙ...
+    三角核心 (sealed 3):
+      hub.cognitive  — V/V1 搜索验证引擎 [必需]
+      hub.eon        — Coordinator 协调内核 [配置必需, 运行时可选]
+      hub.fish       — S/V0 知识供给 [self, 始终可用]
 
-    访问:
-      hub.cognitive  — 二之Yang (V/V1 验证引擎)
-      hub.eon        — 三之Synthesis (Coordinator)
-      hub.porpoise   — 万物之P₁ (江豚)
-      hub.coilia     — 万物之P₂ (刀鲚)
-      hub.conflict   — 万物之C (仲裁)
+    万物衍生 (open N):
+      hub.porpoise   — P₁ 江豚专研
+      hub.coilia     — P₂ 刀鲚专研
+      hub.conflict   — C  冲突仲裁
 
-    状态:
-      hub.is_triangle_complete()  — 三是否完整?
-      hub.health_all()             — 三 + 万物 完整健康
+    铁律:
+      hub.is_triangle_complete() → 三角三元素必须全部可用
+      衍生项目缺失不影响三角运转
     """
 
     def __init__(self) -> None:
-        self._root = Path(__file__).resolve().parent.parent
-        self._workspace = self._root.parent
+        self._root = Path(__file__).resolve().parent.parent  # fish-ecology-assistant/
+        self._workspace = self._root.parent                   # D:\Reasonix\
         self._loaded: Dict[str, Any] = {}
         self._errors: Dict[str, str] = {}
 
+        # 三角成员索引
         self._triangle_map: Dict[str, TriangleMember] = {m.key: m for m in TRIANGLE}
+        # 衍生成员索引
         self._derived_map: Dict[str, DerivedMember] = {m.key: m for m in DERIVED}
 
-        # 预加载二之Yang (cognitive 是必需的阴阳之一极)
+        # 预加载三角核心 (cognitive 必需, eon 尝试)
         self._ensure_triangle("cognitive")
 
-    # ── 三 · Triangle ──
+    # ── 三角核心属性 ──
 
     @property
     def fish(self):
-        """一之势能，二之Yin — 知识供给 (self)。"""
-        return self
+        """fish-ecology-assistant — S/V0 知识供给 (self)。始终可用。"""
+        return self  # self-referential: hub.fish ≡ hub
 
     @property
     def cognitive(self):
-        """二之Yang — 搜索验证引擎。"""
+        """cognitive-search-engine — V/V1 搜索验证引擎 [三角必需]。"""
         return self._ensure_triangle("cognitive")
 
     @property
     def eon(self):
-        """三之Synthesis — 协调内核。"""
+        """eon-core — Coordinator 协调内核 [三角必需]。"""
         return self._ensure_triangle("eon")
 
-    # ── 万物 · Myriad ──
+    # ── 万物衍生属性 ──
 
     @property
     def porpoise(self):
-        """万物之P₁ — 江豚专研。"""
+        """porpoise-agent — P₁ 江豚专研 [衍生可选]。"""
         return self._ensure_derived("porpoise")
 
     @property
     def coilia(self):
-        """万物之P₂ — 刀鲚专研。"""
+        """coilia-agent — P₂ 刀鲚专研 [衍生可选]。"""
         return self._ensure_derived("coilia")
 
     @property
     def conflict(self):
-        """万物之C — 冲突仲裁。"""
+        """conflict-arbiter — C 冲突仲裁 [衍生可选]。"""
         return self._ensure_derived("conflict")
 
-    # ── 三角完整性 ──
+    # ── 三角完整性检查 ──
 
     @property
     def triangle_members(self) -> List[str]:
+        """三角核心成员列表 (按 S→V→Coordinator 顺序)。"""
         return ["fish", "cognitive", "eon"]
 
     @property
     def derived_members(self) -> List[str]:
+        """万物衍生成员列表。"""
         return [m.key for m in DERIVED]
 
     def is_triangle_complete(self) -> bool:
-        """三是否完整? 密闭三元组铁律。"""
-        if self._ensure_triangle("cognitive") is None:
-            return False
-        eon_ok = self._ensure_triangle("eon") is not None
-        if not eon_ok:
-            eon_cfg = self._workspace / "eon-core" / "config" / "taiji.yaml"
-            eon_ok = eon_cfg.is_file()
-        return eon_ok
+        """三角三元素是否全部可用? 密闭集合铁律。"""
+        return all(
+            self._ensure_triangle(k) is not None
+            for k in self.triangle_members
+        )
 
     def triangle_status(self) -> Dict[str, Any]:
-        """三之详细状态。"""
+        """三角核心详细状态。"""
         status = {}
         for m in TRIANGLE:
             adapter = self._loaded.get(m.key)
-            available = adapter is not None or m.key == "fish"
-            if m.key == "eon" and not available:
-                eon_cfg = self._workspace / "eon-core" / "config" / "taiji.yaml"
-                available = eon_cfg.is_file()
             status[m.key] = {
                 "symbol": m.symbol,
-                "pole": m.pole,
                 "name": m.name,
                 "role": m.role,
-                "available": available,
+                "available": adapter is not None or m.key == "fish",
+                "required": True,
             }
             if m.key in self._errors:
                 status[m.key]["error"] = self._errors[m.key]
@@ -265,7 +250,7 @@ class ProjectHub:
 
     @property
     def eon_config(self) -> Dict[str, Any]:
-        """eon-core 的 taiji.yaml 配置。"""
+        """加载 eon-core 的 taiji.yaml 配置。"""
         try:
             import yaml
             cfg = self._workspace / "eon-core" / "config" / "taiji.yaml"
@@ -275,20 +260,24 @@ class ProjectHub:
             pass
         return {}
 
-    # ── 道→一→二→三→万物: 搜索闭环 ──
+    # ── 统一入口 ──
 
     def search_species(self, name: str, mode: str = "kb_first",
                        group: str = "full", limit: int = 10) -> Dict[str, Any]:
-        """一→二→三: 用户命令 → Yin/Yang → Triangle Core.
+        """统一物种搜索 — 三角核心联动。
 
-        道: 用户的研究问题 ("珠星三块鱼是什么?")
-        一: 命令进入系统 (此方法被调用)
-        二: Yin(fish·KB) ↔ Yang(cognitive·搜索)
-        三: Triangle闭环 (搜索→验证→写回)
+        Pipeline (三角闭环):
+          S (fish KB) → V (cognitive 搜索) → S (可信度评分写回)
+
+        Args:
+            name: 物种中文名或学名
+            mode: "kb_first" (默认) | "search_only" | "kb_only"
+            group: 搜索引擎组
+            limit: 每引擎最大结果数
         """
         orch = self._get_orchestrator()
         if orch is None:
-            return {"stage": "error", "error": "一之载体 (orchestrator) 不可用"}
+            return {"stage": "error", "error": "三角之S (orchestrator) 不可用 — 三角破裂"}
 
         if mode == "kb_only":
             kb = orch.kb_first_lookup(query=name)
@@ -304,7 +293,7 @@ class ProjectHub:
                     "aliases": kb.aliases,
                     "synonyms": kb.synonyms,
                 },
-                "path": "道→一→Yin(fish·KB)",
+                "triangle_used": ["S(fish)"],
             }
 
         if mode == "kb_first":
@@ -327,17 +316,20 @@ class ProjectHub:
                     "distribution": kb.distribution,
                 },
                 "needs_user_decision": True,
-                "path": "道→一→Yin(fish·KB)",
+                "triangle_used": ["S(fish)"],
             }
 
         return self._run_full_search(name, group, limit)
 
     def _run_full_search(self, name: str, group: str, limit: int,
                          kb_result: Any = None) -> Dict[str, Any]:
-        """二之运动: Yin(知识) → Yang(验证)。"""
+        """S→V: 知识库 → 搜索验证引擎。"""
         cog = self._ensure_triangle("cognitive")
         if cog is None:
-            return {"stage": "error", "error": "二之Yang (cognitive) 不可用 — 阴阳失衡"}
+            return {
+                "stage": "error",
+                "error": "三角之V (cognitive) 不可用 — 三角破裂",
+            }
 
         try:
             full_result = cog.search(name, mode="adaptive")
@@ -345,38 +337,35 @@ class ProjectHub:
                 "stage": "full_search",
                 "kb_found": kb_result.found if kb_result else False,
                 "full_result": full_result,
-                "path": "道→一→二(Yin+Yang)→三(Triangle)",
+                "triangle_used": ["S(fish)", "V(cognitive)"],
             }
         except Exception as e:
             try:
-                # 使用 importlib 直接加载避免 src 命名空间冲突
-                import importlib.util as _iu
-                _cog_src = self._workspace / "cognitive-search-engine" / "src" / "search_coordinator.py"
-                if _cog_src.is_file():
-                    _spec = _iu.spec_from_file_location("_cog_search", str(_cog_src))
-                    if _spec and _spec.loader:
-                        _mod = _iu.module_from_spec(_spec)
-                        _spec.loader.exec_module(_mod)
-                        result = _mod.search(name, group=group, limit=limit)
-                        return {
-                            "stage": "full_search",
-                            "kb_found": kb_result.found if kb_result else False,
-                            "full_result": result,
-                            "path": "道→一→二(Yin+Yang)→三(Triangle)",
-                        }
-                raise RuntimeError("cognitive-search-engine not loadable")
+                import sys as _sys
+                _cog_root = str(self._workspace / "cognitive-search-engine")
+                if _cog_root not in _sys.path:
+                    _sys.path.insert(0, _cog_root)
+                from src.search_coordinator import search
+                result = search(name, group=group, limit=limit)
+                return {
+                    "stage": "full_search",
+                    "kb_found": kb_result.found if kb_result else False,
+                    "full_result": result,
+                    "triangle_used": ["S(fish)", "V(cognitive)"],
+                }
             except Exception as e2:
-                return {"stage": "error", "error": f"搜索失败: {e} / {e2}"}
+                return {"stage": "error", "error": f"三角搜索失败: {e} / {e2}"}
 
-    # ── 三→万物: 三角赋能衍生 ──
+    # ── 委托: 三角 → 衍生 ──
 
     def delegate_to(self, subsystem: str, task: str,
                     **kwargs) -> Optional[Dict[str, Any]]:
-        """三→万物: 三角赋能衍生项目。
+        """委托任务到衍生项目 (三角赋能衍生)。
 
         Args:
             subsystem: "porpoise" | "coilia" | "conflict"
             task: 任务描述
+            **kwargs: 传递参数
         """
         adapter = self._ensure_derived(subsystem) or self._ensure_triangle(subsystem)
         if adapter is None:
@@ -387,125 +376,111 @@ class ProjectHub:
             logger.warning(f"委托 {subsystem} 失败: {e}")
             return None
 
-    # ── 健康 ──
+    # ── 健康检查 ──
 
     def health_all(self) -> Dict[str, Any]:
-        """三 + 万物 的完整健康。"""
+        """三角 + 万物的完整健康状态。"""
         return {
-            "philosophy": "道生一，一生二，二生三，三生万物",
-            "one": {"name": "fish-ecology-assistant", "status": "HEALTHY"},
-            "two": {
-                "yin": {"name": "fish-ecology-assistant", "pole": "Yin", "status": "HEALTHY"},
-                "yang": {
-                    "name": "cognitive-search-engine",
-                    "pole": "Yang",
-                    "status": "HEALTHY" if self._loaded.get("cognitive") else "DEGRADED",
-                },
-            },
-            "three": self.triangle_status(),
+            "architecture": "三生万物",
+            "triangle": self.triangle_status(),
             "triangle_complete": self.is_triangle_complete(),
-            "myriad": self._derived_status(),
+            "derived": self._derived_status(),
         }
 
     def _derived_status(self) -> Dict[str, Any]:
         status = {}
         for m in DERIVED:
             adapter = self._loaded.get(m.key)
-            s = "AVAILABLE" if adapter is not None else "DORMANT"
+            s = "AVAILABLE" if adapter is not None else "NOT_AVAILABLE"
             status[m.key] = {
                 "symbol": m.symbol,
                 "name": m.name,
                 "status": s,
                 "role": m.role,
+                "optional": True,
             }
+            if m.key in self._errors:
+                status[m.key]["error"] = self._errors[m.key]
         return status
 
     def capabilities(self) -> Dict[str, Any]:
+        """三角能力 + 万物能力。"""
         return {
-            "philosophy": "道→一→二→三→万物",
             "triangle": {
                 m.key: {
                     "symbol": m.symbol,
-                    "pole": m.pole,
                     "role": m.role,
+                    "description": m.description,
                     "available": m.key == "fish" or self._loaded.get(m.key) is not None,
                 }
                 for m in TRIANGLE
             },
-            "myriad": {
+            "derived": {
                 m.key: {
                     "symbol": m.symbol,
                     "role": m.role,
+                    "description": m.description,
                     "available": self._loaded.get(m.key) is not None,
                 }
                 for m in DERIVED
             },
         }
 
-    # ── 道生万物 · 全图 ──
+    # ── 关系图 ──
 
     @staticmethod
     def relationship_map() -> str:
-        """道→一→二→三→万物 完整 ASCII 图。"""
+        """三生万物架构 ASCII 图。"""
         return r"""
-              道 生 一，一 生 二，二 生 三，三 生 万 物
-        Dao → One → Two → Three → the Myriad Things
+                    三 生 万 物
+               Triangle → Ten Thousand
 
-                        ┌──────────┐
-                        │   道 Dao  │  外界 · 用户的研究问题
-                        │   Way     │  "珠星三块鱼是什么?"
-                        └────┬─────┘
-                             │ 生 (begets)
-                             ▼
-                        ┌──────────┐
-                        │  一  One  │  命令进入系统
-                        │  Unity    │  fish-ecology-assistant
-                        └────┬─────┘
-                             │ 生 (begets)
-                ┌────────────┴────────────┐
-                ▼                         ▼
-        ┌─────────────┐          ┌─────────────┐
-        │  二 Yin · 阴 │◄─对立─►│  二 Yang · 阳 │  太极生两仪
-        │  fish · S/V0 │  统一   │cognitive·V/V1│  矛盾与统一
-        │  知识 · 静态  │         │  验证 · 动态  │
-        └──────┬──────┘          └──────┬──────┘
-               │                        │
-               └──────────┬─────────────┘
-                          │ 生 (begets)
-                          ▼
-        ┌─────────────────────────────────────┐
-        │           三  Three                  │
-        │        Triangle Core · 密闭三元组    │
-        │                                     │
-        │  ┌─────────┐ ┌─────────┐ ┌───────┐ │
-        │  │fish·Yin │ │cog·Yang │ │eon·合 │ │
-        │  │  S/V0   │ │  V/V1   │ │Coord  │ │
-        │  └─────────┘ └─────────┘ └───────┘ │
-        └──────────────────┬──────────────────┘
-                           │ 生 (begets)
-              ┌────────────┼────────────┐
-              ▼            ▼            ▼
-        ┌─────────┐ ┌─────────┐ ┌─────────┐
-        │porpoise │ │ coilia  │ │conflict │
-        │   P₁    │ │   P₂    │ │    C    │
-        │ 江豚专研│ │ 刀鲚专研│ │ 冲突仲裁│
-        └─────────┘ └─────────┘ └─────────┘
-              │            │
-              ▼            ▼
-          P₃, P₄, P₅ ... 万物 Myriad
-          论文 · 报告 · 声学 · 种群 · 裁决 · ......
-          非一万种，而是一切可能。
+    ┌───────────────────────────────────────────┐
+    │             三 · Triangle Core             │
+    │           密闭集合 · 缺一不可              │
+    │                                           │
+    │   ┌─────────┐  ┌─────────┐  ┌─────────┐  │
+    │   │  fish   │  │cognitive│  │eon-core │  │
+    │   │  S/V0   │  │  V/V1   │  │  Coord  │  │
+    │   │ 知识供给 │  │ 搜索验证 │  │ 协调内核 │  │
+    │   └────┬────┘  └────┬────┘  └────┬────┘  │
+    │        └────────────┼────────────┘        │
+    └─────────────────────┼─────────────────────┘
+                          │ 赋能
+          ┌───────────────┼───────────────┐
+          │               │               │
+          ▼               ▼               ▼
+    ┌──────────┐  ┌──────────┐  ┌──────────┐
+    │ porpoise │  │ coilia   │  │ conflict │
+    │    P₁    │  │    P₂    │  │    C     │
+    │ 江豚专研 │  │ 刀鲚专研 │  │ 冲突仲裁 │
+    └──────────┘  └──────────┘  └──────────┘
+          │               │
+          ▼               ▼
+      P₃, P₄ ... 万物 · 开放集合 · 无限衍生
         """
 
-    # ── 内部 ──
+    # ── 内部: 懒加载 ──
 
     def _get_orchestrator(self) -> Any:
-        from .orchestrator import get_orchestrator
-        return get_orchestrator()
+        """直接文件路径加载 orchestrator — 避免循环导入。"""
+        import importlib.util, sys
+        orch_file = Path(__file__).resolve().parent / "orchestrator.py"
+        mod_name = f"_orch_hub_{id(self) % 10000}"
+        spec = importlib.util.spec_from_file_location(mod_name, str(orch_file))
+        if spec and spec.loader:
+            mod = importlib.util.module_from_spec(spec)
+            sys.modules[mod_name] = mod
+            spec.loader.exec_module(mod)
+            factory = getattr(mod, "get_orchestrator", None)
+            if factory:
+                return factory()
+        return None
 
     def _ensure_triangle(self, key: str) -> Any:
+        """加载三角核心成员 (必需)。"""
         if key == "fish":
-            return self
+            return self  # self-referential
         if key in self._loaded:
             return self._loaded[key]
         info = self._triangle_map.get(key)
@@ -519,10 +494,11 @@ class ProjectHub:
         if adapter is not None:
             self._loaded[key] = adapter
         else:
-            self._errors[key] = f"三角之{info.symbol}({info.pole})不可用"
+            self._errors[key] = f"三角之{info.symbol}不可用 — 三角破裂!"
         return adapter
 
     def _ensure_derived(self, key: str) -> Any:
+        """加载衍生项目成员 (可选)。"""
         if key in self._loaded:
             return self._loaded[key]
         info = self._derived_map.get(key)
@@ -540,24 +516,37 @@ class ProjectHub:
     def _load_adapter(self, directory: str, adapter_module: str,
                       adapter_class: str, factory: str,
                       required: bool = False) -> Any:
+        """通用 importlib 加载器。"""
         import importlib.util, sys
+
         proj_dir = self._workspace / directory
         adapter_file = proj_dir / adapter_module
+
         if not adapter_file.is_file():
             if not required:
                 return None
+            logger.warning(f"三角成员不可用: {adapter_file}")
             return None
+
         proj_str = str(proj_dir)
         if proj_str not in sys.path:
             sys.path.insert(0, proj_str)
+
+        for mod_key in list(sys.modules):
+            if mod_key == "src" or mod_key.startswith("src."):
+                del sys.modules[mod_key]
+
         try:
             spec = importlib.util.spec_from_file_location(
-                f"_hub_{directory}_{id(self) % 10000}", str(adapter_file))
+                f"_hub_{directory}_{id(self) % 10000}",
+                str(adapter_file),
+            )
             if spec is None or spec.loader is None:
                 return None
             mod = importlib.util.module_from_spec(spec)
             sys.modules[f"_hub_{directory}"] = mod
             spec.loader.exec_module(mod)
+
             fn = getattr(mod, factory, None)
             if fn:
                 return fn()

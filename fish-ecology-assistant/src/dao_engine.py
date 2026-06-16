@@ -95,40 +95,16 @@ class OneEntry:
 
     def __post_init__(self):
         """一: 加载系统, 迎接命令。"""
-        import importlib.util as _iu
-        import sys as _sys
-        from pathlib import Path as _Path
-
         try:
-            # 确保 fish-ecology-assistant 在 sys.path 上
-            _root = _Path(__file__).resolve().parent.parent
-            _root_str = str(_root)
-            if _root_str not in _sys.path:
-                _sys.path.insert(0, _root_str)
+            # 加载 ProjectHub (三角核心)
+            from src.project_hub import get_hub
+            self._hub = get_hub()
+            self.hub_loaded = True
 
-            # 清除旧的 src 命名空间污染
-            for _k in list(_sys.modules):
-                if _k == "src" or _k.startswith("src."):
-                    del _sys.modules[_k]
-
-            # 直接文件路径加载 — 避免命名空间冲突
-            _hub_file = _root / "src" / "project_hub.py"
-            _spec = _iu.spec_from_file_location("_one_hub", str(_hub_file))
-            if _spec and _spec.loader:
-                _mod = _iu.module_from_spec(_spec)
-                _sys.modules["_one_hub"] = _mod
-                _spec.loader.exec_module(_mod)
-                self._hub = _mod.get_hub()
-                self.hub_loaded = True
-
-            _orch_file = _root / "src" / "orchestrator.py"
-            _spec2 = _iu.spec_from_file_location("_one_orch", str(_orch_file))
-            if _spec2 and _spec2.loader:
-                _mod2 = _iu.module_from_spec(_spec2)
-                _sys.modules["_one_orch"] = _mod2
-                _spec2.loader.exec_module(_mod2)
-                self._orch = _mod2.get_orchestrator()
-                self.orchestrator_ready = True
+            # 加载 orchestrator
+            from src.orchestrator import get_orchestrator
+            self._orch = get_orchestrator()
+            self.orchestrator_ready = True
         except Exception as e:
             self.errors.append(f"一(One) 初始化失败: {e}")
 
@@ -294,7 +270,6 @@ class MyriadManifest:
     papers: List[Dict[str, Any]] = field(default_factory=list)
     credibility_scores: List[Dict[str, Any]] = field(default_factory=list)
     derived_results: Dict[str, Any] = field(default_factory=dict)
-    taxonomy_feedback: Optional[Dict[str, Any]] = None  # P7: c→f 分类反馈
     report: str = ""
     total_manifestations: int = 0
     total_elapsed_ms: float = 0.0
@@ -365,12 +340,8 @@ class DaoEngine:
         # ── 三: 三角验证 ──
         three = self._execute_three(one)
 
-        # ── P7 反馈: c项目发现 → 写回 f项目知识库 ──
-        taxonomy_feedback = self._execute_taxonomy_feedback(two, one)
-
         # ── 万物: 一切输出 ──
         myriad = self._execute_myriad(two, t0)
-        myriad.taxonomy_feedback = taxonomy_feedback
 
         return {
             "dao": dao,
@@ -407,55 +378,31 @@ class DaoEngine:
 
         yang = None
 
-        # 阳: 如果 auto_search=True, 执行全量搜索
-        if auto_search:
+        # 阳: 如果 KB 未命中且 auto_search=True, 自动搜索
+        if not yin.found and auto_search:
+            yang = self._execute_yang(one, dao)
+        elif yin.found and yin.recommendation == "continue_to_c" and auto_search:
             yang = self._execute_yang(one, dao)
 
         return YinYangDuality(yin=yin, yang=yang,
                               user_decision="auto" if auto_search else "pending")
 
     def _execute_yang(self, one: OneEntry, dao: DaoQuery) -> YangResult:
-        """阳: 搜索验证 — 直接用 c项目 coordinated_search() 而非 skill。
-
-        关键区别:
-          skill (unified-species-search) → Reasonix 子代理, 走 MCP 工具
-          agent (coordinated_search)    → Python 直接调用, 含 taxonomy check
-        """
+        """阳: 搜索验证 — 调用 cognitive-search-engine。"""
         t_yang = time.perf_counter()
         yang = YangResult()
 
         try:
-            # 直接用 cognitive-search-engine 的 search_coordinator
-            import sys as _sys
-            _cog = str(Path(__file__).resolve().parent.parent.parent / "cognitive-search-engine")
-            if _cog not in _sys.path:
-                _sys.path.insert(0, _cog)
-
-            # 清除 src 命名空间冲突
-            for _k in list(_sys.modules):
-                if _k == "src" or _k.startswith("src."):
-                    del _sys.modules[_k]
-
-            from src.search_coordinator import kb_first, continue_full_search
-
-            # Stage 1: KB check
-            stage1 = kb_first(dao.species_hint or dao.raw)
-
-            # Stage 2: Full search via c项目 agent (native Python, not skill)
-            stage2 = continue_full_search(stage1, group="standard", limit=10)
-
-            fs = stage2.full_search
-            if fs is not None:
+            hub = one.hub
+            if hub and hasattr(hub, 'cognitive') and hub.cognitive:
+                result = hub.cognitive.search(
+                    dao.species_hint or dao.raw, mode="adaptive")
+                if isinstance(result, dict):
+                    yang.total_papers = result.get("total_papers", 0)
+                    yang.papers = result.get("papers", [])
+                    yang.mode = result.get("mode", "")
+                    yang.engine_stats = result.get("engine_stats", {})
                 yang.executed = True
-                yang.total_papers = fs.total_papers
-                yang.papers = fs.papers
-                yang.mode = fs.mode
-                yang.engine_stats = fs.engine_stats
-
-                # 保存 taxonomy_warning 供后续反馈用
-                yang._taxonomy_warning = getattr(fs, 'taxonomy_warning', None)
-                yang._scientific_name = fs.scientific_name
-                yang._chinese_name = fs.chinese_name
         except Exception as e:
             yang.errors.append(f"阳(V)搜索异常: {e}")
 
@@ -489,39 +436,6 @@ class DaoEngine:
             pass
 
         return three
-
-    def _execute_taxonomy_feedback(self, two: YinYangDuality,
-                                     one: OneEntry) -> Optional[Dict[str, Any]]:
-        """P7 通路: c项目发现的分类变更 → 写回 f项目知识库。
-
-        二生三之后, 阳(V/搜索)可能发现:
-          - 属名变更 (Tribolodon → Pseudaspius)
-          - 科级变更 (Cyprinidae → Xenocyprididae)
-          - 新同义名
-
-        这些发现必须反馈给阴(S/知识库), 完成阴阳闭环。
-        """
-        if two.yang is None or not two.yang.executed:
-            return None
-
-        yang = two.yang
-        warning = getattr(yang, '_taxonomy_warning', None)
-        if warning is None:
-            return {"status": "consistent", "note": "c项目与f项目分类一致, 无需更新"}
-
-        # 有分类不一致 → 写回 f项目知识库
-        sci_name = getattr(yang, '_scientific_name', '') or two.yin.scientific_name
-        try:
-            import sys as _sys
-            _fish = str(Path(__file__).resolve().parent.parent)
-            if _fish not in _sys.path:
-                _sys.path.insert(0, _fish)
-            from src.adapter import FishEcologyAdapter
-            adapter = FishEcologyAdapter()
-            result = adapter.update_taxonomy(sci_name, warning)
-            return result
-        except Exception as e:
-            return {"status": "error", "error": str(e)}
 
     def _execute_myriad(self, two: YinYangDuality,
                         t0: float) -> MyriadManifest:
@@ -608,21 +522,6 @@ class DaoEngine:
                 ok = "☯️" if m.available else "❌"
                 lines.append(f"│ {ok} {m.symbol:15s} {m.nature}")
             lines.append(f"│ 三角完整: {'✅' if three.complete else '❌ 破裂!'}")
-            lines.append(f"└──────────────────────────────────────────")
-            lines.append("")
-
-        # L3.5: P7 分类反馈 (阴阳闭环)
-        tf = result.get("taxonomy_feedback") if "taxonomy_feedback" in result else (
-            myriad.taxonomy_feedback if myriad else None)
-        if tf:
-            lines.append(f"┌─ P7: 反馈 (Feedback) · c→f 分类回写 ──────")
-            lines.append(f"│ 状态: {tf.get('status', '?')}")
-            if tf.get('updated'):
-                lines.append(f"│ ✅ 已写回: {tf.get('species', '?')} — {tf.get('entry', '?')}")
-            elif tf.get('status') == 'consistent':
-                lines.append(f"│ ☯️ 分类一致, 无需更新")
-            else:
-                lines.append(f"│ ⚠️ {tf.get('note', tf.get('error', '?'))}")
             lines.append(f"└──────────────────────────────────────────")
             lines.append("")
 

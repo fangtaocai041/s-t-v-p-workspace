@@ -18,11 +18,9 @@ import argparse
 import sys
 from pathlib import Path
 
-# Add scripts to path for credibility_scorer (now in cognitive-search-engine)
+# Add scripts to path for credibility_scorer
 _SCRIPTS = Path(__file__).resolve().parent
-_COG = _SCRIPTS.parent.parent / "cognitive-search-engine" / "scripts"
 sys.path.insert(0, str(_SCRIPTS))
-sys.path.insert(0, str(_COG))  # cognitive first, so credibility_scorer resolves to real file
 
 import yaml
 

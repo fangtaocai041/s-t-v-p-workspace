@@ -1,0 +1,205 @@
+# ═══════════════════════════════════════════════════════════════
+# 长江鱼类物种知识库 — Yangtze River Fish Species Knowledge Base
+# ═══════════════════════════════════════════════════════════════
+# 数据来源: 《长江水生生物资源与环境本底状况调查(2017-2021)》
+# 期刊: 水产学报 (Journal of Fisheries of China)
+# DOI: 10.11964/jfc.20220913677
+# 调查范围: 长江干流 + 雅砻江/横江/岷江/赤水河/沱江/嘉陵江/乌江/汉江/洞庭湖/鄱阳湖
+# 参与单位: 中国水产科学研究院总牵头，长江水产研究所技术总协调，24家科研院所和高校
+#
+# 核心发现:
+#   - 历史记录443种(18目37科163属)，2017-2021采集到323种(含15种外来)
+#   - 鱼类资源量约8.86亿尾/12.48万t，仅相当于1950年代的27.3%
+#   - 29种国家重点保护鱼类，仅记录到15种
+#   - 白鲟(IUCN灭绝)、鯮和鲥(多年未见)、长江鲟(IUCN野外灭绝)
+#   - 中华鲟/胭脂鱼/松江鲈 多年未见自然繁殖
+#   - 长江江豚种群稳中有升，分布范围扩大
+# ===================================================================
+
+metadata:
+  source: "长江水生生物资源与环境本底状况调查(2017-2021)"
+  doi: "10.11964/jfc.20220913677"
+  journal: "水产学报"
+  survey_period: "2017-2021"
+  scope: "长江流域 (干流 + 10条主要支流/附属湖泊)"
+  total_historical_species: 443
+  total_collected_2017_2021: 323
+  missing_species: 135
+  exotic_newly_recorded: 15
+  estimated_population: "8.86亿尾 / 12.48万t"
+  compared_to_1950s: "27.3%"
+  compared_to_1980s: "58.7%"
+
+# ══════════════════════════════════════════════════════════════
+# 15 种流域性优势种 (占重量50%, 数量45%)
+# ══════════════════════════════════════════════════════════════
+dominant_species:
+  - name: "鲤"
+    scientific: "Cyprinus carpio"
+    family: "鲤科"
+    conservation: "无"
+  - name: "鲫"
+    scientific: "Carassius auratus"
+    family: "鲤科"
+    conservation: "无"
+  - name: "鲢"
+    scientific: "Hypophthalmichthys molitrix"
+    family: "鲤科"
+    conservation: "无"
+  - name: "黄颡鱼"
+    scientific: "Pelteobagrus fulvidraco"
+    family: "鲿科"
+    conservation: "无"
+  - name: "短颌鲚"
+    scientific: "Coilia brachygnathus"
+    family: "鳀科"
+    conservation: "无"
+  - name: "鲇"
+    scientific: "Silurus asotus"
+    family: "鲇科"
+    conservation: "无"
+  - name: "蛇鮈"
+    scientific: "Saurogobio dabryi"
+    family: "鲤科"
+    conservation: "无"
+  - name: "草鱼"
+    scientific: "Ctenopharyngodon idellus"
+    family: "鲤科"
+    conservation: "无"
+  - name: "光泽黄颡鱼"
+    scientific: "Pelteobagrus nitidus"
+    family: "鲿科"
+    conservation: "无"
+  - name: "䱗"
+    scientific: "Hemiculter leucisculus"
+    family: "鲤科"
+    conservation: "无"
+  - name: "鳜"
+    scientific: "Siniperca chuatsi"
+    family: "鳜科"
+    conservation: "无"
+  - name: "铜鱼"
+    scientific: "Coreius heterodon"
+    family: "鲤科"
+    conservation: "无"
+  - name: "翘嘴鲌"
+    scientific: "Culter alburnus"
+    family: "鲤科"
+    conservation: "无"
+  - name: "鳊"
+    scientific: "Parabramis pekinensis"
+    family: "鲤科"
+    conservation: "无"
+  - name: "鳙"
+    scientific: "Aristichthys nobilis"
+    family: "鲤科"
+    conservation: "无"
+
+# ══════════════════════════════════════════════════════════════
+# 29 种国家重点保护鱼类 (仅15种在调查中记录到)
+# ══════════════════════════════════════════════════════════════
+protected_species:
+  recorded:
+    - name: "中华鲟"
+      scientific: "Acipenser sinensis"
+      protection_level: "国家一级"
+      status: "多年未见自然繁殖"
+      iucn: "极危(CR)"
+    - name: "长江鲟"
+      scientific: "Acipenser dabryanus"
+      protection_level: "国家一级"
+      status: "IUCN认定野外灭绝(EW)"
+      iucn: "野外灭绝(EW)"
+    - name: "胭脂鱼"
+      scientific: "Myxocyprinus asiaticus"
+      protection_level: "国家二级"
+      status: "多年未见自然繁殖"
+    - name: "松江鲈"
+      scientific: "Trachidermus fasciatus"
+      protection_level: "国家二级"
+      status: "多年未见自然繁殖"
+  
+  missing_or_extinct:
+    - name: "白鲟"
+      scientific: "Psephurus gladius"
+      protection_level: "国家一级"
+      status: "IUCN认定灭绝(EX)"
+      iucn: "灭绝(EX)"
+    - name: "鯮"
+      scientific: "Luciobrama macrocephalus"
+      protection_level: "国家二级"
+      status: "多年未见野生个体"
+    - name: "鲥"
+      scientific: "Tenualosa reevesii"
+      protection_level: "国家一级"
+      status: "多年未见野生个体"
+
+# ══════════════════════════════════════════════════════════════
+# 长江江豚 (本次调查核心发现)
+# ══════════════════════════════════════════════════════════════
+yangtze_finless_porpoise:
+  name: "长江江豚"
+  scientific: "Neophocaena asiaeorientalis"
+  protection_level: "国家一级"
+  iucn: "极危(CR)"
+  population_trend: "稳中有升"
+  distribution: "范围有所扩大"
+  key_findings:
+    - "长江中下游干流、洞庭湖、鄱阳湖个体数量整体稳中有升"
+    - "部分群体随季节在不同区域迁移"
+    - "禁捕后种群规模有望稳中有升"
+  research_group: "淡水渔业研究中心 刘凯研究员课题组"
+  dedicated_agent: "porpoise-agent"
+
+# ══════════════════════════════════════════════════════════════
+# 关键濒危鱼类 (已收录于 cognitive-search-engine 图谱)
+# ══════════════════════════════════════════════════════════════
+key_endangered_species_in_graph:
+  - name: "鳤"
+    scientific: "Ochetobius elongatus"
+    family: "鲤科"
+    status: "极罕见"
+    graph_papers: 9
+    note: "含OCR变体 Ochetobibus 2026食性论文"
+  
+  - name: "鯮"
+    scientific: "Luciobrama macrocephalus"
+    family: "鲤科"
+    status: "多年未见"
+    graph_papers: 5
+    note: "2026年新入库5篇"
+  
+  - name: "鳡"
+    scientific: "Elopichthys bambusa"
+    family: "鲤科"
+    status: "濒危"
+    note: "已纳入 species_graph.yaml"
+
+# ══════════════════════════════════════════════════════════════
+# 外来鱼类 (15种新记录)
+# ══════════════════════════════════════════════════════════════
+exotic_species_note: >
+  2017-2021年调查新采集到15种外来鱼类。主要来源为养殖逃逸、
+  观赏鱼放生等。外来种对长江本土鱼类群落的影响需持续监测。
+
+# ══════════════════════════════════════════════════════════════
+# 水质与栖息地
+# ══════════════════════════════════════════════════════════════
+environment:
+  water_quality: "总体较好，整体符合渔业水质标准"
+  water_surface_max: "19663 km² (2019-2020)"
+  water_surface_min: "14281 km² (2019-2020)"
+  fluctuation_zone_total: "6337 km²"
+  fluctuation_zone_counter_seasonal: "633 km²"
+  note: "衰退的消落区将成为制约未来长江水生生态系统恢复的限制性因素"
+
+# ══════════════════════════════════════════════════════════════
+# 禁捕影响
+# ══════════════════════════════════════════════════════════════
+fishing_ban:
+  status: "2021年起长江十年禁捕"
+  expected_impact:
+    - "鱼类资源将有显著恢复"
+    - "长江江豚种群规模有望稳中有升"
+    - "濒危鱼类的处境依然堪忧"
+  pre_ban_fishermen: "以初中学历以下的中老年为主"
