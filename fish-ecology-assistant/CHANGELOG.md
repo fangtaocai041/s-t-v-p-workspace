@@ -4,6 +4,17 @@
 
 ---
 
+## v6.5.1 — 2026-06-17
+
+### 🔄 灾难前快照恢复
+
+- 从工作空间根仓库 `s-t-v-p-workspace` commit `7194383` 提取了灾难前最后一版完整快照
+- 全部 113 个原始文件已存档至 `.reasonix/original-archive/`
+- 原始 README 已加入 `.reasonix/readme-versions/` 作为 v0 (pre-disaster)
+- git 提交历史无法恢复（`.git` 目录误删且未推送到 remote）
+
+---
+
 ## v6.5.0 — 2026-06-12
 
 ### 🧬 KB-First 两阶段搜索

@@ -1,0 +1,30 @@
+﻿# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Node
+node_modules/
+package-lock.json
+package.json
+
+# Reasonix runtime
+.reasonix/truncated-results/
+.reasonix/deepseek-tokenizer.json.gz
+
+# Large binaries
+*.mp4
+*.zip
+*.csv
+
+# Logs
+*.log
+*.jsonl
+
+# MCP runtime
+.reasonix/mcp-servers/*/node_modules/
+
+# Secrets – DO NOT COMMIT
+.env
+CREDENTIALS.*.yaml
