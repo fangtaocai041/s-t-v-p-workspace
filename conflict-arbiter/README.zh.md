@@ -1,4 +1,4 @@
-﻿# Conflict Arbiter 🔥
+# Conflict Arbiter 🔥
 
 **C 万物衍生** — 多源保护级别冲突检测 · 中国优先加权 · 时空可比性。
 
@@ -168,36 +168,6 @@ arbiter:
 
 MIT
 
-## 🔗 生态体系
-
-> 🔥 和则无穷力量，分则顶尖专家引擎。
-
-本项目是「三生万物」生态的 冲突仲裁专家引擎 (C)。
-
-```
-三角核心 (sealed 3):
-  📦 fish-ecology-assistant    → 知识供给 (V0)
-  🔍 cognitive-search-engine   → 搜索验证 (V1)
-  ⚙️ eon-core                  → 协调内核 (Coord)
-
-万物衍生 (open N):
-  🐬 porpoise-agent    → 江豚专研 (P₁)
-  🐟 coilia-agent      → 刀鲚专研 (P₂)
-  🐟 culter-agent      → 鲌类专研 (P₃)
-  🔥 conflict-arbiter  → 冲突仲裁 (C)
-```
-
-| 🏗️ 项目 | 🔗 顶点 | 🎯 角色 |
-|:---------|:--------:|:--------|
-| [fish-ecology-assistant](../fish-ecology-assistant/) | V0 | 📦 知识供给 |
-| [cognitive-search-engine](../cognitive-search-engine/) | V1 | 🔍 搜索验证 |
-| [eon-core](../eon-core/) | Coord | ⚙️ 协调内核 |
-| [porpoise-agent](../porpoise-agent/) | P₁ | 🐬 江豚专研 |
-| [coilia-agent](../coilia-agent/) | P₂ | 🐟 刀鲚专研 |
-| [culter-agent](../culter-agent/) | P₃ | 🐟 鲌类专研 |
-| [conflict-arbiter](../conflict-arbiter/) | C | 🔥 冲突仲裁 |
-
----
 ---
 
 > 🌊 万物皆变 · Panta Rhei
@@ -206,6 +176,6 @@ MIT
 >
 > 💻 我们说：但一个物种可能被三个保护名录给出三种结论。我们的工作是——找出真相。
 >
-> **📅 最后更新: 2026-06-17 · 🖥️ Reasonix Code · ⚡ DeepSeek 驱动**
+> **📅 最后更新: 2026-06-21 · 🖥️ Reasonix Code · ⚡ DeepSeek 驱动**
 
 [⬆ 回到顶部](#)
