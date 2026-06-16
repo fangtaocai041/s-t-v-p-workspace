@@ -1,0 +1,23 @@
+name: Sync to Gitee
+on:
+  push:
+    branches: [master, main]
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Mirror to Gitee
+        uses: Yikun/hub-mirror-action@v1
+        with:
+          src: github/fangtaocai041
+          dst: gitee/fangtaocai
+          dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
+          dst_token: ${{ secrets.GITEE_TOKEN }}
+          static_list: "fish-ecology-assistant,cognitive-search-engine,porpoise-agent,coilia-agent,culter-agent,eon-core,s-t-v-p-workspace"
+          force_update: true
