@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "conflict-arbiter"
+version = "1.0.0"
+description = "多源物种保护等级冲突检测与仲裁引擎 — 加权仲裁 · 熔断保护"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = [
+    "pyyaml>=6.0",
+]
+
+# === P1/P2 待添加依赖 ===
+# httpx>=0.25                 # IUCN API 同步 (P1)
+# pyyaml>=6.0                 # 可配置规则
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

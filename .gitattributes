@@ -1,0 +1,45 @@
+# .gitattributes — Git 属性配置
+
+# 文本文件自动规范化
+* text=auto
+
+# Python
+*.py text diff=python
+*.pyw text
+
+# Markdown
+*.md text diff=markdown
+
+# YAML
+*.yml text
+*.yaml text
+
+# 配置文件
+*.toml text
+*.cfg text
+*.ini text
+*.json text
+
+# Shell
+*.sh text eol=lf
+*.ps1 text eol=crlf
+
+# Makefile
+Makefile text eol=lf
+
+# Git
+.gitattributes text
+.gitignore text
+
+# 二进制文件 — 不进行 diff
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.exe binary
+*.dll binary
+*.xlsx binary
+*.csv binary

@@ -1,11 +1,11 @@
-# Security — API keys / credentials
+﻿# Security – API keys / credentials
 .env
 CREDENTIALS.*.yaml
 
 # MCP config (may contain keys)
 cherry-studio-mcp-*.json
 
-# Personal — advisor / lab info
+# Personal – advisor / lab info
 workspace/docs/research_plan.pdf
 
 # Python
@@ -22,16 +22,38 @@ package.json
 # Reasonix runtime
 .reasonix/truncated-results/
 .reasonix/setup-migrate.ps1
+.reasonix/deepseek-tokenizer.json.gz
+.reasonix/skills/reports/
 
 # Logs
 workspace/logs/*.log
 workspace/logs/*.jsonl
 
 # Large binary files
-bin/node.exe
 *.mp4
 *.zip
 *.csv
 
 logs/
 *.log
+
+# Generated / build output
+dist/
+
+# Binaries / executables
+*.exe
+*.WebView2/
+bin/
+
+# Temp images / screenshots
+crop_*.jpg
+pasted*.jpg
+pasted*.png
+temp_edit.xlsx
+
+# Playwright runtime
+.playwright-mcp/
+
+# Personal folders – each user keeps their own
+刘凯老师课题组/
+方陶文库/

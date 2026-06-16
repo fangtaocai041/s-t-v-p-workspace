@@ -1,0 +1,18 @@
+[submodule "eon-core"]
+	path = eon-core
+	url = git@github.com:fangtaocai041/eon-core.git
+[submodule "cognitive-search-engine"]
+	path = cognitive-search-engine
+	url = git@github.com:fangtaocai041/cognitive-search-engine.git
+[submodule "coilia-agent"]
+	path = coilia-agent
+	url = git@github.com:fangtaocai041/coilia-agent.git
+[submodule "fish-ecology-assistant"]
+	path = fish-ecology-assistant
+	url = git@github.com:fangtaocai041/fish-ecology-assistant.git
+[submodule "porpoise-agent"]
+	path = porpoise-agent
+	url = git@github.com:fangtaocai041/porpoise-agent.git
+[submodule "culter-agent"]
+	path = culter-agent
+	url = git@github.com:fangtaocai041/culter-agent.git
