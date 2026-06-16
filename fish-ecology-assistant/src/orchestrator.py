@@ -160,7 +160,7 @@ class FishEcologyOrchestrator:
         """三角核心详细状态。"""
         return self.hub.triangle_status()
 
-    # 鈹€鈹€ Public API 鈹€鈹€
+    # ──── Public API ────
 
     def delegate_search(
         self, scientific_name: str, chinese_name: str = "", **kwargs
@@ -214,7 +214,7 @@ class FishEcologyOrchestrator:
           2. query == 涓枃鍚?鈫?绮剧‘
           3. chinese 鍙傛暟 == 涓枃鍚?鈫?璺ㄩ」鐩皟鐢?          4.瀛﹀悕瀛愪覆鍖归厤 鈫?鏀寔閮ㄥ垎鎷変竵鍚嶆煡璇㈠ "Ochetobius"
 
-        鉂?鏃犱腑鏂囧悕瀛椾覆鍖归厤 鈥?妯＄硦鎼滅储鏄?c椤圭洰鐨勮亴璐?        """
+        ⚠️ 鏃犱腑鏂囧悕瀛椾覆鍖归厤 —妯＄硦鎼滅储鏄?c椤圭洰鐨勮亴璐?        """
         q = query.strip().lower()
         s = s_name.lower() if s_name else ""
         c = c_name.lower() if c_name else ""
@@ -236,7 +236,7 @@ class FishEcologyOrchestrator:
 
         Matches against: scientific name, Chinese name, aliases, AND synonyms.
         """
-        # 鈹€鈹€ NEW: flat species list 鈹€鈹€
+        # ──── NEW: flat species list ────
         species_list = self._species_db.get("species", [])
         if species_list:
             for item in species_list:
@@ -291,7 +291,7 @@ class FishEcologyOrchestrator:
                         }
             return {}
 
-        # 鈹€鈹€ FALLBACK: old section-based format 鈹€鈹€
+        # ──── FALLBACK: old section-based format ────
         for section_key in ["dominant_species", "protected_species", "key_endangered_species_in_graph"]:
             section = self._species_db.get(section_key, []) or []
             if not isinstance(section, list):

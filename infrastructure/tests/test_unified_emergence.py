@@ -19,7 +19,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import pytest
 
-from infrastructure.unified_emergence import (
+from unified_emergence import (
     EmergenceType,
     DimensionalLevel,
     EmergenceSignal,
@@ -366,7 +366,7 @@ class TestKnownPatterns:
 
 class TestBackwardCompat:
     def test_legacy_detection_result(self):
-        from infrastructure.unified_emergence import DetectionResult
+        from unified_emergence import DetectionResult
         dr = DetectionResult(
             detection_type="anomaly",
             species="test",
@@ -377,6 +377,6 @@ class TestBackwardCompat:
         assert dr.detection_type == "anomaly"
 
     def test_legacy_import(self):
-        from infrastructure import EmergenceMonitor, EmergenceEngine
+        from unified_emergence import EmergenceMonitor, EmergenceEngine
         assert EmergenceMonitor is not None
         assert EmergenceEngine is not None

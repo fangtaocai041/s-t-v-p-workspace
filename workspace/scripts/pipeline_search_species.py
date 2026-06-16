@@ -433,6 +433,13 @@ TEST_CASES = [
     ("TC06: 冷启动(未知物种)", "Xyzzyx unknownus", "search", Intent.SEARCH_LITERATURE, False, 0),
     ("TC07: 强制搜索(中文)", "翘嘴鲌", "search", Intent.SEARCH_LITERATURE, True, 0),
     ("TC08: 别名检索", "东北三块鱼", None, Intent.AUTO, True, 0),
+    # ── 刘凯课题组旗舰物种测试用例 ──
+    ("TC09: 刀鲚检索", "检索刀鲚相关文献", None, Intent.SEARCH_LITERATURE, True, 0),
+    ("TC10: 刀鲚别名", "长江刀鱼", None, Intent.AUTO, True, 0),
+    ("TC11: 刀鲚学名", "Coilia nasus", "search", Intent.SEARCH_LITERATURE, True, 0),
+    ("TC12: 江豚检索", "长江江豚", None, Intent.AUTO, True, 0),
+    ("TC13: 江豚学名", "Neophocaena asiaeorientalis", "search", Intent.SEARCH_LITERATURE, True, 0),
+    ("TC14: 江豚别名", "finless porpoise", "search", Intent.SEARCH_LITERATURE, True, 0),
 ]
 
 

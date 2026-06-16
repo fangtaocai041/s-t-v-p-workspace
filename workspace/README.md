@@ -1,140 +1,140 @@
-# ÈıÉúÍòÎï ÎåÏîÄ¿¹¤×÷¿Õ¼ä (v8.2)
+# ä¸‰ç”Ÿä¸‡ç‰© äº”é¡¹ç›®å·¥ä½œç©ºé—´ (v8.2)
 
-> **ÎïÖÖÈ«¾°·ÖÎö¹ÜÏß ¡ª Phase 0:»­Ïñ ¡ú 1:Í³¼Æ ¡ú 2:Ç÷ÊÆ ¡ú 3:¿Õ°× ¡ú 4:Ó¿ÏÖ ¡ú 5:¼ÙËµ**
+> **ç‰©ç§å…¨æ™¯åˆ†æç®¡çº¿ â€” Phase 0:ç”»åƒ â†’ 1:ç»Ÿè®¡ â†’ 2:è¶‹åŠ¿ â†’ 3:ç©ºç™½ â†’ 4:æ¶Œç° â†’ 5:å‡è¯´**
 
-## ¼Ü¹¹¸ÅÀÀ
+## æ¶æ„æ¦‚è§ˆ
 
-| ÏîÄ¿ | ½ÇÉ« | ÎåĞĞ | gRPC ¶Ë¿Ú |
+| é¡¹ç›® | è§’è‰² | äº”è¡Œ | gRPC ç«¯å£ |
 |------|------|:----:|:---------:|
-| **eon-core** | UNIFIED_KERNEL (10²ãÍ¬ĞÄ) | È«²¿ | ¡ª |
-| **fish-ecology-assistant** | S (State) ¡ú V0 SupplyVertex | ÍÁ •0¯7 | 50051 |
-| **cognitive-search-engine** | V (Validation) ¡ú V1 VerifyVertex | ½ğ •0¯4 | 50052 |
-| **porpoise-agent** | P6®9 (ÑÜÉú, DomainVertex) | Ë® ”9Ú1 | 50053 |
-| **coilia-agent** | P6¯0 (ÑÜÉú, DomainVertex) | Ä¾ ”9´8 | 50054 |
-| **culter-agent** | P6¯1 (ÑÜÉú, DomainVertex) | »ğ ”9æ7 | 50055 |
+| **eon-core** | UNIFIED_KERNEL (10å±‚åŒå¿ƒ) | å…¨éƒ¨ | â€” |
+| **fish-ecology-assistant** | S (State) â†’ V0 SupplyVertex | åœŸ ğŸŸ« | 50051 |
+| **cognitive-search-engine** | V (Validation) â†’ V1 VerifyVertex | é‡‘ ğŸŸ¨ | 50052 |
+| **porpoise-agent** | Pâ‚ (è¡ç”Ÿ, DomainVertex) | æ°´ ğŸ’§ | 50053 |
+| **coilia-agent** | Pâ‚‚ (è¡ç”Ÿ, DomainVertex) | æœ¨ ğŸŒ² | 50054 |
+| **culter-agent** | Pâ‚ƒ (è¡ç”Ÿ, DomainVertex) | ç« ğŸ”¥ | 50055 |
 
-## ËÑË÷Ğ­Òé
+## æœç´¢åè®®
 
-`workspace/skills/` Óë `.reasonix/skills/` ÄÚÈİÒ»ÖÂ£¬´ÓÁ½Ä¿Â¼¾ù¿Éµ÷ÓÃÍ¬Ò»Ì×ËÑË÷Ğ­Òé£º
+`workspace/skills/` ä¸ `.reasonix/skills/` å†…å®¹ä¸€è‡´ï¼Œä»ä¸¤ç›®å½•å‡å¯è°ƒç”¨åŒä¸€å¥—æœç´¢åè®®ï¼š
 
-| Skill | ÓÃÍ¾ | Ä£Ê½ |
+| Skill | ç”¨é€” | æ¨¡å¼ |
 |-------|------|:----:|
-| `graph-search-engine` | Í¼Æ×ÎïÖÖËÑË÷ v4.1 | subagent |
-| `cognitive-species-search` | ÈÏÖªÎïÖÖËÑË÷ v3.2 | subagent |
-| `chinese-academic-search` | ÖĞÎÄÆÚ¿¯ËÑË÷ | inline |
-| `self-evolve` | ×Ô½ø»¯·´À¡ÒıÇæ | subagent |
-| `parallel-farm` | ²¢ĞĞ×Ó agent ÅÉ·¢ | inline |
-| `meso-orchestrator` | ¿çÏîÄ¿Ğ­µ÷ | subagent |
-| `auto-skill` | ×Ô¶¯¼¼ÄÜ³Áµí | inline |
-| `ocr-solution-audit` | OCR ·½°¸Éó¼Æ | subagent |
+| `graph-search-engine` | å›¾è°±ç‰©ç§æœç´¢ v4.1 | subagent |
+| `cognitive-species-search` | è®¤çŸ¥ç‰©ç§æœç´¢ v3.2 | subagent |
+| `chinese-academic-search` | ä¸­æ–‡æœŸåˆŠæœç´¢ | inline |
+| `self-evolve` | è‡ªè¿›åŒ–åé¦ˆå¼•æ“ | subagent |
+| `parallel-farm` | å¹¶è¡Œå­ agent æ´¾å‘ | inline |
+| `meso-orchestrator` | è·¨é¡¹ç›®åè°ƒ | subagent |
+| `auto-skill` | è‡ªåŠ¨æŠ€èƒ½æ²‰æ·€ | inline |
+| `ocr-solution-audit` | OCR æ–¹æ¡ˆå®¡è®¡ | subagent |
 
-### µ÷ÓÃ·½Ê½
+### è°ƒç”¨æ–¹å¼
 
 ```
-# ´Ó workspace Ä¿Â¼µ÷ÓÃ
-/run_skill name:graph-search-engine arguments:"ËÑË÷ Ochetobius elongatus ÎÄÏ×"
+# ä» workspace ç›®å½•è°ƒç”¨
+/run_skill name:graph-search-engine arguments:"æœç´¢ Ochetobius elongatus æ–‡çŒ®"
 
-# ´Ó .reasonix Ä¿Â¼µ÷ÓÃ£¨µÈĞ§£©
-/run_skill name:graph-search-engine arguments:"ËÑË÷ Ochetobius elongatus ÎÄÏ×"
+# ä» .reasonix ç›®å½•è°ƒç”¨ï¼ˆç­‰æ•ˆï¼‰
+/run_skill name:graph-search-engine arguments:"æœç´¢ Ochetobius elongatus æ–‡çŒ®"
 
-# ÎïÖÖÈ«¾°·ÖÎö (ÍÆ¼ö)
-python scripts/run_full_analysis.py "ÖéĞÇÈı¿éÓã" "Tribolodon brandti"
+# ç‰©ç§å…¨æ™¯åˆ†æ (æ¨è)
+python scripts/run_full_analysis.py "ç æ˜Ÿä¸‰å—é±¼" "Tribolodon brandti"
 
-# ÔËĞĞ²âÊÔ¼¯
+# è¿è¡Œæµ‹è¯•é›†
 python scripts/test_pipeline.py
 
-# µ¥Ä£¿é
-python scripts/trend_analyzer.py "ÖéĞÇÈı¿éÓã"
-python scripts/gap_analyzer.py "ÖéĞÇÈı¿éÓã"
-python scripts/cross_synthesis.py "ÖéĞÇÈı¿éÓã" "Tribolodon brandti"
-python scripts/reasoning_engine.py "ÖéĞÇÈı¿éÓã" "Tribolodon brandti"
+# å•æ¨¡å—
+python scripts/trend_analyzer.py "ç æ˜Ÿä¸‰å—é±¼"
+python scripts/gap_analyzer.py "ç æ˜Ÿä¸‰å—é±¼"
+python scripts/cross_synthesis.py "ç æ˜Ÿä¸‰å—é±¼" "Tribolodon brandti"
+python scripts/reasoning_engine.py "ç æ˜Ÿä¸‰å—é±¼" "Tribolodon brandti"
 
-# CLI½»»¥Èë¿Ú
-python scripts/search_species.py "ÖéĞÇÈı¿éÓã"
+# CLIäº¤äº’å…¥å£
+python scripts/search_species.py "ç æ˜Ÿä¸‰å—é±¼"
 
-# ¾ÉËÑË÷¹ÜÏß£¨¼æÈİ£©
-python scripts/pipeline_search_species.py "¼ìË÷ÖéĞÇÈı¿éÓãÏà¹ØÎÄÏ×"
-python scripts/coordinator.py           # ×Ô¼ì
+# æ—§æœç´¢ç®¡çº¿ï¼ˆå…¼å®¹ï¼‰
+python scripts/pipeline_search_species.py "æ£€ç´¢ç æ˜Ÿä¸‰å—é±¼ç›¸å…³æ–‡çŒ®"
+python scripts/coordinator.py           # è‡ªæ£€
 python scripts/credibility_scorer.py --example
 python scripts/self_evolve.py --example
 ```
 
-## ¿ìËÙ¿ªÊ¼
+## å¿«é€Ÿå¼€å§‹
 
 ```bash
-# 1. ÑéÖ¤¹¤×÷¿Õ¼äÍêÕûĞÔ
+# 1. éªŒè¯å·¥ä½œç©ºé—´å®Œæ•´æ€§
 python workspace/launch_all.py
 
-# 2. ÎïÖÖÎÄÏ×ËÑË÷£¨È«¹ÜÏß£©
-python workspace/scripts/pipeline_search_species.py "¼ìË÷ÖéĞÇÈı¿éÓãÏà¹ØÎÄÏ×"
+# 2. ç‰©ç§æ–‡çŒ®æœç´¢ï¼ˆå…¨ç®¡çº¿ï¼‰
+python workspace/scripts/pipeline_search_species.py "æ£€ç´¢ç æ˜Ÿä¸‰å—é±¼ç›¸å…³æ–‡çŒ®"
 
-# 3. ½ö²éÖªÊ¶¿â
-python workspace/scripts/pipeline_search_species.py "ÖéĞÇÈı¿éÓã" --phase lookup
+# 3. ä»…æŸ¥çŸ¥è¯†åº“
+python workspace/scripts/pipeline_search_species.py "ç æ˜Ÿä¸‰å—é±¼" --phase lookup
 
-# 4. È«Õ»½¡¿µ¼ì²é
+# 4. å…¨æ ˆå¥åº·æ£€æŸ¥
 python -c "from workspace.scripts.coordinator import coordinator; print(coordinator.info('cognitive'))"
 ```
 
-## Í³Ò»Èë¿Ú API
+## ç»Ÿä¸€å…¥å£ API
 
-| º¯Êı | Â·ÓÉ | ÓÃÍ¾ |
+| å‡½æ•° | è·¯ç”± | ç”¨é€” |
 |------|------|------|
-| `search_species(name)` | ¡ú cognitive-search-engine | ÎïÖÖÎÄÏ×ËÑË÷ |
-| `lookup_species(name)` | ¡ú fish-ecology-assistant | ÎïÖÖÖªÊ¶¿â²éÑ¯ |
-| `assess_conservation(name)` | ¡ú porpoise-agent | ±£»¤ÆÀ¹À |
-| `assess_species(name)` | ¡ú coilia-agent | ÎïÖÖÆÀ¹À (ä§ÓÎ/×ÊÔ´) |
-| `health_check()` | ¡ú È«²¿ÏîÄ¿ | È«Õ»½¡¿µ¼ì²é |
+| `search_species(name)` | â†’ cognitive-search-engine | ç‰©ç§æ–‡çŒ®æœç´¢ |
+| `lookup_species(name)` | â†’ fish-ecology-assistant | ç‰©ç§çŸ¥è¯†åº“æŸ¥è¯¢ |
+| `assess_conservation(name)` | â†’ porpoise-agent | ä¿æŠ¤è¯„ä¼° |
+| `assess_species(name)` | â†’ coilia-agent | ç‰©ç§è¯„ä¼° (æ´„æ¸¸/èµ„æº) |
+| `health_check()` | â†’ å…¨éƒ¨é¡¹ç›® | å…¨æ ˆå¥åº·æ£€æŸ¥ |
 
-## Ä¿Â¼½á¹¹
+## ç›®å½•ç»“æ„
 
 ```
 workspace/
-©À©¤©¤ __init__.py              ¡ª °ü±ê¼Ç
-©À©¤©¤ launch_all.py            ¡ª Ò»¼üÆô¶¯ + ½¡¿µ¼ì²é
-©À©¤©¤ activate.ps1             ¡ª PowerShell »·¾³¼¤»î
-©À©¤©¤ README.md                ¡ª ±¾ÎÄµµ
-©À©¤©¤ skills/                  ¡ª ËÑË÷Ğ­Òé skill ¶¨Òå£¨Óë .reasonix/skills/ Í¬²½£©
-©¦   ©À©¤©¤ graph-search-engine.md
-©¦   ©À©¤©¤ cognitive-species-search.md
-©¦   ©À©¤©¤ chinese-academic-search.md
-©¦   ©À©¤©¤ self-evolve.md
-©¦   ©À©¤©¤ parallel-farm.md
-©¦   ©À©¤©¤ meso-orchestrator.md
-©¦   ©À©¤©¤ auto-skill.md
-©¦   ©¸©¤©¤ ocr-solution-audit.md
-©À©¤©¤ scripts/                 ¡ª Python ¿ÉÖ´ĞĞÊµÏÖ
-©¦   ©À©¤©¤ run_full_analysis.py         ¡ª Ò»¼üÈ«Á¿·ÖÎö Phase 0-5 ”9‹5
-©¦   ©À©¤©¤ kb_loader.py                 ¡ª Í³Ò»Êı¾İ¼ÓÔØÆ÷        ”9‹5
-©¦   ©À©¤©¤ trend_analyzer.py            ¡ª ÑĞ¾¿Ç÷ÊÆ·ÖÎö          ”9‹5
-©¦   ©À©¤©¤ gap_analyzer.py              ¡ª ÑĞ¾¿¿Õ°×Ê¶±ğ          ”9‹5
-©¦   ©À©¤©¤ cross_synthesis.py           ¡ª ¿çÎïÖÖÓ¿ÏÖ(5¼ì²âÆ÷)   ”9‹5
-©¦   ©À©¤©¤ reasoning_engine.py          ¡ª ÉúÌ¬¼ÙËµÍÆÀí(6¼ÙËµ)   ”9‹5
-©¦   ©À©¤©¤ test_pipeline.py             ¡ª ¹ÜÏß²âÊÔ¼¯(38Ïî)      ”9‹5
-©¦   ©À©¤©¤ search_species.py            ¡ª CLI½»»¥Èë¿Ú
-©¦   ©À©¤©¤ pipeline_search_species.py   ¡ª ËÑË÷¹ÜÏß(¼æÈİ)
-©¦   ©À©¤©¤ coordinator.py               ¡ª ÎåÏîÄ¿Ğ­µ÷Æ÷
-©¦   ©À©¤©¤ credibility_scorer.py        ¡ª Èı½ÇÑéÖ¤ÆÀ·Ö
-©¦   ©À©¤©¤ self_evolve.py               ¡ª ×Ô½ø»¯·´À¡
-©¦   ©¸©¤©¤ kb_to_graph_sync.py          ¡ª KB6Ç2Í¼Æ×Í¬²½
-©À©¤©¤ config/
-©¦   ©¸©¤©¤ root_config/
-©¦       ©À©¤©¤ species_graph.yaml       ¡ª 48ÎïÖÖ 176ÂÛÎÄ
-©¦       ©¸©¤©¤ meso_agent.yaml          ¡ª MesoĞ­µ÷ÅäÖÃ
-©À©¤©¤ data/                    ¡ª Êı¾İÎÄ¼ş
-©À©¤©¤ docs/                    ¡ª ¼Ü¹¹ÎÄµµ
-©À©¤©¤ ocr/                     ¡ª OCR ²âÊÔ¹¤¾ß
-©À©¤©¤ logs/                    ¡ª ÔËĞĞÈÕÖ¾
-©À©¤©¤ search_records/          ¡ª ËÑË÷¼ÇÂ¼
-©¸©¤©¤ bin/                     ¡ª ¿ÉÖ´ĞĞÎÄ¼ş
+â”œâ”€â”€ __init__.py              â€” åŒ…æ ‡è®°
+â”œâ”€â”€ launch_all.py            â€” ä¸€é”®å¯åŠ¨ + å¥åº·æ£€æŸ¥
+â”œâ”€â”€ activate.ps1             â€” PowerShell ç¯å¢ƒæ¿€æ´»
+â”œâ”€â”€ README.md                â€” æœ¬æ–‡æ¡£
+â”œâ”€â”€ skills/                  â€” æœç´¢åè®® skill å®šä¹‰ï¼ˆä¸ .reasonix/skills/ åŒæ­¥ï¼‰
+â”‚   â”œâ”€â”€ graph-search-engine.md
+â”‚   â”œâ”€â”€ cognitive-species-search.md
+â”‚   â”œâ”€â”€ chinese-academic-search.md
+â”‚   â”œâ”€â”€ self-evolve.md
+â”‚   â”œâ”€â”€ parallel-farm.md
+â”‚   â”œâ”€â”€ meso-orchestrator.md
+â”‚   â”œâ”€â”€ auto-skill.md
+â”‚   â””â”€â”€ ocr-solution-audit.md
+â”œâ”€â”€ scripts/                 â€” Python å¯æ‰§è¡Œå®ç°
+â”‚   â”œâ”€â”€ run_full_analysis.py         â€” ä¸€é”®å…¨é‡åˆ†æ Phase 0-5 ğŸ†•
+â”‚   â”œâ”€â”€ kb_loader.py                 â€” ç»Ÿä¸€æ•°æ®åŠ è½½å™¨        ğŸ†•
+â”‚   â”œâ”€â”€ trend_analyzer.py            â€” ç ”ç©¶è¶‹åŠ¿åˆ†æ          ğŸ†•
+â”‚   â”œâ”€â”€ gap_analyzer.py              â€” ç ”ç©¶ç©ºç™½è¯†åˆ«          ğŸ†•
+â”‚   â”œâ”€â”€ cross_synthesis.py           â€” è·¨ç‰©ç§æ¶Œç°(5æ£€æµ‹å™¨)   ğŸ†•
+â”‚   â”œâ”€â”€ reasoning_engine.py          â€” ç”Ÿæ€å‡è¯´æ¨ç†(6å‡è¯´)   ğŸ†•
+â”‚   â”œâ”€â”€ test_pipeline.py             â€” ç®¡çº¿æµ‹è¯•é›†(38é¡¹)      ğŸ†•
+â”‚   â”œâ”€â”€ search_species.py            â€” CLIäº¤äº’å…¥å£
+â”‚   â”œâ”€â”€ pipeline_search_species.py   â€” æœç´¢ç®¡çº¿(å…¼å®¹)
+â”‚   â”œâ”€â”€ coordinator.py               â€” äº”é¡¹ç›®åè°ƒå™¨
+â”‚   â”œâ”€â”€ credibility_scorer.py        â€” ä¸‰è§’éªŒè¯è¯„åˆ†
+â”‚   â”œâ”€â”€ self_evolve.py               â€” è‡ªè¿›åŒ–åé¦ˆ
+â”‚   â””â”€â”€ kb_to_graph_sync.py          â€” KBâ†”å›¾è°±åŒæ­¥
+â”œâ”€â”€ config/
+â”‚   â””â”€â”€ root_config/
+â”‚       â”œâ”€â”€ species_graph.yaml       â€” 48ç‰©ç§ 176è®ºæ–‡
+â”‚       â””â”€â”€ meso_agent.yaml          â€” Mesoåè°ƒé…ç½®
+â”œâ”€â”€ data/                    â€” æ•°æ®æ–‡ä»¶
+â”œâ”€â”€ docs/                    â€” æ¶æ„æ–‡æ¡£
+â”œâ”€â”€ ocr/                     â€” OCR æµ‹è¯•å·¥å…·
+â”œâ”€â”€ logs/                    â€” è¿è¡Œæ—¥å¿—
+â”œâ”€â”€ search_records/          â€” æœç´¢è®°å½•
+â””â”€â”€ bin/                     â€” å¯æ‰§è¡Œæ–‡ä»¶
 ```
 
-## ÎåÏîÄ¿¼´Îå¶ÀÁ¢²Ö¿â
+## äº”é¡¹ç›®å³äº”ç‹¬ç«‹ä»“åº“
 
-Ã¿¸öÏîÄ¿ÓĞ¶ÀÁ¢µÄ `.git`£¬¿Éµ¥¶À¿ª·¢/²¿Êğ¡£`pipeline_search_species.py` ÊÇËüÃÇµÄÍ³Ò»ËÑË÷Èë¿Ú¡£
+æ¯ä¸ªé¡¹ç›®æœ‰ç‹¬ç«‹çš„ `.git`ï¼Œå¯å•ç‹¬å¼€å‘/éƒ¨ç½²ã€‚`pipeline_search_species.py` æ˜¯å®ƒä»¬çš„ç»Ÿä¸€æœç´¢å…¥å£ã€‚
 
-## Ïà¹ØÎÄµµ
+## ç›¸å…³æ–‡æ¡£
 
-- `config/VERSION.yaml` ¡ª °æ±¾µ¥Ô´ÕæÏà
-- `config/coordination.yaml` ¡ª ¿çÏîÄ¿Ğ­µ÷Ğ­Òé
-- `docs/root_docs/ARCHITECTURE_OVERVIEW.md` ¡ª ÕûÌå¼Ü¹¹ËµÃ÷
-- `docs/root_docs/SANSHENG_WANWU.md` ¡ª ÈıÉúÍòÎïÕÜÑ§
+- `config/VERSION.yaml` â€” ç‰ˆæœ¬å•æºçœŸç›¸
+- `config/coordination.yaml` â€” è·¨é¡¹ç›®åè°ƒåè®®
+- `docs/root_docs/ARCHITECTURE_OVERVIEW.md` â€” æ•´ä½“æ¶æ„è¯´æ˜
+- `docs/root_docs/SANSHENG_WANWU.md` â€” ä¸‰ç”Ÿä¸‡ç‰©å“²å­¦

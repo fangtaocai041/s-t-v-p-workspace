@@ -2,7 +2,18 @@
 
 **它聪明地搜索物种文献，不遗漏一篇该看的论文，也不浪费一分钱搜无关的。**
 
-[English](README.md) · [更新日志](CHANGELOG.md) · [怎么参与](CONTRIBUTING.md)
+[English](README.md) · [更新日志](CHANGELOG.md) · [路线图](ROADMAP.zh.md) · [怎么参与](CONTRIBUTING.md)
+
+---
+
+## 🔺 三角闭环角色: **V1 (验证)**
+
+> **三角闭环 (V1/验证)**，由 [eon-core](https://github.com/fangtaocai041/eon-core) 协调。
+> **三角闭环**: fish(V0知识库) + cognitive(V1验证) + eon-core(协调器) — 缺一不可
+> **三生万物**: P₁(porpoise) · P₂(coilia) · 无限衍生
+>
+> 搜索验证、权威可信度评分、多重三角验证 (≥3源, ≥2项目独立验证)。
+> **DirectLoader**: `importlib` 零 MCP 进程。**三角验证**: ≥3 来源, ≥2 独立项目。
 
 ---
 
@@ -12,7 +23,7 @@
 
 1. **猜你要搜多少文献** — 先查 PubMed、Crossref、OpenAlex 估算文献量
 2. **决定怎么搜** — 文献少就穷举，多就分类，太多了就综述锚定
-3. **并行搜 6+ 个源** — 谷歌学术/PubMed/Crossref/OpenAlex/arXiv/中文期刊，谁先返回先处理
+3. **并行搜 21 个引擎** — SerpAPI·Exa·Europe PMC·NCBI·OpenAlex·Semantic Scholar·CNKI·更多
 4. **去重打分** — 按期刊权威性给每篇论文打分（0~100）
 5. **检测缺口** — 看看哪些方向还没人研究
 6. **自我进化** — 搜得越多，参数越准
@@ -54,7 +65,7 @@ result = adapter.search("珠星三块鱼", mode="adaptive")
 
 ## 它怎么工作的
 
-### 六个搜索通道
+### 6+ 搜索通道 (MCP + HTTP)
 
 ```
 MCP 通道 (需 npx/node):
@@ -99,7 +110,8 @@ cognitive-search-engine/
 │   ├── meso_agent.py       ← BDI 认知循环，搜索入口
 │   ├── mcp_client.py       ← MCP 子进程管理 + 工具发现
 │   ├── parallel_search.py  ← HTTP 直连搜索（6 源并行）
-│   ├── unified_search.py   ← 搜索协议 + 分类学服务
+│   ├── unified_search.py   ← 搜索协议 + 分类学服务 + 引擎注册表
+│   ├── search_coordinator.py ← 统一搜索协调器
 │   ├── validator.py        ← 论文验证
 │   ├── credibility_scorer.py ← 期刊白名单评分
 │   ├── variant_generator.py  ← OCR 拼写变体
@@ -108,23 +120,39 @@ cognitive-search-engine/
 │   ├── world_model.py      ← 预搜索仿真
 │   ├── adapter.py          ← 跨项目接口
 │   └── report_formatter.py ← 分类报告输出
-├── scripts/          # CLI 工具
+├── scripts/          # CLI 工具 (search_api, credibility_scorer, kb_to_graph_sync, self_evolve)
 ├── skills/           # Reasonix AI 技能
 └── tests/
 ```
 
 ---
 
-## 它和谁一起工作
+## 和谁一起工作
 
 ```
-三角核心（S-T-V 闭环）
-├── S  fish-ecology-assistant   → 知识库 + 数据分析
-├── T  porpoise-agent           → 任务调度 + 流水线执行
-└── V  cognitive-search-engine  → 搜索验证 ← 就是这个项目
+三角闭环 + 衍生 (跨项目)
+├── V0  fish-ecology-assistant   → 知识库 + 数据 + 矛盾分析
+├── V1  cognitive-search-engine  → 搜索验证 ← 就是这个项目
+├── Coord  eon-core              → EventBus + DAG 路由
+│
+├── P₁  porpoise-agent           → 衍生: 江豚种群监测
+└── P₂  coilia-agent             → 衍生: 刀鲚洄游生态
 ```
 
-你是 `fish-ecology-assistant` 的用户？你查物种文献时，**先查 f 项目知识库**（不花 token），再决定要不要走 c 项目全量搜索（花 token 但更全）。
+本引擎是**整个工作区的唯一搜索网关**。所有外部搜索请求必须路由到此引擎。
+
+---
+
+## 🧭 各项目未来优化方向
+
+| 项目 | 层级 | 近期 (3月) | 中期 (6月) | 远期 (12月) |
+|------|:----:|-----------|-----------|------------|
+| **cognitive-search-engine** | V1 | SerpAPI 百度/学术/DuckDuckGo 反爬突破 · Exa 语义扩展；目标：21→28引擎, p95延迟 25→15s | 跨语言检索 (中英双向) · 搜索即图谱实时更新；目标：零冷启动 | 自调优 MoE 路由 — 物种级动态引擎选择；目标：90%召回率 at 50% token 成本 |
+| **fish-ecology-assistant** | V0 | 文献自动分类 · 矛盾检测管线；目标：95% 自动归类 | 知识库-图谱双向同步 · 自动年度综述生成；目标：80% 综合自动化 | 多模态知识库 (文本+图像+基因组) · LLM 研究缺口推荐；目标：每物种推荐 3 个可执行方向 |
+| **eon-core** | Coord | EventBus 吞吐量优化 · 学习型 DAG 路由；目标：项目间延迟 <200ms | 跨项目资源感知调度 · 5+ Agent 分布式协调；目标：零配置新项目接入 | 自愈协调图 · 自主衍生项目生成 (三生万物自动 P₃/P₄…)；目标：新项目 5min 内搭好骨架 |
+| **porpoise-agent** | P₁ | 声学监测数据接入 · 种群趋势看板；目标：野外数据按月更新 | ML 威胁评估 (船舶+捕捞+污染) · 实时告警；目标：风险事件前 48h 预警 | 全数字孪生 — 管理方案模拟 · 政策影响预测；目标：推荐最优保护行动, 90% 置信度 |
+| **coilia-agent** | P₂ | 耳石微化学自动化管线 · 微量元素洄游路径重建；目标：80% 自动化 | 多年产卵场预测 · 气候变化情景模拟；目标：提前 2 年预测补充量 | 全生命周期数字孪生 (卵→成体) · 基因流集合种群模型；目标：指导放流, 85% 补充成功率 |
+| **culter-agent** | P₃ | 染色体级基因组组装管线 · 肠道微生物营养生态位推断；目标：基因组注释 <2周 | 群体基因组 — 适应性位点发现 · 鲌亚科物种形成基因组学；目标：发现 10+ 适应性位点 | 生态-进化模拟 — 预测物种对环境变化的响应 · 整合基因组+营养+分布数据；目标：5年种群预测, 80% 准确率 |
 
 ---
 
