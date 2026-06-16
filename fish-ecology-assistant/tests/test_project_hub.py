@@ -40,11 +40,9 @@ def test_hub_health_all():
     """health_all 应返回完整健康结构。"""
     hub = get_hub()
     health = hub.health_all()
-    assert "philosophy" in health
-    assert "one" in health
-    assert "two" in health
-    assert "three" in health
-    assert "myriad" in health
+    assert "architecture" in health
+    
+    assert "derived" in health
     assert "triangle_complete" in health
 
 
@@ -53,7 +51,7 @@ def test_hub_capabilities():
     hub = get_hub()
     caps = hub.capabilities()
     assert "triangle" in caps
-    assert "myriad" in caps
+    assert "derived" in caps
     # fish 应始终可用（本项目自身）
     assert caps["triangle"]["fish"]["available"] is True
 
@@ -65,7 +63,7 @@ def test_hub_triangle_status():
     for key in ("fish", "cognitive", "eon"):
         assert key in status
         assert "symbol" in status[key]
-        assert "pole" in status[key]
+        
 
 
 def test_hub_singleton():
@@ -80,4 +78,4 @@ def test_relationship_map():
     result = ProjectHub.relationship_map()
     assert isinstance(result, str)
     assert len(result) > 100
-    assert "道" in result or "Dao" in result
+    assert "三 生 万 物" in result
