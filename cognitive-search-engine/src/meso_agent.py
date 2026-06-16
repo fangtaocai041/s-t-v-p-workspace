@@ -806,8 +806,8 @@ def _dedup_papers(papers: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     deduped: List[Dict[str, Any]] = []
 
     for p in papers:
-        doi = p.get("doi", "").strip().lower()
-        title = p.get("title", "").strip().lower()[:100]
+        doi = (p.get("doi") or "").strip().lower()
+        title = (p.get("title") or "").strip().lower()[:100]
 
         if doi and doi in seen_dois:
             continue
