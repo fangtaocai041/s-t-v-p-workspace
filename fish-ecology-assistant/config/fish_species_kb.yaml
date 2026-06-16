@@ -442,8 +442,7 @@ species:
   conservation: 无
   ecology: 溯河洄游鱼类
   max_length_cm: 50
-  description: '三块鱼属溯河洄游性鱼类，成鱼在海洋中生活，繁殖期溯河而上进入淡水河流产卵。 体型侧扁，体侧具不规则暗色斑块（"三块"之名源于体侧的斑块状花纹）。
-    是东北亚地区特有的经济鱼类和生态指示种。
+  description: '三块鱼属溯河洄游性鱼类，成鱼在海洋中生活，繁殖期溯河而上进入淡水河流产卵。 体型侧扁，体侧具不规则暗色斑块（"三块"之名源于体侧的斑块状花纹）。 是东北亚地区特有的经济鱼类和生态指示种。
 
     '
   economic_value: 东北亚重要经济鱼类，在日本被称作ウグイ (Ugui)
@@ -499,7 +498,68 @@ species:
     new_value: Coilia_nasus
     note: 通过 P₂ 刀鲚专研补充 — cognitive-species-search v3.2
   species_graph_id: Coilia_nasus
-
+- id: culter_mongolicus
+  name: 蒙古鲌
+  scientific: Culter mongolicus
+  family: 鲤科
+  order: 鲤形目
+  conservation: 无
+  aliases: []
+  ecology: 中上层鱼类，栖息于江河湖泊敞水区，以小鱼、虾为食
+  economic_value: 经济鱼类
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    - 蒙古
+    basins:
+    - 长江流域
+    - 黑龙江流域
+  literature: []
+  species_graph_id: Culter_mongolicus
+- id: culter_oxycephalus
+  name: 尖头鲌
+  scientific: Culter oxycephalus
+  family: 鲤科
+  order: 鲤形目
+  conservation: 无
+  aliases: []
+  ecology: 中上层凶猛鱼类，栖息于湖泊、水库等静水水体
+  economic_value: 经济鱼类
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    basins:
+    - 长江流域
+    - 黑龙江流域
+  literature: []
+  species_graph_id: Culter_oxycephalus
+- id: coilia_mystus
+  name: 凤鲚
+  scientific: Coilia mystus
+  family: 鳀科
+  order: 鲱形目
+  conservation: 无
+  aliases:
+  - 凤尾鱼
+  - 烤子鱼
+  ecology: 沿海洄游性鱼类，栖息于近海及河口区，是刀鲚近缘种
+  economic_value: 重要经济鱼类
+  distribution:
+    continents:
+    - 亚洲
+    countries:
+    - 中国
+    - 日本
+    - 韩国
+    basins:
+    - 长江流域
+    - 东海岸
+  literature: []
+  species_graph_id: Coilia_mystus
 exotic_species_note: '2017-2021年长江调查新采集到15种外来鱼类。主要来源为养殖逃逸、 观赏鱼放生等。外来种对长江本土鱼类群落的影响需持续监测。
 
   '
