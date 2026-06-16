@@ -351,7 +351,8 @@ print(f"已记录 {len(history)} 次搜索")
 | `scripts/kb_to_graph_sync.py` | KB → 图谱同步 | `python scripts/kb_to_graph_sync.py` |
 | `scripts/self_evolve.py` | 自进化反馈 | `python -c "from scripts.self_evolve import log_search; ..."` |
 | `scripts/taxonomy_sync.py` | 分类学同步 | `python scripts/taxonomy_sync.py` |
-| `scripts/verify_architecture.py` | 架构验证 | `python scripts/verify_architecture.py` |
+| `scripts/add_literature.py` | 文献添加 | `python scripts/add_literature.py` |
+| `scripts/check_scihub.py` | Sci-Hub 检查 | `python scripts/check_scihub.py` |
 
 ```bash
 # 查看帮助
@@ -397,7 +398,8 @@ fish-ecology-assistant/
 │   ├── kb_to_graph_sync.py         ← 知识库 ↔ 图谱同步
 │   ├── self_evolve.py              ← 搜索后自进化反馈
 │   ├── taxonomy_sync.py            ← 分类学同步
-│   └── verify_architecture.py      ← 架构合规性验证
+│   ├── add_literature.py           ← 文献添加
+│   └── check_scihub.py             ← Sci-Hub 可用性检查
 │
 ├── research_output/                ← 研究报告输出目录
 │   └── .gitkeep
