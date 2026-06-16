@@ -75,16 +75,44 @@ class FishEcologyOrchestrator:
         self._load_configs()
 
     def _load_configs(self) -> None:
-        """Load agent.yaml and fish_species_kb.yaml (multi-basin)."""
+        """Load configs: try new index+profiles first, fall back to flat YAML."""
         try:
             import yaml
+
             agent_cfg = self._project_root / "config" / "agent.yaml"
             if agent_cfg.is_file():
                 self._agent_config = yaml.safe_load(agent_cfg.read_text(encoding="utf-8")) or {}
 
-            species_cfg = self._project_root / "config" / "fish_species_kb.yaml"
-            if species_cfg.is_file():
-                self._species_db = yaml.safe_load(species_cfg.read_text(encoding="utf-8")) or {}
+            # Try new format: index.yaml + individual .md profiles
+            index_cfg = self._project_root / "config" / "fish_species_index.yaml"
+            profiles_dir = self._project_root / "config" / "knowledge_base" / "species"
+
+            if index_cfg.is_file() and profiles_dir.is_dir():
+                index_data = yaml.safe_load(index_cfg.read_text(encoding="utf-8")) or {}
+                species_list = []
+                for entry in index_data.get("species", []):
+                    sid = entry["id"]
+                    species_data = {"id": sid}
+                    for k in ["name", "scientific", "family"]:
+                        if k in entry:
+                            species_data[k] = entry[k]
+                    profile_path = profiles_dir / f"{sid}.md"
+                    if profile_path.is_file():
+                        text = profile_path.read_text(encoding="utf-8")
+                        if text.startswith("---"):
+                            parts = text.split("---", 2)
+                            if len(parts) >= 3:
+                                fm = yaml.safe_load(parts[1]) or {}
+                                species_data.update(fm)
+                    if "basins" not in species_data and entry.get("basins"):
+                        species_data["basins"] = entry["basins"]
+                    species_list.append(species_data)
+                self._species_db = {"species": species_list}
+            else:
+                # Fallback: flat YAML
+                species_cfg = self._project_root / "config" / "fish_species_kb.yaml"
+                if species_cfg.is_file():
+                    self._species_db = yaml.safe_load(species_cfg.read_text(encoding="utf-8")) or {}
         except Exception as exc:
             logger.warning(f"Config load failed: {exc}")
 
@@ -289,7 +317,7 @@ class FishEcologyOrchestrator:
             "project": "fish-ecology-assistant",
             "status": "HEALTHY" if self._agent_config else "DEGRADED",
             "config_loaded": bool(self._agent_config),
-            "species_db_size": len(self._species_db),
+            "species_db_size": len(self._species_db.get("species", [])),
             "pipeline_stages": self.STAGES,
         }
         # 附加子系统健康状态
