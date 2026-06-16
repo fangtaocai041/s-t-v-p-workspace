@@ -23,6 +23,17 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+# 涌现检测集成
+try:
+    import sys as _sys
+    _infra = str(Path(__file__).resolve().parent.parent.parent / "infrastructure")
+    if _infra not in _sys.path:
+        _sys.path.insert(0, _infra)
+    from unified_emergence import EmergenceMonitor, DimensionalLevel
+    _EMERGENCE_AVAILABLE = True
+except ImportError:
+    _EMERGENCE_AVAILABLE = False
+
 from .shared import JOURNAL_WHITELIST, build_search_queries, generate_ocr_variants
 
 logger = logging.getLogger(__name__)
@@ -532,6 +543,16 @@ class FishEcologyOrchestrator:
             lines.append("知识库中无任何匹配。建议启动 c项目全量搜索。")
 
         summary = "\n".join(lines)
+
+        # Feed to emergence engine
+        if _EMERGENCE_AVAILABLE:
+            try:
+                mon = EmergenceMonitor()
+                mon.record("f_kb_query", 1, DimensionalLevel.D1)
+                mon.record("f_kb_found", 0, DimensionalLevel.D1)
+                mon.record("f_candidates", len(candidates), DimensionalLevel.D1)
+            except Exception:
+                pass
 
         return KbFirstResult(
             found=False,

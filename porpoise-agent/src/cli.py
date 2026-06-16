@@ -14,6 +14,17 @@ import argparse
 import asyncio
 import logging
 import sys
+from pathlib import Path
+
+# 涌现检测集成
+try:
+    _infra = str(Path(__file__).resolve().parent.parent.parent / "infrastructure")
+    if _infra not in sys.path:
+        sys.path.insert(0, _infra)
+    from unified_emergence import EmergenceMonitor, DimensionalLevel
+    _EMERGENCE_AVAILABLE = True
+except ImportError:
+    _EMERGENCE_AVAILABLE = False
 
 
 def setup_parser() -> argparse.ArgumentParser:
@@ -350,10 +361,22 @@ async def run_doctor(full: bool = False):
 
 # ── Main ────────────────────────────────────────────────────
 
+def _feed_emergence(command: str) -> None:
+    """记录 CLI 调用到涌现引擎."""
+    if not _EMERGENCE_AVAILABLE:
+        return
+    try:
+        mon = EmergenceMonitor()
+        mon.record(f"p_cli_{command}", 1, DimensionalLevel.D1)
+    except Exception:
+        pass
+
 def main():
     """Main CLI entry point"""
     parser = setup_parser()
     args = parser.parse_args()
+
+    _feed_emergence(args.command or "unknown")
 
     if args.command == "chat":
         asyncio.run(run_chat(
