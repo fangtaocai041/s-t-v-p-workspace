@@ -1,0 +1,40 @@
+# Culter Agent Component Registry — 鲌类专研组件注册表 (v2.0)
+# 借鉴: coilia-agent/config/component_registry.yaml (P₂ 模板)
+
+components:
+  core:
+    orchestrator:
+      version: "2.0.0"
+      created: "2026-07-10"
+      last_verified: "2026-07-10"
+      module: "src/agent/orchestrator.py"
+      expiry_policy: { type: "manual_review", max_age_days: 90 }
+
+  skills:
+    - { name: "search-literature", version: "1.0.0", last_verified: "2026-07-10", expiry: { type: "manual_review", max_age_days: 90 } }
+    - { name: "analyze-growth", version: "1.0.0", last_verified: "2026-07-10", expiry: { type: "manual_review", max_age_days: 90 } }
+    - { name: "analyze-genomics", version: "1.0.0", last_verified: "2026-07-10", expiry: { type: "manual_review", max_age_days: 90 } }
+    - { name: "analyze-genetics", version: "1.0.0", last_verified: "2026-07-10", expiry: { type: "manual_review", max_age_days: 90 } }
+    - { name: "analyze-trophic", version: "1.0.0", last_verified: "2026-07-10", expiry: { type: "manual_review", max_age_days: 90 } }
+    - { name: "model-coexistence", version: "1.0.0", last_verified: "2026-07-10", expiry: { type: "manual_review", max_age_days: 90 } }
+    - { name: "assess-resource", version: "1.0.0", last_verified: "2026-07-10", expiry: { type: "manual_review", max_age_days: 90 } }
+    - { name: "model-habitat", version: "1.0.0", last_verified: "2026-07-10", expiry: { type: "manual_review", max_age_days: 90 } }
+
+  configs:
+    agent_yaml: { version: "2.0.0", last_verified: "2026-07-10", expiry: { type: "manual_review", max_age_days: 90 } }
+
+  knowledge_base:
+    version: "2.0.0"
+    created: "2026-07-10"
+    last_verified: "2026-07-10"
+    expiry_policy: { type: "manual_review", max_age_days: 180 }
+    species_entries: 3  # C. alburnus, C. mongolicus, C. oxycephalus
+    related_species: 3  # Ch. erythropterus, C. dabryi, C. oxycephaloides
+    new_sections: ["genomics", "stable_isotopes", "trophic_niche", "sympatric_coexistence"]
+
+living_system:
+  born: "2026-07-10"
+  total_components: 11  # 1 core + 8 skills + 1 config + 1 KB
+  health_score: 100
+  last_health_check: "2026-07-10"
+  sister_agents: ["porpoise-agent (P₁)", "coilia-agent (P₂)"]

@@ -1,0 +1,74 @@
+# ═══════════════════════════════════════════════════════════════
+# Coilia Agent — 刀鲚专研 Agent 配置 (P₂)
+# ═══════════════════════════════════════════════════════════════
+# 借鉴: porpoise-agent/config/agent.yaml (P₁ 模板)
+# 课题组: 淡水渔业研究中心 刘凯研究员
+
+agent:
+  name: "Coilia Agent"
+  version: "1.3.0"
+  description: "刀鲚专研 Agent — 洄游生态、耳石微化学、资源评估、群体遗传"
+  species: "Coilia nasus (刀鲚/长江刀鱼)"
+  research_group: "淡水渔业研究中心 刘凯研究员课题组"
+  role: "P₂ (Porpoise-parallel Specialist)"
+  
+  activation_keywords:
+    chinese:
+      - 刀鲚, 长颌鲚, 刀鱼, 长江刀鱼, 鲚属, 鳀科
+      - 洄游, 溯河, 耳石, 微化学, Sr/Ca, 资源量, 禁捕
+      - 产卵场, 补充群体, 仔鱼, 短颌鲚, 凤鲚
+    english:
+      - Coilia nasus, tapertail anchovy, estuarine tapertail anchovy
+      - otolith microchemistry, anadromous migration, stock assessment
+    related_species:
+      - "短颌鲚 (Coilia brachygnathus)"
+      - "凤鲚 (Coilia mystus)"
+
+  skills:
+    external:
+      - name: "search-literature"
+        description: "中英双语文献检索 — 通过 cognitive-search-engine DirectLoader"
+        path: "src/skills/search-literature/SKILL.md"
+      - name: "analyze-migration"
+        description: "耳石微化学数据解析 — Sr/Ca比、LA-ICP-MS数据处理"
+        path: "src/skills/analyze-migration/SKILL.md"
+      - name: "assess-stock"
+        description: "资源评估 — CPUE标准化、种群动态模型、MSY估算"
+        path: "src/skills/assess-stock/SKILL.md"
+      - name: "analyze-genetics"
+        description: "群体遗传学 — 微卫星/线粒体/SNP数据分析"
+        path: "src/skills/analyze-genetics/SKILL.md"
+      - name: "analyze-feeding"
+        description: "食性与营养生态 — 胃含物、稳定同位素、DNA宏条形码"
+        path: "src/skills/analyze-feeding/SKILL.md"
+    inline_phases:
+      - name: "genetics-analysis"
+        description: "群体遗传学 — 微卫星/线粒体/SNP分析 (内联管线阶段)"
+      - name: "report-generation"
+        description: "综合报告生成 — 合并所有阶段发现 (内联管线阶段)"
+
+  pipeline:
+    phases:
+      - "文献调研 (Literature Review)"
+      - "数据分析 (Data Analysis — 耳石/遗传/资源)"
+      - "野外调查 (Field Survey — 产卵场/洄游监测)"
+      - "资源评估 (Stock Assessment)"
+      - "报告生成 (Report Generation)"
+
+architecture:
+  # S-T-V-P₁-P₂ 五体架构: eon-core (10层内核) 统一协调
+  # P 层专研由本 Agent 负责
+  layer: "P (Specialist)"
+  sister_agent: "porpoise-agent (P₁/V2, 长江江豚)"
+  coordinator: "eon-core"
+
+# ═══════════════════════════════════════════════════════════
+# Shared — 跨项目共享配置 (与其他 agent.yaml 对齐)
+# ═══════════════════════════════════════════════════════════
+shared:
+  version: "1.2.0"
+  philosophy: "Panta Rhei + Systems Thinking"
+  architecture: "S-T-V-P₁-P₂ (三角派生 P₂/V3)"
+  rule_count: 18
+  coordination_file: "coordination.yaml"
+  preflight: "read config/agent.yaml before all Skills"

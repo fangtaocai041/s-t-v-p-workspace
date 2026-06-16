@@ -1,0 +1,45 @@
+# MCP Server Configuration
+# Porpoise Agent integrates external tools via MCP protocol
+
+servers:
+  scholar:
+    name: Scholar MCP
+    command: npx
+    args: ["-y", "@anthropic/mcp-server-scholar"]
+    description: Google Scholar + full-text literature search
+    enabled: true
+
+  article:
+    name: Article MCP
+    command: python
+    args: ["-m", "article_mcp"]
+    description: PMC full-text + journal quality (EasyScholar + OpenAlex)
+    enabled: true
+
+  filesystem:
+    name: Filesystem MCP
+    command: npx
+    args: ["-y", "@anthropic/mcp-server-filesystem", "./data"]
+    description: Secure file read/write within data directory
+    enabled: true
+
+  memory:
+    name: Memory MCP
+    command: npx
+    args: ["-y", "@anthropic/mcp-server-memory"]
+    description: Knowledge graph persistence (entities + relations)
+    enabled: false
+
+  echarts:
+    name: Echarts MCP
+    url: http://localhost:3000/mcp
+    transport: http
+    description: Data visualization (chart generation)
+    enabled: true
+
+  tavily:
+    name: Tavily MCP
+    command: npx
+    args: ["-y", "@tavily/mcp-server-tavily"]
+    description: Web search and research
+    enabled: true

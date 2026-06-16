@@ -1,0 +1,36 @@
+# Coilia Agent Component Registry — 刀鲚专研组件注册表
+# 借鉴: porpoise-agent/config/component_registry.yaml (P₁ 模板)
+
+components:
+  core:
+    orchestrator:
+      version: "1.0.0"
+      created: "2026-06-07"
+      last_verified: "2026-06-07"
+      module: "src/agent/orchestrator.py"
+      expiry_policy: { type: "manual_review", max_age_days: 90 }
+
+  skills:
+    - { name: "search-literature", version: "1.0.0", last_verified: "2026-06-07", expiry: { type: "manual_review", max_age_days: 90 } }
+    - { name: "analyze-migration", version: "1.0.0", last_verified: "2026-06-07", expiry: { type: "manual_review", max_age_days: 90 } }
+    - { name: "assess-stock", version: "1.0.0", last_verified: "2026-06-07", expiry: { type: "manual_review", max_age_days: 90 } }
+    - { name: "analyze-genetics", version: "1.0.0", last_verified: "2026-06-07", expiry: { type: "manual_review", max_age_days: 90 } }
+    - { name: "analyze-feeding", version: "1.0.0", last_verified: "2026-06-07", expiry: { type: "manual_review", max_age_days: 90 } }
+
+  configs:
+    agent_yaml: { version: "1.0.0", last_verified: "2026-06-07", expiry: { type: "manual_review", max_age_days: 90 } }
+
+  knowledge_base:
+    version: "1.0.0"
+    created: "2026-06-07"
+    last_verified: "2026-06-07"
+    expiry_policy: { type: "manual_review", max_age_days: 180 }
+    species_entries: 1  # Coilia nasus (with related species)
+    related_species: 2  # C. brachygnathus, C. mystus
+
+living_system:
+  born: "2026-06-07"
+  total_components: 8  # 1 core + 5 skills + 1 config + 1 KB
+  health_score: 100
+  last_health_check: "2026-06-07"
+  sister_agent: "porpoise-agent (P₁)"

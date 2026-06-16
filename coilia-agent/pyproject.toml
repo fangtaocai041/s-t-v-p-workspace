@@ -1,0 +1,9 @@
+[project]
+name = "coilia-agent"
+version = "1.3.0"
+description = "Coilia Agent — 刀鲚专研 Agent (P₂)，淡水渔业研究中心 刘凯研究员课题组"
+requires-python = ">=3.10"
+dependencies = ["pyyaml>=6.0"]
+
+[project.scripts]
+coilia = "src.main:main"

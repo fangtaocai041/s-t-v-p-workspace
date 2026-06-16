@@ -1,0 +1,62 @@
+name: test
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+          pip install -e . 2>/dev/null || true
+
+      - name: Import check (all modules)
+        run: |
+          python -c "
+          import sys
+          modules = [
+              'src.interaction.nlu', 'src.interaction.renderer',
+              'src.cognitive.bdi', 'src.cognitive.react_loop',
+              'src.cognitive.decomposer', 'src.cognitive.reflexion',
+              'src.cognitive.search',
+              'src.memory.short_term', 'src.memory.long_term', 'src.memory.manager',
+              'src.mapping.router', 'src.mapping.serializer', 'src.mapping.validator',
+              'src.execution.sandbox', 'src.execution.tool_registry',
+              'src.agents.topology', 'src.agents.base',
+              'src.agents.literature', 'src.agents.acoustic',
+              'src.agents.ecology', 'src.agents.conservation',
+              'src.agents.critic', 'src.agents.orchestrator',
+              'src.agent',
+          ]
+          for m in modules:
+              try:
+                  __import__(m)
+                  print(f'  OK  {m}')
+              except Exception as e:
+                  print(f'  FAIL {m}: {e}')
+                  sys.exit(1)
+          print('All imports OK')
+          "
+
+      - name: Unit tests
+        run: python -m pytest tests/test_bdi.py tests/test_memory.py tests/test_serializer.py -v
+
+      - name: Workflow tests
+        run: python tests/workflow_test.py

@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "culter-agent"
+version = "2.0.0"
+description = "长江鲌类领域专研智能体 — 基因组学 · 年龄生长 · 同位素 · 同域共存 · 资源评估"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = [
+    "pyyaml>=6.0",
+]
+
+# === P1/P2 待添加依赖 ===
+# numpy>=1.26                 # 数据分析
+# pandas>=2.1                 # 数据处理
+# scipy>=1.12                 # 科学计算
+# scikit-learn>=1.4           # 机器学习
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

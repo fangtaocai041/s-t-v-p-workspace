@@ -1,0 +1,42 @@
+# 模型配置
+
+providers:
+  deepseek:
+    base_url: "https://api.deepseek.com/v1"
+    api_key_env: "DEEPSEEK_API_KEY"
+    models:
+      - id: "deepseek-chat"
+        name: "DeepSeek V3"
+        context_window: 65536
+        max_output_tokens: 8192
+        cost_per_1k_input: 0.00014
+        cost_per_1k_output: 0.00028
+        suitable_for:
+          - literature_search
+          - data_analysis
+          - report_generation
+      - id: "deepseek-reasoner"
+        name: "DeepSeek R1"
+        context_window: 65536
+        max_output_tokens: 8192
+        cost_per_1k_input: 0.00055
+        cost_per_1k_output: 0.00219
+        suitable_for:
+          - complex_reasoning
+          - conservation_assessment
+          - hypothesis_generation
+
+routing:
+  default: "deepseek-chat"
+  reasoning: "deepseek-reasoner"
+  strategy: "adaptive"
+
+reasonix:
+  cache_enabled: true
+  harvest_enabled: true
+  branch_count: 3
+  repair_enabled: true
+  retry:
+    max_retries: 3
+    backoff_base: 2
+    jitter: true

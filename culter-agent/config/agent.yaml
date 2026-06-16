@@ -1,0 +1,139 @@
+# ═══════════════════════════════════════════════════════════════
+# Culter Agent — 鲌类专研 Agent 配置 (P₃)
+# ═══════════════════════════════════════════════════════════════
+# 借鉴: coilia-agent/config/agent.yaml (P₂ 模板)
+# 专精: 基因组学、年龄与生长、遗传与谱系地理、营养生态位与同位素、
+#        同域共存、资源评估、栖息地建模
+
+agent:
+  name: "Culter Agent"
+  version: "2.0.0"
+  description: "鲌类专研 Agent — 基因组与遗传、年龄与生长、同位素营养生态位、同域共存、资源评估、栖息地建模"
+  genus: "Culter (鲌属) 及近缘属 Chanodichthys (原鲌属)"
+  role: "P₃ (万物衍生第三子)"
+  
+  primary_species:
+    - "翘嘴鲌 (Culter alburnus / topmouth culter)"
+    - "蒙古鲌 (Culter mongolicus / Mongolian culter)"
+    - "尖头鲌 (Culter oxycephalus)"
+  related_species:
+    - "红鳍原鲌 (Chanodichthys erythropterus / redfin culter)"
+    - "达氏鲌 (Culter dabryi)"
+    - "拟尖头鲌 (Culter oxycephaloides)"
+
+  activation_keywords:
+    chinese:
+      - 鲌, 鲌类, 鲌属, 翘嘴鲌, 蒙古鲌, 尖头鲌, 红鳍鲌, 红鳍原鲌
+      - 鲌鱼, 白鱼, 大白鱼, 翘嘴, 蒙古红鲌
+      # 基因组 + 遗传
+      - 基因组, 全基因组, 测序, 组装, 注释, 比较基因组, 简化基因组
+      - RAD-seq, GBS, 转录组, 线粒体基因组, 叶绿体, 系统发育基因组
+      - 遗传, 遗传多样性, 遗传分化, 谱系地理, 系统发育, 单倍型
+      - 微卫星, SSR, SNP, 基因流, 瓶颈效应, 有效种群大小
+      # 年龄与生长
+      - 年龄, 鳞片, 耳石, 生长方程, von Bertalanffy, VBGF
+      # 同位素 + 营养生态位
+      - 同位素, 稳定同位素, δ13C, δ15N, δ34S, 碳氮比, MixSIAR, SIAR
+      - 营养级, 营养生态位, 食性, 胃含物, 摄食, 饵料, 食物组成
+      - 营养重叠, 生态位宽度, 摄食策略, 食性转换
+      # 同域共存
+      - 同域共存, 共存机制, 生态位分化, 资源分割, niche partitioning
+      - 种间竞争, 同域分布, 栖位分离, 时间生态位, 空间生态位
+      # 资源 + 栖息地
+      - 资源, CPUE, 评估, 种群, 捕捞, MSY, 增殖放流
+      - 栖息地, 生境, 适宜性, HSI, 水环境, 产卵场
+      - 繁殖, 产卵, 繁殖力, 性腺, 性比
+    english:
+      - Culter alburnus, Culter mongolicus, Culter oxycephalus
+      - Chanodichthys erythropterus, topmouth culter, Mongolian culter
+      # genomics + genetics
+      - genome, genomics, whole genome, assembly, annotation, comparative genomics
+      - RAD-seq, GBS, transcriptome, mitogenome, phylogenomics, phylogeography
+      - genetic diversity, genetic differentiation, microsatellite, SNP, haplotype, gene flow
+      - population structure, demographic history, effective population size
+      # age + growth
+      - age, growth, von Bertalanffy, VBGF, otolith, scale, annulus
+      # isotopes + trophic
+      - stable isotope, δ13C, δ15N, δ34S, MixSIAR, SIAR, trophic position
+      - trophic niche, diet, gut content, feeding ecology, food web
+      - niche overlap, niche breadth, dietary shift, ontogenetic diet
+      # coexistence
+      - coexistence, niche partitioning, resource partitioning, sympatric
+      - interspecific competition, spatial segregation, temporal segregation
+      # resource + habitat
+      - stock assessment, CPUE, MSY, population dynamics, recruitment
+      - habitat suitability, HSI, environmental flow, spawning ground
+      - reproduction, fecundity, spawning, gonad
+
+  skills:
+    external:
+      - name: "search-literature"
+        description: "鲌类双语文献检索 — 通过 cognitive-search-engine DirectLoader"
+        path: "src/skills/search-literature/SKILL.md"
+      - name: "analyze-growth"
+        description: "年龄鉴定与生长建模 — 鳞片/耳石轮纹、VBGF拟合、生长参数比较"
+        path: "src/skills/analyze-growth/SKILL.md"
+      - name: "analyze-genomics"
+        description: "基因组学分析 — 全基因组/简化基因组、组装注释、比较基因组、系统发育基因组"
+        path: "src/skills/analyze-genomics/SKILL.md"
+      - name: "analyze-genetics"
+        description: "群体遗传与谱系地理 — 遗传多样性、种群结构、基因流、谱系地理、种群历史"
+        path: "src/skills/analyze-genetics/SKILL.md"
+      - name: "analyze-trophic"
+        description: "同位素与营养生态位 — δ13C/δ15N稳定同位素、MixSIAR混合模型、营养级、食性分析"
+        path: "src/skills/analyze-trophic/SKILL.md"
+      - name: "model-coexistence"
+        description: "同域共存建模 — 生态位分化量化、资源分割、共存机制、种间竞争评估"
+        path: "src/skills/model-coexistence/SKILL.md"
+      - name: "assess-resource"
+        description: "资源评估 — CPUE标准化、剩余产量模型、YPR分析、MSY估算"
+        path: "src/skills/assess-resource/SKILL.md"
+      - name: "model-habitat"
+        description: "栖息地适宜性建模 — HSI模型、环境因子关联分析、产卵场评估"
+        path: "src/skills/model-habitat/SKILL.md"
+    inline_phases:
+      - name: "report-generation"
+        description: "综合报告生成 — 合并所有阶段发现 (内联管线阶段)"
+
+  pipeline:
+    phases:
+      - "文献调研 (Literature Review)"
+      - "年龄与生长 (Age & Growth)"
+      - "基因组学 (Genomics)"
+      - "群体遗传与谱系地理 (Population Genetics & Phylogeography)"
+      - "同位素与营养生态位 (Isotopes & Trophic Niche)"
+      - "同域共存 (Sympatric Coexistence)"
+      - "资源评估 (Stock Assessment)"
+      - "栖息地模型 (Habitat Modeling)"
+      - "报告生成 (Report Generation)"
+
+  chinese_name_mapping:
+    "翘嘴鲌": "Culter alburnus"
+    "蒙古鲌": "Culter mongolicus"
+    "蒙古红鲌": "Culter mongolicus"
+    "尖头鲌": "Culter oxycephalus"
+    "红鳍鲌": "Chanodichthys erythropterus"
+    "红鳍原鲌": "Chanodichthys erythropterus"
+    "达氏鲌": "Culter dabryi"
+    "拟尖头鲌": "Culter oxycephaloides"
+    "白鱼": "Culter alburnus"
+    "翘壳": "Culter alburnus"
+    "大白鱼": "Culter alburnus"
+
+architecture:
+  # S-T-V-P₁-P₂-P₃ 多体架构: eon-core (10层内核) 统一协调
+  # P 层专研由本 Agent 负责
+  layer: "P (Specialist)"
+  sister_agents: ["porpoise-agent (P₁/V2, 长江江豚)", "coilia-agent (P₂/V3, 刀鲚)"]
+  coordinator: "eon-core"
+
+# ═══════════════════════════════════════════════════════════
+# Shared — 跨项目共享配置 (与其他 agent.yaml 对齐)
+# ═══════════════════════════════════════════════════════════
+shared:
+  version: "2.0.0"
+  philosophy: "Panta Rhei + Systems Thinking"
+  architecture: "S-T-V-P₁-P₂-P₃ (三角派生 P₃/V4)"
+  rule_count: 18
+  coordination_file: "coordination.yaml"
+  preflight: "read config/agent.yaml before all Skills"

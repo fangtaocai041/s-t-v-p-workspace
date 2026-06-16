@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "fish-ecology-assistant"
+version = "6.5.0"
+description = "鱼类生态学知识供给引擎 — 多流域物种知识库 + 两阶段文献搜索 + 三角验证评分"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = [
+    "pyyaml>=6.0",
+]
+
+[project.urls]
+Repository = "https://github.com/fangtaocai041/fish-ecology-assistant"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["fish_ecology_assistant*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
