@@ -1,32 +1,32 @@
 """
-ProjectHub — 三生万物架构 · 统一项目中枢
+ProjectHub — 多项目协调中枢
 
-三生万物 = 三角核心 (sealed 3) + 万物衍生 (open N)
+架构: 三角核心 (sealed 3) + 衍生项目 (open N)
 
-  三 (Triangle Core · 密闭三元素):
-    fish-ecology-assistant     S/V0 — 知识供给 (self)
+  三角核心 (密闭三元素):
+    fish-ecology-assistant     S/V0 — 知识供给
     cognitive-search-engine    V/V1 — 搜索验证
     eon-core                   Coordinator — 协调内核
 
-  万物 (Derived · 开放衍生):
+  衍生项目 (开放):
     porpoise-agent    P₁ — 江豚专研
     coilia-agent      P₂ — 刀鲚专研
     conflict-arbiter  C  — 冲突仲裁
-    ...               Pₙ — 未来可无限扩展
+    ...               Pₙ — 可无限扩展
 
-铁律:
-  - 三角核心密闭: 正好3个, 缺一不可, 三项目共同进化
-  - 万物开放: 0到N, 三角不依赖任何衍生项目
+规则:
+  - 三角核心密闭: 正好3个, 缺一不可
+  - 衍生项目开放: 0到N, 三角不依赖任何衍生项目
   - 三角提供基础能力 (知识+验证+协调), 衍生项目在此基础上执行
 
 用法:
   from src.project_hub import get_hub
 
   hub = get_hub()
-  hub.cognitive.search("Ochetobius elongatus")    # 三角: 搜索验证
-  hub.porpoise.health()                            # 衍生: 江豚状态
-  hub.is_triangle_complete()                       # → True/False
-  result = hub.search_species("珠星三块鱼")         # 统一入口
+  hub.cognitive.search("Ochetobius elongatus")
+  hub.porpoise.health()
+  hub.is_triangle_complete()
+  result = hub.search_species("珠星三块鱼")
 """
 
 from __future__ import annotations

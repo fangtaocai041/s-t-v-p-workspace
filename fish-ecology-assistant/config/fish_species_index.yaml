@@ -1,9 +1,8 @@
 metadata:
-  title: 鱼类物种知识库索引
+  title: 物种索引
   version: '3.0'
   last_updated: '2026-06-16'
   total_species: 30
-  note: 详细档案位于 config/knowledge_base/species/
 species:
 - id: cyprinus_carpio
   name: 鲤

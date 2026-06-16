@@ -4,8 +4,8 @@
 # 路径: D:/Reasonix/coordination.yaml
 # 唯一协调配置 — 所有7个项目由此文件统一管理。
 #
-# 道(eon-core) → S(fish知识) + T(cognitive验证) → 万物(P₁porpoise江豚 + P₂coilia刀鲚 + P₃culter鲌类 + conflict仲裁[T层内嵌])
-# 
+# Triangle Core: fish(知识) → cognitive(验证) → eon-core(协调)
+# Derived: P₁江豚 + P₂刀鲚 + P₃鲌类 + C仲裁
 #
 # 🧠 Meso-Cosmos Agent (v5.0): workspace-level coordination
 #    Macro(BDI意图) → Meso(跨项目协调) → Micro(项目执行)
@@ -43,12 +43,9 @@ coordination:
       - { phase: 4, name: "SYNTHESIZE", layer: "Merge", action: "多项目结果合并 → 统一报告" }
       - { phase: 5, name: "EVOLVE", layer: "Feedback", action: "评估 → 触发跨项目进化" }
 
-  # ===== S-T-V 三角 =====
-  # ===== 三角闭环 (Triangle Core) =====
-  # 道生一 → 一生二 → 二生三 → 三生万物
-  # 一: 太极(命令入口)  二: 阴阳(S↔V对立)  三: 三角闭环(缺一不可)
+  # ===== Triangle Core (三角闭环) =====
   # 三角 = fish(知识) + cognitive(验证) + eon-core(协调)
-  # 万物: P₁(porpoise) P₂(coilia) ... 从三角衍生，三角不依赖万物
+  # 衍生: P₁(porpoise) P₂(coilia) ... 从三角衍生，三角不依赖衍生项目
   triangle_core:
     fish_knowledge:
       project: "fish-ecology-assistant"
@@ -89,7 +86,7 @@ coordination:
     conflict_arbiter:
       id: "C"
       project: "conflict-arbiter"
-      role: "冲突仲裁层 (火🟥) — 多源保护推荐冲突检测, 可信度加权仲裁, 熔断, 中国物种区域策略"
+      role: "冲突仲裁层 — 多源保护推荐冲突检测, 可信度加权仲裁, 熔断, 中国物种区域策略"
       depends_on: ["fish_knowledge", "cognitive_engine"]
 
 # ═══════════════════════════════════════════════════════

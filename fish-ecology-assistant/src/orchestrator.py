@@ -1,15 +1,14 @@
-"""FishEcologyOrchestrator — 道生一 (One: 统一入口)
+"""FishEcologyOrchestrator — 统一入口 API
 
-道→一→二→三→万物 哲学链中"一"的具现:
-  道 (Dao)   = 外界 — 用户的研究问题, 长江生态需求
-  一 (One)   = 太极 — 命令进入系统, fish-ecology-assistant 统一入口 [本模块]
-  二 (Two)   = 阴阳 — S(知识/静) ↔ V(验证/动) 二元对立
-  三 (Three) = 三角 — fish + cognitive + eon-core 矛盾统一体
-  万物       = Myriad — 一切衍生 + Skills + 输出, 无限演化
+三角核心 S/V0 知识供给层的主入口。提供:
+  - kb_first_lookup(): 知识库优先查询
+  - search_species(): 统一物种搜索
+  - delegate_to(): 跨项目委托
 
-This orchestrator IS the "One" — the undivided entry point where
-the user's command (from Dao, the external world) first enters the system.
-From here, Yin/Yang duality emerges, and the Triangle structure forms.
+三角核心:
+  fish-ecology-assistant (S/V0 知识供给)
+  cognitive-search-engine (V/V1 搜索验证)
+  eon-core (Coordinator 协调器)
 
 Usage:
     from src.orchestrator import FishEcologyOrchestrator
