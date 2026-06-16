@@ -1,6 +1,6 @@
-﻿# Changelog
+# Changelog
 
-> 版本变更记录。版本副本保存在 .reasonix/readme-versions/。
+> 版本变更记录。版本副本保存在 `.reasonix/readme-versions/`。
 
 ---
 
@@ -8,16 +8,16 @@
 
 ### 🧬 KB-First 两阶段搜索
 
-- KB-First 两阶段搜索架构：kb_first_lookup() 先查知识库 → 用户决策 → continue_full_search() 全量搜索
-- ProjectHub 统一加载 5 个子系统（⊂cognitive ∥porpoise ∥coilia ⫛eon-core ⊢conflict）
-- search_species() 统一入口方法
-- delegate_to() 跨项目委托协议
+- KB-First 两阶段搜索架构：`kb_first_lookup()` 先查知识库 → 用户决策 → `continue_full_search()` 全量搜索
+- `ProjectHub` 统一加载 5 个子系统（⊂cognitive ∥porpoise ∥coilia ⫛eon-core ⊢conflict）
+- `search_species()` 统一入口方法
+- `delegate_to()` 跨项目委托协议
 
 ### 🏠 宿主容器架构
 
-- 宿主容器架构重写，src/project_hub.py 作为统一协调中枢
-- src/orchestrator.py 精简为轻量级 API 层
-- TRIANGLE + DERIVED 数据类规范定义三角/万物结构
+- 宿主容器架构重写，`src/project_hub.py` 作为统一协调中枢
+- `src/orchestrator.py` 精简为轻量级 API 层
+- `TRIANGLE` + `DERIVED` 数据类规范定义三角/万物结构
 
 ---
 
@@ -25,10 +25,10 @@
 
 ### 🔧 工程架构规范化
 
-- 精确匹配器 _match_species()：支持学名/中文名/别名/同义名
-- 	axonomy_log 分类变更记录：含时间·期刊·作者证据
-- detect_taxonomy_discrepancy() 跨项目分类一致性检测
-- erify_architecture.py 架构合规性验证脚本
+- 精确匹配器 `_match_species()`：支持学名/中文名/别名/同义名
+- `taxonomy_log` 分类变更记录：含时间·期刊·作者证据
+- `detect_taxonomy_discrepancy()` 跨项目分类一致性检测
+- `verify_architecture.py` 架构合规性验证脚本
 - 项目职责边界声明（工程语言而非哲学语言）
 
 ---
@@ -39,7 +39,7 @@
 
 - 10 层同心架构集成（OriginKernel → YinYang → Vertices → ...）
 - conflict-arbiter (V4) 冲突仲裁模块集成
-- 三角核心密闭性检查 is_triangle_complete()
+- 三角核心密闭性检查 `is_triangle_complete()`
 
 ---
 
@@ -59,7 +59,7 @@
 
 - 跨项目协同进化协议
 - S-T-V 三角角色增强定义
-- coordination.yaml 统一协调配置
+- `coordination.yaml` 统一协调配置
 
 ---
 
@@ -67,9 +67,9 @@
 
 ### 🧠 Cognitive Search Engine DirectLoader
 
-- CognitiveSearch DirectLoader 协议（importlib 零进程加载）
-- 双模式搜索：轻量 ParallelSearch + 完整 CognitiveAgent BDI ReAct
-- 知识图谱进化：species_graph.yaml 积累共享
+- CognitiveSearch DirectLoader 协议（`importlib` 零进程加载）
+- 双模式搜索：轻量 `ParallelSearch` + 完整 `CognitiveAgent` BDI ReAct
+- 知识图谱进化：`species_graph.yaml` 积累共享
 
 ---
 
@@ -78,7 +78,7 @@
 ### 🔍 12 引擎搜索
 
 - 12 搜索引擎并行（GS 优先 + 4 中文源）
-- search_api.py 搜索编排器
+- `search_api.py` 搜索编排器
 - 搜索 v3.0 架构
 
 ---

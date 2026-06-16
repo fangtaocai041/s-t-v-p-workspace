@@ -1,0 +1,458 @@
+# ═══════════════════════════════════════════════════════════════════
+# 鱼类物种知识库 — Fish Species Knowledge Base (多流域版)
+# ═══════════════════════════════════════════════════════════════════
+# 分类体系: 大陆板块 → 国家 → 流域 → 物种
+#
+# 数据来源:
+#   [长江] 《长江水生生物资源与环境本底状况调查(2017-2021)》
+#          水产学报 DOI:10.11964/jfc.20220913677
+#           中国水产科学研究院总牵头，24家科研院所
+#   [图们江/绥芬河] 文献补充 + 物种分布记录
+#
+# 核心发现 (长江调查):
+#   - 历史记录443种(18目37科163属)，2017-2021采集到323种(含15种外来)
+#   - 鱼类资源量约8.86亿尾/12.48万t，仅相当于1950年代的27.3%
+#   - 29种国家重点保护鱼类，仅记录到15种
+#   - 白鲟(IUCN灭绝)、鯮和鲥(多年未见)、长江鲟(IUCN野外灭绝)
+#   - 中华鲟/胭脂鱼/松江鲈 多年未见自然繁殖
+#   - 长江江豚种群稳中有升，分布范围扩大
+# ===================================================================
+
+metadata:
+  title: "鱼类物种知识库（多流域版）"
+  version: "2.0"
+  sources:
+    - name: "长江水生生物资源与环境本底状况调查(2017-2021)"
+      doi: "10.11964/jfc.20220913677"
+      journal: "水产学报"
+      survey_period: "2017-2021"
+      scope: "长江流域 (干流 + 10条主要支流/附属湖泊)"
+      total_historical_species: 443
+      total_collected_2017_2021: 323
+      missing_species: 135
+      exotic_newly_recorded: 15
+      estimated_population: "8.86亿尾 / 12.48万t"
+      compared_to_1950s: "27.3%"
+      compared_to_1980s: "58.7%"
+    - name: "图们江/绥芬河鱼类补充"
+      note: "东北亚溯河洄游鱼类分布数据，持续扩充中"
+
+# ═══════════════════════════════════════════════════════════════════
+# 分类层级索引 — 大陆板块 > 国家 > 流域
+# ═══════════════════════════════════════════════════════════════════
+classification:
+  - continent: "亚洲"
+    countries:
+      - name: "中国"
+        basins:
+          - name: "长江流域"
+            id: yangtze
+            sub_areas: ["干流", "雅砻江", "横江", "岷江", "赤水河", "沱江", "嘉陵江", "乌江", "汉江", "洞庭湖", "鄱阳湖"]
+          - name: "图们江流域"
+            id: tumen
+            note: "中朝俄界河，东北亚特有鱼类分布区"
+          - name: "绥芬河流域"
+            id: suifen
+            note: "中俄界河，溯河洄游鱼类通道"
+          - name: "黑龙江流域"
+            id: heilongjiang
+            note: "中俄界河，冷水性鱼类区系"
+          - name: "珠江水系"
+            id: pearl
+            note: "华南淡水鱼类区系，待扩充"
+      - name: "日本"
+        basins:
+          - name: "北海道沿岸"
+            id: hokkaido
+          - name: "本州沿岸"
+            id: honshu
+      - name: "俄罗斯"
+        basins:
+          - name: "滨海边疆区沿岸"
+            id: primorsky
+          - name: "萨哈林岛沿岸"
+            id: sakhalin
+      - name: "朝鲜"
+        basins:
+          - name: "图们江下游"
+            id: tumen_nk
+          - name: "东海岸"
+            id: east_coast_nk
+      - name: "韩国"
+        basins:
+          - name: "东海岸"
+            id: east_coast_kr
+  - continent: "北美洲"
+    countries:
+      - name: "美国"
+        basins:
+          - name: "密西西比河流域"
+            id: mississippi
+            note: "待扩充"
+
+# ═══════════════════════════════════════════════════════════════════
+# 物种名录 (按需扩展)
+# ═══════════════════════════════════════════════════════════════════
+# 每个物种标注:
+#   - 分类信息 (科/目/属)
+#   - 分布 (大陆 > 国家 > 流域)
+#   - 类别标签 (dominant/protected/endangered/exotic)
+#   - 生态信息
+
+species:
+
+  # ── 🏆 长江流域优势种 (15种占重量50%+数量45%) ──
+  - id: cyprinus_carpio
+    name: "鲤"
+    scientific: "Cyprinus carpio"
+    family: "鲤科"
+    conservation: "无"
+    category: "dominant"
+    distribution:
+      continents: ["亚洲", "北美洲"]
+      countries: ["中国"]
+      basins: ["长江流域"]
+
+  - id: carassius_auratus
+    name: "鲫"
+    scientific: "Carassius auratus"
+    family: "鲤科"
+    conservation: "无"
+    category: "dominant"
+    distribution:
+      continents: ["亚洲"]
+      countries: ["中国"]
+      basins: ["长江流域"]
+
+  - id: hypophthalmichthys_molitrix
+    name: "鲢"
+    scientific: "Hypophthalmichthys molitrix"
+    family: "鲤科"
+    conservation: "无"
+    category: "dominant"
+    distribution:
+      continents: ["亚洲"]
+      countries: ["中国"]
+      basins: ["长江流域"]
+
+  - id: pelteobagrus_fulvidraco
+    name: "黄颡鱼"
+    scientific: "Pelteobagrus fulvidraco"
+    family: "鲿科"
+    conservation: "无"
+    category: "dominant"
+    distribution:
+      continents: ["亚洲"]
+      countries: ["中国"]
+      basins: ["长江流域"]
+
+  - id: coilia_brachygnathus
+    name: "短颌鲚"
+    scientific: "Coilia brachygnathus"
+    family: "鳀科"
+    conservation: "无"
+    category: "dominant"
+    distribution:
+      continents: ["亚洲"]
+      countries: ["中国"]
+      basins: ["长江流域"]
+
+  - id: silurus_asotus
+    name: "鲇"
+    scientific: "Silurus asotus"
+    family: "鲇科"
+    conservation: "无"
+    category: "dominant"
+    distribution:
+      continents: ["亚洲"]
+      countries: ["中国"]
+      basins: ["长江流域"]
+
+  - id: saurogobio_dabryi
+    name: "蛇鮈"
+    scientific: "Saurogobio dabryi"
+    family: "鲤科"
+    conservation: "无"
+    category: "dominant"
+    distribution:
+      continents: ["亚洲"]
+      countries: ["中国"]
+      basins: ["长江流域"]
+
+  - id: ctenopharyngodon_idellus
+    name: "草鱼"
+    scientific: "Ctenopharyngodon idellus"
+    family: "鲤科"
+    conservation: "无"
+    category: "dominant"
+    distribution:
+      continents: ["亚洲"]
+      countries: ["中国"]
+      basins: ["长江流域"]
+
+  - id: pelteobagrus_nitidus
+    name: "光泽黄颡鱼"
+    scientific: "Pelteobagrus nitidus"
+    family: "鲿科"
+    conservation: "无"
+    category: "dominant"
+    distribution:
+      continents: ["亚洲"]
+      countries: ["中国"]
+      basins: ["长江流域"]
+
+  - id: hemiculter_leucisculus
+    name: "䱗"
+    scientific: "Hemiculter leucisculus"
+    family: "鲤科"
+    conservation: "无"
+    category: "dominant"
+    distribution:
+      continents: ["亚洲"]
+      countries: ["中国"]
+      basins: ["长江流域"]
+
+  - id: siniperca_chuatsi
+    name: "鳜"
+    scientific: "Siniperca chuatsi"
+    family: "鳜科"
+    conservation: "无"
+    category: "dominant"
+    distribution:
+      continents: ["亚洲"]
+      countries: ["中国"]
+      basins: ["长江流域"]
+
+  - id: coreius_heterodon
+    name: "铜鱼"
+    scientific: "Coreius heterodon"
+    family: "鲤科"
+    conservation: "无"
+    category: "dominant"
+    distribution:
+      continents: ["亚洲"]
+      countries: ["中国"]
+      basins: ["长江流域"]
+
+  - id: culter_alburnus
+    name: "翘嘴鲌"
+    scientific: "Culter alburnus"
+    family: "鲤科"
+    conservation: "无"
+    category: "dominant"
+    distribution:
+      continents: ["亚洲"]
+      countries: ["中国"]
+      basins: ["长江流域"]
+
+  - id: parabramis_pekinensis
+    name: "鳊"
+    scientific: "Parabramis pekinensis"
+    family: "鲤科"
+    conservation: "无"
+    category: "dominant"
+    distribution:
+      continents: ["亚洲"]
+      countries: ["中国"]
+      basins: ["长江流域"]
+
+  - id: aristichthys_nobilis
+    name: "鳙"
+    scientific: "Aristichthys nobilis"
+    family: "鲤科"
+    conservation: "无"
+    category: "dominant"
+    distribution:
+      continents: ["亚洲"]
+      countries: ["中国"]
+      basins: ["长江流域"]
+
+  # ── 🛡️ 国家重点保护鱼类 ──
+  # 调查中记录到的:
+  - id: acipenser_sinensis
+    name: "中华鲟"
+    scientific: "Acipenser sinensis"
+    family: "鲟科"
+    protection_level: "国家一级"
+    status: "多年未见自然繁殖"
+    iucn: "极危(CR)"
+    category: "protected_recorded"
+    distribution:
+      continents: ["亚洲"]
+      countries: ["中国"]
+      basins: ["长江流域"]
+
+  - id: acipenser_dabryanus
+    name: "长江鲟"
+    scientific: "Acipenser dabryanus"
+    family: "鲟科"
+    protection_level: "国家一级"
+    status: "IUCN认定野外灭绝(EW)"
+    iucn: "野外灭绝(EW)"
+    category: "protected_recorded"
+    distribution:
+      continents: ["亚洲"]
+      countries: ["中国"]
+      basins: ["长江流域"]
+
+  - id: myxocyprinus_asiaticus
+    name: "胭脂鱼"
+    scientific: "Myxocyprinus asiaticus"
+    family: "胭脂鱼科"
+    protection_level: "国家二级"
+    status: "多年未见自然繁殖"
+    category: "protected_recorded"
+    distribution:
+      continents: ["亚洲"]
+      countries: ["中国"]
+      basins: ["长江流域"]
+
+  - id: trachidermus_fasciatus
+    name: "松江鲈"
+    scientific: "Trachidermus fasciatus"
+    family: "杜父鱼科"
+    protection_level: "国家二级"
+    status: "多年未见自然繁殖"
+    category: "protected_recorded"
+    distribution:
+      continents: ["亚洲"]
+      countries: ["中国"]
+      basins: ["长江流域"]
+
+  # 已消失/多年未见:
+  - id: psephurus_gladius
+    name: "白鲟"
+    scientific: "Psephurus gladius"
+    family: "匙吻鲟科"
+    protection_level: "国家一级"
+    status: "IUCN认定灭绝(EX)"
+    iucn: "灭绝(EX)"
+    category: "protected_missing"
+    distribution:
+      continents: ["亚洲"]
+      countries: ["中国"]
+      basins: ["长江流域"]
+
+  - id: luciobrama_macrocephalus
+    name: "鯮"
+    scientific: "Luciobrama macrocephalus"
+    family: "鲤科"
+    protection_level: "国家二级"
+    status: "多年未见野生个体"
+    category: "protected_missing"
+    distribution:
+      continents: ["亚洲"]
+      countries: ["中国"]
+      basins: ["长江流域"]
+
+  - id: tenualosa_reevesii
+    name: "鲥"
+    scientific: "Tenualosa reevesii"
+    family: "鲱科"
+    protection_level: "国家一级"
+    status: "多年未见野生个体"
+    category: "protected_missing"
+    distribution:
+      continents: ["亚洲"]
+      countries: ["中国"]
+      basins: ["长江流域"]
+
+  # ── 🔍 关键濒危鱼类 (已入 cognitive-search-engine 图谱) ──
+  - id: ochetobius_elongatus
+    name: "鳤"
+    scientific: "Ochetobius elongatus"
+    family: "鲤科"
+    conservation: "无"
+    status: "极罕见"
+    category: "endangered_in_graph"
+    graph_papers: 9
+    note: "含OCR变体 Ochetobibus 2026食性论文"
+    distribution:
+      continents: ["亚洲"]
+      countries: ["中国"]
+      basins: ["长江流域"]
+
+  - id: elopichthys_bambusa
+    name: "鳡"
+    scientific: "Elopichthys bambusa"
+    family: "鲤科"
+    conservation: "无"
+    status: "濒危"
+    category: "endangered_in_graph"
+    distribution:
+      continents: ["亚洲"]
+      countries: ["中国"]
+      basins: ["长江流域"]
+
+  # ── 🐬 哺乳类 ──
+  - id: neophocaena_asiaeorientalis
+    name: "长江江豚"
+    scientific: "Neophocaena asiaeorientalis"
+    family: "鼠海豚科"
+    protection_level: "国家一级"
+    iucn: "极危(CR)"
+    population_trend: "稳中有升"
+    distribution: "长江中下游干流、洞庭湖、鄱阳湖"
+    category: "mammal"
+    key_findings:
+      - "长江中下游干流、洞庭湖、鄱阳湖个体数量整体稳中有升"
+      - "部分群体随季节在不同区域迁移"
+      - "禁捕后种群规模有望稳中有升"
+    research_group: "淡水渔业研究中心 刘凯研究员课题组"
+    dedicated_agent: "porpoise-agent"
+    distribution:
+      continents: ["亚洲"]
+      countries: ["中国"]
+      basins: ["长江流域"]
+
+  # ── 🌏 非长江物种 — 三块鱼 (图们江/绥芬河/日本海) ──
+  - id: tribolodon_brandti
+    name: "三块鱼"
+    aliases: ["珠星三块鱼", "东北三块鱼", "小鳞三块鱼", "珠星滩头鱼"]
+    scientific: "Tribolodon brandti"
+    synonyms: ["Leuciscus brandti", "Pseudaspius brandti"]
+    family: "鲤科"
+    subfamily: "雅罗鱼亚科"
+    order: "鲤形目"
+    conservation: "无"
+    ecology: "溯河洄游鱼类"
+    max_length_cm: 50
+    description: >
+      三块鱼属溯河洄游性鱼类，成鱼在海洋中生活，繁殖期溯河而上进入淡水河流产卵。
+      体型侧扁，体侧具不规则暗色斑块（"三块"之名源于体侧的斑块状花纹）。
+      是东北亚地区特有的经济鱼类和生态指示种。
+    economic_value: "东北亚重要经济鱼类，在日本被称作ウグイ (Ugui)"
+    category: "diadromous"
+    distribution:
+      continents: ["亚洲"]
+      countries: ["中国", "俄罗斯", "朝鲜", "韩国", "日本"]
+      basins: ["图们江流域", "绥芬河流域", "滨海边疆区沿岸", "北海道沿岸", "东海岸"]
+
+# ═══════════════════════════════════════════════════════════════════
+# 外来鱼类 (15种新记录 — 仅长江调查覆盖)
+# ═══════════════════════════════════════════════════════════════════
+exotic_species_note: >
+  2017-2021年长江调查新采集到15种外来鱼类。主要来源为养殖逃逸、
+  观赏鱼放生等。外来种对长江本土鱼类群落的影响需持续监测。
+
+# ═══════════════════════════════════════════════════════════════════
+# 水质与栖息地 (长江流域)
+# ═══════════════════════════════════════════════════════════════════
+environment:
+  water_quality: "总体较好，整体符合渔业水质标准"
+  water_surface_max: "19663 km² (2019-2020)"
+  water_surface_min: "14281 km² (2019-2020)"
+  fluctuation_zone_total: "6337 km²"
+  fluctuation_zone_counter_seasonal: "633 km²"
+  note: "衰退的消落区将成为制约未来长江水生生态系统恢复的限制性因素"
+
+# ═══════════════════════════════════════════════════════════════════
+# 禁捕影响 (长江流域)
+# ═══════════════════════════════════════════════════════════════════
+fishing_ban:
+  status: "2021年起长江十年禁捕"
+  expected_impact:
+    - "鱼类资源将有显著恢复"
+    - "长江江豚种群规模有望稳中有升"
+    - "濒危鱼类的处境依然堪忧"
+  pre_ban_fishermen: "以初中学历以下的中老年为主"
