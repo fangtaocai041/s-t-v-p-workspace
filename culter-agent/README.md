@@ -1,13 +1,13 @@
-﻿# 🐟 Culter Agent
-
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python) ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge) ![Version](https://img.shields.io/badge/Version-v1.0.0-blueviolet?style=for-the-badge) ![Pipeline](https://img.shields.io/badge/Pipeline-9-phase-orange?style=for-the-badge) ![Domain](https://img.shields.io/badge/Domain-Culter%20Genomics-9cf?style=for-the-badge) ![Triangle](https://img.shields.io/badge/Triangle-Powered-yellow?style=for-the-badge)
 
-> Domain expert engine for Yangtze fish research.
-> Together infinite power, apart top expert engines.
+[English](README.md) · [中文](README.zh.md)
 
-[English](README.md) · [中文](README.zh.md) · [CHANGELOG](CHANGELOG.md)
+<div align="center"><h3>🌊 Everything flows.</h3></div>
+
+The world is dynamic, knowledge is temporary, emergence is the norm.
 
 ---
+
 
 ## 📖 Table of Contents
 

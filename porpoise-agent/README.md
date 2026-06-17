@@ -1,7 +1,4 @@
-﻿# 🐬 Porpoise Agent
-
-<p align="center">
-  ![Python 3.11+](https://img.shields.io/badge/Python%203.11%2B-3776AB?style=flat-square)
+![Python 3.11+](https://img.shields.io/badge/Python%203.11%2B-3776AB?style=flat-square)
   ![MIT](https://img.shields.io/badge/MIT-34D058?style=flat-square)
   ![v0.2](https://img.shields.io/badge/v0.2-8A4FCE?style=flat-square)
   ![7-agent MAS](https://img.shields.io/badge/7-agent%20MAS-007EC6?style=flat-square)
@@ -12,14 +9,13 @@
   ![MCTS](https://img.shields.io/badge/MCTS-F59E0B?style=flat-square)
 </p>
 
+[English](README.md) · [中文](README.zh.md)
 
-> 🎯 Porpoise Domain Expert Engine — 5-layer cognitive architecture with BDI+ReAct+Reflexion, 7-agent MAS, and frontier techniques.
-> A porpoise knows the river — an agent knows the domain.
+<div align="center"><h3>🌊 Everything flows.</h3></div>
 
-[English](README.md) · [中文](README.zh.md) · [CHANGELOG](CHANGELOG.md)
+The world is dynamic, knowledge is temporary, emergence is the norm.
 
 ---
-
 ## 📖 Table of Contents
 
 - [Philosophy](#-philosophy)

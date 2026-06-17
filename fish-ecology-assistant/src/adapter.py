@@ -201,6 +201,113 @@ class FishEcologyAdapter(IProjectAdapter):
             ],
         }
 
+    def score(self, query: str, **kwargs) -> Dict[str, Any]:
+        """Standard pipeline scoring stage.
+
+        Called by cross_project pipeline as fish.score.
+        Aggregates outputs from all prior stages (search, verify, arbitrate)
+        and produces a final credibility-weighted score.
+
+        Args:
+            query: species name or search query
+            prior_outputs: dict of prior stage outputs
+            species: species name override
+        """
+        prior = kwargs.get("prior_outputs", {})
+        species = kwargs.get("species", query)
+
+        scores: Dict[str, Any] = {
+            "query": query,
+            "species": species,
+            "stages_analyzed": [],
+            "component_scores": {},
+            "final_score": 50.0,
+            "confidence": "medium",
+        }
+
+        # Score from fish.search stage
+        fish_output = prior.get("fish", {})
+        if isinstance(fish_output, dict) and fish_output.get("status") == "ok":
+            scores["stages_analyzed"].append("fish.search")
+            fish_score = 60.0  # base
+            if fish_output.get("known_species"):
+                fish_score += 20
+            species_data = fish_output.get("species_data", {})
+            if species_data:
+                if species_data.get("family"):
+                    fish_score += 5
+                if species_data.get("conservation"):
+                    fish_score += 5
+                if species_data.get("ecology"):
+                    fish_score += 5
+            fish_score = min(fish_score, 100)
+            scores["component_scores"]["fish_search"] = {
+                "score": fish_score,
+                "known_species": fish_output.get("known_species", False),
+            }
+
+        # Score from cognitive.verify stage
+        cog_output = prior.get("cognitive", {})
+        if isinstance(cog_output, dict) and cog_output.get("status") == "ok":
+            scores["stages_analyzed"].append("cognitive.verify")
+            verification = cog_output.get("verification", {})
+            cog_score = 50.0
+            if isinstance(verification, dict):
+                verified = verification.get("verified", 0)
+                claims_count = verification.get("claims_count", 1)
+                if claims_count > 0:
+                    cog_score = min(100, 50 + 40 * (verified / claims_count))
+            scores["component_scores"]["cognitive_verify"] = {
+                "score": cog_score,
+                "verified_claims": verification.get("verified", 0),
+            }
+
+        # Score from conflict.arbitrate stage
+        conflict_output = prior.get("conflict", {})
+        if isinstance(conflict_output, dict):
+            scores["stages_analyzed"].append("conflict.arbitrate")
+            conflict_level = conflict_output.get("conflict_level", 0)
+            # Lower conflict = higher score
+            arb_score = max(10, 100 - conflict_level * 25)
+            scores["component_scores"]["conflict_arbitrate"] = {
+                "score": arb_score,
+                "conflict_level": conflict_level,
+                "verdict": conflict_output.get("verdict", ""),
+            }
+
+        # Compute final weighted score
+        component_scores = scores["component_scores"]
+        if component_scores:
+            weights = {
+                "fish_search": 0.35,
+                "cognitive_verify": 0.35,
+                "conflict_arbitrate": 0.30,
+            }
+            weighted_sum = 0.0
+            total_weight = 0.0
+            for key, comp in component_scores.items():
+                w = weights.get(key, 0.33)
+                weighted_sum += comp.get("score", 50) * w
+                total_weight += w
+            if total_weight > 0:
+                scores["final_score"] = round(weighted_sum / total_weight, 1)
+
+        # Confidence label
+        fs = scores["final_score"]
+        if fs >= 80:
+            scores["confidence"] = "high"
+        elif fs >= 50:
+            scores["confidence"] = "medium"
+        else:
+            scores["confidence"] = "low"
+
+        scores["status"] = "ok"
+        scores["adapter"] = "FishEcologyAdapter"
+        scores["method"] = "score"
+        scores["pipeline"] = "fish.search → cognitive.verify → conflict.arbitrate → fish.score"
+
+        return scores
+
     def supply_knowledge(self, domain: str, query: str, **kwargs) -> Dict[str, Any]:
         """Supply domain-specific knowledge — full triangle closed loop.
 

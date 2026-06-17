@@ -1,7 +1,4 @@
-﻿# 🔍 Cognitive Search Engine
-
-<p align="center">
-  ![Python 3.10+](https://img.shields.io/badge/Python%203.10%2B-3776AB?style=flat-square)
+![Python 3.10+](https://img.shields.io/badge/Python%203.10%2B-3776AB?style=flat-square)
   ![MIT](https://img.shields.io/badge/MIT-34D058?style=flat-square)
   ![v5.9](https://img.shields.io/badge/v5.9-8A4FCE?style=flat-square)
   ![15+ engines](https://img.shields.io/badge/15%2B%20engines-007EC6?style=flat-square)
@@ -12,14 +9,13 @@
   ![BDI agent](https://img.shields.io/badge/BDI%20agent-F59E0B?style=flat-square)
 </p>
 
+[English](README.md) · [中文](README.zh.md)
 
-> ⚡ Search Verification Core — BDI cognitive search with 15+ engines, Thompson Sampling, and MPC optimization.
-> You cannot answer today's question with yesterday's search.
+<div align="center"><h3>🌊 Everything flows.</h3></div>
 
-[English](README.md) · [中文](README.zh.md) · [CHANGELOG](CHANGELOG.md)
+The world is dynamic, knowledge is temporary, emergence is the norm.
 
 ---
-
 ## 📖 Table of Contents
 
 - [Philosophy](#-philosophy)

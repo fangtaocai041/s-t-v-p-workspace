@@ -1,7 +1,4 @@
-﻿# 🔍 认知搜索引擎
-
-<p align="center">
-  ![Python 3.10+](https://img.shields.io/badge/Python%203.10%2B-3776AB?style=flat-square)
+![Python 3.10+](https://img.shields.io/badge/Python%203.10%2B-3776AB?style=flat-square)
   ![MIT](https://img.shields.io/badge/MIT-34D058?style=flat-square)
   ![v5.9](https://img.shields.io/badge/v5.9-8A4FCE?style=flat-square)
   ![15+ engines](https://img.shields.io/badge/15%2B%20engines-007EC6?style=flat-square)
@@ -12,14 +9,13 @@
   ![BDI agent](https://img.shields.io/badge/BDI%20agent-F59E0B?style=flat-square)
 </p>
 
+[English](README.md) · [中文](README.zh.md)
 
-> ⚡ 搜索验证核心 — BDI认知搜索，15+引擎，Thompson采样，MPC优化。
-> 你无法用昨天的搜索结果回答今天的问题。
+<div align="center"><h3>🌊 万物皆流。</h3></div>
 
-[English](README.md) · [中文](README.zh.md) · [更新日志](CHANGELOG.md)
+世界是动态的，知识是暂时的，涌现是常态。
 
 ---
-
 ## 📖 目录
 
 - [哲学](#-哲学)

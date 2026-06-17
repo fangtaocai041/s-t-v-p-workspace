@@ -3,6 +3,9 @@ __pycache__/
 *.pyc
 *.pyo
 .pytest_cache/
+*.egg-info/
+dist/
+build/
 
 # Node
 node_modules/
@@ -28,3 +31,11 @@ package.json
 # Secrets – DO NOT COMMIT
 .env
 CREDENTIALS.*.yaml
+
+# Environment
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db

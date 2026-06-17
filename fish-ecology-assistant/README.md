@@ -1,7 +1,4 @@
-﻿# 🐟 Fish Ecology Assistant
-
-<p align="center">
-  ![Python 3.10+](https://img.shields.io/badge/Python%203.10%2B-3776AB?style=flat-square)
+![Python 3.10+](https://img.shields.io/badge/Python%203.10%2B-3776AB?style=flat-square)
   ![MIT](https://img.shields.io/badge/MIT-34D058?style=flat-square)
   ![v8.1](https://img.shields.io/badge/v8.1-8A4FCE?style=flat-square)
   ![430 species](https://img.shields.io/badge/430%20species-007EC6?style=flat-square)
@@ -12,14 +9,13 @@
   ![SQLite](https://img.shields.io/badge/SQLite-6B7280?style=flat-square)
 </p>
 
+[English](README.md) · [中文](README.zh.md)
 
-> 🌊 Knowledge Supply Core — 430 Yangtze fish species, 289 morphological traits, population-level variation.
-> Panta Rhei — Everything flows.
+<div align="center"><h3>🌊 Everything flows.</h3></div>
 
-[English](README.md) · [中文](README.zh.md) · [CHANGELOG](CHANGELOG.md)
+The world is dynamic, knowledge is temporary, emergence is the norm.
 
 ---
-
 ## 📖 Table of Contents
 
 - [Philosophy](#-philosophy)

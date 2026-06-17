@@ -1,7 +1,4 @@
-﻿# 🐬 江豚智能体
-
-<p align="center">
-  ![Python 3.11+](https://img.shields.io/badge/Python%203.11%2B-3776AB?style=flat-square)
+![Python 3.11+](https://img.shields.io/badge/Python%203.11%2B-3776AB?style=flat-square)
   ![MIT](https://img.shields.io/badge/MIT-34D058?style=flat-square)
   ![v0.2](https://img.shields.io/badge/v0.2-8A4FCE?style=flat-square)
   ![7-agent MAS](https://img.shields.io/badge/7-agent%20MAS-007EC6?style=flat-square)
@@ -12,15 +9,13 @@
   ![MCTS](https://img.shields.io/badge/MCTS-F59E0B?style=flat-square)
 </p>
 
+[English](README.md) · [中文](README.zh.md)
 
-> 🎯 江豚领域专家引擎 — 5层认知架构，BDI+ReAct+Reflexion，7智能体MAS，前沿技术。
-🎯 江豚领域专家引擎 — 五层认知架构，BDI+ReAct+Reflexion，七智能体。
-> 江豚知江河，智能体知领域。
+<div align="center"><h3>🌊 万物皆流。</h3></div>
 
-[English](README.md) · [中文](README.zh.md) · [更新日志](CHANGELOG.md)
+世界是动态的，知识是暂时的，涌现是常态。
 
 ---
-
 ## 📖 目录
 
 - [哲学](#-哲学)

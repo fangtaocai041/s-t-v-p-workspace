@@ -7,8 +7,8 @@
 
 agent:
   name: "Culter Agent"
-  version: "2.0.0"
-  description: "鲌类专研 Agent — 基因组与遗传、年龄与生长、同位素营养生态位、同域共存、资源评估、栖息地建模"
+  version: "2.1.0"
+  description: "鲌类专研 Agent — 基因组与遗传、年龄与生长、同位素营养生态位、同域共存、资源评估、栖息地建模 (v2.1: 集成可执行分析脚本)"
   genus: "Culter (鲌属) 及近缘属 Chanodichthys (原鲌属)"
   role: "P₃ (万物衍生第三子)"
   
@@ -131,9 +131,28 @@ architecture:
 # Shared — 跨项目共享配置 (与其他 agent.yaml 对齐)
 # ═══════════════════════════════════════════════════════════
 shared:
-  version: "2.0.0"
+  version: "2.1.0"
   philosophy: "Panta Rhei + Systems Thinking"
   architecture: "S-T-V-P₁-P₂-P₃ (三角派生 P₃/V4)"
   rule_count: 18
   coordination_file: "coordination.yaml"
   preflight: "read config/agent.yaml before all Skills"
+
+# ═══════════════════════════════════════════════════════════
+# Scripts — 可执行分析脚本映射 (v2.1)
+# ═══════════════════════════════════════════════════════════
+scripts:
+  growth_analysis:
+    path: "scripts/growth_analysis.py"
+    description: "鲌类 von Bertalanffy 生长方程分析 — Ford-Walford + 非线性最小二乘"
+    methods: ["ford_walford", "nonlinear"]
+    fallback: "static_kb"
+    pipeline_phase: "growth_analysis"
+
+  trophic_analysis:
+    path: "scripts/trophic_analysis.py"
+    description: "鲌类稳定同位素营养生态位分析 — 营养级 + 生态位宽度 + 种间重叠 + 凸包"
+    methods: ["trophic_level", "niche_overlap", "convex_hull", "all"]
+    fallback: "static_kb"
+    pipeline_phase: "trophic_ecology"
+    also_serves: ["coexistence_modeling"]
