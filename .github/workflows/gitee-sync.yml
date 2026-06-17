@@ -7,13 +7,14 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Mirror to Gitee
-        uses: Yikun/hub-mirror-action@v1
+        uses: Yikun/hub-mirror-action@v1.4
         with:
           src: github/fangtaocai041
           dst: gitee/fangtao
