@@ -1,140 +1,140 @@
-# ä¸‰ç”Ÿä¸‡ç‰© äº”é¡¹ç›®å·¥ä½œç©ºé—?(v8.2)
+# ÈýÉúÍòÎï ¡¤ ÎåÏîÄ¿¹¤×÷¿Õ¼ä (v8.0.0)
 
-> **ç‰©ç§å…¨æ™¯åˆ†æžç®¡çº¿ â€?Phase 0:ç”»åƒ â†?1:ç»Ÿè®¡ â†?2:è¶‹åŠ¿ â†?3:ç©ºç™½ â†?4:æ¶ŒçŽ° â†?5:å‡è¯´**
+> **ÎïÖÖÈ«Õ»·ÖÎö¹ÜÏß ¡¤ Phase 0:»­Ïñ ¡ú 1:Í³¼Æ ¡ú 2:Ç÷ÊÆ ¡ú 3:¿Õ°× ¡ú 4:Ó¿ÏÖ ¡ú 5:¼ÙÉè**
 
-## æž¶æž„æ¦‚è§ˆ
+## ¼Ü¹¹¸ÅÀÀ
 
-| é¡¹ç›® | è§’è‰² | äº”è¡Œ | gRPC ç«¯å£ |
+| ÏîÄ¿ | ½ÇÉ« | ÎåÐÐ | gRPC ¶Ë¿Ú |
 |------|------|:----:|:---------:|
-| **eon-core** | UNIFIED_KERNEL (10å±‚åŒå¿? | å…¨éƒ¨ | â€?|
-| **fish-ecology-assistant** | S (State) â†?V0 SupplyVertex | åœ?ðŸŸ« | 50051 |
-| **cognitive-search-engine** | V (Validation) â†?V1 VerifyVertex | é‡?ðŸŸ¨ | 50052 |
-| **porpoise-agent** | Pâ‚?(è¡ç”Ÿ, DomainVertex) | æ°?ðŸ’§ | 50053 |
-| **coilia-agent** | Pâ‚?(è¡ç”Ÿ, DomainVertex) | æœ?ðŸŒ² | 50054 |
-| **culter-agent** | Pâ‚?(è¡ç”Ÿ, DomainVertex) | ç?ðŸ”¥ | 50055 |
+| **eon-core** | UNIFIED_KERNEL (È«²ãÐ­µ÷) | È«²¿ | ¡ª |
+| **fish-ecology-assistant** | S (State) ¡ú V0 SupplyVertex | ÍÁ •0¯7 | 50051 |
+| **cognitive-search-engine** | V (Validation) ¡ú V1 VerifyVertex | ½ð 7¿8 | 50052 |
+| **porpoise-agent** | P6®9(ÑÜÉú, DomainVertex) | Ë® ”9Ú1 | 50053 |
+| **coilia-agent** | P6¯0(ÑÜÉú, DomainVertex) | Ä¾ ”9´9 | 50054 |
+| **culter-agent** | P6¯1(ÑÜÉú, DomainVertex) | »ð ”9æ7 | 50055 |
 
-## æœç´¢åè®®
+## ËÑË÷Ð­Òé
 
-`workspace/skills/` ä¸?`.reasonix/skills/` å†…å®¹ä¸€è‡´ï¼Œä»Žä¸¤ç›®å½•å‡å¯è°ƒç”¨åŒä¸€å¥—æœç´¢åè®®ï¼š
+`workspace/skills/` Óë `.reasonix/skills/` ÄÚÈÝÒ»ÖÂ£¬´ÓÁ½Ä¿Â¼¾ù¿Éµ÷ÓÃÍ¬Ò»Ì×ËÑË÷Ð­Òé£º
 
-| Skill | ç”¨é€?| æ¨¡å¼ |
+| Skill | ÓÃÍ¾ | Ä£Ê½ |
 |-------|------|:----:|
-| `graph-search-engine` | å›¾è°±ç‰©ç§æœç´¢ v4.1 | subagent |
-| `cognitive-species-search` | è®¤çŸ¥ç‰©ç§æœç´¢ v3.2 | subagent |
-| `chinese-academic-search` | ä¸­æ–‡æœŸåˆŠæœç´¢ | inline |
-| `self-evolve` | è‡ªè¿›åŒ–åé¦ˆå¼•æ“?| subagent |
-| `parallel-farm` | å¹¶è¡Œå­?agent æ´¾å‘ | inline |
-| `meso-orchestrator` | è·¨é¡¹ç›®åè°?| subagent |
-| `auto-skill` | è‡ªåŠ¨æŠ€èƒ½æ²‰æ·€ | inline |
-| `ocr-solution-audit` | OCR æ–¹æ¡ˆå®¡è®¡ | subagent |
+| `graph-search-engine` | Í¼Æ×ÎïÖÖËÑË÷ v4.1 | subagent |
+| `cognitive-species-search` | ÈÏÖªÎïÖÖËÑË÷ v3.2 | subagent |
+| `chinese-academic-search` | ÖÐÎÄÆÚ¿¯ËÑË÷ | inline |
+| `self-evolve` | ×Ô½ø»¯·´À¡ÒýÇæ | subagent |
+| `parallel-farm` | ²¢ÐÐ×Ó agent ÅÉ·¢ | inline |
+| `meso-orchestrator` | ¿çÏîÄ¿Ð­µ÷ | subagent |
+| `auto-skill` | ×Ô¶¯¼¼ÄÜ³Áµí | inline |
+| `ocr-solution-audit` | OCR ·½°¸Éó¼Æ | subagent |
 
-### è°ƒç”¨æ–¹å¼
+### µ÷ÓÃ·½Ê½
 
 ```
-# ä»?workspace ç›®å½•è°ƒç”¨
-/run_skill name:graph-search-engine arguments:"æœç´¢ Ochetobius elongatus æ–‡çŒ®"
+# ´Ó workspace Ä¿Â¼µ÷ÓÃ
+/run_skill name:graph-search-engine arguments:"ËÑË÷ Ochetobius elongatus ÎÄÏ×"
 
-# ä»?.reasonix ç›®å½•è°ƒç”¨ï¼ˆç­‰æ•ˆï¼‰
-/run_skill name:graph-search-engine arguments:"æœç´¢ Ochetobius elongatus æ–‡çŒ®"
+# ´Ó .reasonix Ä¿Â¼µ÷ÓÃ£¨µÈÐ§£©
+/run_skill name:graph-search-engine arguments:"ËÑË÷ Ochetobius elongatus ÎÄÏ×"
 
-# ç‰©ç§å…¨æ™¯åˆ†æž (æŽ¨è)
-python scripts/run_full_analysis.py "ç æ˜Ÿä¸‰å—é±? "Tribolodon brandti"
+# ÎïÖÖÈ«Õ»·ÖÎö£¨ÍÆ¼ö£©
+python scripts/run_full_analysis.py "ÖéÐÇÈý¿éÓã" "Tribolodon brandti"
 
-# è¿è¡Œæµ‹è¯•é›?
+# ÔËÐÐ²âÊÔ¼¯
 python scripts/test_pipeline.py
 
-# å•æ¨¡å?
-python scripts/trend_analyzer.py "ç æ˜Ÿä¸‰å—é±?
-python scripts/gap_analyzer.py "ç æ˜Ÿä¸‰å—é±?
-python scripts/cross_synthesis.py "ç æ˜Ÿä¸‰å—é±? "Tribolodon brandti"
-python scripts/reasoning_engine.py "ç æ˜Ÿä¸‰å—é±? "Tribolodon brandti"
+# µ¥Ä£¿é
+python scripts/trend_analyzer.py "ÖéÐÇÈý¿éÓã"
+python scripts/gap_analyzer.py "ÖéÐÇÈý¿éÓã"
+python scripts/cross_synthesis.py "ÖéÐÇÈý¿éÓã" "Tribolodon brandti"
+python scripts/reasoning_engine.py "ÖéÐÇÈý¿éÓã" "Tribolodon brandti"
 
-# CLIäº¤äº’å…¥å£
-python scripts/search_species.py "ç æ˜Ÿä¸‰å—é±?
+# CLI ½»»¥Èë¿Ú
+python scripts/search_species.py "ÖéÐÇÈý¿éÓã"
 
-# æ—§æœç´¢ç®¡çº¿ï¼ˆå…¼å®¹ï¼?
-python scripts/pipeline_search_species.py "æ£€ç´¢ç æ˜Ÿä¸‰å—é±¼ç›¸å…³æ–‡çŒ®"
-python scripts/coordinator.py           # è‡ªæ£€
+# ¾ÉËÑË÷¹ÜÏß£¨¼æÈÝ£©
+python scripts/pipeline_search_species.py "¼ìË÷ÖéÐÇÈý¿éÓãÏà¹ØÎÄÏ×"
+python scripts/coordinator.py           # ×Ô¼ì
 python scripts/credibility_scorer.py --example
 python scripts/self_evolve.py --example
 ```
 
-## å¿«é€Ÿå¼€å§?
+## ¿ìËÙ¿ªÊ¼
 
 ```bash
-# 1. éªŒè¯å·¥ä½œç©ºé—´å®Œæ•´æ€?
+# 1. ÑéÖ¤¹¤×÷¿Õ¼äÍêÕûÐÔ
 python workspace/launch_all.py
 
-# 2. ç‰©ç§æ–‡çŒ®æœç´¢ï¼ˆå…¨ç®¡çº¿ï¼?
-python workspace/scripts/pipeline_search_species.py "æ£€ç´¢ç æ˜Ÿä¸‰å—é±¼ç›¸å…³æ–‡çŒ®"
+# 2. ÎïÖÖÎÄÏ×ËÑË÷£¨È«¹ÜÏß£©
+python workspace/scripts/pipeline_search_species.py "¼ìË÷ÖéÐÇÈý¿éÓãÏà¹ØÎÄÏ×"
 
-# 3. ä»…æŸ¥çŸ¥è¯†åº?
-python workspace/scripts/pipeline_search_species.py "ç æ˜Ÿä¸‰å—é±? --phase lookup
+# 3. ½ö²éÖªÊ¶¿â
+python workspace/scripts/pipeline_search_species.py "ÖéÐÇÈý¿éÓã" --phase lookup
 
-# 4. å…¨æ ˆå¥åº·æ£€æŸ?
+# 4. È«Õ»½¡¿µ¼ì²é
 python -c "from workspace.scripts.coordinator import coordinator; print(coordinator.info('cognitive'))"
 ```
 
-## ç»Ÿä¸€å…¥å£ API
+## Í³Ò»Èë¿Ú API
 
-| å‡½æ•° | è·¯ç”± | ç”¨é€?|
+| º¯Êý | Â·ÓÉ | ÓÃÍ¾ |
 |------|------|------|
-| `search_species(name)` | â†?cognitive-search-engine | ç‰©ç§æ–‡çŒ®æœç´¢ |
-| `lookup_species(name)` | â†?fish-ecology-assistant | ç‰©ç§çŸ¥è¯†åº“æŸ¥è¯?|
-| `assess_conservation(name)` | â†?porpoise-agent | ä¿æŠ¤è¯„ä¼° |
-| `assess_species(name)` | â†?coilia-agent | ç‰©ç§è¯„ä¼° (æ´„æ¸¸/èµ„æº) |
-| `health_check()` | â†?å…¨éƒ¨é¡¹ç›® | å…¨æ ˆå¥åº·æ£€æŸ?|
+| `search_species(name)` | ¡ú cognitive-search-engine | ÎïÖÖÎÄÏ×ËÑË÷ |
+| `lookup_species(name)` | ¡ú fish-ecology-assistant | ÎïÖÖÖªÊ¶¿â²éÑ¯ |
+| `assess_conservation(name)` | ¡ú porpoise-agent | ±£»¤ÆÀ¹À |
+| `assess_species(name)` | ¡ú coilia-agent | ÎïÖÖÆÀ¹À£¨ä§ÓÎ/×ÊÔ´£© |
+| `health_check()` | ¡ú È«²¿ÏîÄ¿ | È«Õ»½¡¿µ¼ì²é |
 
-## ç›®å½•ç»“æž„
+## Ä¿Â¼½á¹¹
 
 ```
 workspace/
-â”œâ”€â”€ __init__.py              â€?åŒ…æ ‡è®?
-â”œâ”€â”€ launch_all.py            â€?ä¸€é”®å¯åŠ?+ å¥åº·æ£€æŸ?
-â”œâ”€â”€ activate.ps1             â€?PowerShell çŽ¯å¢ƒæ¿€æ´?
-â”œâ”€â”€ README.md                â€?æœ¬æ–‡æ¡?
-â”œâ”€â”€ skills/                  â€?æœç´¢åè®® skill å®šä¹‰ï¼ˆä¸Ž .reasonix/skills/ åŒæ­¥ï¼?
-â”?  â”œâ”€â”€ graph-search-engine.md
-â”?  â”œâ”€â”€ cognitive-species-search.md
-â”?  â”œâ”€â”€ chinese-academic-search.md
-â”?  â”œâ”€â”€ self-evolve.md
-â”?  â”œâ”€â”€ parallel-farm.md
-â”?  â”œâ”€â”€ meso-orchestrator.md
-â”?  â”œâ”€â”€ auto-skill.md
-â”?  â””â”€â”€ ocr-solution-audit.md
-â”œâ”€â”€ scripts/                 â€?Python å¯æ‰§è¡Œå®žçŽ?
-â”?  â”œâ”€â”€ run_full_analysis.py         â€?ä¸€é”®å…¨é‡åˆ†æž?Phase 0-5 ðŸ†•
-â”?  â”œâ”€â”€ kb_loader.py                 â€?ç»Ÿä¸€æ•°æ®åŠ è½½å™?       ðŸ†•
-â”?  â”œâ”€â”€ trend_analyzer.py            â€?ç ”ç©¶è¶‹åŠ¿åˆ†æž          ðŸ†•
-â”?  â”œâ”€â”€ gap_analyzer.py              â€?ç ”ç©¶ç©ºç™½è¯†åˆ«          ðŸ†•
-â”?  â”œâ”€â”€ cross_synthesis.py           â€?è·¨ç‰©ç§æ¶ŒçŽ?5æ£€æµ‹å™¨)   ðŸ†•
-â”?  â”œâ”€â”€ reasoning_engine.py          â€?ç”Ÿæ€å‡è¯´æŽ¨ç?6å‡è¯´)   ðŸ†•
-â”?  â”œâ”€â”€ test_pipeline.py             â€?ç®¡çº¿æµ‹è¯•é›?38é¡?      ðŸ†•
-â”?  â”œâ”€â”€ search_species.py            â€?CLIäº¤äº’å…¥å£
-â”?  â”œâ”€â”€ pipeline_search_species.py   â€?æœç´¢ç®¡çº¿(å…¼å®¹)
-â”?  â”œâ”€â”€ coordinator.py               â€?äº”é¡¹ç›®åè°ƒå™¨
-â”?  â”œâ”€â”€ credibility_scorer.py        â€?ä¸‰è§’éªŒè¯è¯„åˆ†
-â”?  â”œâ”€â”€ self_evolve.py               â€?è‡ªè¿›åŒ–åé¦?
-â”?  â””â”€â”€ kb_to_graph_sync.py          â€?KBâ†”å›¾è°±åŒæ­?
-â”œâ”€â”€ config/
-â”?  â””â”€â”€ root_config/
-â”?      â”œâ”€â”€ species_graph.yaml       â€?48ç‰©ç§ 176è®ºæ–‡
-â”?      â””â”€â”€ meso_agent.yaml          â€?Mesoåè°ƒé…ç½®
-â”œâ”€â”€ data/                    â€?æ•°æ®æ–‡ä»¶
-â”œâ”€â”€ docs/                    â€?æž¶æž„æ–‡æ¡£
-â”œâ”€â”€ ocr/                     â€?OCR æµ‹è¯•å·¥å…·
-â”œâ”€â”€ logs/                    â€?è¿è¡Œæ—¥å¿—
-â”œâ”€â”€ search_records/          â€?æœç´¢è®°å½•
-â””â”€â”€ bin/                     â€?å¯æ‰§è¡Œæ–‡ä»?
+©À©¤©¤ __init__.py              ¡ª °ü±ê¼Ç
+©À©¤©¤ launch_all.py            ¡ª Ò»¼üÆô¶¯ + ½¡¿µ¼ì²é
+©À©¤©¤ activate.ps1             ¡ª PowerShell »·¾³¼¤»î
+©À©¤©¤ README.md                ¡ª ±¾ÎÄµµ
+©À©¤©¤ skills/                  ¡ª ËÑË÷Ð­Òé skill ¶¨Òå£¨Óë .reasonix/skills/ Í¬²½£©
+©¦   ©À©¤©¤ graph-search-engine.md
+©¦   ©À©¤©¤ cognitive-species-search.md
+©¦   ©À©¤©¤ chinese-academic-search.md
+©¦   ©À©¤©¤ self-evolve.md
+©¦   ©À©¤©¤ parallel-farm.md
+©¦   ©À©¤©¤ meso-orchestrator.md
+©¦   ©À©¤©¤ auto-skill.md
+©¦   ©¸©¤©¤ ocr-solution-audit.md
+©À©¤©¤ scripts/                 ¡ª Python ¿ÉÖ´ÐÐÊµÏÖ
+©¦   ©À©¤©¤ run_full_analysis.py         ¡ª Ò»¼üÈ«Á¿·ÖÎö Phase 0-5 •0ô6
+©¦   ©À©¤©¤ kb_loader.py                 ¡ª Í³Ò»Êý¾Ý¼ÓÔØÆ÷       •0ô6
+©¦   ©À©¤©¤ trend_analyzer.py            ¡ª ÑÐ¾¿Ç÷ÊÆ·ÖÎö         •0ô6
+©¦   ©À©¤©¤ gap_analyzer.py              ¡ª ÑÐ¾¿¿Õ°×Ê¶±ð         •0ô6
+©¦   ©À©¤©¤ cross_synthesis.py           ¡ª ¿çÎïÖÖÓ¿ÏÖ(5¼ì²âÆ÷)  •0ô6
+©¦   ©À©¤©¤ reasoning_engine.py          ¡ª ÉúÌ¬¼ÙÉèÍÆÀí(6¼ÙÉè)  •0ô6
+©¦   ©À©¤©¤ test_pipeline.py             ¡ª ¹ÜÏß²âÊÔ¼¯(38Ïî)    •0ô6
+©¦   ©À©¤©¤ search_species.py            ¡ª CLI ½»»¥Èë¿Ú
+©¦   ©À©¤©¤ pipeline_search_species.py   ¡ª ËÑË÷¹ÜÏß(¼æÈÝ)
+©¦   ©À©¤©¤ coordinator.py               ¡ª ÎåÏîÄ¿Ð­µ÷Æ÷
+©¦   ©À©¤©¤ credibility_scorer.py        ¡ª Èý½ÇÑéÖ¤ÆÀ·Ö
+©¦   ©À©¤©¤ self_evolve.py               ¡ª ×Ô½ø»¯·´À¡
+©¦   ©¸©¤©¤ kb_to_graph_sync.py          ¡ª KB6Ç2Í¼Æ×Í¬²½
+©À©¤©¤ config/
+©¦   ©¸©¤©¤ root_config/
+©¦       ©À©¤©¤ species_graph.yaml       ¡ª 48ÎïÖÖ 176ÂÛÎÄ
+©¦       ©¸©¤©¤ meso_agent.yaml          ¡ª Meso Ð­µ÷ÅäÖÃ
+©À©¤©¤ data/                  ¡ª Êý¾ÝÎÄ¼þ
+©À©¤©¤ docs/                  ¡ª ¼Ü¹¹ÎÄµµ
+©À©¤©¤ ocr/                   ¡ª OCR ²âÊÔ¹¤¾ß
+©À©¤©¤ logs/                  ¡ª ÔËÐÐÈÕÖ¾
+©À©¤©¤ search_records/        ¡ª ËÑË÷¼ÇÂ¼
+©¸©¤©¤ bin/                   ¡ª ¿ÉÖ´ÐÐÎÄ¼þ
 ```
 
-## äº”é¡¹ç›®å³äº”ç‹¬ç«‹ä»“åº?
+## ÎåÏîÄ¿¼´Îå¶ÀÁ¢²Ö¿â
 
-æ¯ä¸ªé¡¹ç›®æœ‰ç‹¬ç«‹çš„ `.git`ï¼Œå¯å•ç‹¬å¼€å?éƒ¨ç½²ã€‚`pipeline_search_species.py` æ˜¯å®ƒä»¬çš„ç»Ÿä¸€æœç´¢å…¥å£ã€?
+Ã¿¸öÏîÄ¿ÓÐ¶ÀÁ¢µÄ `.git`£¬¿Éµ¥¶À¿ª·¢¡¢²¿Êð¡£`pipeline_search_species.py` ÊÇËüÃÇµÄÍ³Ò»ËÑË÷Èë¿Ú¡£
 
-## ç›¸å…³æ–‡æ¡£
+## Ïà¹ØÎÄµµ
 
-- `config/VERSION.yaml` â€?ç‰ˆæœ¬å•æºçœŸç›¸
-- `config/coordination.yaml` â€?è·¨é¡¹ç›®åè°ƒåè®?
-- `docs/root_docs/ARCHITECTURE_OVERVIEW.md` â€?æ•´ä½“æž¶æž„è¯´æ˜Ž
-- `docs/root_docs/SANSHENG_WANWU.md` â€?ä¸‰ç”Ÿä¸‡ç‰©å“²å­¦
+- `config/VERSION.yaml` ¡ª °æ±¾µ¥Ô´ÕæÏà
+- `config/coordination.yaml` ¡ª ¿çÏîÄ¿Ð­µ÷Ð­Òé
+- `docs/root_docs/ARCHITECTURE_OVERVIEW.md` ¡ª ÕûÌå¼Ü¹¹ËµÃ÷
+- `docs/root_docs/SANSHENG_WANWU.md` ¡ª ÈýÉúÍòÎïÕÜÑ§

@@ -54,6 +54,9 @@ temp_edit.xlsx
 # Playwright runtime
 .playwright-mcp/
 
+# Backup directories (MCP servers etc.)
+backup_mcp_*/
+
 # Personal folders – each user keeps their own
 刘凯老师课题组/
 方陶文库/
