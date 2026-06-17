@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 规则1: 功能脚本化原则 — 检查所有 .md 描述的算法/流程是否有对应的 .py 实现。
 
@@ -71,6 +72,8 @@ def check_project(project: str) -> List[Tuple[str, str, str]]:
             script_name = ref.replace("scripts/", "")
             candidates = [
                 proj_root / "scripts" / script_name,
+                proj_root / "src" / script_name,
+                proj_root / "tests" / script_name,
                 proj_root / script_name,
                 ROOT / "scripts" / script_name,
             ]

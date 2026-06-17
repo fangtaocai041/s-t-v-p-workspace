@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 规则5: 日期准确性 — 检查 README/CHANGELOG 中的日期是否为实际日期而非未来计划日期。
 

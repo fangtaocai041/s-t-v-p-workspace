@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 规则3+4: Git 提交纪律 + 工作流 — 检查全部仓库的 commit/push/force-push 状态。
 
