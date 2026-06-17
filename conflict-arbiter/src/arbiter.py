@@ -20,7 +20,9 @@
 
 from __future__ import annotations
 
+import json
 import logging
+import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -548,8 +550,298 @@ class ConflictArbiter:
                 "circuit_breaker",
                 "multi_source_normalization",
                 "cross_project_consensus",
+                "live_api_integration",
+                "batch_arbitration",
+                "local_caching",
             ],
         }
+
+    # ── 实时 API 集成 ──
+
+    @classmethod
+    def from_live_data(
+        cls,
+        species_name: str,
+        region: str = "china",
+        config_path: Optional[Path] = None,
+        iucn_api_key: Optional[str] = None,
+        cites_api_key: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """从 IUCN/CITES 实时 API 获取数据并执行仲裁。
+
+        本地数据优先 (config/arbitration_rules.yaml), API 数据作为补充。
+        当 API 不可用时优雅降级。
+
+        Args:
+            species_name: 物种学名, 如 "Coilia nasus"
+            region: 区域策略 ("china" | "global")
+            config_path: arbiter 配置文件路径
+            iucn_api_key: IUCN API key (也可通过环境变量 IUCN_API_KEY 设置)
+            cites_api_key: CITES API key (也可通过环境变量 CITES_API_KEY 设置)
+
+        Returns:
+            完整的仲裁结果 dict, 含 api_sources 字段。
+        """
+        arbiter = cls(config_path=config_path)
+
+        # 1. 尝试加载本地预置数据
+        local_sources: List[Dict[str, Any]] = []
+        local_data = cls._load_local_species_data(species_name)
+        if local_data:
+            local_sources.extend(local_data)
+            logger.info(f"加载本地数据: {species_name} ({len(local_sources)} 条)")
+
+        # 2. 尝试调用实时 API
+        api_sources: List[Dict[str, Any]] = []
+        api_errors: List[str] = []
+
+        # IUCN
+        try:
+            from api_clients import IUCNClient
+            iucn = IUCNClient(api_key=iucn_api_key)
+            iucn_profile = iucn.get_full_profile(species_name)
+            if iucn_profile and iucn_profile.get("assessment"):
+                cat = iucn_profile["assessment"].get("category", "")
+                cat_name = iucn_profile["assessment"].get("category_name", cat)
+                trend = iucn_profile["assessment"].get("population_trend", "")
+                api_sources.append({
+                    "source": "iucn",
+                    "iucn": cat or cat_name,
+                    "status": cat or cat_name,
+                    "population_trend": trend,
+                    "raw": iucn_profile,
+                    "origin": "api",
+                })
+                logger.info(f"IUCN API: {species_name} → {cat} ({cat_name})")
+            else:
+                api_errors.append("IUCN: 未找到评估数据")
+        except Exception as exc:
+            api_errors.append(f"IUCN: {exc}")
+
+        # CITES
+        try:
+            from api_clients import CITESClient
+            cites = CITESClient(api_key=cites_api_key)
+            cites_profile = cites.get_full_profile(species_name)
+            if cites_profile and cites_profile.get("listing"):
+                listing = cites_profile["listing"]
+                appendix = listing.get("appendix", "")
+                api_sources.append({
+                    "source": "cites",
+                    "cites": appendix,
+                    "status": listing.get("appendix_name", appendix),
+                    "listed_since": listing.get("listed_since", ""),
+                    "raw": cites_profile,
+                    "origin": "api",
+                })
+                logger.info(f"CITES API: {species_name} → 附录{appendix}")
+            else:
+                api_errors.append("CITES: 未找到列名数据")
+        except Exception as exc:
+            api_errors.append(f"CITES: {exc}")
+
+        # 3. 合并来源: 本地优先, API 补充 (去重同源)
+        seen_sources = {s.get("source") for s in local_sources}
+        combined = list(local_sources)
+        for api_src in api_sources:
+            if api_src.get("source") not in seen_sources:
+                combined.append(api_src)
+                seen_sources.add(api_src.get("source"))
+
+        # 4. 执行仲裁
+        result = arbiter.detect_conflicts(
+            species_name=species_name,
+            sources=combined if combined else api_sources,
+            region=region,
+        )
+
+        # 5. 附加 API 元信息
+        result["api_sources"] = {
+            "iucn_available": any(s["source"] == "iucn" for s in api_sources),
+            "cites_available": any(s["source"] == "cites" for s in api_sources),
+            "api_errors": api_errors if api_errors else None,
+            "local_data_used": len(local_sources) > 0,
+        }
+        result["fetched_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+
+        return result
+
+    def batch_arbitrate(
+        self,
+        species_list: List[str],
+        region: str = "china",
+        use_api: bool = False,
+        iucn_api_key: Optional[str] = None,
+        cites_api_key: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """批量仲裁多个物种。
+
+        Args:
+            species_list: 物种学名列表
+            region: 区域策略
+            use_api: 是否尝试实时 API (建议批处理时关闭避免速率限制)
+            iucn_api_key: IUCN API key
+            cites_api_key: CITES API key
+
+        Returns:
+            {
+                "total": 3,
+                "results": [...],
+                "summary": {"conflict_0": 1, "conflict_1": 1, ...},
+                "batch_fetched_at": "..."
+            }
+        """
+        results = []
+        summary: Dict[str, int] = {}
+
+        for name in species_list:
+            if use_api:
+                result = self.from_live_data(
+                    species_name=name,
+                    region=region,
+                    iucn_api_key=iucn_api_key,
+                    cites_api_key=cites_api_key,
+                )
+            else:
+                # 纯本地数据模式
+                local_sources = self._load_local_species_data(name)
+                result = self.detect_conflicts(
+                    species_name=name,
+                    sources=local_sources,
+                    region=region,
+                )
+
+            results.append(result)
+            cl = f"conflict_{result.get('conflict_level', '?')}"
+            summary[cl] = summary.get(cl, 0) + 1
+
+        return {
+            "total": len(species_list),
+            "results": results,
+            "summary": summary,
+            "batch_fetched_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        }
+
+    # ── 本地缓存层 ──
+
+    _species_cache: Dict[str, Dict[str, Any]] = {}
+    _cache_file: Optional[Path] = None
+
+    @classmethod
+    def _load_local_species_data(cls, species_name: str) -> List[Dict[str, Any]]:
+        """从本地配置文件加载物种预置数据。
+
+        查找 config/arbitration_rules.yaml 中的 species_data 节,
+        或使用内置的中文物种数据。
+        """
+        # 1. 内存缓存
+        if species_name in ConflictArbiter._species_cache:
+            return list(ConflictArbiter._species_cache[species_name].get("sources", []))
+
+        # 2. 尝试从 YAML 配置文件加载
+        cfg_path = Path(__file__).resolve().parent.parent / "config" / "arbitration_rules.yaml"
+        if cfg_path.is_file():
+            try:
+                import yaml
+                cfg = yaml.safe_load(cfg_path.read_text(encoding="utf-8")) or {}
+                species_data = cfg.get("species_data", {})
+                entry = species_data.get(species_name.lower())
+                if entry:
+                    sources = entry.get("sources", [])
+                    ConflictArbiter._species_cache[species_name] = {"sources": sources}
+                    return list(sources)
+            except Exception as exc:
+                logger.debug(f"加载本地物种数据失败: {exc}")
+
+        # 3. 内置硬编码数据 (常见中国保护物种快速参考)
+        builtin = cls._get_builtin_species_data(species_name)
+        if builtin:
+            ConflictArbiter._species_cache[species_name] = {"sources": builtin}
+            return list(builtin)
+
+        return []
+
+    @classmethod
+    def _get_builtin_species_data(cls, name: str) -> List[Dict[str, Any]]:
+        """内置常见鱼类保护数据 (快速参考, 避免 API 调用)。"""
+        key = name.lower().strip()
+        data: Dict[str, List[Dict[str, Any]]] = {
+            "coilia nasus": [
+                {"source": "chinese_red_list", "protection_level": "二级",
+                 "status": "EN", "note": "长江流域重点保护"},
+                {"source": "survey_report", "protection_level": "重点保护",
+                 "status": "VU", "note": "2020年长江禁渔后种群恢复中"},
+                {"source": "iucn", "iucn": "EN", "status": "濒危",
+                 "note": "IUCN评估为濒危(EN)"},
+            ],
+            "anguilla japonica": [
+                {"source": "chinese_red_list", "protection_level": "二级",
+                 "status": "EN", "note": "国家重点保护水生野生动物"},
+                {"source": "iucn", "iucn": "EN", "status": "濒危",
+                 "note": "IUCN评估为濒危(EN)"},
+                {"source": "cites", "cites": "附录Ⅱ", "status": "附录Ⅱ",
+                 "note": "CITES附录Ⅱ管控国际贸易"},
+            ],
+            "acipenser sinensis": [
+                {"source": "chinese_red_list", "protection_level": "一级",
+                 "status": "CR", "note": "国家一级保护动物"},
+                {"source": "iucn", "iucn": "CR", "status": "极危",
+                 "note": "IUCN评估为极危(CR)"},
+                {"source": "cites", "cites": "附录Ⅱ", "status": "附录Ⅱ",
+                 "note": "CITES附录Ⅱ管控"},
+            ],
+            "myxocyprinus asiaticus": [
+                {"source": "chinese_red_list", "protection_level": "二级",
+                 "status": "VU", "note": "国家二级保护动物"},
+                {"source": "iucn", "iucn": "VU", "status": "易危",
+                 "note": "IUCN评估为易危(VU)"},
+            ],
+            "pecten albicans": [
+                {"source": "chinese_red_list", "protection_level": "二级",
+                 "status": "EN", "note": "国家重点保护水生野生动物"},
+                {"source": "iucn", "iucn": "EN", "status": "濒危",
+                 "note": "IUCN评估为濒危(EN)"},
+            ],
+        }
+        return data.get(key, [])
+
+    @classmethod
+    def load_cache(cls, cache_path: Optional[Path] = None) -> int:
+        """从 JSON 缓存文件加载仲裁结果。返回加载的记录数。"""
+        if cache_path is None:
+            cache_path = cls._cache_file or (
+                Path.home() / ".conflict_arbiter_cache" / "arbitration_results.json"
+            )
+        if not cache_path.is_file():
+            return 0
+        try:
+            data = json.loads(cache_path.read_text(encoding="utf-8"))
+            if isinstance(data, dict):
+                cls._species_cache.update(data)
+                return len(data)
+            return 0
+        except Exception as exc:
+            logger.warning(f"缓存加载失败: {exc}")
+            return 0
+
+    @classmethod
+    def save_cache(cls, cache_path: Optional[Path] = None) -> int:
+        """将内存中的仲裁结果保存为 JSON 缓存文件。返回保存的记录数。"""
+        if cache_path is None:
+            cache_path = cls._cache_file or (
+                Path.home() / ".conflict_arbiter_cache" / "arbitration_results.json"
+            )
+        cache_path.parent.mkdir(parents=True, exist_ok=True)
+        cls._cache_file = cache_path
+        try:
+            cache_path.write_text(
+                json.dumps(cls._species_cache, ensure_ascii=False, default=str, indent=2),
+                encoding="utf-8",
+            )
+            return len(cls._species_cache)
+        except Exception as exc:
+            logger.warning(f"缓存保存失败: {exc}")
+            return -1
 
 
 # ── 便捷工厂 ──

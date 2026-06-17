@@ -1,77 +1,104 @@
-# Culter Agent 🐟
+﻿# 🐟 Culter Agent
 
-**P₃ 万物衍生** — 鲌类专研 · 基因组 · 年龄生长 · 同域共存。
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python) ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge) ![Version](https://img.shields.io/badge/Version-v1.0.0-blueviolet?style=for-the-badge) ![Pipeline](https://img.shields.io/badge/Pipeline-9-phase-orange?style=for-the-badge) ![Domain](https://img.shields.io/badge/Domain-Culter%20Genomics-9cf?style=for-the-badge) ![Triangle](https://img.shields.io/badge/Triangle-Powered-yellow?style=for-the-badge)
 
-> 万物皆变 · Panta Rhei
->
-> 翘嘴鲌、蒙古鲌、尖头鲌、红鳍原鲌……
-> 同一条江水里，它们怎么分享同一张餐桌？
+> Domain expert engine for Yangtze fish research.
+> Together infinite power, apart top expert engines.
 
-[English](README.md) · [中文版](README.zh.md) · [更新日志](CHANGELOG.md)
+[English](README.md) · [中文](README.zh.md) · [CHANGELOG](CHANGELOG.md)
 
 ---
 
-## 核心哲学
+## 📖 Table of Contents
 
-> 世界是动态的，知识是暂时的，涌现是常态。
-
-P₃ 是从三角核心衍生的第三个项目。它依赖 S/V0 的物种知识、V/V1 的搜索验证、Coordinator 的协调调度。P₃ 只做一件事：**研究鲌类**。
-
-### 在万物中的角色
-
-```
-三生万物架构：
-  三角核心 (sealed 3)             → 基础能力
-    ├── S/V0  fish-ecology-assistant
-    ├── V/V1  cognitive-search-engine
-    └── Coord eon-core
-  
-  万物衍生 (open N):
-    P₁  porpoise-agent  → 江豚专研
-    P₂  coilia-agent    → 刀鲚专研
-    P₃  culter-agent    → 鲌类专研  ← 你在这里
-    C   conflict-arbiter → 冲突仲裁
-```
+- [Philosophy](#-philosophy)
+- [Quick Start](#-quick-start)
+- [Architecture](#-architecture)
+- [Features](#-features)
+- [Project Structure](#-project-structure)
+- [Ecosystem](#-ecosystem)
 
 ---
 
-## 这个项目是什么
+## 🏛️ Philosophy
 
-鲌属（*Culter*）是长江中上游最常见的经济鱼类之一。翘嘴鲌、蒙古鲌、尖头鲌——它们形态相似、食性重叠、分布同域。它们是怎么共存的？是食物生态位分化、还是时空资源分割？
+> Specialized knowledge, focused analysis.
 
-这个项目通过几何形态测量、稳定同位素（δ¹³C, δ¹⁵N）、肠道内含物分析和基因组学来回答这些问题。
-
-> 赫拉克利特说：人不能两次踏进同一条河流。
->
-> 我们说：但五条鲌鱼可以——只要每条鱼都有自己的生态位。
+This is a derived project of SanShengWanWu, empowered by the Triangle Core (V0 knowledge + V1 search + Coord orchestration).
 
 ---
 
-## 快速上手
+## 🚀 Quick Start
 
 ```bash
-# CLI 入口
-python src/main.py --help
+# Clone
+git clone git@github.com:fangtaocai041/culter-agent.git
+cd culter-agent
 
-# 鲌类物种评估
-python -c "from src.adapter import CulterAdapter; a = CulterAdapter(); print(a.health())"
+# Install
+pip install -e .
+
+# Run
+python -m culter_agent run "trophic ecology"
 ```
 
 ---
 
-## 核心能力
+## 🏗️ Architecture
 
-| 能力 | 说明 |
-|:-----|:------|
-| **几何形态测量** | landmark 分析 + Procrustes 叠印 |
-| **稳定同位素** | δ¹³C, δ¹⁵N → 营养生态位 |
-| **肠道内含物** | 食性组成 + 重叠指数 |
-| **基因组** | RAD-seq / SNP 标记 |
-| **同域共存** | 生态位分化 + 时空资源分割 |
+```
+  (see project src/ directory)
+```
 
 ---
 
-> 鱼在水里，你在岸上，代码在中间。
-> 愿每条鱼都有自己的生态位。
+## ✨ Features
+
+| Feature | Description |
+|---------|-------------|
+| 🔬 Domain Analysis | Species-specific research pipeline |
+| 📡 Triangle Powered | V0 knowledge + V1 search + Coord orchestration |
+| 🧠 Cognitive Loop | ReAct pattern for iterative analysis |
+
+---
+
+## 📁 Project Structure
+
+```
+culter-agent/
+  (see project src/ directory)
+```
+
+---
+
+## 🔗 Ecosystem
+
+This project is the Culter Domain Expert Engine (P₃) in the SanShengWanWu ecosystem.
+
+```
+Triangle Core (sealed 3):
+  📦 fish-ecology-assistant    → Knowledge Supply (V0)
+  🔍 cognitive-search-engine   → Search Verification (V1)
+  ⚙️ eon-core                  → Coordination Hub (Coord)
+
+Derived Projects (open N):
+  🐬 porpoise-agent    → P₁ Porpoise Expert
+  🐟 coilia-agent      → P₂ Coilia Expert
+  🐟 culter-agent      → P₃ Culter Expert
+  🔥 conflict-arbiter  → C  Conflict Arbitration
+```
+
+> 🔥 Together infinite power, apart top expert engines.
+
+---
+
+🌱 **Everything Flows · Panta Rhei**
+
+> Heraclitus said: No man ever steps in the same river twice.
 >
-> **最后更新: 2026-06-21 · Reasonix Code · DeepSeek 驱动**
+> We say: You cannot analyze today''s ecological data with last month''s code.
+
+This project is not a fixed toolset — it is a **living system**. Every component has built-in expiration mechanisms, version tracking, and emergence awareness. As your research deepens, packages update, and new methods emerge, it evolves with you.
+
+*Last updated: 2026-06-17　|　Environment: Reasonix Code · DeepSeek Powered*
+

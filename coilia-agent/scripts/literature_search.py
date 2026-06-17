@@ -1,21 +1,23 @@
 #!/usr/bin/env python3
 """
-刀鲚文献搜索 — P₂ 6步搜索协议的可执行实现.
+鲚属文献搜索 — P₂ 6步搜索协议的可执行实现.
 
 对应 SKILL.md: src/skills/search-literature/SKILL.md
 搜索协议: Unified Search Protocol v1.0
 
-Step 1: 精确名搜索 (Primary)     — Coilia nasus
+Step 1: 精确名搜索 (Primary)     — <学名>
 Step 2: 宽网搜索 (Secondary)     — 补漏
 Step 3: OCR 变体搜索 (Safety)    — 拼写变体
 Step 4: 合并去重                 — DOI/标题
-Step 5: 按 5 个研究方向分类
+Step 5: 按研究方向分类
 Step 6: 格式化输出
+
+支持多物种: --species coilia_nasus | coilia_brachygnathus | coilia_mystus | coilia_grayii
 
 用法:
   python scripts/literature_search.py --query "洄游"               # 搜索+分类输出
   python scripts/literature_search.py --query "migration" --theme migration  # 按主题过滤
-  python scripts/literature_search.py --query "耳石" --json       # JSON 输出
+  python scripts/literature_search.py --species coilia_mystus --query "食性" --json  # 凤鲚+JSON
   python scripts/literature_search.py --example                   # 示例演示
   python scripts/literature_search.py --list-species              # 打印物种约束参数
 """
@@ -32,33 +34,58 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-# ── P₂ 刀鲚物种约束 ───────────────────────────────────
+# ── 物种约束 (从 SpeciesRegistry 动态加载) ────────────
 
-SPECIES_CONFIG: Dict[str, Any] = {
-    "agent_id": "P₂",
-    "species_scientific": "Coilia nasus",
-    "species_chinese": ["刀鲚", "长颌鲚", "长江刀鱼", "刀鱼"],
-    "species_variants": [
-        "Coilia nasis", "Coilia nasua", "Coilia nasas",
-        "Coilia ectenes", "Coilia brachygnathus",
-    ],
-    "research_themes": {
-        "migration":   "洄游生态与耳石微化学",
-        "genetics":    "群体遗传与种群结构",
-        "stock":       "资源评估与管理",
-        "feeding":     "食性与营养生态",
-        "early_life":  "早期资源与繁殖",
-    },
-}
+def _get_species_config(species_id: Optional[str] = None) -> Dict[str, Any]:
+    """从 SpeciesRegistry 加载物种配置，包装为兼容 SPECIES_CONFIG 格式."""
+    # 确保项目根在 sys.path
+    _project = str(Path(__file__).resolve().parent.parent)
+    if _project not in sys.path:
+        sys.path.insert(0, _project)
 
-# 主题关键词映射（用于自动分类）
-THEME_KEYWORDS: Dict[str, List[str]] = {
-    "migration":  ["洄游", "migration", "耳石", "otolith", "sr/ca", "微化学", "anadromous"],
-    "genetics":   ["遗传", "genetic", "dna", "微卫星", "snp", "线粒体", "基因组", "population structure"],
-    "stock":      ["资源", "stock", "cpue", "评估", "msy", "种群", "捕捞", "fishery"],
-    "feeding":    ["食性", "feeding", "营养", "稳定同位素", "胃含物", "diet", "isotope"],
-    "early_life": ["繁殖", "spawning", "产卵", "仔鱼", "早期资源", "胚胎", "larvae", "recruitment"],
-}
+    from src.agent.species_registry import get_registry
+    registry = get_registry()
+    if species_id is None:
+        species_id = registry.default_id()
+    raw = registry.get(species_id)
+    if raw is None:
+        raw = registry.default()
+
+    return {
+        "agent_id": "P₂",
+        "species_scientific": raw.get("species_scientific", "Coilia nasus"),
+        "species_chinese": raw.get("species_chinese", []),
+        "species_variants": raw.get("species_variants", []),
+        "research_themes": {
+            tid: theme.get("label", tid)
+            for tid, theme in raw.get("research_themes", {}).items()
+        },
+    }
+
+
+def _get_theme_keywords(species_id: Optional[str] = None) -> Dict[str, List[str]]:
+    """从 SpeciesRegistry 加载主题关键词."""
+    _project = str(Path(__file__).resolve().parent.parent)
+    if _project not in sys.path:
+        sys.path.insert(0, _project)
+
+    from src.agent.species_registry import get_registry
+    registry = get_registry()
+    if species_id is None:
+        species_id = registry.default_id()
+    raw = registry.get(species_id)
+    if raw is None:
+        raw = registry.default()
+
+    return {
+        tid: theme.get("keywords", [])
+        for tid, theme in raw.get("research_themes", {}).items()
+    }
+
+
+# ── 向后兼容：模块级 SPECIES_CONFIG ──
+SPECIES_CONFIG = _get_species_config()
+THEME_KEYWORDS = _get_theme_keywords()
 
 
 # ── 数据结构 ───────────────────────────────────────────
@@ -106,22 +133,24 @@ def deduplicate(papers: List[Paper]) -> List[Paper]:
 
 # ── Step 5: 主题分类 ────────────────────────────────────
 
-def classify_paper(paper: Paper) -> str:
-    """根据标题+摘要关键词归类到 5 个研究方向."""
+def classify_paper(paper: Paper, keywords: Dict[str, List[str]] = None) -> str:
+    """根据标题+摘要关键词归类到研究方向."""
+    if keywords is None:
+        keywords = THEME_KEYWORDS
     text = f"{paper.title} ".lower()
     scores: Dict[str, int] = {}
-    for theme, keywords in THEME_KEYWORDS.items():
-        scores[theme] = sum(1 for kw in keywords if kw.lower() in text)
+    for theme, kws in keywords.items():
+        scores[theme] = sum(1 for kw in kws if kw.lower() in text)
     if not scores or max(scores.values()) == 0:
         return "unclassified"
     return max(scores, key=scores.get)
 
 
-def classify_papers(papers: List[Paper]) -> List[Paper]:
+def classify_papers(papers: List[Paper], keywords: Dict[str, List[str]] = None) -> List[Paper]:
     """批量分类."""
     for p in papers:
         if p.theme == "unclassified":
-            p.theme = classify_paper(p)
+            p.theme = classify_paper(p, keywords)
     return papers
 
 
@@ -139,25 +168,30 @@ def _try_import_coordinator():
         return None
 
 
-def search_cognitive(query: str, theme: Optional[str] = None) -> Dict[str, Any]:
+def search_cognitive(query: str, theme: Optional[str] = None,
+                     cfg: Optional[Dict] = None) -> Dict[str, Any]:
     """通过 coordinator 调用 cognitive-search-engine 执行搜索.
 
     Args:
         query: 搜索查询
         theme: 可选的主题过滤
+        cfg: 物种配置 (默认使用 SPECIES_CONFIG)
 
     Returns:
         {status, items, total, ...}
     """
+    if cfg is None:
+        cfg = SPECIES_CONFIG
+
     coord = _try_import_coordinator()
     if coord is None:
         return {"status": "coordinator_unavailable", "items": [],
                 "total": 0, "error": "cognitive-search-engine 不可用"}
 
     # 构造搜索参数 (遵循 Unified Search Protocol)
-    full_query = f"{SPECIES_CONFIG['species_scientific']} {query}"
+    full_query = f"{cfg['species_scientific']} {query}"
     if theme:
-        cn = SPECIES_CONFIG["research_themes"].get(theme, theme)
+        cn = cfg["research_themes"].get(theme, theme)
         full_query = f"{full_query} {cn}"
 
     try:
@@ -221,27 +255,34 @@ def _example_papers() -> List[Paper]:
 
 # ── Step 6: 输出格式化 ────────────────────────────────
 
-def format_table(papers: List[Paper], theme: Optional[str] = None) -> str:
+def format_table(papers: List[Paper], theme: Optional[str] = None,
+                 cfg: Optional[Dict] = None) -> str:
     """格式化为主题分类表格."""
+    if cfg is None:
+        cfg = SPECIES_CONFIG
+
     # 按主题分组
     by_theme: Dict[str, List[Paper]] = {}
     for p in papers:
         by_theme.setdefault(p.theme, []).append(p)
 
+    species_cn = '/'.join(cfg["species_chinese"]) if cfg["species_chinese"] else cfg["species_scientific"]
+
     lines: List[str] = []
-    lines.append(f"刀鲚 (Coilia nasus) 文献搜索结果")
+    lines.append(f"{species_cn} ({cfg['species_scientific']}) 文献搜索结果")
     lines.append(f"搜索时间: {datetime.now().strftime('%Y-%m-%d %H:%M')}")
     lines.append(f"总计: {len(papers)} 篇\n")
 
-    theme_cn = SPECIES_CONFIG["research_themes"]
+    theme_cn = cfg["research_themes"]
 
-    for tid in ["migration", "genetics", "stock", "feeding", "early_life", "unclassified"]:
+    for tid in list(theme_cn.keys()) + ["unclassified"]:
         if theme and tid != theme:
             continue
         group = by_theme.get(tid, [])
         cn = theme_cn.get(tid, tid)
         icon = {"migration": "🐟", "genetics": "🧬", "stock": "📊",
-                "feeding": "🍽️", "early_life": "🥚", "unclassified": "📎"}.get(tid, "📄")
+                "feeding": "🍽️", "early_life": "🥚", "morphology": "🔬",
+                "unclassified": "📎"}.get(tid, "📄")
         lines.append(f"\n{icon} {cn} ({len(group)} 篇)")
         lines.append("-" * 60)
         for p in group:
@@ -252,28 +293,33 @@ def format_table(papers: List[Paper], theme: Optional[str] = None) -> str:
     return "\n".join(lines)
 
 
-def format_json(papers: List[Paper], theme: Optional[str] = None) -> str:
+def format_json(papers: List[Paper], theme: Optional[str] = None,
+                cfg: Optional[Dict] = None) -> str:
     """JSON 格式输出."""
+    if cfg is None:
+        cfg = SPECIES_CONFIG
     data = {
-        "species": SPECIES_CONFIG["species_scientific"],
-        "species_chinese": SPECIES_CONFIG["species_chinese"],
+        "species": cfg["species_scientific"],
+        "species_chinese": cfg["species_chinese"],
         "total": len(papers),
         "papers": [p.as_dict() for p in papers if not theme or p.theme == theme],
     }
     return json.dumps(data, ensure_ascii=False, indent=2)
 
 
-def list_species() -> str:
+def list_species(cfg: Optional[Dict] = None) -> str:
     """打印物种约束参数."""
+    if cfg is None:
+        cfg = SPECIES_CONFIG
     lines = [
-        f"Agent:     {SPECIES_CONFIG['agent_id']}",
-        f"Species:   {SPECIES_CONFIG['species_scientific']}",
-        f"中文名:    {'/'.join(SPECIES_CONFIG['species_chinese'])}",
-        f"拼写变体:  {', '.join(SPECIES_CONFIG['species_variants'])}",
+        f"Agent:     {cfg['agent_id']}",
+        f"Species:   {cfg['species_scientific']}",
+        f"中文名:    {'/'.join(cfg['species_chinese'])}",
+        f"拼写变体:  {', '.join(cfg['species_variants'])}",
         "",
         "研究方向:",
     ]
-    for tid, cn in SPECIES_CONFIG["research_themes"].items():
+    for tid, cn in cfg["research_themes"].items():
         lines.append(f"  {tid:12s} → {cn}")
     return "\n".join(lines)
 
@@ -281,8 +327,9 @@ def list_species() -> str:
 # ── 主流程 ─────────────────────────────────────────────
 
 def search_coilia(query: str, theme: Optional[str] = None,
-                  use_example: bool = False) -> Tuple[List[Paper], str]:
-    """执行完整的刀鲚文献搜索流程.
+                  use_example: bool = False,
+                  species_id: Optional[str] = None) -> Tuple[List[Paper], str]:
+    """执行完整的鲚属文献搜索流程.
 
     Step 1: 精确名搜索
     Step 2: 宽网搜索补漏
@@ -295,59 +342,80 @@ def search_coilia(query: str, theme: Optional[str] = None,
         query: 搜索查询
         theme: 可选研究方向过滤
         use_example: 使用示例数据（离线模式）
+        species_id: 物种 ID (默认 coilia_nasus)
 
     Returns:
         (papers列表, 格式化输出字符串)
     """
+    cfg = _get_species_config(species_id)
+    keywords = _get_theme_keywords(species_id)
+
     if use_example:
         papers = _example_papers()
     else:
         # Step 1-3: 通过 cognitive-search-engine 搜索
-        result = search_cognitive(query, theme)
+        result = search_cognitive(query, theme, cfg=cfg)
         papers = papers_from_coordinator(result)
 
     # Step 4: 去重
     papers = deduplicate(papers)
 
     # Step 5: 分类
-    papers = classify_papers(papers)
+    papers = classify_papers(papers, keywords=keywords)
 
     # Step 6: 输出
     return papers, ""  # 由调用方选择格式
 
 
 def main():
+    # 提前加载注册表以获取可用 species 列表
+    _project = str(Path(__file__).resolve().parent.parent)
+    if _project not in sys.path:
+        sys.path.insert(0, _project)
+    from src.agent.species_registry import get_registry
+    registry = get_registry()
+    available_species = registry.list_species()
+
     parser = argparse.ArgumentParser(
         prog="literature_search",
-        description="刀鲚 (Coilia nasus) 文献搜索 — P₂ 6步搜索协议"
+        description="鲚属 (Coilia) 文献搜索 — P₂ 6步搜索协议"
     )
     parser.add_argument("--query", "-q", help="搜索关键词")
-    parser.add_argument("--theme", "-t", choices=list(SPECIES_CONFIG["research_themes"]) + ["all"],
-                        default=None, help="按研究方向过滤")
+    parser.add_argument("--species", "-s", choices=available_species,
+                        default=None, help="目标物种 (默认: coilia_nasus)")
+    parser.add_argument("--theme", "-t", default=None,
+                        help="按研究方向过滤")
     parser.add_argument("--json", "-j", action="store_true", help="JSON 格式输出")
     parser.add_argument("--example", action="store_true", help="使用内置示例数据")
     parser.add_argument("--list-species", action="store_true", help="打印物种约束参数")
 
     args = parser.parse_args()
 
+    # 按 species 参数加载配置
+    cfg = _get_species_config(args.species) if args.species else SPECIES_CONFIG
+
     if args.list_species:
-        print(list_species())
+        print(list_species(cfg))
         return
 
+    # 动态更新 theme choices
+    if args.theme and args.theme not in cfg["research_themes"] and args.theme != "all":
+        pass  # 允许自由文本
+
     if args.example:
-        papers, _ = search_coilia("", use_example=True)
+        papers, _ = search_coilia("", use_example=True, species_id=args.species)
     elif args.query:
-        papers, _ = search_coilia(args.query, theme=args.theme)
+        papers, _ = search_coilia(args.query, theme=args.theme, species_id=args.species)
     else:
         # 默认: 示例演示
-        papers, _ = search_coilia("", use_example=True)
+        papers, _ = search_coilia("", use_example=True, species_id=args.species)
 
     theme_filter = None if args.theme == "all" else args.theme
 
     if args.json:
-        print(format_json(papers, theme=theme_filter))
+        print(format_json(papers, theme=theme_filter, cfg=cfg))
     else:
-        print(format_table(papers, theme=theme_filter))
+        print(format_table(papers, theme=theme_filter, cfg=cfg))
 
 
 if __name__ == "__main__":

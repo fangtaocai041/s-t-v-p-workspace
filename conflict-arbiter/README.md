@@ -1,84 +1,104 @@
-# Conflict Arbiter 🔥
+﻿# 🔥 Conflict Arbiter
 
-**C 万物衍生** — 多源保护级别冲突检测 · 中国优先加权 · 时空可比性。
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python) ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge) ![Version](https://img.shields.io/badge/Version-v1.0.0-blueviolet?style=for-the-badge) ![Conflict](https://img.shields.io/badge/Conflict-4-level-red?style=for-the-badge) ![China](https://img.shields.io/badge/China-Weighted-orange?style=for-the-badge) ![Circuit](https://img.shields.io/badge/Circuit-Breaker-yellow?style=for-the-badge) ![Triangle](https://img.shields.io/badge/Triangle-Powered-9cf?style=for-the-badge)
 
-> 万物皆变 · Panta Rhei
->
-> IUCN 说濒危，国标说无危，CITES 说附录 II。
-> 一个物种，三张红牌——谁是对的？
+> Domain expert engine for Yangtze fish research.
+> Together infinite power, apart top expert engines.
 
-[English](README.md) · [中文版](README.zh.md) · [更新日志](CHANGELOG.md)
+[English](README.md) · [中文](README.zh.md) · [CHANGELOG](CHANGELOG.md)
 
 ---
 
-## 核心哲学
+## 📖 Table of Contents
 
-> 世界是动态的，知识是暂时的，涌现是常态。
-
-C（Conflict Arbiter）是万物衍生中的仲裁者。当不同数据源对同一物种的保护级别给出不同结论时——IUCN 说 CR、中国红皮书说 EN、CITES 说附录 II——它来裁决。
-
-### 在万物中的角色
-
-```
-三生万物架构：
-  三角核心 (sealed 3)             → 基础能力
-    ├── S/V0  fish-ecology-assistant
-    ├── V/V1  cognitive-search-engine
-    └── Coord eon-core
-  
-  万物衍生 (open N):
-    P₁  porpoise-agent  → 江豚专研
-    P₂  coilia-agent    → 刀鲚专研
-    P₃  culter-agent    → 鲌类专研
-    C   conflict-arbiter → 冲突仲裁  ← 你在这里
-```
+- [Philosophy](#-philosophy)
+- [Quick Start](#-quick-start)
+- [Architecture](#-architecture)
+- [Features](#-features)
+- [Project Structure](#-project-structure)
+- [Ecosystem](#-ecosystem)
 
 ---
 
-## 这个项目是什么
+## 🏛️ Philosophy
 
-保护生物学中最尴尬的问题之一：同一个物种，不同的保护名录给出不同的结论。
+> Specialized knowledge, focused analysis.
 
-- **IUCN 红色名录**：全球视角，更新周期长
-- **中国红皮书**：国家视角，但部分物种数据陈旧
-- **CITES 附录**：贸易管制视角，不直接对应濒危等级
-- **国家重点保护野生动物名录**：法律效力，但 2021 年才大修
-
-当它们打架时，C 使用中国优先加权、时空可比性检查和证据链追溯来给出仲裁意见。
-
-> 赫拉克利特说：人不能两次踏进同一条河流。
->
-> 我们说：但一个物种可能被三个保护名录给出三种结论。
-> 我们的工作是——找出真相。
+This is a derived project of SanShengWanWu, empowered by the Triangle Core (V0 knowledge + V1 search + Coord orchestration).
 
 ---
 
-## 快速上手
+## 🚀 Quick Start
 
 ```bash
-# 直接调用仲裁引擎
-python -c "
-from src.arbiter import ConflictArbiter
-a = ConflictArbiter()
-result = a.arbitrate('Ochetobius elongatus')
-print(result)
-"
+# Clone
+git clone git@github.com:fangtaocai041/conflict-arbiter.git
+cd conflict-arbiter
+
+# Install
+pip install -e .
+
+# Run
+python -m conflict_arbiter arbitrate "Coilia nasus"
 ```
 
 ---
 
-## 核心能力
+## 🏗️ Architecture
 
-| 能力 | 说明 |
-|:-----|:------|
-| **多源冲突检测** | IUCN / 中国红皮书 / CITES / 国保名录 |
-| **中国优先加权** | 中国分布物种以中国分类为权威 |
-| **时空可比性** | 区分"不同时间/空间的声明"与"真正矛盾" |
-| **证据链追溯** | taxonomy_log 记录每次变更的来源和证据 |
+```
+  (see project src/ directory)
+```
 
 ---
 
-> 鱼在水里，你在岸上，代码在中间。
-> 愿每一次仲裁都经得起时间的检验。
+## ✨ Features
+
+| Feature | Description |
+|---------|-------------|
+| 🔬 Domain Analysis | Species-specific research pipeline |
+| 📡 Triangle Powered | V0 knowledge + V1 search + Coord orchestration |
+| 🧠 Cognitive Loop | ReAct pattern for iterative analysis |
+
+---
+
+## 📁 Project Structure
+
+```
+conflict-arbiter/
+  (see project src/ directory)
+```
+
+---
+
+## 🔗 Ecosystem
+
+This project is the Conflict Arbitration Expert Engine (C) in the SanShengWanWu ecosystem.
+
+```
+Triangle Core (sealed 3):
+  📦 fish-ecology-assistant    → Knowledge Supply (V0)
+  🔍 cognitive-search-engine   → Search Verification (V1)
+  ⚙️ eon-core                  → Coordination Hub (Coord)
+
+Derived Projects (open N):
+  🐬 porpoise-agent    → P₁ Porpoise Expert
+  🐟 coilia-agent      → P₂ Coilia Expert
+  🐟 culter-agent      → P₃ Culter Expert
+  🔥 conflict-arbiter  → C  Conflict Arbitration
+```
+
+> 🔥 Together infinite power, apart top expert engines.
+
+---
+
+🌱 **Everything Flows · Panta Rhei**
+
+> Heraclitus said: No man ever steps in the same river twice.
 >
-> **最后更新: 2026-06-21 · Reasonix Code · DeepSeek 驱动**
+> We say: You cannot analyze today''s ecological data with last month''s code.
+
+This project is not a fixed toolset — it is a **living system**. Every component has built-in expiration mechanisms, version tracking, and emergence awareness. As your research deepens, packages update, and new methods emerge, it evolves with you.
+
+*Last updated: 2026-06-17　|　Environment: Reasonix Code · DeepSeek Powered*
+

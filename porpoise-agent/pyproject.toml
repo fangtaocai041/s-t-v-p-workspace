@@ -9,33 +9,57 @@ authors = [
 ]
 requires-python = ">=3.11"
 dependencies = [
+    # ── 核心依赖 (始终安装) ──
     "cognitive-search-engine",          # 本地路径: D:/Reasonix/cognitive-search-engine
     "reasonix>=0.30.0",
-    "openai>=1.0.0",           # DeepSeek API 兼容
+    "openai>=1.0.0",                    # DeepSeek API 兼容
+    "httpx>=0.25",                      # HTTP 客户端
+    "pyyaml>=6.0",                      # 配置解析
+    "langchain>=0.3",                   # LLM 编排
+    # ── 基础科学计算 (轻量，广泛使用) ──
     "numpy>=1.26",
     "scipy>=1.12",
     "pandas>=2.1",
-    "librosa>=0.10",
-    "soundfile>=0.12",
-    "matplotlib>=3.8",
-    "scikit-learn>=1.4",
-    "pyyaml>=6.0",
     "pydantic>=2.5",
     "rich>=13.0",
-    "httpx>=0.25",
+    "matplotlib>=3.8",
     "pyarrow>=15.0",
-    "geopandas>=0.14",
-    "shapely>=2.0",
-    "rasterio>=1.3",
-    "obspy>=1.4",               # 地震/声学信号处理
     "pydub>=0.25",
-    "pamguide",                 # PAM 工具
-    "langchain>=0.3",
-    "chromadb>=0.5",            # 向量存储
-    "neo4j>=5.0",               # 知识图谱（可选）
+    "soundfile>=0.12",
 ]
 
 [project.optional-dependencies]
+# ── 声学分析 ──
+acoustics = [
+    "librosa>=0.10",
+    "obspy>=1.4",               # 地震/声学信号处理
+    "pamguide",                 # PAM 工具
+]
+# ── 空间分析 ──
+spatial = [
+    "geopandas>=0.14",
+    "rasterio>=1.3",
+    "shapely>=2.0",
+]
+# ── 知识图谱 ──
+knowledge = [
+    "neo4j>=5.0",
+    "chromadb>=0.5",            # 向量存储
+]
+# ── 机器学习 ──
+ml = [
+    "scikit-learn>=1.4",
+    "torch>=2.2",
+]
+# ── 全部可选依赖 ──
+all = [
+    # 引用上面的分组 (pip 支持自引用)
+    "porpoise-agent[acoustics]",
+    "porpoise-agent[spatial]",
+    "porpoise-agent[knowledge]",
+    "porpoise-agent[ml]",
+]
+# ── 开发工具 ──
 dev = [
     "pytest>=8.0",
     "pytest-asyncio>=0.23",

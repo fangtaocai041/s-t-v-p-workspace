@@ -1,0 +1,59 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "fishkb"
+version = "1.0.0"
+description = "鱼类生态学知识库核心库 — SQLite-backed species knowledge base with KB-first lookup and credibility scoring"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [
+    { name = "Reasonix" },
+]
+keywords = ["fish", "ecology", "species", "knowledge-base", "bibliometrics"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+
+dependencies = [
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+server = [
+    "fastapi>=0.100",
+    "uvicorn>=0.23",
+]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Reasonix/fishkb"
+Repository = "https://github.com/Reasonix/fishkb"
+
+[tool.hatch.build.targets.wheel]
+packages = ["fishkb"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "fishkb/**",
+    "data/**",
+    "config/**",
+    "README.md",
+    "pyproject.toml",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]

@@ -1,0 +1,53 @@
+{
+  "dimensions": [
+    {
+      "aspect": "Trait scope",
+      "our_approach": "7 categories: morphology, life_history, reproduction, feeding, habitat, migration, conservation (58 sub-traits)",
+      "FISHMORPH": "10 morphological traits only",
+      "FishTraits_USGS": "Ecological + life-history traits (US fish only)",
+      "Pearl_River_2018": "Morphological traits only (body shape, fin position)"
+    },
+    {
+      "aspect": "Species coverage",
+      "our_approach": "430 Yangtze species (251 with FISHMORPH, all with conservation)",
+      "FISHMORPH": "8,342 global species",
+      "FishTraits_USGS": "809 US freshwater fish species",
+      "Pearl_River_2018": "6 species"
+    },
+    {
+      "aspect": "Population-level resolution",
+      "our_approach": "YES — 23 records with water_body annotation; same species across river sections",
+      "FISHMORPH": "No — one record per species (from specimen photos)",
+      "FishTraits_USGS": "No — species-level only",
+      "Pearl_River_2018": "YES — intra-species by river section (closest to us)"
+    },
+    {
+      "aspect": "Taxonomic validation",
+      "our_approach": "YES — 20 taxonomic changes with trait-based conflict analysis",
+      "FISHMORPH": "No",
+      "FishTraits_USGS": "No",
+      "Pearl_River_2018": "No"
+    },
+    {
+      "aspect": "Temporal dimension",
+      "our_approach": "YES — fishing ban pre/post comparison (2017-2019 vs 2021-2023)",
+      "FISHMORPH": "No",
+      "FishTraits_USGS": "No",
+      "Pearl_River_2018": "No"
+    },
+    {
+      "aspect": "Conservation framework",
+      "our_approach": "Dual: IUCN + China Red List + National Protection + CITES",
+      "FISHMORPH": "No",
+      "FishTraits_USGS": "US Endangered Species Act",
+      "Pearl_River_2018": "No"
+    }
+  ],
+  "standardization_gaps": [
+    "FISHMORPH uses specimen-level ratios — we adopted this for 251 species",
+    "FishBase Stocks concept — we adopted for growth parameters",
+    "IUCN v3.1 — we adopted with Chinese supplement",
+    "Need: formal trait measurement protocol (like FISHMORPH's photo-based method)",
+    "Need: inter-observer calibration for manual measurements"
+  ]
+}

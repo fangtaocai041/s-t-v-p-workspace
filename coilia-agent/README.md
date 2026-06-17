@@ -1,78 +1,104 @@
-# Coilia Agent 🐟
+﻿# 🐟 Coilia Agent
 
-**P₂ 万物衍生** — 刀鲚专研 · 耳石微化学 · 洄游生态 · 资源评估。
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python) ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge) ![Version](https://img.shields.io/badge/Version-v1.3.0-blueviolet?style=for-the-badge) ![ReAct](https://img.shields.io/badge/ReAct-Cognitive%20Loop-orange?style=for-the-badge) ![Scripts](https://img.shields.io/badge/Scripts-8%20algorithms-success?style=for-the-badge) ![Domain](https://img.shields.io/badge/Domain-Coilia%20Migration-9cf?style=for-the-badge) ![Triangle](https://img.shields.io/badge/Triangle-Powered-yellow?style=for-the-badge)
 
-> 万物皆变 · Panta Rhei
->
-> 长江三鲜之首。每一条鱼耳石里的 Sr/Ca 比值，
-> 都在诉说它一生的洄游路线。
+> Domain expert engine for Yangtze fish research.
+> Together infinite power, apart top expert engines.
 
-[English](README.md) · [中文版](README.zh.md) · [更新日志](CHANGELOG.md)
+[English](README.md) · [中文](README.zh.md) · [CHANGELOG](CHANGELOG.md)
 
 ---
 
-## 核心哲学
+## 📖 Table of Contents
 
-> 世界是动态的，知识是暂时的，涌现是常态。
-
-P₂ 是从三角核心衍生的第二个项目。它依赖 S/V0 的物种知识、V/V1 的搜索验证、Coordinator 的协调调度。P₂ 只做一件事：**研究刀鲚**。
-
-### 在万物中的角色
-
-```
-三生万物架构：
-  三角核心 (sealed 3)             → 基础能力
-    ├── S/V0  fish-ecology-assistant
-    ├── V/V1  cognitive-search-engine
-    └── Coord eon-core
-  
-  万物衍生 (open N):
-    P₁  porpoise-agent  → 江豚专研
-    P₂  coilia-agent    → 刀鲚专研  ← 你在这里
-    C   conflict-arbiter → 冲突仲裁
-```
+- [Philosophy](#-philosophy)
+- [Quick Start](#-quick-start)
+- [Architecture](#-architecture)
+- [Features](#-features)
+- [Project Structure](#-project-structure)
+- [Ecosystem](#-ecosystem)
 
 ---
 
-## 这个项目是什么
+## 🏛️ Philosophy
 
-刀鲚（*Coilia nasus*），"长江三鲜"之首。每年春夏之交，它们从海里游回长江产卵。但过度捕捞和水工建筑让它们的洄游路线越来越艰难。
+> Specialized knowledge, focused analysis.
 
-这个项目通过耳石微化学（Sr/Ca 比值）重建每一条鱼的洄游历史——它在哪里出生、在哪里长大、在哪里产卵。每一片耳石，都是一本打开的生命日记。
-
-> 赫拉克利特说：人不能两次踏进同一条河流。
->
-> 我们说：但一条刀鲚可以——只要河流还在。
+This is a derived project of SanShengWanWu, empowered by the Triangle Core (V0 knowledge + V1 search + Coord orchestration).
 
 ---
 
-## 快速上手
+## 🚀 Quick Start
 
 ```bash
-# 文献搜索
-python scripts/literature_search.py "Coilia nasus"
+# Clone
+git clone git@github.com:fangtaocai041/coilia-agent.git
+cd coilia-agent
 
-# 洄游分析（耳石微化学）
-python scripts/migration_analysis.py --species "Coilia nasus"
+# Install
+pip install -e .
 
-# 食性分析
-python scripts/feeding_analysis.py --species "Coilia brachygnathus"
+# Run
+python -m coilia_agent run "migration analysis"
 ```
 
 ---
 
-## 核心能力
+## 🏗️ Architecture
 
-| 能力 | 说明 |
-|:-----|:------|
-| **耳石微化学** | Sr/Ca 比值 → 洄游路线重建 |
-| **洄游生态** | 长江 → 近海 → 长江 生命周期 |
-| **资源评估** | CPUE 分析 + 种群动态模型 |
-| **食性分析** | 胃含物 + 稳定同位素 (δ¹³C, δ¹⁵N) |
+```
+  (see project src/ directory)
+```
 
 ---
 
-> 鱼在水里，你在岸上，代码在中间。
-> 愿每一片耳石的故事都被读懂。
+## ✨ Features
+
+| Feature | Description |
+|---------|-------------|
+| 🔬 Domain Analysis | Species-specific research pipeline |
+| 📡 Triangle Powered | V0 knowledge + V1 search + Coord orchestration |
+| 🧠 Cognitive Loop | ReAct pattern for iterative analysis |
+
+---
+
+## 📁 Project Structure
+
+```
+coilia-agent/
+  (see project src/ directory)
+```
+
+---
+
+## 🔗 Ecosystem
+
+This project is the Coilia Domain Expert Engine (P₂) in the SanShengWanWu ecosystem.
+
+```
+Triangle Core (sealed 3):
+  📦 fish-ecology-assistant    → Knowledge Supply (V0)
+  🔍 cognitive-search-engine   → Search Verification (V1)
+  ⚙️ eon-core                  → Coordination Hub (Coord)
+
+Derived Projects (open N):
+  🐬 porpoise-agent    → P₁ Porpoise Expert
+  🐟 coilia-agent      → P₂ Coilia Expert
+  🐟 culter-agent      → P₃ Culter Expert
+  🔥 conflict-arbiter  → C  Conflict Arbitration
+```
+
+> 🔥 Together infinite power, apart top expert engines.
+
+---
+
+🌱 **Everything Flows · Panta Rhei**
+
+> Heraclitus said: No man ever steps in the same river twice.
 >
-> **最后更新: 2026-06-21 · Reasonix Code · DeepSeek 驱动**
+> We say: You cannot analyze today''s ecological data with last month''s code.
+
+This project is not a fixed toolset — it is a **living system**. Every component has built-in expiration mechanisms, version tracking, and emergence awareness. As your research deepens, packages update, and new methods emerge, it evolves with you.
+
+*Last updated: 2026-06-17　|　Environment: Reasonix Code · DeepSeek Powered*
+

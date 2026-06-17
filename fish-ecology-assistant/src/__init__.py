@@ -22,15 +22,31 @@ Usage:
 
 __version__ = "6.5.3"
 
-# ── 核心编排器与协调中枢 ──
-from .orchestrator import FishEcologyOrchestrator, KbFirstResult, get_orchestrator
-from .project_hub import ProjectHub, get_hub, TriangleMember, DerivedMember
+# ── 延迟导入以避免缺失可选依赖 (fishkb) 时崩溃 ──
+# 核心类通过 get_* 工厂函数按需加载，而非模块级直接导入。
 
-# ── 跨项目适配器 ──
-from .adapter import FishEcologyAdapter
+import logging as _logging
+_logger = _logging.getLogger(__name__)
 
-# ── 类型系统 ──
-from .types import (
+
+def get_orchestrator():
+    """延迟获取 FishEcologyOrchestrator 单例."""
+    from .orchestrator import get_orchestrator as _go
+    return _go()
+
+
+def get_hub():
+    """延迟获取 ProjectHub 单例."""
+    from .project_hub import get_hub as _gh
+    return _gh()
+
+
+# ── 安全导出 — 只在模块可以导入时暴露 ──
+# 跨项目适配器 (优先保证可导入)
+from .adapter import FishEcologyAdapter  # noqa: E402
+
+# 类型系统 (纯 dataclass, 无外部依赖)
+from .types import (  # noqa: E402
     PipelinePhase,
     ConfidenceLevel,
     EvidenceQuality,
@@ -45,15 +61,10 @@ from .types import (
 )
 
 __all__ = [
-    # Core orchestrator
-    "FishEcologyOrchestrator",
-    "KbFirstResult",
+    # Core orchestrator (lazy)
     "get_orchestrator",
-    # Project hub
-    "ProjectHub",
+    # Project hub (lazy)
     "get_hub",
-    "TriangleMember",
-    "DerivedMember",
     # Adapter
     "FishEcologyAdapter",
     # Types

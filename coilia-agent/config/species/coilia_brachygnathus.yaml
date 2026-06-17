@@ -1,0 +1,34 @@
+# Coilia brachygnathus (短颌鲚) — 鲚属淡水定居种
+# 与刀鲚形态相似，曾被认为是刀鲚的同物异名
+
+species_id: "coilia_brachygnathus"
+species_scientific: "Coilia brachygnathus"
+species_chinese: ["短颌鲚", "毛花鱼", "毛刀鱼", "短颌"]
+species_variants:
+  - "Coilia brachygnathis"
+  - "Coilia brachignathus"
+
+profile:
+  family: "Engraulidae (鳀科)"
+  migration_type: "淡水定居 (freshwater resident)"
+  iucn: "未评估 (NE)"
+  economic: "中高 (长江中下游重要经济鱼类)"
+  distribution: "长江中下游干流及附属湖泊 (洞庭湖、鄱阳湖等)"
+  note: "曾被认为是刀鲚(Coilia nasus)的同物异名，现为独立物种"
+
+research_themes:
+  genetics:
+    label: "物种界定与群体遗传学"
+    keywords: ["物种界定", "DNA条形码", "COI", "微卫星", "遗传分化", "brachygnathus"]
+  feeding:
+    label: "食性与营养生态"
+    keywords: ["食性", "feeding", "胃含物", "稳定同位素", "diet"]
+  stock:
+    label: "资源评估与管理"
+    keywords: ["资源", "stock", "cpue", "捕捞", "种群"]
+  early_life:
+    label: "早期生活史与繁殖"
+    keywords: ["繁殖", "spawning", "仔鱼", "产卵", "补充群体"]
+  morphology:
+    label: "形态比较与分类"
+    keywords: ["形态", "morphology", "鳃耙", "上颌骨", "分类"]

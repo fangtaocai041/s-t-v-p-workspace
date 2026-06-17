@@ -9,16 +9,86 @@
 - 人工审批标记
 - 调用日志
 - 降级 (fallback)
+- 优雅降级 (可选依赖缺失时不崩溃)
 
 对应五层模型中的"API调用与控制"层。
 """
 
+import importlib
 import logging
 import time
 from dataclasses import dataclass, field
 from typing import Any, Callable, Optional
 
 logger = logging.getLogger(__name__)
+
+
+# ── 优雅降级: 安全导入 ──────────────────────────────────────
+
+_IMPORT_WARNED: set[str] = set()  # 避免重复 warning
+
+def safe_import(
+    module_name: str,
+    feature_name: str = "",
+    pip_package: str = "",
+) -> Optional[Any]:
+    """
+    安全导入可选依赖模块，缺失时打印 warning 并返回 None。
+
+    用法:
+        librosa = safe_import("librosa", feature_name="声学分析", pip_package="librosa")
+        if librosa is None:
+            return {"error": "librosa 未安装，声学分析不可用"}
+    """
+    try:
+        return importlib.import_module(module_name)
+    except ImportError:
+        pkg = pip_package or module_name.split(".")[0]
+        feat = feature_name or module_name
+        if module_name not in _IMPORT_WARNED:
+            logger.warning(
+                f"可选依赖缺失: {module_name} ({feat}) — "
+                f"请运行 pip install porpoise-agent[{pkg}] 安装"
+            )
+            _IMPORT_WARNED.add(module_name)
+        return None
+
+
+def is_available(module_name: str) -> bool:
+    """检查可选模块是否可用（无 side-effect，不打印 warning）"""
+    try:
+        importlib.import_module(module_name)
+        return True
+    except ImportError:
+        return False
+
+
+def list_missing_optionals() -> dict[str, bool]:
+    """
+    列出所有可选依赖的可用状态。
+
+    Returns:
+        {"librosa": False, "geopandas": True, ...}
+    """
+    optional_map = {
+        # acoustics 组
+        "librosa": "acoustics",
+        "obspy": "acoustics",
+        # spatial 组
+        "geopandas": "spatial",
+        "rasterio": "spatial",
+        "shapely": "spatial",
+        # knowledge 组
+        "neo4j": "knowledge",
+        "chromadb": "knowledge",
+        # ml 组
+        "sklearn": "ml",
+        "torch": "ml",
+    }
+    status = {}
+    for mod, group in optional_map.items():
+        status[f"{mod} ({group})"] = is_available(mod)
+    return status
 
 
 @dataclass
@@ -287,6 +357,110 @@ class ToolRegistry:
             "total_calls": total_calls,
             "success_rate": f"{success_rate:.1f}%",
         }
+
+    def register_builtin_tools(self) -> dict[str, bool]:
+        """
+        注册内建工具，自动跳过缺失可选依赖的功能。
+
+        每个可选依赖组在导入失败时只打印一次 warning。
+
+        Returns:
+            dict: {"acoustics": True, "spatial": False, ...} 各组注册状态
+        """
+        status: dict[str, bool] = {}
+
+        # ── 声学分析工具 ──
+        librosa_ok = is_available("librosa")
+        if librosa_ok:
+            self.register(
+                name="detect_clicks",
+                description="检测 NBHF click 脉冲 (100-180 kHz)",
+                parameters={
+                    "audio_path": {"type": "string", "description": "音频文件路径"},
+                    "threshold_db": {"type": "number", "description": "检测阈值 dB"},
+                },
+                fn=None,  # 由 AcousticAgent 提供实现
+                category="acoustic",
+                tags=["nbhf", "click", "acoustic"],
+            )
+            logger.info("Acoustic tools registered (librosa available)")
+        else:
+            logger.warning(
+                "Acoustic tools skipped — librosa not installed. "
+                "Run: pip install porpoise-agent[acoustics]"
+            )
+        status["acoustics"] = librosa_ok
+
+        # ── 空间分析工具 ──
+        geopandas_ok = is_available("geopandas")
+        if geopandas_ok:
+            self.register(
+                name="habitat_model",
+                description="栖息地建模与空间分析",
+                parameters={
+                    "species": {"type": "string"},
+                    "region": {"type": "string"},
+                    "env_layers": {"type": "array"},
+                },
+                fn=None,
+                category="spatial",
+                tags=["habitat", "gis", "modeling"],
+            )
+            logger.info("Spatial tools registered (geopandas available)")
+        else:
+            logger.warning(
+                "Spatial tools skipped — geopandas not installed. "
+                "Run: pip install porpoise-agent[spatial]"
+            )
+        status["spatial"] = geopandas_ok
+
+        # ── 知识图谱工具 ──
+        chromadb_ok = is_available("chromadb")
+        if chromadb_ok:
+            self.register(
+                name="vector_search",
+                description="向量相似度搜索 (ChromaDB)",
+                parameters={
+                    "query": {"type": "string"},
+                    "collection": {"type": "string"},
+                    "n_results": {"type": "integer"},
+                },
+                fn=None,
+                category="knowledge",
+                tags=["vector", "semantic", "chromadb"],
+            )
+            logger.info("Knowledge tools registered (chromadb available)")
+        else:
+            logger.warning(
+                "Knowledge tools (chromadb) skipped — chromadb not installed. "
+                "Run: pip install porpoise-agent[knowledge]"
+            )
+        status["knowledge"] = chromadb_ok
+
+        # ── ML 工具 ──
+        sklearn_ok = is_available("sklearn")
+        if sklearn_ok:
+            self.register(
+                name="classify",
+                description="机器学习分类 (scikit-learn)",
+                parameters={
+                    "data": {"type": "array"},
+                    "labels": {"type": "array"},
+                    "method": {"type": "string", "description": "分类方法 (rf/svm/knn)"},
+                },
+                fn=None,
+                category="ml",
+                tags=["classification", "sklearn"],
+            )
+            logger.info("ML tools registered (sklearn available)")
+        else:
+            logger.warning(
+                "ML tools skipped — scikit-learn not installed. "
+                "Run: pip install porpoise-agent[ml]"
+            )
+        status["ml"] = sklearn_ok
+
+        return status
 
 
 # ── 快捷注册函数 ────────────────────────────────────────────

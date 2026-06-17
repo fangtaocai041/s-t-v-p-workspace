@@ -1,0 +1,1557 @@
+{
+  "version": 216,
+  "updated_at": "2026-06-17T11:50:48.526464",
+  "nodes": [
+    [
+      "direction:遗传与分子",
+      "Direction",
+      "遗传与分子",
+      {
+        "name": "遗传与分子",
+        "description": "种群遗传学、分子标记、系统发育"
+      }
+    ],
+    [
+      "direction:基因组学",
+      "Direction",
+      "基因组学",
+      {
+        "name": "基因组学",
+        "description": "全基因组组装、比较基因组、MHC"
+      }
+    ],
+    [
+      "direction:生物声学",
+      "Direction",
+      "生物声学",
+      {
+        "name": "生物声学",
+        "description": "NBHF click、PAM、回声定位"
+      }
+    ],
+    [
+      "direction:生态与种群",
+      "Direction",
+      "生态与种群",
+      {
+        "name": "生态与种群",
+        "description": "分布、种群动态、栖息地利用"
+      }
+    ],
+    [
+      "direction:污染物与健康",
+      "Direction",
+      "污染物与健康",
+      {
+        "name": "污染物与健康",
+        "description": "POPs、重金属、微塑料、微生物"
+      }
+    ],
+    [
+      "direction:保护管理",
+      "Direction",
+      "保护管理",
+      {
+        "name": "保护管理",
+        "description": "IUCN评估、迁地保护、自然保护区"
+      }
+    ],
+    [
+      "direction:解剖与生理",
+      "Direction",
+      "解剖与生理",
+      {
+        "name": "解剖与生理",
+        "description": "系统解剖、听力生理、潜水生理"
+      }
+    ],
+    [
+      "direction:行为与认知",
+      "Direction",
+      "行为与认知",
+      {
+        "name": "行为与认知",
+        "description": "母子行为、社群结构、捕食策略"
+      }
+    ],
+    [
+      "species:长江江豚",
+      "Species",
+      "长江江豚",
+      {
+        "name_zh": "长江江豚",
+        "scientific_name": "Neophocaena asiaeorientalis asiaeorientalis",
+        "iucn": "CR",
+        "distribution": "长江中下游"
+      }
+    ],
+    [
+      "species:东溟江豚",
+      "Species",
+      "东溟江豚",
+      {
+        "name_zh": "东溟江豚",
+        "scientific_name": "Neophocaena sunameri",
+        "iucn": "NT",
+        "distribution": "中国沿海、日本、韩国"
+      }
+    ],
+    [
+      "species:印太江豚",
+      "Species",
+      "印太江豚",
+      {
+        "name_zh": "印太江豚",
+        "scientific_name": "Neophocaena phocaenoides",
+        "iucn": "VU",
+        "distribution": "印度-太平洋"
+      }
+    ],
+    [
+      "species:港湾鼠海豚",
+      "Species",
+      "港湾鼠海豚",
+      {
+        "name_zh": "港湾鼠海豚",
+        "scientific_name": "Phocoena phocoena",
+        "iucn": "LC",
+        "distribution": "北大西洋/北太平洋"
+      }
+    ],
+    [
+      "species:加湾鼠海豚",
+      "Species",
+      "加湾鼠海豚",
+      {
+        "name_zh": "加湾鼠海豚",
+        "scientific_name": "Phocoena sinus",
+        "iucn": "CR",
+        "distribution": "加利福尼亚湾"
+      }
+    ],
+    [
+      "species:白鱀豚",
+      "Species",
+      "白鱀豚",
+      {
+        "name_zh": "白鱀豚",
+        "scientific_name": "Lipotes vexillifer",
+        "iucn": "CR(PE)",
+        "distribution": "长江 (原)"
+      }
+    ],
+    [
+      "species:中华白海豚",
+      "Species",
+      "中华白海豚",
+      {
+        "name_zh": "中华白海豚",
+        "scientific_name": "Sousa chinensis",
+        "iucn": "VU",
+        "distribution": "中国东南沿海"
+      }
+    ],
+    [
+      "institution:中国科学院水生生物研究所",
+      "Institution",
+      "中国科学院水生生物研究所",
+      {
+        "name_zh": "中国科学院水生生物研究所",
+        "name_en": "IHB-CAS",
+        "country": "中国"
+      }
+    ],
+    [
+      "institution:淡水渔业研究中心",
+      "Institution",
+      "淡水渔业研究中心",
+      {
+        "name_zh": "淡水渔业研究中心",
+        "name_en": "FFRC-CAFS",
+        "country": "中国"
+      }
+    ],
+    [
+      "institution:南京师范大学",
+      "Institution",
+      "南京师范大学",
+      {
+        "name_zh": "南京师范大学",
+        "name_en": "NNU",
+        "country": "中国"
+      }
+    ],
+    [
+      "institution:复旦大学",
+      "Institution",
+      "复旦大学",
+      {
+        "name_zh": "复旦大学",
+        "name_en": "Fudan",
+        "country": "中国"
+      }
+    ],
+    [
+      "institution:中山大学",
+      "Institution",
+      "中山大学",
+      {
+        "name_zh": "中山大学",
+        "name_en": "SYSU",
+        "country": "中国"
+      }
+    ],
+    [
+      "institution:中科院深海所",
+      "Institution",
+      "中科院深海所",
+      {
+        "name_zh": "中科院深海所",
+        "name_en": "IDSSE",
+        "country": "中国"
+      }
+    ],
+    [
+      "institution:自然资源部第三海洋研究所",
+      "Institution",
+      "自然资源部第三海洋研究所",
+      {
+        "name_zh": "自然资源部第三海洋研究所",
+        "name_en": "TIO-MNR",
+        "country": "中国"
+      }
+    ],
+    [
+      "institution:日本渔业研究教育机构",
+      "Institution",
+      "日本渔业研究教育机构",
+      {
+        "name_zh": "日本渔业研究教育机构",
+        "name_en": "FRA-Japan",
+        "country": "日本"
+      }
+    ],
+    [
+      "institution:韩国海洋研究所",
+      "Institution",
+      "韩国海洋研究所",
+      {
+        "name_zh": "韩国海洋研究所",
+        "name_en": "KIOST",
+        "country": "韩国"
+      }
+    ],
+    [
+      "institution:香港大学",
+      "Institution",
+      "香港大学",
+      {
+        "name_zh": "香港大学",
+        "name_en": "HKU",
+        "country": "中国香港"
+      }
+    ],
+    [
+      "institution:伦敦动物学会",
+      "Institution",
+      "伦敦动物学会",
+      {
+        "name_zh": "伦敦动物学会",
+        "name_en": "ZSL",
+        "country": "英国"
+      }
+    ],
+    [
+      "institution:俄罗斯科学院",
+      "Institution",
+      "俄罗斯科学院",
+      {
+        "name_zh": "俄罗斯科学院",
+        "name_en": "RAS",
+        "country": "俄罗斯"
+      }
+    ],
+    [
+      "researcher:王丁",
+      "Researcher",
+      "王丁",
+      {
+        "name_zh": "王丁",
+        "name_en": "Wang Ding",
+        "institution": "中国科学院水生生物研究所",
+        "h_index": 38,
+        "directions": [
+          "保护管理",
+          "生态与种群"
+        ],
+        "title": "研究员/博士生导师/白鱀豚馆创始人",
+        "papers": "Turvey 2007 (Biol Lett); Mei 2012 (Biol Conserv); Mei 2014 (Conserv Biol)",
+        "note": "40+年江豚研究，全球最高引，领导全流域科考"
+      }
+    ],
+    [
+      "researcher:王克雄",
+      "Researcher",
+      "王克雄",
+      {
+        "name_zh": "王克雄",
+        "name_en": "Wang Kexiong",
+        "institution": "中国科学院水生生物研究所",
+        "h_index": 24,
+        "directions": [
+          "生物声学"
+        ],
+        "title": "研究员/博士生导师/声学研究组组长",
+        "papers": "Wang K 2006 (JASA); Wang K 2014",
+        "note": "中国江豚PAM技术奠基人之一"
+      }
+    ],
+    [
+      "researcher:郑劲松",
+      "Researcher",
+      "郑劲松",
+      {
+        "name_zh": "郑劲松",
+        "name_en": "Zheng Jinsong",
+        "institution": "中国科学院水生生物研究所",
+        "h_index": 18,
+        "directions": [
+          "遗传与分子"
+        ],
+        "title": "研究员/遗传学研究组组长",
+        "papers": "Zheng 2005 (Biochem Genet)",
+        "note": "江豚分子标记与种群遗传"
+      }
+    ],
+    [
+      "researcher:梅志刚",
+      "Researcher",
+      "梅志刚",
+      {
+        "name_zh": "梅志刚",
+        "name_en": "Mei Zhigang",
+        "institution": "中国科学院水生生物研究所",
+        "h_index": 22,
+        "directions": [
+          "生态与种群",
+          "保护管理"
+        ],
+        "title": "副研究员",
+        "papers": "Mei 2012 (Biol Conserv); Zhang & Mei 2025 (Curr Biol)",
+        "note": "古诗生态学创始人之一，种群动态建模"
+      }
+    ],
+    [
+      "researcher:郝玉江",
+      "Researcher",
+      "郝玉江",
+      {
+        "name_zh": "郝玉江",
+        "name_en": "Hao Yujiang",
+        "institution": "中国科学院水生生物研究所",
+        "h_index": 18,
+        "directions": [
+          "保护管理"
+        ],
+        "title": "副研究员/白鱀豚馆日常管理负责人",
+        "papers": "郝玉江 2024 (水生生物学报); 迁地保护系列",
+        "note": "天鹅洲故道迁地保护+圈养繁殖"
+      }
+    ],
+    [
+      "researcher:王智伟",
+      "Researcher",
+      "王智伟",
+      {
+        "name_zh": "王智伟",
+        "name_en": "Wang Zhiwei",
+        "institution": "中国科学院水生生物研究所",
+        "h_index": 17,
+        "directions": [
+          "生物声学"
+        ],
+        "title": "副研究员",
+        "papers": "Wang Z 2014 (PLoS ONE); Wang Z 2020 (Environ Pollut)",
+        "note": "PAM监测+水下噪声影响评估"
+      }
+    ],
+    [
+      "researcher:陈敏敏",
+      "Researcher",
+      "陈敏敏",
+      {
+        "name_zh": "陈敏敏",
+        "name_en": "Chen Minmin",
+        "institution": "中国科学院水生生物研究所",
+        "h_index": 12,
+        "directions": [
+          "遗传与分子"
+        ],
+        "title": "副研究员",
+        "papers": "Chen 2014 (IJMS)",
+        "note": "遗传多样性微卫星"
+      }
+    ],
+    [
+      "researcher:方亮",
+      "Researcher",
+      "方亮",
+      {
+        "name_zh": "方亮",
+        "name_en": "Fang Liang",
+        "institution": "中国科学院水生生物研究所",
+        "h_index": 10,
+        "directions": [
+          "生物声学"
+        ],
+        "title": "助理研究员",
+        "papers": "Fang 2015 (JASA)",
+        "note": "Click声学参数特征"
+      }
+    ],
+    [
+      "researcher:徐跑",
+      "Researcher",
+      "徐跑",
+      {
+        "name_zh": "徐跑",
+        "name_en": "Xu Pao",
+        "institution": "淡水渔业研究中心",
+        "h_index": 16,
+        "directions": [
+          "保护管理"
+        ],
+        "title": "FFRC所长/研究员/博士生导师",
+        "papers": "徐跑 2024 (水生生物学报)",
+        "note": "长江江豚保护顶层设计"
+      }
+    ],
+    [
+      "researcher:刘凯",
+      "Researcher",
+      "刘凯",
+      {
+        "name_zh": "刘凯",
+        "name_en": "Liu Kai",
+        "institution": "淡水渔业研究中心",
+        "h_index": 12,
+        "directions": [
+          "生态与种群",
+          "保护管理"
+        ],
+        "title": "研究员/博士生导师/长江下游禁捕监测评估负责人",
+        "papers": "刘凯 2024 (水生生物学报); Chen 2024 (水生生物学报)",
+        "note": "你的导师，核心研究：江豚+刀鲚+禁渔评估"
+      }
+    ],
+    [
+      "researcher:杨彦平",
+      "Researcher",
+      "杨彦平",
+      {
+        "name_zh": "杨彦平",
+        "name_en": "Yang Yanping",
+        "institution": "淡水渔业研究中心",
+        "h_index": 8,
+        "directions": [
+          "生态与种群"
+        ],
+        "title": "博士/助理研究员",
+        "papers": "刀鲚生态系列论文",
+        "note": "刀鲚仔稚鱼发生动态"
+      }
+    ],
+    [
+      "researcher:方弟安",
+      "Researcher",
+      "方弟安",
+      {
+        "name_zh": "方弟安",
+        "name_en": "Fang Di'an",
+        "institution": "淡水渔业研究中心",
+        "h_index": 10,
+        "directions": [
+          "生态与种群"
+        ],
+        "title": "副研究员",
+        "papers": "长江鱼类群落调查",
+        "note": "鱼类群落生态"
+      }
+    ],
+    [
+      "researcher:徐东坡",
+      "Researcher",
+      "徐东坡",
+      {
+        "name_zh": "徐东坡",
+        "name_en": "Xu Dongpo",
+        "institution": "淡水渔业研究中心",
+        "h_index": 10,
+        "directions": [
+          "生态与种群"
+        ],
+        "title": "副研究员",
+        "papers": "渔业资源评估系列",
+        "note": "渔业资源监测"
+      }
+    ],
+    [
+      "researcher:王银平",
+      "Researcher",
+      "王银平",
+      {
+        "name_zh": "王银平",
+        "name_en": "Wang Yinping",
+        "institution": "淡水渔业研究中心",
+        "h_index": 8,
+        "directions": [
+          "生态与种群"
+        ],
+        "title": "助理研究员",
+        "papers": "浮游动物群落特征",
+        "note": "浮游动物+鱼类群落"
+      }
+    ],
+    [
+      "researcher:段金荣",
+      "Researcher",
+      "段金荣",
+      {
+        "name_zh": "段金荣",
+        "name_en": "Duan Jinrong",
+        "institution": "淡水渔业研究中心",
+        "h_index": 8,
+        "directions": [
+          "生态与种群"
+        ],
+        "title": "助理研究员",
+        "papers": "长江鱼类多样性调查",
+        "note": "资源调查"
+      }
+    ],
+    [
+      "researcher:张敏莹",
+      "Researcher",
+      "张敏莹",
+      {
+        "name_zh": "张敏莹",
+        "name_en": "Zhang Minying",
+        "institution": "淡水渔业研究中心",
+        "h_index": 8,
+        "directions": [
+          "生态与种群"
+        ],
+        "title": "助理研究员",
+        "papers": "鱼类生态学研究",
+        "note": "鱼类生态"
+      }
+    ],
+    [
+      "researcher:蔺丹清",
+      "Researcher",
+      "蔺丹清",
+      {
+        "name_zh": "蔺丹清",
+        "name_en": "Lin Danqing",
+        "institution": "淡水渔业研究中心",
+        "h_index": 5,
+        "directions": [
+          "生态与种群"
+        ],
+        "title": "科研成员",
+        "papers": "Chen 2024 (水生生物学报) 共同作者",
+        "note": "长江江豚分布监测"
+      }
+    ],
+    [
+      "researcher:张家路",
+      "Researcher",
+      "张家路",
+      {
+        "name_zh": "张家路",
+        "name_en": "Zhang Jialu",
+        "institution": "淡水渔业研究中心",
+        "h_index": 5,
+        "directions": [
+          "生态与种群"
+        ],
+        "title": "科研成员",
+        "papers": "Chen 2024 (水生生物学报) 共同作者",
+        "note": "长江江豚分布监测"
+      }
+    ],
+    [
+      "researcher:应聪萍",
+      "Researcher",
+      "应聪萍",
+      {
+        "name_zh": "应聪萍",
+        "name_en": "Ying Congping",
+        "institution": "淡水渔业研究中心",
+        "h_index": 5,
+        "directions": [
+          "保护管理"
+        ],
+        "title": "科研成员",
+        "papers": "徐跑 2024 (水生生物学报) 共同作者",
+        "note": "长江江豚保护"
+      }
+    ],
+    [
+      "researcher:尹登花",
+      "Researcher",
+      "尹登花",
+      {
+        "name_zh": "尹登花",
+        "name_en": "Yin Denghua",
+        "institution": "淡水渔业研究中心",
+        "h_index": 5,
+        "directions": [
+          "保护管理"
+        ],
+        "title": "科研成员",
+        "papers": "徐跑 2024 (水生生物学报) 共同作者",
+        "note": "长江江豚保护"
+      }
+    ],
+    [
+      "researcher:轩中亚",
+      "Researcher",
+      "轩中亚",
+      {
+        "name_zh": "轩中亚",
+        "name_en": "Xuan Zhongya",
+        "institution": "淡水渔业研究中心",
+        "h_index": 5,
+        "directions": [
+          "生态与种群"
+        ],
+        "title": "科研成员",
+        "papers": "",
+        "note": "鱼类生态"
+      }
+    ],
+    [
+      "researcher:杨光",
+      "Researcher",
+      "杨光",
+      {
+        "name_zh": "杨光",
+        "name_en": "Yang Guang",
+        "institution": "南京师范大学",
+        "h_index": 28,
+        "directions": [
+          "遗传与分子",
+          "基因组学"
+        ],
+        "title": "教授/博士生导师/南京师大生科院",
+        "papers": "Yang 2018 (Nat Commun) 江豚基因组",
+        "note": "江豚淡水适应性进化基因组"
+      }
+    ],
+    [
+      "researcher:李松海",
+      "Researcher",
+      "李松海",
+      {
+        "name_zh": "李松海",
+        "name_en": "Li Songhai",
+        "institution": "中科院深海所",
+        "h_index": 22,
+        "directions": [
+          "生物声学"
+        ],
+        "title": "研究员/博士生导师/深海所鲸类声学组组长",
+        "papers": "Whistle characterization",
+        "note": "深海鲸类声学"
+      }
+    ],
+    [
+      "researcher:王先艳",
+      "Researcher",
+      "王先艳",
+      {
+        "name_zh": "王先艳",
+        "name_en": "Wang Xianyan",
+        "institution": "自然资源部第三海洋研究所",
+        "h_index": 10,
+        "directions": [
+          "生态与种群"
+        ],
+        "title": "研究员",
+        "papers": "东亚江豚种群评估",
+        "note": "东亚江豚+印太江豚"
+      }
+    ],
+    [
+      "researcher:刘佳佳",
+      "Researcher",
+      "刘佳佳",
+      {
+        "name_zh": "刘佳佳",
+        "name_en": "Liu Jiajia",
+        "institution": "复旦大学",
+        "h_index": 12,
+        "directions": [
+          "保护管理"
+        ],
+        "title": "青年研究员/生命科学学院",
+        "papers": "Zhang & Mei 2025 (Curr Biol) 共同作者",
+        "note": "保护生物学+古诗生态学"
+      }
+    ],
+    [
+      "researcher:Tomonari Akamatsu",
+      "Researcher",
+      "Tomonari Akamatsu",
+      {
+        "name_zh": "Tomonari Akamatsu",
+        "name_en": "Akamatsu T",
+        "institution": "日本渔业研究教育机构",
+        "h_index": 38,
+        "directions": [
+          "生物声学"
+        ],
+        "title": "主任研究员/A-tag发明者",
+        "papers": "Akamatsu 2005 (JASA); Kimura 2010 (JASA)",
+        "note": "世界江豚声学权威，A-tag技术发明人"
+      }
+    ],
+    [
+      "researcher:Leszek Karczmarski",
+      "Researcher",
+      "Leszek Karczmarski",
+      {
+        "name_zh": "Leszek Karczmarski",
+        "name_en": "Karczmarski L",
+        "institution": "香港大学",
+        "h_index": 32,
+        "directions": [
+          "生态与种群"
+        ],
+        "title": "教授/鲸类生态学组组长",
+        "papers": "Lin 2017 (Mamm Biol); 种群动态系列",
+        "note": "谱系地理+种群动态"
+      }
+    ],
+    [
+      "researcher:Samuel Turvey",
+      "Researcher",
+      "Samuel Turvey",
+      {
+        "name_zh": "Samuel Turvey",
+        "name_en": "Turvey ST",
+        "institution": "伦敦动物学会",
+        "h_index": 28,
+        "directions": [
+          "保护管理"
+        ],
+        "title": "教授/海洋保护生物学组长",
+        "papers": "Turvey 2007 (Biol Lett); Turvey 2013 (Oryx)",
+        "note": "IUCN评估+灭绝风险评估"
+      }
+    ],
+    [
+      "researcher:Popov VV",
+      "Researcher",
+      "Popov VV",
+      {
+        "name_zh": "Popov VV",
+        "name_en": "Popov VV",
+        "institution": "俄罗斯科学院",
+        "h_index": 22,
+        "directions": [
+          "生物声学"
+        ],
+        "title": "教授/听觉生理学家",
+        "papers": "Popov 2011 (JASA) 江豚听力图",
+        "note": "江豚听觉生理+噪声阈值"
+      }
+    ],
+    [
+      "paper:10.1016/j.biocon.2012.03.005",
+      "Paper",
+      "The Yangtze finless porpoise: on an accelerating path to extinction?",
+      {
+        "title": "The Yangtze finless porpoise: on an accelerating path to extinction?",
+        "doi": "10.1016/j.biocon.2012.03.005",
+        "year": 2012,
+        "journal": "Biological Conservation"
+      }
+    ],
+    [
+      "paper:10.1016/j.cub.2025.02.052",
+      "Paper",
+      "Range contraction of the Yangtze finless porpoise inferred from classic Chinese ",
+      {
+        "title": "Range contraction of the Yangtze finless porpoise inferred from classic Chinese poems",
+        "doi": "10.1016/j.cub.2025.02.052",
+        "year": 2025,
+        "journal": "Current Biology"
+      }
+    ],
+    [
+      "paper:10.1038/s41467-018-03722-x",
+      "Paper",
+      "Population genomics of finless porpoises reveal an incipient cetacean species ad",
+      {
+        "title": "Population genomics of finless porpoises reveal an incipient cetacean species adapted to freshwater",
+        "doi": "10.1038/s41467-018-03722-x",
+        "year": 2018,
+        "journal": "Nature Communications"
+      }
+    ],
+    [
+      "paper:10.7541/2024.2024.0027",
+      "Paper",
+      "长江江豚保护进展与工作展望",
+      {
+        "title": "长江江豚保护进展与工作展望",
+        "doi": "10.7541/2024.2024.0027",
+        "year": 2024,
+        "journal": "水生生物学报"
+      }
+    ],
+    [
+      "paper:10.1371/journal.pone.0104038",
+      "Paper",
+      "Diel echolocation activity of Yangtze finless porpoise",
+      {
+        "title": "Diel echolocation activity of Yangtze finless porpoise",
+        "doi": "10.1371/journal.pone.0104038",
+        "year": 2014,
+        "journal": "PLoS ONE"
+      }
+    ],
+    [
+      "paper:长江安庆段长江江豚分布特征及其影响因子探究",
+      "Paper",
+      "长江安庆段长江江豚分布特征及其影响因子探究",
+      {
+        "title": "长江安庆段长江江豚分布特征及其影响因子探究",
+        "doi": "",
+        "year": 2024,
+        "journal": "水生生物学报"
+      }
+    ],
+    [
+      "paper:10.1016/j.envpol.2020.114679",
+      "Paper",
+      "Noise exposure and its effect on Yangtze finless porpoise",
+      {
+        "title": "Noise exposure and its effect on Yangtze finless porpoise",
+        "doi": "10.1016/j.envpol.2020.114679",
+        "year": 2020,
+        "journal": "Environmental Pollution"
+      }
+    ],
+    [
+      "paper:10.1121/1.3655295",
+      "Paper",
+      "Evoked-potential audiogram of the Yangtze finless porpoise",
+      {
+        "title": "Evoked-potential audiogram of the Yangtze finless porpoise",
+        "doi": "10.1121/1.3655295",
+        "year": 2011,
+        "journal": "Journal of the Acoustical Society of America"
+      }
+    ],
+    [
+      "paper:10.1121/1.3492859",
+      "Paper",
+      "A-tag density estimation method for finless porpoise",
+      {
+        "title": "A-tag density estimation method for finless porpoise",
+        "doi": "10.1121/1.3492859",
+        "year": 2010,
+        "journal": "Journal of the Acoustical Society of America"
+      }
+    ]
+  ],
+  "edges": [
+    [
+      "researcher:王丁",
+      "institution:中国科学院水生生物研究所",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:王丁",
+      "direction:保护管理",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:王丁",
+      "direction:生态与种群",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:王丁",
+      "paper:10.1016/j.biocon.2012.03.005",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:王丁",
+      "paper:10.1016/j.cub.2025.02.052",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:王丁",
+      "paper:10.1016/j.biocon.2012.03.005",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:王丁",
+      "paper:10.1016/j.cub.2025.02.052",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:王克雄",
+      "institution:中国科学院水生生物研究所",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:王克雄",
+      "direction:生物声学",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:王克雄",
+      "paper:10.1016/j.cub.2025.02.052",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:王克雄",
+      "paper:10.1016/j.cub.2025.02.052",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:郑劲松",
+      "institution:中国科学院水生生物研究所",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:郑劲松",
+      "direction:遗传与分子",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:梅志刚",
+      "institution:中国科学院水生生物研究所",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:梅志刚",
+      "direction:生态与种群",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:梅志刚",
+      "direction:保护管理",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:梅志刚",
+      "paper:10.1016/j.biocon.2012.03.005",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:梅志刚",
+      "paper:10.1016/j.cub.2025.02.052",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:梅志刚",
+      "paper:10.1016/j.biocon.2012.03.005",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:梅志刚",
+      "paper:10.1016/j.cub.2025.02.052",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:郝玉江",
+      "institution:中国科学院水生生物研究所",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:郝玉江",
+      "direction:保护管理",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:王智伟",
+      "institution:中国科学院水生生物研究所",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:王智伟",
+      "direction:生物声学",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:王智伟",
+      "paper:10.1371/journal.pone.0104038",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:王智伟",
+      "paper:10.1016/j.envpol.2020.114679",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:王智伟",
+      "paper:10.1371/journal.pone.0104038",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:王智伟",
+      "paper:10.1016/j.envpol.2020.114679",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:陈敏敏",
+      "institution:中国科学院水生生物研究所",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:陈敏敏",
+      "direction:遗传与分子",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:方亮",
+      "institution:中国科学院水生生物研究所",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:方亮",
+      "direction:生物声学",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:徐跑",
+      "institution:淡水渔业研究中心",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:徐跑",
+      "direction:保护管理",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:徐跑",
+      "paper:10.7541/2024.2024.0027",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:徐跑",
+      "paper:10.7541/2024.2024.0027",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:刘凯",
+      "institution:淡水渔业研究中心",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:刘凯",
+      "direction:生态与种群",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:刘凯",
+      "direction:保护管理",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:刘凯",
+      "paper:10.7541/2024.2024.0027",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:刘凯",
+      "paper:长江安庆段长江江豚分布特征及其影响因子探究",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:刘凯",
+      "paper:10.7541/2024.2024.0027",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:刘凯",
+      "paper:长江安庆段长江江豚分布特征及其影响因子探究",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:杨彦平",
+      "institution:淡水渔业研究中心",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:杨彦平",
+      "direction:生态与种群",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:方弟安",
+      "institution:淡水渔业研究中心",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:方弟安",
+      "direction:生态与种群",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:徐东坡",
+      "institution:淡水渔业研究中心",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:徐东坡",
+      "direction:生态与种群",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:王银平",
+      "institution:淡水渔业研究中心",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:王银平",
+      "direction:生态与种群",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:段金荣",
+      "institution:淡水渔业研究中心",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:段金荣",
+      "direction:生态与种群",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:张敏莹",
+      "institution:淡水渔业研究中心",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:张敏莹",
+      "direction:生态与种群",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:蔺丹清",
+      "institution:淡水渔业研究中心",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:蔺丹清",
+      "direction:生态与种群",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:蔺丹清",
+      "paper:长江安庆段长江江豚分布特征及其影响因子探究",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:蔺丹清",
+      "paper:长江安庆段长江江豚分布特征及其影响因子探究",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:张家路",
+      "institution:淡水渔业研究中心",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:张家路",
+      "direction:生态与种群",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:应聪萍",
+      "institution:淡水渔业研究中心",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:应聪萍",
+      "direction:保护管理",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:尹登花",
+      "institution:淡水渔业研究中心",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:尹登花",
+      "direction:保护管理",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:轩中亚",
+      "institution:淡水渔业研究中心",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:轩中亚",
+      "direction:生态与种群",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:杨光",
+      "institution:南京师范大学",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:杨光",
+      "direction:遗传与分子",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:杨光",
+      "direction:基因组学",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:杨光",
+      "paper:10.1038/s41467-018-03722-x",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:杨光",
+      "paper:10.1038/s41467-018-03722-x",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:李松海",
+      "institution:中科院深海所",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:李松海",
+      "direction:生物声学",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:王先艳",
+      "institution:自然资源部第三海洋研究所",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:王先艳",
+      "direction:生态与种群",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:刘佳佳",
+      "institution:复旦大学",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:刘佳佳",
+      "direction:保护管理",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:刘佳佳",
+      "paper:10.1016/j.cub.2025.02.052",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:刘佳佳",
+      "paper:10.1016/j.cub.2025.02.052",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:Tomonari Akamatsu",
+      "institution:日本渔业研究教育机构",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:Tomonari Akamatsu",
+      "direction:生物声学",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:Tomonari Akamatsu",
+      "paper:10.1121/1.3492859",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:Tomonari Akamatsu",
+      "paper:10.1121/1.3492859",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:Leszek Karczmarski",
+      "institution:香港大学",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:Leszek Karczmarski",
+      "direction:生态与种群",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:Samuel Turvey",
+      "institution:伦敦动物学会",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:Samuel Turvey",
+      "direction:保护管理",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:Popov VV",
+      "institution:俄罗斯科学院",
+      "WORKS_AT",
+      1.0
+    ],
+    [
+      "researcher:Popov VV",
+      "direction:生物声学",
+      "SPECIALIZES",
+      1.0
+    ],
+    [
+      "researcher:Popov VV",
+      "paper:10.1121/1.3655295",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "researcher:Popov VV",
+      "paper:10.1121/1.3655295",
+      "AUTHORED",
+      1.0
+    ],
+    [
+      "paper:10.1016/j.biocon.2012.03.005",
+      "species:长江江豚",
+      "ABOUT",
+      1.0
+    ],
+    [
+      "paper:10.1016/j.biocon.2012.03.005",
+      "species:长江江豚",
+      "ABOUT",
+      1.0
+    ],
+    [
+      "paper:10.1016/j.cub.2025.02.052",
+      "species:长江江豚",
+      "ABOUT",
+      1.0
+    ],
+    [
+      "paper:10.1016/j.cub.2025.02.052",
+      "species:长江江豚",
+      "ABOUT",
+      1.0
+    ],
+    [
+      "paper:10.1038/s41467-018-03722-x",
+      "species:长江江豚",
+      "ABOUT",
+      1.0
+    ],
+    [
+      "paper:10.1038/s41467-018-03722-x",
+      "species:东溟江豚",
+      "ABOUT",
+      1.0
+    ],
+    [
+      "paper:10.1038/s41467-018-03722-x",
+      "species:长江江豚",
+      "ABOUT",
+      1.0
+    ],
+    [
+      "paper:10.1038/s41467-018-03722-x",
+      "species:东溟江豚",
+      "ABOUT",
+      1.0
+    ],
+    [
+      "paper:10.7541/2024.2024.0027",
+      "species:长江江豚",
+      "ABOUT",
+      1.0
+    ],
+    [
+      "paper:10.7541/2024.2024.0027",
+      "species:长江江豚",
+      "ABOUT",
+      1.0
+    ],
+    [
+      "paper:10.1371/journal.pone.0104038",
+      "species:长江江豚",
+      "ABOUT",
+      1.0
+    ],
+    [
+      "paper:10.1371/journal.pone.0104038",
+      "species:长江江豚",
+      "ABOUT",
+      1.0
+    ],
+    [
+      "paper:长江安庆段长江江豚分布特征及其影响因子探究",
+      "species:长江江豚",
+      "ABOUT",
+      1.0
+    ],
+    [
+      "paper:长江安庆段长江江豚分布特征及其影响因子探究",
+      "species:长江江豚",
+      "ABOUT",
+      1.0
+    ],
+    [
+      "paper:10.1016/j.envpol.2020.114679",
+      "species:长江江豚",
+      "ABOUT",
+      1.0
+    ],
+    [
+      "paper:10.1016/j.envpol.2020.114679",
+      "species:长江江豚",
+      "ABOUT",
+      1.0
+    ],
+    [
+      "paper:10.1121/1.3655295",
+      "species:长江江豚",
+      "ABOUT",
+      1.0
+    ],
+    [
+      "paper:10.1121/1.3655295",
+      "species:长江江豚",
+      "ABOUT",
+      1.0
+    ],
+    [
+      "paper:10.1121/1.3492859",
+      "species:长江江豚",
+      "ABOUT",
+      1.0
+    ],
+    [
+      "paper:10.1121/1.3492859",
+      "species:东溟江豚",
+      "ABOUT",
+      1.0
+    ],
+    [
+      "paper:10.1121/1.3492859",
+      "species:长江江豚",
+      "ABOUT",
+      1.0
+    ],
+    [
+      "paper:10.1121/1.3492859",
+      "species:东溟江豚",
+      "ABOUT",
+      1.0
+    ]
+  ]
+}

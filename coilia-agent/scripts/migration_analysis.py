@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-刀鲚洄游生态分析 — 耳石微化学 + 标志放流 + eDNA.
+鲚属洄游生态分析 — 耳石微化学 + 标志放流 + eDNA.
 
 对应 SKILL.md: src/skills/analyze-migration/SKILL.md
 
@@ -9,9 +9,11 @@
   - 洄游履历重建: 从耳石核心到边缘的线扫描
   - 水利工程影响评估
 
+支持多物种: --species coilia_nasus | coilia_brachygnathus | coilia_mystus | coilia_grayii
+
 用法:
   python scripts/migration_analysis.py --input otolith.csv           # 读耳石数据
-  python scripts/migration_analysis.py --input otolith.csv --json    # JSON 输出
+  python scripts/migration_analysis.py --species coilia_mystus --json # 指定物种+JSON
   python scripts/migration_analysis.py --example                     # 示例演示
   python scripts/migration_analysis.py --list-params                 # 打印分析参数
 """
@@ -189,39 +191,56 @@ def _example_otolith_data() -> List[OtolithPoint]:
     return points
 
 
+# ── 物种信息 ───────────────────────────────────────────
+
+def _get_species_info(species_id: str) -> tuple:
+    """从注册表获取物种显示信息."""
+    _project = str(Path(__file__).resolve().parent.parent)
+    if _project not in sys.path:
+        sys.path.insert(0, _project)
+    from src.agent.species_registry import get_registry
+    cfg = get_registry().get(species_id)
+    if cfg is None:
+        return ("刀鲚", "Coilia nasus")
+    return (cfg.get("species_chinese", ["刀鲚"])[0],
+            cfg.get("species_scientific", "Coilia nasus"))
+
+
 # ── 报告生成 ───────────────────────────────────────────
 
-def format_report(profile: MigrationProfile, barriers: List[Dict[str, str]]) -> str:
+def format_report(profile: MigrationProfile, barriers: List[Dict[str, str]],
+                  species_id: str = "coilia_nasus") -> str:
     """生成洄游分析报告 (SKILL.md 输出模板格式)."""
+    species_cn, species_sci = _get_species_info(species_id)
     total = profile.total_days or 1
     lines = [
         "=" * 60,
-        "  刀鲚洄游分析报告",
+        f"  {species_cn} ({species_sci}) 洄游分析报告",
         "=" * 60,
         "",
         f"分析时间: {datetime.now().strftime('%Y-%m-%d %H:%M')}",
         f"数据置信度: {profile.confidence}",
         "",
-        "1️⃣  个体洄游履历 (基于耳石 Sr/Ca)",
+        "1  个体洄游履历 (基于耳石 Sr/Ca)",
         "-" * 40,
         f"   淡水生活期:   {profile.freshwater_days:.0f} 天 ({profile.freshwater_days/total*100:.0f}%)",
         f"   半咸水过渡期: {profile.brackish_days:.0f} 天 ({profile.brackish_days/total*100:.0f}%)",
         f"   海水生长期:   {profile.marine_days:.0f} 天 ({profile.marine_days/total*100:.0f}%)",
         f"   生境转换次数: {profile.transitions} 次",
         "",
-        "2️⃣  群体洄游模式",
+        "2  群体洄游模式",
         "-" * 40,
         f"   溯河时间: {MIGRATION_PARAMS['upstream_period']}",
         f"   降海时间: {MIGRATION_PARAMS['downstream_period']}",
         f"   历史分布: {MIGRATION_PARAMS['historical_range']}",
         f"   当前分布: {MIGRATION_PARAMS['current_range']}",
         "",
-        "3️⃣  环境驱动因子",
+        "3  环境驱动因子",
         "-" * 40,
         f"   产卵水温阈值: {MIGRATION_PARAMS['spawning_temp']}",
         f"   产卵流量阈值: {MIGRATION_PARAMS['spawning_discharge']}",
         "",
-        "4️⃣  水利工程影响",
+        "4  水利工程影响",
         "-" * 40,
     ]
     for b in barriers:
@@ -232,10 +251,14 @@ def format_report(profile: MigrationProfile, barriers: List[Dict[str, str]]) -> 
     return "\n".join(lines)
 
 
-def format_json_report(profile: MigrationProfile, barriers: List[Dict[str, str]]) -> str:
+def format_json_report(profile: MigrationProfile, barriers: List[Dict[str, str]],
+                       species_id: str = "coilia_nasus") -> str:
     """JSON 格式输出."""
+    species_cn, species_sci = _get_species_info(species_id)
     data = {
-        "analysis_type": "刀鲚洄游分析",
+        "analysis_type": f"{species_cn}洄游分析",
+        "species": species_sci,
+        "species_id": species_id,
         "analysis_time": datetime.now().isoformat(),
         "confidence": profile.confidence,
         "migration_profile": {
@@ -270,7 +293,7 @@ def list_params() -> str:
 
 def analyze_migration(input_path: Optional[str] = None,
                       use_example: bool = False) -> Tuple[MigrationProfile, List[Dict[str, str]]]:
-    """执行完整的刀鲚洄游分析.
+    """执行完整的鲚属洄游分析.
 
     Args:
         input_path: 耳石微化学 CSV 文件路径
@@ -292,11 +315,20 @@ def analyze_migration(input_path: Optional[str] = None,
 
 
 def main():
+    import sys as _sys
+    _project = str(Path(__file__).resolve().parent.parent)
+    if _project not in _sys.path:
+        _sys.path.insert(0, _project)
+    from src.agent.species_registry import get_registry
+    available_species = get_registry().list_species()
+
     parser = argparse.ArgumentParser(
         prog="migration_analysis",
-        description="刀鲚 (Coilia nasus) 洄游生态分析 — 耳石微化学 + 标志放流 + eDNA"
+        description="鲚属 (Coilia) 洄游生态分析 — 耳石微化学 + 标志放流 + eDNA"
     )
     parser.add_argument("--input", "-i", help="耳石微化学 CSV 输入文件")
+    parser.add_argument("--species", "-s", choices=available_species,
+                        default="coilia_nasus", help="目标物种 (默认: coilia_nasus)")
     parser.add_argument("--json", "-j", action="store_true", help="JSON 格式输出")
     parser.add_argument("--example", action="store_true", help="使用内置示例数据")
     parser.add_argument("--list-params", action="store_true", help="打印分析参数")
@@ -313,9 +345,9 @@ def main():
     )
 
     if args.json:
-        print(format_json_report(profile, barriers))
+        print(format_json_report(profile, barriers, species_id=args.species))
     else:
-        print(format_report(profile, barriers))
+        print(format_report(profile, barriers, species_id=args.species))
 
 
 if __name__ == "__main__":

@@ -1,11 +1,12 @@
-"""CoiliaAgent — P₂ 刀鲚专研 · 领域分析引擎.
+﻿"""CoiliaAgent — P₂ 鲚属专研 · 领域分析引擎.
 
 P₂ 不搜索。搜索由 cognitive-search-engine 统一执行 (Unified Search Protocol)。
 P₂ 做三件事:
-  1. 物种约束: 告诉搜索系统 "搜 Coilia nasus，5 个研究方向"
-  2. 阶段路由: 根据关键词匹配到刀鲚专属研究方向
+  1. 物种约束: 告诉搜索系统 "搜 <当前物种>，N 个研究方向"
+  2. 阶段路由: 根据关键词匹配到专属研究方向
   3. 领域分析: 对搜索结果做 P₂ 特有的专研分析
 
+物种配置由 SpeciesRegistry 统一管理 (config/species/*.yaml)。
 搜索协议参见:
   cognitive-search-engine/docs/UNIFIED_SEARCH_PROTOCOL.md
 """
@@ -21,55 +22,49 @@ _reasonix = str(Path(__file__).resolve().parent.parent.parent.parent)  # D:\Reas
 if _reasonix not in sys.path:
     sys.path.insert(0, _reasonix)
 
+from src.agent.species_registry import SpeciesRegistry, get_registry
 
 
-# ── P₂ 物种配置 ─────────────────────────────────────
+# ── 向后兼容 ─────────────────────────────────────────────
+# 旧代码引用 SPECIES_CONFIG 时返回默认物种配置 (coilia_nasus)
+def _get_default_config() -> Dict[str, Any]:
+    cfg = get_registry().default()
+    return {
+        "agent_id": "P₂",
+        "agent_name": "coilia-agent · 鲚属专研",
+        "species_scientific": cfg.get("species_scientific", "Coilia nasus"),
+        "species_chinese": cfg.get("species_chinese", []),
+        "species_variants": cfg.get("species_variants", []),
+        "profile": cfg.get("profile", {}),
+        "research_themes": cfg.get("research_themes", {}),
+    }
 
-SPECIES_CONFIG: Dict[str, Any] = {
-    "agent_id": "P₂",
-    "agent_name": "coilia-agent · 刀鲚专研",
-    "species_scientific": "Coilia nasus",
-    "species_chinese": ["刀鲚", "长颌鲚", "长江刀鱼", "刀鱼"],
-    "species_variants": [
-        "Coilia nasis", "Coilia nasua", "Coilia nasas",
-        "Coilia ectenes", "Coilia brachygnathus",
-    ],
-    "profile": {
-        "family": "Engraulidae (鳀科)",
-        "migration_type": "溯河洄游 (anadromous)",
-        "historical_peak": "1973年 3750t",
-        "current_status": "资源量仅为历史峰值的1-3%",
-        "research_group": "淡水渔业研究中心 刘凯研究员课题组",
-    },
-    "research_themes": {
-        "migration": {
-            "label": "洄游生态与耳石微化学",
-            "keywords": ["洄游", "migration", "耳石", "otolith", "sr/ca", "微化学"],
-        },
-        "genetics": {
-            "label": "群体遗传与种群结构",
-            "keywords": ["遗传", "genetic", "dna", "微卫星", "snp", "线粒体", "基因组"],
-        },
-        "stock": {
-            "label": "资源评估与管理",
-            "keywords": ["资源", "stock", "cpue", "评估", "msy", "种群", "捕捞"],
-        },
-        "feeding": {
-            "label": "食性与营养生态",
-            "keywords": ["食性", "feeding", "营养", "稳定同位素", "胃含物"],
-        },
-        "early_life": {
-            "label": "早期资源与繁殖",
-            "keywords": ["繁殖", "spawning", "产卵", "仔鱼", "早期资源", "胚胎"],
-        },
-    },
-}
 
+SPECIES_CONFIG = _get_default_config()
+
+
+# ── Cognitive enhancement (from porpoise-agent BDI pattern) ──
+try:
+    from src.agent.cognitive_analyzer import CognitiveAnalyzer, CognitiveResult
+    _HAS_COGNITIVE = True
+except ImportError:
+    _HAS_COGNITIVE = False
+    CognitiveAnalyzer = None  # type: ignore
+    CognitiveResult = None    # type: ignore
 
 # ── 领域分析引擎 ─────────────────────────────────────
 
+# ── ReAct cognitive loop (cross-pollination from porpoise-agent) ──
+try:
+    from src.agent.react_loop import CoiliaReActLoop, ReActState
+    _HAS_REACT = True
+except ImportError:
+    _HAS_REACT = False
+    CoiliaReActLoop = None
+    ReActState = None
+
 class CoiliaOrchestrator:
-    """P₂ 刀鲚专研 — 领域分析引擎。
+    """P₂ 鲚属专研 — 领域分析引擎。
 
     Step 1: run(question)
       → 路由到研究方向
@@ -78,11 +73,49 @@ class CoiliaOrchestrator:
     Step 2: analyze(theme, search_results)
       → 对搜索结果做 P₂ 专研分析
       → 返回领域分析报告
+
+    支持多物种: 通过 species_id 指定 (默认 coilia_nasus)。
     """
 
-    def __init__(self):
-        self.config = SPECIES_CONFIG
+    def __init__(self, species_id: str = None):
+        registry = get_registry()
+        if species_id is None:
+            species_id = registry.default_id()
+        self.species_id = species_id
+        raw = registry.get(species_id)
+        if raw is None:
+            raw = registry.default()
+        self.config = {
+            "agent_id": "P₂",
+            "agent_name": f"coilia-agent · {raw.get('species_chinese', [species_id])[0]}专研",
+            "species_scientific": raw.get("species_scientific", "Coilia nasus"),
+            "species_chinese": raw.get("species_chinese", []),
+            "species_variants": raw.get("species_variants", []),
+            "profile": raw.get("profile", {}),
+            "research_themes": raw.get("research_themes", {}),
+        }
 
+    def run_with_react(self, question: str) -> dict:
+        """Execute full ReAct cognitive cycle for domain analysis.
+        
+        Adopted from porpoise-agent's Think→Act→Observe→Reflect pattern.
+        This is the RECOMMENDED method — combines script algorithms with
+        cognitive reasoning for higher quality analysis.
+        """
+        if not _HAS_REACT:
+            return self.run(question)
+        
+        loop = CoiliaReActLoop(max_iterations=3)
+        result = loop.run(question)
+        return {
+            "mode": "react_cognitive",
+            "agent": self.config.get("agent_id", "P2"),
+            "result": result,
+            "iterations": result.get("iterations", 0),
+            "state": result.get("state", "unknown"),
+        }
+
+    # ── Keyword routing ──
     # ── Step 1: 搜索请求 ──
 
     def run(self, question: str) -> dict:
@@ -103,6 +136,51 @@ class CoiliaOrchestrator:
             #   1. 精确名搜索 2. 宽网补漏 3. OCR变体 4. 合并去重 5. 分类 6. 输出
             #   参见: cognitive-search-engine/docs/UNIFIED_SEARCH_PROTOCOL.md
             "search_protocol": "Unified Search Protocol v1.0",
+        }
+
+
+    # ── BDI Cognitive Analysis (cross-pollination from porpoise-agent) ──
+
+    def analyze_with_cognition(self, question: str, theme_id: str = "",
+                               search_results: dict | None = None,
+                               depth: str = "standard") -> dict | None:
+        """Execute BDI cognitive analysis cycle.
+
+        Upgraded from porpoise-agent's BDI+ReAct+Reflexion pattern.
+        Perceive (gather beliefs) → Deliberate (form intentions) →
+        Execute (run analysis) → Reflect (self-critique) → Refine (iterate).
+
+        This is the RECOMMENDED analysis method — it produces higher quality,
+        self-critiqued results compared to the legacy _analyze_* methods.
+        """
+        if not _HAS_COGNITIVE:
+            # Fallback to legacy analysis
+            return self.analyze(theme_id, search_results or {}, use_scripts=True)
+
+        analyzer = CognitiveAnalyzer(self.config)
+        result: CognitiveResult = analyzer.analyze(
+            question=question,
+            theme_id=theme_id or self._route(question)[0],
+            search_results=search_results,
+            depth=depth,
+        )
+
+        return {
+            "mode": "cognitive_bdi",
+            "state": result.state.value,
+            "question": result.question,
+            "theme_id": result.theme_id,
+            "findings": result.findings,
+            "belief_confidence": result.belief.confidence,
+            "reflection": {
+                "strengths": result.reflection.strengths if result.reflection else [],
+                "weaknesses": result.reflection.weaknesses if result.reflection else [],
+                "missing_evidence": result.reflection.missing_evidence if result.reflection else [],
+                "needs_reanalysis": result.reflection.needs_reanalysis if result.reflection else False,
+            } if result.reflection else None,
+            "sources_used": result.sources_used,
+            "triangles_engaged": result.triangles_engaged,
+            "iterations": analyzer.iteration_count,
         }
 
     def _route(self, question: str):
@@ -127,7 +205,7 @@ class CoiliaOrchestrator:
 
     def analyze(self, theme_id: str, search_results: dict,
                 use_scripts: bool = False) -> dict:
-        """搜索结果 → 刀鲚专研分析.
+        """搜索结果 → 鲚属专研分析.
 
         两种模式:
           - use_scripts=False (默认): 使用内置硬编码发现 (适合文献综述)
@@ -300,8 +378,8 @@ class CoiliaOrchestrator:
             "papers_found": len(papers),
             "findings": [
                 "评估方法: CPUE 标准化 + 剩余产量模型 (Schaefer/Fox)",
-                f"历史峰值: {profile['historical_peak']}",
-                f"当前状态: {profile['current_status']}",
+                f"历史峰值: {profile.get('historical_peak', '未知')}",
+                f"当前状态: {profile.get('current_status', '未知')}",
                 "保护建议: 延长春季禁渔、保护产卵场、减少兼捕",
             ],
         }

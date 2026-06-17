@@ -327,11 +327,16 @@ def format_isotope_report(isotope: IsotopeResult, group_name: str = "全部") ->
 
 
 def format_feeding_report(stomach_results: Dict[str, StomachContentResult],
-                          isotope_results: Dict[str, IsotopeResult]) -> str:
+                          isotope_results: Dict[str, IsotopeResult],
+                          species_id: str = "coilia_nasus") -> str:
     """生成完整食性分析报告."""
+    _project = str(Path(__file__).resolve().parent.parent); import sys; sys.path.insert(0, _project) if _project not in sys.path else None
+    from src.agent.species_registry import get_registry
+    cfg = get_registry().get(species_id) or {}
+    species_cn = cfg.get("species_chinese", ["刀鲚"])[0]
     lines = [
         "=" * 60,
-        "  刀鲚食性分析报告",
+        f"  {species_cn}食性分析报告",
         "=" * 60,
         f"\n分析时间: {datetime.now().strftime('%Y-%m-%d %H:%M')}",
     ]
@@ -359,10 +364,16 @@ def format_feeding_report(stomach_results: Dict[str, StomachContentResult],
 
 
 def format_json_feeding(stomach_results: Dict[str, StomachContentResult],
-                        isotope_results: Dict[str, IsotopeResult]) -> str:
+                        isotope_results: Dict[str, IsotopeResult],
+                        species_id: str = "coilia_nasus") -> str:
     """JSON 格式输出."""
+    _project = str(Path(__file__).resolve().parent.parent); import sys; sys.path.insert(0, _project) if _project not in sys.path else None
+    from src.agent.species_registry import get_registry
+    cfg = get_registry().get(species_id) or {}
     data: Dict[str, Any] = {
-        "analysis_type": "刀鲚食性分析",
+        "analysis_type": f"{cfg.get('species_chinese', ['刀鲚'])[0]}食性分析",
+        "species": cfg.get("species_scientific", "Coilia nasus"),
+        "species_id": species_id,
         "analysis_time": datetime.now().isoformat(),
         "stomach_content": {
             group: {
@@ -428,12 +439,21 @@ def analyze_feeding(input_path: Optional[str] = None,
 
 
 def main():
+    import sys as _sys
+    _project = str(Path(__file__).resolve().parent.parent)
+    if _project not in _sys.path:
+        _sys.path.insert(0, _project)
+    from src.agent.species_registry import get_registry
+    available_species = get_registry().list_species()
+
     parser = argparse.ArgumentParser(
         prog="feeding_analysis",
-        description="刀鲚 (Coilia nasus) 食性与营养生态分析 — 胃含物 + 稳定同位素 + DNA宏条形码"
+        description="鲚属 (Coilia) 食性与营养生态分析 — 胃含物 + 稳定同位素 + DNA宏条形码"
     )
     parser.add_argument("--input", "-i", help="胃含物 CSV 输入文件")
     parser.add_argument("--isotope", help="稳定同位素 CSV 输入文件")
+    parser.add_argument("--species", "-s", choices=available_species,
+                        default="coilia_nasus", help="目标物种 (默认: coilia_nasus)")
     parser.add_argument("--json", "-j", action="store_true", help="JSON 格式输出")
     parser.add_argument("--example", action="store_true", help="使用内置示例数据")
 
@@ -446,9 +466,9 @@ def main():
     )
 
     if args.json:
-        print(format_json_feeding(stomach_results, isotope_results))
+        print(format_json_feeding(stomach_results, isotope_results, species_id=args.species))
     else:
-        print(format_feeding_report(stomach_results, isotope_results))
+        print(format_feeding_report(stomach_results, isotope_results, species_id=args.species))
 
 
 if __name__ == "__main__":

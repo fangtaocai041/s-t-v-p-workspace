@@ -96,6 +96,7 @@ class KnowledgeDB:
             except Exception as e:
                 print(f"  ⚠️ {md_file.name}: {e}")
         print(f"✅ 已迁移 {count} 个物种到 SQLite")
+        self.conn.commit()
         return count
 
     def _parse_markdown(self, path: Path) -> tuple[dict, str]:

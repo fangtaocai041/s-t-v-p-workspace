@@ -22,6 +22,9 @@ from src.execution.tool_registry import (
     ToolCall,
     tool,
     tools,
+    safe_import,
+    is_available,
+    list_missing_optionals,
 )
 from src.execution.api import (
     APIClient,
@@ -42,6 +45,10 @@ __all__ = [
     "ToolCall",
     "tool",
     "tools",
+    # Graceful degradation
+    "safe_import",
+    "is_available",
+    "list_missing_optionals",
     # API
     "APIClient",
     "APIResult",

@@ -1,0 +1,34 @@
+# Coilia mystus (凤鲚) — 鲚属近海洄游种
+# 俗称凤尾鱼/烤子鱼，长江口重要经济鱼类
+
+species_id: "coilia_mystus"
+species_scientific: "Coilia mystus"
+species_chinese: ["凤鲚", "凤尾鱼", "烤子鱼"]
+species_variants:
+  - "Coilia mystis"
+  - "Coilia mustus"
+
+profile:
+  family: "Engraulidae (鳀科)"
+  migration_type: "沿海洄游 (coastal migratory)"
+  iucn: "未评估 (NE)"
+  economic: "高 (凤尾鱼罐头原料，长江口重要经济鱼类)"
+  distribution: "中国沿海，长江口及邻近海域"
+  note: "与刀鲚近缘，但栖息于近海及河口区，不作长距离溯河洄游"
+
+research_themes:
+  migration:
+    label: "河口洄游生态"
+    keywords: ["洄游", "migration", "河口", "estuary", "盐度", "salinity"]
+  feeding:
+    label: "食性与营养生态"
+    keywords: ["食性", "feeding", "胃含物", "稳定同位素", "diet"]
+  genetics:
+    label: "群体遗传学"
+    keywords: ["遗传", "genetic", "线粒体", "COI", "群体结构", "mystus"]
+  stock:
+    label: "资源评估与管理"
+    keywords: ["资源", "stock", "cpue", "捕捞", "凤尾鱼"]
+  early_life:
+    label: "早期生活史"
+    keywords: ["繁殖", "spawning", "仔鱼", "产卵场", "larvae"]

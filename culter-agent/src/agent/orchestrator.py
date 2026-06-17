@@ -105,6 +105,15 @@ _DEFAULT_PROFILE = {
 # Orchestrator
 # ═══════════════════════════════════════════════════════════════
 
+# ── Cognitive enhancement (cross-pollination from porpoise-agent BDI) ──
+try:
+    from src.agent.cognitive_analyzer import CognitiveAnalyzer, CognitiveResult
+    _HAS_COGNITIVE = True
+except ImportError:
+    _HAS_COGNITIVE = False
+    CognitiveAnalyzer = None  # type: ignore
+    CognitiveResult = None    # type: ignore
+
 class CulterOrchestrator:
     """鲌类专研编排器 (P₃, 同级于 P₁ porpoise-agent / P₂ coilia-agent).
 
@@ -239,6 +248,45 @@ class CulterOrchestrator:
             return self._integrated_response(question, phase)
 
         return self._run_pipeline(question, phase)
+
+    def analyze_with_cognition(self, question: str, phase_id: str = "",
+                               search_results: dict | None = None,
+                               depth: str = "standard") -> dict | None:
+        """Execute BDI cognitive analysis cycle for culter research.
+        Cross-pollination from porpoise-agent BDI+ReAct+Reflexion.
+        """
+        if not _HAS_COGNITIVE:
+            self.context = ResearchContext(question=question,
+                                           phase=ResearchPhase.LITERATURE,
+                                           mode=RunMode.STANDALONE)
+            return self._run_pipeline(question, ResearchPhase.LITERATURE)
+
+        profile = self._get_species_profile()
+        analyzer = CognitiveAnalyzer(profile)
+        result = analyzer.analyze(
+            question=question,
+            phase_id=phase_id or self._route_phase(question).value,
+            search_results=search_results,
+            depth=depth,
+        )
+
+        return {
+            "mode": "cognitive_bdi",
+            "state": result.state.value,
+            "question": result.question,
+            "phase_id": result.phase_id,
+            "findings": result.findings,
+            "belief_confidence": result.belief.confidence,
+            "reflection": {
+                "strengths": result.reflection.strengths if result.reflection else [],
+                "weaknesses": result.reflection.weaknesses if result.reflection else [],
+                "missing_evidence": result.reflection.missing_evidence if result.reflection else [],
+                "needs_reanalysis": result.reflection.needs_reanalysis if result.reflection else False,
+            } if result.reflection else None,
+            "sources_used": result.sources_used,
+            "triangles_engaged": result.triangles_engaged,
+            "iterations": analyzer.iteration_count,
+        }
 
     # ── Mode Detection ──
 

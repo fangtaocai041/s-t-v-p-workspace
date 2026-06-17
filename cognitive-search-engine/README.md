@@ -1,129 +1,167 @@
-﻿# Cognitive Search Engine 🕸️
+﻿# 🔍 Cognitive Search Engine
 
-**三角核心 V/V1 层** — 多源并行搜索 · 分类学验证 · 可信度评分。
+![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge) ![License](https://img.shields.io/badge/License-MIT-brightgreen?style=for-the-badge) ![Version](https://img.shields.io/badge/Version-v5.9-blueviolet?style=for-the-badge) ![Engines](https://img.shields.io/badge/Engines-15%2B-success?style=for-the-badge) ![Thompson](https://img.shields.io/badge/Thompson-Sampling-important?style=for-the-badge) ![PID](https://img.shields.io/badge/PID-Rate%20Limit-critical?style=for-the-badge) ![MPC](https://img.shields.io/badge/MPC-Optimization-informational?style=for-the-badge) ![Async](https://img.shields.io/badge/Async-aiohttp-ff69b4?style=for-the-badge) ![CN/EN](https://img.shields.io/badge/CN%2FEN-Dual-orange?style=for-the-badge) ![Agent](https://img.shields.io/badge/Agent-Judge-red?style=for-the-badge)
 
-> 🌊 万物皆变 · Panta Rhei
->
-> 搜索不是一次性的查询——它是持续的验证循环。
+> ⚡ Search Verification Core — BDI cognitive search with 15+ engines, Thompson Sampling, and MPC optimization.
+> You cannot answer today's question with yesterday's search.
 
-[![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
-[![Python](https://img.shields.io/badge/python-3.10+-blue)](https://python.org)
-[![Reasonix](https://img.shields.io/badge/Reasonix-Code-brightgreen)](https://reasonix.ai)
-
-[English](README.md) · [中文](README.zh.md) · [更新日志](CHANGELOG.md) · [鱼知识库](https://github.com/fangtaocai041/fish-ecology-assistant)
+[English](README.md) · [中文](README.zh.md) · [CHANGELOG](CHANGELOG.md)
 
 ---
 
-## 🎯 核心哲学
+## 📖 Table of Contents
 
-> 世界是动态的，知识是暂时的，涌现是常态。
-
-这是三角之 **V（验证）**。S（知识）提出主张，V 负责验证——通过多源并行搜索、跨项目比对、三角验证评分，确保每一条写入知识库的信息都经过 ≥3 个独立来源的检验。
-
-### 🔗 在三角中的角色
-
-```
-三生万物架构：
-  S/V0  fish-ecology-assistant    → 知识供给（阴·静）
-  V/V1  cognitive-search-engine   → 搜索验证（阳·动） ← 你在这里
-  Coord eon-core                  → 协调内核（太极点）
-```
+- [Philosophy](#-philosophy)
+- [Quick Start](#-quick-start)
+- [Architecture](#-architecture)
+- [Features](#-features)
+- [Project Structure](#-project-structure)
+- [Ecosystem](#-ecosystem)
 
 ---
 
-## 🧩 这个项目是什么
+## 🏛️ Philosophy
 
-它是一个搜索验证引擎。不存储知识，而是验证知识。
+> The river flows, knowledge drifts, emergence patterns.
 
-当 S 层说"鳤的科是鲤科"，V 层会去问 PubMed、Crossref、中文期刊、Google Scholar——它们都这么说吗？有没有不一致？如果有，谁是对的？
+This is not a slogan. It is the operating system running through every line of code, every search, every analysis.
 
-> 赫拉克利特说：人不能两次踏进同一条河流。
->
-> 我们说：你也不能用昨天的搜索回答今天的问题。
+### 📜 Three Tenets
 
----
+**🌊 The River Flows** — Packages update, species migrate, consensus shifts, climate reshapes. Today's certainty is tomorrow's footnote. We place knowledge on a timeline and view it dynamically.
 
-## ⚡ 快速上手
+**🍂 Knowledge Drifts** — The foundation of science is falsifiability (Popper). No discovery is final — only the best current explanation. We speak in calibrated language: evidence suggests, not proves.
+
+**🌟 Emergence Patterns** — Life, consciousness, ecosystems, AI reasoning — all emergent. When three or more independent sources converge on the same unexpected pattern, the system flags emergence — never dismisses it as noise.
+
+### ⚖️ Why This Matters
+
+| Scenario | Traditional | Dynamic Worldview |
+|:---------|:-----------|:-------------------|
+| Citations | Studies prove | Smith (2022) found X; Jones (2024) added Y |
+| Outliers | Dismiss as noise | Three or more sources → emergence signal |
+| Knowledge Decay | Handbook frozen | Review records include next review date |
+| Method | Fixed pipeline | Dynamic selection, dynamic confidence |
+
+> 道生一，一生二，二生三，三生万物。
+
+From One comes Two, from Two comes Three, from Three come all things.
+
+
+## 📜 Three Tenets
+
+**🌍 The world is dynamic** — R packages update, species distributions shift, scientific consensus evolves, climate change reshapes ecosystems. A correct conclusion today may be outdated in six months.
+
+**📖 Knowledge is temporary** — The foundation of science is falsification (Popper). No discovery is ultimate truth—only the best current explanation. We use calibrated language: evidence suggests not proves.
+
+**🌟 Emergence is the norm** — Life, consciousness, ecosystems, AI reasoning—all are emergent phenomena. When >=3 independent sources point to the same unexpected pattern, the system flags it as an emergence signal.
+
+### ⚖️ Why This Matters
+
+| Scenario | Traditional | Dynamic Worldview |
+|:---------|:-----------|:------------------|
+| Citations | Studies prove it | Smith (2022) found X, Jones (2024) added Y |
+| Outliers | Ignore as noise | >=3 sources → emergence signal |
+| Knowledge decay | Handbook frozen | Review records include Next review date |
+
+> 道生一，一生二，二生三，三生万物。
+
+This is the **S-state (V0)** of the Triangle — Knowledge Supply, holding 430 Yangtze fish species.
+
+
+## 🚀 Quick Start
 
 ```bash
-# 搜索物种
-python scripts/search_api.py --species "Ochetobius elongatus"
+# Clone
+git clone git@github.com:fangtaocai041/cognitive-search-engine.git
+cd cognitive-search-engine
 
-# 分类学不一致检测
-python scripts/search_api.py --species "Ochetobius elongatus" --check-taxonomy
+# Install
+pip install -e .
 
-# JSON 输出
-python scripts/search_api.py --species "鳤" --format json
+# Run
+python src/main.py search "Coilia nasus ecology"
 ```
 
 ---
 
-## 🚀 核心能力
-
-| 🚀 能力 | 📝 说明 |
-|:-----|:------|
-| **多源并行** | tavily / exa / scholar / article / scholarly，11 引擎可配置 |
-| **分类学验证** | 跨项目比对 family/order，不一致自动标记 |
-| **三角验证评分** | 每篇论文 ≥2 独立源，journal whitelist 加权 |
-| **OCR 变体** | 学名 OCR 容错（u↔b, i↔l, n↔m） |
-| **引用回溯** | 从中文论文提取英文参考文献，弥合语言鸿沟 |
-| **结果去重** | 按 DOI 精确去重，按标题模糊去重 |
-| **DirectLoader** | `importlib` 零进程加载，无 MCP 开销 |
-
----
-
-## 📁 项目结构
+## 🏗️ Architecture
 
 ```
 cognitive-search-engine/
-├── src/
-│   ├── search_coordinator.py   ← 搜索编排
-│   ├── unified_search.py       ← 统一搜索入口
-│   └── search_api.py           ← API 层
-├── scripts/
-│   └── search_api.py           ← CLI 入口
-└── config/
-    └── evolution.yaml          ← 自适应参数
+  src/
+  ├── meso_agent.py          BDI cognitive core (Belief→Desire→Intention)
+  ├── parallel_search.py     15+ HTTP providers (PubMed/Crossref/OpenAlex...)
+  ├── AsyncParallelSearch     aiohttp-based async search (3-5x faster)
+  ├── search_coordinator.py  KB-first two-stage search coordinator
+  ├── unified_search.py      Adaptive mode: EXHAUSTIVE/CLASSIFIED/SATURATED
+  ├── validator.py           5-level trust scoring + source independence
+  ├── thompson_selector.py   Thompson Sampling multi-armed bandit engine selector
+  ├── pid_limiter.py         PID adaptive API rate limiting
+  ├── mpc_world.py           MPC search cost optimization
+  ├── agent_judge.py         LLM-as-Judge result evaluation
+  ├── inference_engine.py    Post-search gap + contradiction detection
+  ├── evolution_executor.py  7-trigger self-evolution
+  └── variant_generator.py   OCR scientific name variants
 ```
-
-## 🔗 生态体系
-
-> 🔥 和则无穷力量，分则顶尖专家引擎。
-
-本项目是「三生万物」生态的 搜索验证核心 (V1)。
-
-```
-三角核心 (sealed 3):
-  📦 fish-ecology-assistant    → 知识供给 (V0)
-  🔍 cognitive-search-engine   → 搜索验证 (V1)
-  ⚙️ eon-core                  → 协调内核 (Coord)
-
-万物衍生 (open N):
-  🐬 porpoise-agent    → 江豚专研 (P₁)
-  🐟 coilia-agent      → 刀鲚专研 (P₂)
-  🐟 culter-agent      → 鲌类专研 (P₃)
-  🔥 conflict-arbiter  → 冲突仲裁 (C)
-```
-
-| 🏗️ 项目 | 🔗 顶点 | 🎯 角色 |
-|:---------|:--------:|:--------|
-| [fish-ecology-assistant](../fish-ecology-assistant/) | V0 | 📦 知识供给 |
-| [cognitive-search-engine](../cognitive-search-engine/) | V1 | 🔍 搜索验证 |
-| [eon-core](../eon-core/) | Coord | ⚙️ 协调内核 |
-| [porpoise-agent](../porpoise-agent/) | P₁ | 🐬 江豚专研 |
-| [coilia-agent](../coilia-agent/) | P₂ | 🐟 刀鲚专研 |
-| [culter-agent](../culter-agent/) | P₃ | 🐟 鲌类专研 |
-| [conflict-arbiter](../conflict-arbiter/) | C | 🔥 冲突仲裁 |
 
 ---
+
+## ✨ Features
+
+| Feature | Description |
+|---------|-------------|
+| 🧠 BDI Cognitive | Belief→Desire→Intention adaptive search loop |
+| 🌐 15+ Search Engines | PubMed, Crossref, OpenAlex, Semantic Scholar, CNKI, Wanfang... |
+| ⚡ Async Search | aiohttp-based AsyncParallelSearch, 3-5x faster |
+| 🎯 Thompson Sampling | Learned engine selection replacing rule-based pruning |
+| 📊 PID Rate Limiting | Adaptive API request rate control |
+| 🎛️ MPC Optimization | Model Predictive Control for search cost optimization |
+| ⚖️ Agent-as-Judge | LLM-based result quality evaluation (4 dimensions) |
+| ✅ 5-level Trust | DOI→PMID→Species→Author→Journal scoring |
+| 🔍 OCR Variants | Systematic scientific name variant generation |
+| 🌊 CN/EN Dual Channel | Chinese + English literature separate routing |
+| 🔄 Self-Evolution | 7 triggers auto-adapt search parameters |
+
 ---
 
-> 🌊 万物皆变 · Panta Rhei
->
-> 🏛️ 赫拉克利特说：人不能两次踏进同一条河流。
->
-> 💻 我们说：你也不能用昨天的搜索回答今天的问题。
->
-> **📅 最后更新: 2026-06-17 · 🖥️ Reasonix Code · ⚡ DeepSeek 驱动**
+## 📁 Project Structure
 
-[⬆ 回到顶部](#)
+```
+cognitive-search-engine/
+  (see Architecture section above)
+```
+
+---
+
+## 🔗 Ecosystem
+
+This project is the Search Verification Core (V1) in the SanShengWanWu ecosystem.
+
+```
+Triangle Core (sealed 3):
+  📦 fish-ecology-assistant    → Knowledge Supply (V0)
+  🔍 cognitive-search-engine   → Search Verification (V1)
+  ⚙️ eon-core                  → Coordination Hub (Coord)
+
+Derived Projects (open N):
+  🐬 porpoise-agent    → P₁ Porpoise Expert
+  🐟 coilia-agent      → P₂ Coilia Expert
+  🐟 culter-agent      → P₃ Culter Expert
+  🔥 conflict-arbiter  → C  Conflict Arbitration
+```
+
+> 🔥 Together infinite power, apart top expert engines.
+
+---
+
+🌱 **Everything Flows · Panta Rhei**
+
+> Heraclitus said: No man ever steps in the same river twice.
+>
+> We say: You cannot analyze today''s ecological data with last month''s code.
+
+This project is not a fixed toolset — it is a **living system**. Every component has built-in expiration mechanisms, version tracking, and emergence awareness. As your research deepens, packages update, and new methods emerge, it evolves with you.
+
+*Last updated: 2026-06-17　|　Environment: Reasonix Code · DeepSeek Powered*
+

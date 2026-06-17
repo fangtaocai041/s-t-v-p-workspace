@@ -1,76 +1,166 @@
-# Porpoise Agent 🐬
+﻿# 🐬 Porpoise Agent
 
-**P₁ 万物衍生** — 长江江豚专研 · NBHF 声学 · 种群评估 · 栖息地建模。
+![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?style=for-the-badge) ![License](https://img.shields.io/badge/License-MIT-brightgreen?style=for-the-badge) ![Version](https://img.shields.io/badge/Version-v0.2-blueviolet?style=for-the-badge) ![Agents](https://img.shields.io/badge/Agents-7-MAS-success?style=for-the-badge) ![Arch](https://img.shields.io/badge/Arch-5-Layer-important?style=for-the-badge) ![BDI](https://img.shields.io/badge/BDI-ReAct-critical?style=for-the-badge) ![GoT](https://img.shields.io/badge/GoT-MCTS-informational?style=for-the-badge) ![SSE](https://img.shields.io/badge/SSE-Streaming-ff69b4?style=for-the-badge) ![ChromaDB](https://img.shields.io/badge/ChromaDB-RAG-orange?style=for-the-badge) ![StateGraph](https://img.shields.io/badge/StateGraph-LangGraph-red?style=for-the-badge)
 
-> 万物皆变 · Panta Rhei
->
-> 江豚在长江里游了 2500 万年。
-> 我们的代码，是试图理解它们的另一种语言。
+> 🎯 Porpoise Domain Expert Engine — 5-layer cognitive architecture with BDI+ReAct+Reflexion, 7-agent MAS, and frontier techniques.
+> A porpoise knows the river — an agent knows the domain.
 
-[English](README.md) · [中文版](README.zh.md) · [更新日志](CHANGELOG.md)
+[English](README.md) · [中文](README.zh.md) · [CHANGELOG](CHANGELOG.md)
 
 ---
 
-## 核心哲学
+## 📖 Table of Contents
 
-> 世界是动态的，知识是暂时的，涌现是常态。
-
-P₁ 是从三角核心衍生的第一个项目。它不重新发明轮子——S/V0 提供物种知识，V/V1 提供搜索验证，Coordinator 提供协调调度。P₁ 只做一件事：**研究江豚**。
-
-### 在万物中的角色
-
-```
-三生万物架构：
-  三角核心 (sealed 3)             → 基础能力
-    ├── S/V0  fish-ecology-assistant
-    ├── V/V1  cognitive-search-engine
-    └── Coord eon-core
-  
-  万物衍生 (open N):
-    P₁  porpoise-agent  → 江豚专研  ← 你在这里
-    P₂  coilia-agent    → 刀鲚专研
-    C   conflict-arbiter → 冲突仲裁
-```
+- [Philosophy](#-philosophy)
+- [Quick Start](#-quick-start)
+- [Architecture](#-architecture)
+- [Features](#-features)
+- [Project Structure](#-project-structure)
+- [Ecosystem](#-ecosystem)
 
 ---
 
-## 这个项目是什么
+## 🏛️ Philosophy
 
-长江江豚（*Neophocaena asiaeorientalis*）是长江里唯一的哺乳动物。2017 年种群调查约 1012 头，2022 年约 1249 头——禁渔后第一次止跌回升。
+> The river flows, knowledge drifts, emergence patterns.
 
-这个项目追踪它们的声学信号（NBHF，100-180kHz）、建模栖息地分布、评估种群动态。26 个文件的知识库，全部为江豚而生。
+This is not a slogan. It is the operating system running through every line of code, every search, every analysis.
 
-> 赫拉克利特说：人不能两次踏进同一条河流。
->
-> 我们说：你也不能用去年的种群数据预测今年的江豚分布。
+### 📜 Three Tenets
 
----
+**🌊 The River Flows** — Packages update, species migrate, consensus shifts, climate reshapes. Today's certainty is tomorrow's footnote. We place knowledge on a timeline and view it dynamically.
 
-## 快速上手
+**🍂 Knowledge Drifts** — The foundation of science is falsifiability (Popper). No discovery is final — only the best current explanation. We speak in calibrated language: evidence suggests, not proves.
+
+**🌟 Emergence Patterns** — Life, consciousness, ecosystems, AI reasoning — all emergent. When three or more independent sources converge on the same unexpected pattern, the system flags emergence — never dismisses it as noise.
+
+### ⚖️ Why This Matters
+
+| Scenario | Traditional | Dynamic Worldview |
+|:---------|:-----------|:-------------------|
+| Citations | Studies prove | Smith (2022) found X; Jones (2024) added Y |
+| Outliers | Dismiss as noise | Three or more sources → emergence signal |
+| Knowledge Decay | Handbook frozen | Review records include next review date |
+| Method | Fixed pipeline | Dynamic selection, dynamic confidence |
+
+> 道生一，一生二，二生三，三生万物。
+
+From One comes Two, from Two comes Three, from Three come all things.
+
+
+## 📜 Three Tenets
+
+**🌍 The world is dynamic** — R packages update, species distributions shift, scientific consensus evolves, climate change reshapes ecosystems. A correct conclusion today may be outdated in six months.
+
+**📖 Knowledge is temporary** — The foundation of science is falsification (Popper). No discovery is ultimate truth—only the best current explanation. We use calibrated language: evidence suggests not proves.
+
+**🌟 Emergence is the norm** — Life, consciousness, ecosystems, AI reasoning—all are emergent phenomena. When >=3 independent sources point to the same unexpected pattern, the system flags it as an emergence signal.
+
+### ⚖️ Why This Matters
+
+| Scenario | Traditional | Dynamic Worldview |
+|:---------|:-----------|:------------------|
+| Citations | Studies prove it | Smith (2022) found X, Jones (2024) added Y |
+| Outliers | Ignore as noise | >=3 sources → emergence signal |
+| Knowledge decay | Handbook frozen | Review records include Next review date |
+
+> 道生一，一生二，二生三，三生万物。
+
+This is the **S-state (V0)** of the Triangle — Knowledge Supply, holding 430 Yangtze fish species.
+
+
+## 🚀 Quick Start
 
 ```bash
-# 分析江豚
-python src/cli.py analyze --species "Neophocaena asiaeorientalis"
+# Clone
+git clone git@github.com:fangtaocai041/porpoise-agent.git
+cd porpoise-agent
 
-# 健康检查
-python -c "from src import get_adapter; print(get_adapter().health())"
+# Install
+pip install -e .
+
+# Run
+python src/cli.py chat "Analyze finless porpoise acoustic data"
 ```
 
 ---
 
-## 核心能力
+## 🏗️ Architecture
 
-| 能力 | 说明 |
-|:-----|:------|
-| **NBHF 声学检测** | 100-180 kHz 窄带高频信号 |
-| **栖息地建模** | 长江干流 + 洞庭湖 + 鄱阳湖 |
-| **种群评估** | 2017 / 2022 / 2025 年对比 |
-| **威胁评估** | 航运 / 渔业 / 水利工程 / 污染 |
-| **MoE 知识库** | 26 文件，江豚专属 |
+```
+porpoise-agent/
+  src/
+  ├── interaction/     L1 — NLU intent parser + Markdown renderer
+  │   └── sse_emitter.py   SSE streaming output
+  ├── cognitive/       L2 — BDI + ReAct + Reflexion + Decomposer (CoT/ToT/GoT)
+  │   ├── bdi.py            Formal BDI with MDP correspondence
+  │   ├── react_loop.py     Think→Act→Observe→Reflect engine
+  │   ├── reflexion.py      Credit assignment + self-critique
+  │   ├── decomposer.py     CoT/ToT/GoT task decomposition
+  │   ├── search.py         BFS/DFS/Beam/MCTS thought-space search
+  │   └── stategraph.py     LangGraph-inspired StateGraph topology
+  ├── memory/          L3 — STM + LTM (ChromaDB RAG)
+  ├── mapping/         L4 — IntentRouter + Serializer + Validator
+  ├── execution/       L5 — Sandbox + ToolRegistry + APIClient
+  ├── agents/          7 specialized agents with graph topology
+  └── integration/     4 adapters (cognitive-search/Zotero/Obsidian/Neo4j)
+```
 
 ---
 
-> 鱼在水里，你在岸上，代码在中间。
-> 愿声学信号和江豚的歌声一样清晰。
+## ✨ Features
+
+| Feature | Description |
+|---------|-------------|
+| 🧠 BDI+ReAct+Reflexion | Formal cognitive loop with MDP correspondence |
+| 🌳 CoT/ToT/GoT/MCTS | Multiple task decomposition and search strategies |
+| 🕸️ StateGraph | LangGraph-inspired conditional edge routing |
+| 🔴 SSE Streaming | Real-time agent output via Server-Sent Events |
+| 🗄️ ChromaDB RAG | Vector-backed long-term memory with graceful degradation |
+| 🔧 7-Agent MAS | Literature, Acoustic, Ecology, Conservation, Critic... |
+| 🔀 6 Topology Types | Sequential, Hierarchical, Star, Debate, DAG, Dynamic |
+| 🔒 Subprocess Sandbox | Safe code execution with import whitelist |
+| 📚 4 Integrations | cognitive-search, Zotero, Obsidian, Neo4j/KnowledgeGraph |
+
+---
+
+## 📁 Project Structure
+
+```
+porpoise-agent/
+  (see Architecture section above)
+```
+
+---
+
+## 🔗 Ecosystem
+
+This project is the Porpoise Domain Expert Engine (P₁) in the SanShengWanWu ecosystem.
+
+```
+Triangle Core (sealed 3):
+  📦 fish-ecology-assistant    → Knowledge Supply (V0)
+  🔍 cognitive-search-engine   → Search Verification (V1)
+  ⚙️ eon-core                  → Coordination Hub (Coord)
+
+Derived Projects (open N):
+  🐬 porpoise-agent    → P₁ Porpoise Expert
+  🐟 coilia-agent      → P₂ Coilia Expert
+  🐟 culter-agent      → P₃ Culter Expert
+  🔥 conflict-arbiter  → C  Conflict Arbitration
+```
+
+> 🔥 Together infinite power, apart top expert engines.
+
+---
+
+🌱 **Everything Flows · Panta Rhei**
+
+> Heraclitus said: No man ever steps in the same river twice.
 >
-> **最后更新: 2026-06-21 · Reasonix Code · DeepSeek 驱动**
+> We say: You cannot analyze today''s ecological data with last month''s code.
+
+This project is not a fixed toolset — it is a **living system**. Every component has built-in expiration mechanisms, version tracking, and emergence awareness. As your research deepens, packages update, and new methods emerge, it evolves with you.
+
+*Last updated: 2026-06-17　|　Environment: Reasonix Code · DeepSeek Powered*
+

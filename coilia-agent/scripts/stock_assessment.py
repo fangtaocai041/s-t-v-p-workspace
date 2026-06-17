@@ -294,11 +294,17 @@ def format_cpue_table(cpue: CPUSEResult) -> str:
     return "\n".join(lines)
 
 
-def format_report(cpue: CPUSEResult, msy: MSYResult) -> str:
+def format_report(cpue: CPUSEResult, msy: MSYResult,
+                  species_id: str = "coilia_nasus") -> str:
     """生成资源评估报告 (SKILL.md 输出模板格式)."""
+    _project = str(Path(__file__).resolve().parent.parent); import sys; sys.path.insert(0, _project) if _project not in sys.path else None
+    from src.agent.species_registry import get_registry
+    cfg = get_registry().get(species_id) or {}
+    species_cn = cfg.get("species_chinese", ["刀鲚"])[0]
+    species_sci = cfg.get("species_scientific", "Coilia nasus")
     lines = [
         "=" * 60,
-        "  刀鲚资源评估报告",
+        f"  {species_cn} ({species_sci}) 资源评估报告",
         "=" * 60,
         f"\n评估时间: {datetime.now().strftime('%Y-%m-%d %H:%M')}",
     ]
@@ -349,10 +355,16 @@ def format_report(cpue: CPUSEResult, msy: MSYResult) -> str:
     return "\n".join(lines)
 
 
-def format_json_stock(cpue: CPUSEResult, msy: MSYResult) -> str:
+def format_json_stock(cpue: CPUSEResult, msy: MSYResult,
+                      species_id: str = "coilia_nasus") -> str:
     """JSON 格式输出."""
+    _project = str(Path(__file__).resolve().parent.parent); import sys; sys.path.insert(0, _project) if _project not in sys.path else None
+    from src.agent.species_registry import get_registry
+    cfg = get_registry().get(species_id) or {}
     data: Dict[str, Any] = {
-        "analysis_type": "刀鲚资源评估",
+        "analysis_type": f"{cfg.get('species_chinese', ['刀鲚'])[0]}资源评估",
+        "species": cfg.get("species_scientific", "Coilia nasus"),
+        "species_id": species_id,
         "analysis_time": datetime.now().isoformat(),
         "species": STOCK_PARAMS["species"],
         "cpue_trends": {
@@ -400,11 +412,20 @@ def assess_stock(cpue_path: Optional[str] = None,
 
 
 def main():
+    import sys as _sys
+    _project = str(Path(__file__).resolve().parent.parent)
+    if _project not in _sys.path:
+        _sys.path.insert(0, _project)
+    from src.agent.species_registry import get_registry
+    available_species = get_registry().list_species()
+
     parser = argparse.ArgumentParser(
         prog="stock_assessment",
-        description="刀鲚 (Coilia nasus) 资源评估 — CPUE标准化 + 种群动态模型 + MSY估算"
+        description="鲚属 (Coilia) 资源评估 — CPUE标准化 + 种群动态模型 + MSY估算"
     )
     parser.add_argument("--cpue", "-c", help="CPUE 时间序列 CSV 输入文件")
+    parser.add_argument("--species", "-s", choices=available_species,
+                        default="coilia_nasus", help="目标物种 (默认: coilia_nasus)")
     parser.add_argument("--full", "-f", action="store_true", help="完整评估 (含 MSY 估算)")
     parser.add_argument("--json", "-j", action="store_true", help="JSON 格式输出")
     parser.add_argument("--example", action="store_true", help="使用内置示例数据")
@@ -421,9 +442,9 @@ def main():
         args.full = True
 
     if args.json:
-        print(format_json_stock(cpue, msy))
+        print(format_json_stock(cpue, msy, species_id=args.species))
     else:
-        print(format_report(cpue, msy))
+        print(format_report(cpue, msy, species_id=args.species))
 
 
 if __name__ == "__main__":

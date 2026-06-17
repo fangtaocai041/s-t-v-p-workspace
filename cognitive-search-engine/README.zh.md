@@ -1,16 +1,22 @@
-﻿# Cognitive Search Engine 🕸️
+﻿# 🔍 认知搜索引擎
 
-**三角核心 V/V1 层** — 多源并行搜索 · 分类学验证 · 可信度评分。
+![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge) ![协议](https://img.shields.io/badge/%E5%8D%8F%E8%AE%AE-MIT-brightgreen?style=for-the-badge) ![版本](https://img.shields.io/badge/%E7%89%88%E6%9C%AC-v5.9-blueviolet?style=for-the-badge) ![引擎](https://img.shields.io/badge/%E5%BC%95%E6%93%8E-15%2B-success?style=for-the-badge) ![Thompson](https://img.shields.io/badge/Thompson-%E9%87%87%E6%A0%B7-important?style=for-the-badge) ![PID](https://img.shields.io/badge/PID-%E9%99%90%E9%80%9F-critical?style=for-the-badge) ![MPC](https://img.shields.io/badge/MPC-%E4%BC%98%E5%8C%96-informational?style=for-the-badge) ![异步](https://img.shields.io/badge/%E5%BC%82%E6%AD%A5-aiohttp-ff69b4?style=for-the-badge) ![中英](https://img.shields.io/badge/%E4%B8%AD%E8%8B%B1-%E5%8F%8C%E9%80%9A%E9%81%93-orange?style=for-the-badge) ![智能](https://img.shields.io/badge/%E6%99%BA%E8%83%BD-%E8%A3%81%E5%88%A4-red?style=for-the-badge)
 
-> 🌊 万物皆变 · Panta Rhei
->
-> 搜索不是一次性的查询——它是持续的验证循环。
-
-[![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
-[![Python](https://img.shields.io/badge/python-3.10+-blue)](https://python.org)
-[![Reasonix](https://img.shields.io/badge/Reasonix-Code-brightgreen)](https://reasonix.ai)
+> ⚡ 搜索验证核心 — BDI认知搜索，15+引擎，Thompson采样，MPC优化。
+> 你无法用昨天的搜索结果回答今天的问题。
 
 [English](README.md) · [中文](README.zh.md) · [更新日志](CHANGELOG.md)
+
+---
+
+## 📖 目录
+
+- [哲学](#-哲学)
+- [快速开始](#-快速开始)
+- [架构](#-架构)
+- [功能特性](#-功能特性)
+- [项目结构](#-项目结构)
+- [生态体系](#-生态体系)
 
 ---
 
@@ -43,32 +49,109 @@
 
 ---
 
-## ⚡ 快速上手
+## 🧩 这个项目是什么
+
+它是一个搜索验证引擎。不存储知识，而是验证知识。
+
+当 S 层说"鳤的科是鲤科"，V 层会去问 PubMed、Crossref、中文期刊、Google Scholar——它们都这么说吗？有没有不一致？如果有，谁是对的？
+
+> 赫拉克利特说：人不能两次踏进同一条河流。
+>
+> 我们说：你也不能用昨天的搜索回答今天的问题。
+
+---
+
+## 📜 三谛
+
+**🌊 万象流转** — R包迭代，物种迁徙，共识更迭，气候重塑生态。今日之确论，半载后或为陈迹。吾辈不视任何知识为永恒真理，而将其置于时间轴上，以动态眼光审之。
+
+**🍂 真知若寄** — 科学之基石，在于可证伪（波普尔）。无发现乃终极真理——唯有「当下最佳解释」。吾辈用校准之语：「证据提示」而非「证明」，「Smith (2022) 发现」而非「研究表明」。每一条输出，皆镌刻时间之锚。
+
+**🌟 涌现成章** — 生命、意识、生态、AI推理——莫非涌现。不可执一隅以窥全豹。当≥3个独立来源指向同一意外模式，系统不以其为噪声而弃之，乃标记为涌现信号而追踪之。
+
+### ⚖️ 何以重要
+
+| 事境 | 旧习 | 新观 |
+|:-----|:----|:----|
+| 引用 | 「研究证明」 | 「Smith(2022) 发现 X，Jones(2024) 补 Y」 |
+| 异常 | 视为噪声弃之 | ≥3 来源 → 涌现信号，持续追踪 |
+| 知识衰减 | 手册尘封不更 | 审查记录含「下次审查日期」 |
+| 方法选择 | 流水线一成不变 | 择法动态，信心动态 |
+
+> 道生一，一生二，二生三，三生万物。
+
+此为三角之根，载 430 种长江鱼类。
+
+
+## 📜 三大信条
+
+**🌍 世界是动态的** — R包在更新，物种分布变化，科学共识在演进。今天正确的结论，六个月后可能过时。
+
+**📖 知识是暂时的** — 科学的基石是可证伪（波普尔）。没有发现是终极真理——只有当前最佳解释。我们用校准语言：证据表明，而非证明。
+
+**🌟 涌现是常态** — 生命、意识、生态系统、AI推理——都是涌现现象。当≥3个独立来源指向同一意外模式，系统标记为涌现信号。
+
+### ⚖️ 为什么这对研究很重要
+
+| 场景 | 传统做法 | 动态世界观 |
+|:-----|:--------|:----------|
+| 引用 | 研究证明 | Smith(2022)发现X，Jones(2024)补充Y |
+| 异常值 | 当作噪声 | ≥3来源→涌现信号 |
+| 知识衰减 | 手册冻结 | 含下次审查日期 |
+
+> 道生一，一生二，二生三，三生万物。
+
+这是三角之核心，承载 430 种长江鱼类。
+
+
+## 🚀 快速开始
 
 ```bash
-# 搜索物种
-python scripts/search_api.py --species "Ochetobius elongatus"
-
-# 分类学不一致检测
-python scripts/search_api.py --species "Ochetobius elongatus" --check-taxonomy
-
-# JSON 输出
-python scripts/search_api.py --species "鳤" --format json
+git clone git@github.com:fangtaocai041/cognitive-search-engine.git
+cd cognitive-search-engine
+pip install -e .
+python src/main.py search "刀鲚 生态"
 ```
 
 ---
 
-## 🚀 核心能力
+## 🏗️ 架构
 
-| 🚀 能力 | 📝 说明 |
-|:---------|:--------|
-| **多源并行** | tavily / exa / scholar / article / scholarly，11 引擎可配置 |
-| **分类学验证** | 跨项目比对 family/order，不一致自动标记 |
-| **三角验证评分** | 每篇论文 ≥2 独立源，journal whitelist 加权 |
-| **OCR 变体** | 学名 OCR 容错（u↔b, i↔l, n↔m） |
-| **引用回溯** | 从中文论文提取英文参考文献，弥合语言鸿沟 |
-| **结果去重** | 按 DOI 精确去重，按标题模糊去重 |
-| **DirectLoader** | `importlib` 零进程加载，无 MCP 开销 |
+```
+cognitive-search-engine/
+  src/
+  ├── meso_agent.py          BDI 认知核心 (Belief→Desire→Intention)
+  ├── parallel_search.py     15+ HTTP 数据源 (PubMed/Crossref/OpenAlex...)
+  ├── AsyncParallelSearch     aiohttp 异步搜索 (3-5x 加速)
+  ├── search_coordinator.py  KB-First 两阶段搜索协调器
+  ├── unified_search.py      自适应模式: 全量/分类/饱和
+  ├── validator.py           5级信任评分 + 源独立性检验
+  ├── thompson_selector.py   Thompson采样多臂老虎机引擎选择
+  ├── pid_limiter.py         PID自适应API速率限制
+  ├── mpc_world.py           MPC搜索成本优化
+  ├── agent_judge.py         LLM裁判结果评估
+  ├── inference_engine.py    搜索后缺口+矛盾检测
+  ├── evolution_executor.py  7触发器自进化
+  └── variant_generator.py   OCR学名变体生成
+```
+
+---
+
+## ✨ 功能特性
+
+| 功能 | 说明 |
+|------|------|
+| 🧠 BDI 认知 | Belief→Desire→Intention 自适应搜索循环 |
+| 🌐 15+ 搜索引擎 | PubMed, Crossref, OpenAlex, Semantic Scholar, CNKI, 万方... |
+| ⚡ 异步搜索 | aiohttp AsyncParallelSearch, 3-5x 加速 |
+| 🎯 Thompson 采样 | 学习型引擎选择替代规则剪枝 |
+| 📊 PID 速率限制 | 自适应 API 请求速率控制 |
+| 🎛️ MPC 优化 | 模型预测控制搜索成本优化 |
+| ⚖️ Agent 裁判 | LLM 结果质量评估 (4维度) |
+| ✅ 5级信任 | DOI→PMID→物种→作者→期刊评分 |
+| 🔍 OCR 变体 | 系统化学名变体生成 |
+| 🌊 中英双通道 | 中英文文献分路由 |
+| 🔄 自进化 | 7 触发器自适应搜索参数 |
 
 ---
 
@@ -76,19 +159,12 @@ python scripts/search_api.py --species "鳤" --format json
 
 ```
 cognitive-search-engine/
-├── src/
-│   ├── search_coordinator.py   ← 搜索编排
-│   ├── unified_search.py       ← 统一搜索入口
-│   └── search_api.py           ← API 层
-├── scripts/
-│   └── search_api.py           ← CLI 入口
-└── config/
-    └── evolution.yaml          ← 自适应参数
+  (见上方架构图)
 ```
 
-## 🔗 生态体系
+---
 
-> 🔥 和则无穷力量，分则顶尖专家引擎。
+## 🔗 生态体系
 
 本项目是「三生万物」生态的 搜索验证核心 (V1)。
 
@@ -99,31 +175,23 @@ cognitive-search-engine/
   ⚙️ eon-core                  → 协调内核 (Coord)
 
 万物衍生 (open N):
-  🐬 porpoise-agent    → 江豚专研 (P₁)
-  🐟 coilia-agent      → 刀鲚专研 (P₂)
-  🐟 culter-agent      → 鲌类专研 (P₃)
-  🔥 conflict-arbiter  → 冲突仲裁 (C)
+  🐬 porpoise-agent    → P₁ 江豚专研
+  🐟 coilia-agent      → P₂ 刀鲚专研
+  🐟 culter-agent      → P₃ 鲌类专研
+  🔥 conflict-arbiter  → C  冲突仲裁
 ```
 
-| 🏗️ 项目 | 🔗 顶点 | 🎯 角色 |
-|:---------|:--------:|:--------|
-| [fish-ecology-assistant](../fish-ecology-assistant/) | V0 | 📦 知识供给 |
-| [cognitive-search-engine](../cognitive-search-engine/) | V1 | 🔍 搜索验证 |
-| [eon-core](../eon-core/) | Coord | ⚙️ 协调内核 |
-| [porpoise-agent](../porpoise-agent/) | P₁ | 🐬 江豚专研 |
-| [coilia-agent](../coilia-agent/) | P₂ | 🐟 刀鲚专研 |
-| [culter-agent](../culter-agent/) | P₃ | 🐟 鲌类专研 |
-| [conflict-arbiter](../conflict-arbiter/) | C | 🔥 冲突仲裁 |
+> 🔥 和则无穷力量，分则顶尖专家引擎。
 
 ---
----
 
-> 🌊 万物皆变 · Panta Rhei
->
-> 🏛️ 赫拉克利特说：人不能两次踏进同一条河流。
->
-> 💻 我们说：你也不能用昨天的搜索回答今天的问题。
->
-> **📅 最后更新: 2026-06-17 · 🖥️ Reasonix Code · ⚡ DeepSeek 驱动**
+🌱 **万物皆变 · Panta Rhei**
 
-[⬆ 回到顶部](#)
+> 赫拉克利特说：人不能两次踏进同一条河流。
+>
+> 我们说：你也不能用上个月的代码分析今天的生态数据。
+
+这个项目不是一套固定的工具集——它是一个**活的系统**。每个组件都内置了过期机制、版本追踪和涌现感知。随着你的研究深入、R包更新、新方法涌现，它会和你一起进化。
+
+*最后更新：2026-06-17　|　适用环境：Reasonix Code · DeepSeek 驱动*
+

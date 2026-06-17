@@ -276,11 +276,17 @@ def _example_spawning_grounds() -> List[SpawningGround]:
 # ── 报告生成 ───────────────────────────────────────────
 
 def format_report(larval_stats: LarvalStats,
-                   spawning_grounds: List[SpawningGround]) -> str:
+                   spawning_grounds: List[SpawningGround],
+                   species_id: str = "coilia_nasus") -> str:
     """生成早期资源与繁殖分析报告."""
+    _project = str(Path(__file__).resolve().parent.parent); import sys; sys.path.insert(0, _project) if _project not in sys.path else None
+    from src.agent.species_registry import get_registry
+    cfg = get_registry().get(species_id) or {}
+    species_cn = cfg.get("species_chinese", ["刀鲚"])[0]
+    species_sci = cfg.get("species_scientific", "Coilia nasus")
     lines = [
         "=" * 60,
-        "  刀鲚早期资源与繁殖分析报告",
+        f"  {species_cn} ({species_sci}) 早期资源与繁殖分析报告",
         "=" * 60,
         f"\n分析时间: {datetime.now().strftime('%Y-%m-%d %H:%M')}",
         f"数据置信度: {larval_stats.confidence}",
@@ -333,10 +339,16 @@ def format_report(larval_stats: LarvalStats,
 
 
 def format_json_report(larval_stats: LarvalStats,
-                        spawning_grounds: List[SpawningGround]) -> str:
+                        spawning_grounds: List[SpawningGround],
+                        species_id: str = "coilia_nasus") -> str:
     """JSON 格式输出."""
+    _project = str(Path(__file__).resolve().parent.parent); import sys; sys.path.insert(0, _project) if _project not in sys.path else None
+    from src.agent.species_registry import get_registry
+    cfg = get_registry().get(species_id) or {}
     data: Dict[str, Any] = {
-        "analysis_type": "刀鲚早期资源与繁殖分析",
+        "analysis_type": f"{cfg.get('species_chinese', ['刀鲚'])[0]}早期资源与繁殖分析",
+        "species": cfg.get("species_scientific", "Coilia nasus"),
+        "species_id": species_id,
         "analysis_time": datetime.now().isoformat(),
         "spawning_grounds": [
             {
@@ -391,11 +403,20 @@ def analyze_early_life(larval_path: Optional[str] = None,
 
 
 def main():
+    import sys as _sys
+    _project = str(Path(__file__).resolve().parent.parent)
+    if _project not in _sys.path:
+        _sys.path.insert(0, _project)
+    from src.agent.species_registry import get_registry
+    available_species = get_registry().list_species()
+
     parser = argparse.ArgumentParser(
         prog="early_life_analysis",
-        description="刀鲚 (Coilia nasus) 早期资源与繁殖分析 — 产卵场 + 仔鱼资源 + 繁殖生物学"
+        description="鲚属 (Coilia) 早期资源与繁殖分析 — 产卵场 + 仔鱼资源 + 繁殖生物学"
     )
     parser.add_argument("--input", "-i", help="仔鱼调查 CSV 输入文件")
+    parser.add_argument("--species", "-s", choices=available_species,
+                        default="coilia_nasus", help="目标物种 (默认: coilia_nasus)")
     parser.add_argument("--json", "-j", action="store_true", help="JSON 格式输出")
     parser.add_argument("--example", action="store_true", help="使用内置示例数据")
 
@@ -407,9 +428,9 @@ def main():
     )
 
     if args.json:
-        print(format_json_report(stats, grounds))
+        print(format_json_report(stats, grounds, species_id=args.species))
     else:
-        print(format_report(stats, grounds))
+        print(format_report(stats, grounds, species_id=args.species))
 
 
 if __name__ == "__main__":

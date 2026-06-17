@@ -1,28 +1,52 @@
 # ═══════════════════════════════════════════════════════════════
-# Coilia Agent — 刀鲚专研 Agent 配置 (P₂)
+# Coilia Agent — 鲚属专研 Agent 配置 (P2)
 # ═══════════════════════════════════════════════════════════════
-# 借鉴: porpoise-agent/config/agent.yaml (P₁ 模板)
+# 借鉴: porpoise-agent/config/agent.yaml (P1 模板)
+# 物种配置: config/species/*.yaml (SpeciesRegistry 统一管理)
 # 课题组: 淡水渔业研究中心 刘凯研究员
 
 agent:
   name: "Coilia Agent"
-  version: "1.3.0"
-  description: "刀鲚专研 Agent — 洄游生态、耳石微化学、资源评估、群体遗传"
-  species: "Coilia nasus (刀鲚/长江刀鱼)"
+  version: "2.0.0"
+  description: "鲚属(Coilia)全类群专研 Agent — 洄游生态、耳石微化学、资源评估、群体遗传"
+  genus: "Coilia (鲚属)"
+  genus_description: "鲚属(Coilia)隶属鲱形目鳀科，中国有4种: 刀鲚(C. nasus)、短颌鲚(C. brachygnathus)、凤鲚(C. mystus)、七丝鲚(C. grayii)"
+  default_species: "coilia_nasus"
+
+  species_list:
+    - id: "coilia_nasus"
+      scientific: "Coilia nasus"
+      chinese: ["刀鲚", "长颌鲚", "长江刀鱼", "刀鱼"]
+      description: "溯河洄游种，长江三鲜之首，IUCN EN(濒危)"
+    - id: "coilia_brachygnathus"
+      scientific: "Coilia brachygnathus"
+      chinese: ["短颌鲚", "毛花鱼", "毛刀鱼"]
+      description: "淡水定居种，曾被认为是刀鲚同物异名"
+    - id: "coilia_mystus"
+      scientific: "Coilia mystus"
+      chinese: ["凤鲚", "凤尾鱼", "烤子鱼"]
+      description: "沿海洄游种，长江口重要经济鱼类"
+    - id: "coilia_grayii"
+      scientific: "Coilia grayii"
+      chinese: ["七丝鲚", "白春", "马刀"]
+      description: "河口半咸水种，分布于华南沿海"
+
   research_group: "淡水渔业研究中心 刘凯研究员课题组"
-  role: "P₂ (Porpoise-parallel Specialist)"
-  
+  role: "P2 (Porpoise-parallel Specialist)"
+
   activation_keywords:
     chinese:
-      - 刀鲚, 长颌鲚, 刀鱼, 长江刀鱼, 鲚属, 鳀科
-      - 洄游, 溯河, 耳石, 微化学, Sr/Ca, 资源量, 禁捕
-      - 产卵场, 补充群体, 仔鱼, 短颌鲚, 凤鲚
+      - 刀鲚, 长颌鲚, 刀鱼, 长江刀鱼, 短颌鲚, 凤鲚, 七丝鲚
+      - 鲚属, 鳀科, 洄游, 溯河, 耳石, 微化学, Sr/Ca, 资源量, 禁捕
+      - 产卵场, 补充群体, 仔鱼
     english:
-      - Coilia nasus, tapertail anchovy, estuarine tapertail anchovy
+      - Coilia nasus, Coilia brachygnathus, Coilia mystus, Coilia grayii
+      - tapertail anchovy, grenadier anchovy
       - otolith microchemistry, anadromous migration, stock assessment
     related_species:
       - "短颌鲚 (Coilia brachygnathus)"
       - "凤鲚 (Coilia mystus)"
+      - "七丝鲚 (Coilia grayii)"
 
   skills:
     external:
@@ -57,10 +81,10 @@ agent:
       - "报告生成 (Report Generation)"
 
 architecture:
-  # S-T-V-P₁-P₂ 五体架构: eon-core (10层内核) 统一协调
+  # S-T-V-P1-P2 五体架构: eon-core (10层内核) 统一协调
   # P 层专研由本 Agent 负责
   layer: "P (Specialist)"
-  sister_agent: "porpoise-agent (P₁/V2, 长江江豚)"
+  sister_agent: "porpoise-agent (P1/V2, 长江江豚)"
   coordinator: "eon-core"
 
 # ═══════════════════════════════════════════════════════════
@@ -69,7 +93,7 @@ architecture:
 shared:
   version: "1.2.0"
   philosophy: "Panta Rhei + Systems Thinking"
-  architecture: "S-T-V-P₁-P₂ (三角派生 P₂/V3)"
+  architecture: "S-T-V-P1-P2 (三角派生 P2/V3)"
   rule_count: 18
   coordination_file: "coordination.yaml"
   preflight: "read config/agent.yaml before all Skills"

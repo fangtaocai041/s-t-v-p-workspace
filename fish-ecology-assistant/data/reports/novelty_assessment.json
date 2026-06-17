@@ -1,0 +1,30 @@
+{
+  "our_approach": "Population-level trait variation across Yangtze water bodies + taxonomic validation via trait congruence",
+  "key_references": [
+    {
+      "citation": "Luiz OJ, Olden JD, Kennard MJ, et al. (2022) Substantial intraspecific trait variation across a hydrological gradient in northern Australian fishes. Ecosphere 13:e4169",
+      "finding": "Intraspecific variability contributes up to 70% of total trait variability, averaging 31% across all traits. Most trait-based studies IGNORE this.",
+      "relevance": "Validates our approach of recording traits per water body. We are applying this framework to Yangtze — first such application."
+    },
+    {
+      "citation": "Guo H, Zhang X, Tang W, Liu K (2025) Spatial and Sex-Specific Growth Variations of Migratory Coilia nasus in the Middle and Lower Yangtze, China. Biology 14(9):1211",
+      "finding": "Coilia nasus shows significant growth variation across Yangtze sections. Upstream individuals are smaller but more fecund. VBGF parameters vary spatially.",
+      "relevance": "Liu Kai group publication — directly supports our population-level approach. We have this data in our database."
+    },
+    {
+      "citation": "长江中上游3种鲌的营养生态位比较 (2020) 中国水产科学 30(2):236",
+      "finding": "δ13C and δ15N values of 3 Culter species differ significantly across upper/middle Yangtze reaches. Trophic niche varies by location.",
+      "relevance": "Supports our multi-water-body trait recording for Culter species (翘嘴鲌/蒙古鲌/尖头鲌)."
+    },
+    {
+      "citation": "Langerhans RB, Layman CA, Langerhans AK, Dewitt TJ (2003) Habitat-associated morphological divergence in two Neotropical fish. Biological Journal of the Linnean Society 80:689-698",
+      "finding": "River channel vs lagoon habitats drive significant morphological divergence within the same species.",
+      "relevance": "Classic reference for habitat-driven intraspecific morphological variation. Our Yangtze section comparison is analogous."
+    }
+  ],
+  "novelty_assessment": {
+    "what_exists": "Intraspecific trait variation studied in Australian, Neotropical, and European freshwater fish. Mostly ecological gradient studies.",
+    "what_is_new": "1) First application to Yangtze fish community at multi-species scale; 2) Combining population-level traits with taxonomic hypothesis testing (old vs new classification); 3) Integration with fishing ban impact assessment; 4) Chinese + IUCN conservation dual-framework.",
+    "potential_contribution": "If published: 'Intraspecific trait variation as a tool for taxonomic validation: A case study from the Yangtze River fish community'. Target journals: Ecology and Evolution, Freshwater Biology, or Reviews in Fish Biology and Fisheries."
+  }
+}

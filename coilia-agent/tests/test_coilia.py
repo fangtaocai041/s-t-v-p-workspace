@@ -9,17 +9,25 @@
 
 import sys
 import unittest
+import importlib.util
 from pathlib import Path
 
-# Add project root to path
+# Ensure D:\Reasonix\scripts\ is found BEFORE coilia-agent\scripts\
+# (pytest may pre-add coilia-agent to sys.path, shadowing the shared scripts package)
 _proj = str(Path(__file__).resolve().parent.parent)
-if _proj not in sys.path:
-    sys.path.insert(0, _proj)
-
-# Add D:\Reasonix for shared test base
 _reasonix = str(Path(__file__).resolve().parent.parent.parent)
-if _reasonix not in sys.path:
-    sys.path.insert(0, _reasonix)
+# Remove any existing entries for _proj and _reasonix, then re-add in correct order
+_sys_path_new = []
+for _p in sys.path:
+    if _p not in (_proj, _reasonix):
+        _sys_path_new.append(_p)
+sys.path[:] = [_reasonix, _proj] + _sys_path_new
+
+# Clear any cached 'scripts' module from earlier test collection
+# (other tests may have loaded coilia-agent/scripts/ as the 'scripts' package)
+for _key in list(sys.modules.keys()):
+    if _key == 'scripts' or _key.startswith('scripts.'):
+        del sys.modules[_key]
 
 from scripts.test_pn_base import (
     PnAdapterTestBase,

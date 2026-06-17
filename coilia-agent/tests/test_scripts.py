@@ -17,9 +17,14 @@ _reasonix = str(Path(__file__).resolve().parent.parent.parent)
 if _reasonix not in sys.path:
     sys.path.insert(0, _reasonix)
 
+# Ensure scripts/ is importable
+_scripts_dir = str(Path(_proj) / "scripts")
+if _scripts_dir not in sys.path:
+    sys.path.insert(0, _scripts_dir)
+
 # These imports need the project root on sys.path
-import scripts.species_kb as skb
-import scripts.fish_kb_add_species as fkas
+import species_kb as skb
+import fish_kb_add_species as fkas
 
 
 # ══════════════════════════════════════════════════════════════
@@ -64,9 +69,9 @@ key_research_groups:
     focus: "资源评估、洄游生态"
 """
 
-    @patch("scripts.species_kb._KB_PATH", Path("/fake/coilia-nasus.md"))
-    @patch("scripts.species_kb.Path.is_file", return_value=True)
-    @patch("scripts.species_kb.Path.read_text", return_value=SAMPLE_KB)
+    @patch("species_kb._KB_PATH", Path("/fake/coilia-nasus.md"))
+    @patch("species_kb.Path.is_file", return_value=True)
+    @patch("species_kb.Path.read_text", return_value=SAMPLE_KB)
     def test_load_kb(self, mock_read, mock_isfile):
         """load_kb 能正确解析 species、themes、groups。"""
         data = skb.load_kb()
@@ -77,9 +82,9 @@ key_research_groups:
         self.assertIn("key_research_groups", data)
         self.assertEqual(len(data["key_research_groups"]), 1)
 
-    @patch("scripts.species_kb._KB_PATH", Path("/fake/coilia-nasus.md"))
-    @patch("scripts.species_kb.Path.is_file", return_value=True)
-    @patch("scripts.species_kb.Path.read_text", return_value=SAMPLE_KB)
+    @patch("species_kb._KB_PATH", Path("/fake/coilia-nasus.md"))
+    @patch("species_kb.Path.is_file", return_value=True)
+    @patch("species_kb.Path.read_text", return_value=SAMPLE_KB)
     def test_load_kb_file_missing(self, mock_read, mock_isfile):
         """文件不存在时返回 error dict。"""
         mock_isfile.return_value = False
@@ -87,9 +92,9 @@ key_research_groups:
         self.assertIn("error", data)
         self.assertIn("不存在", data["error"])
 
-    @patch("scripts.species_kb._KB_PATH", Path("/fake/coilia-nasus.md"))
-    @patch("scripts.species_kb.Path.is_file", return_value=True)
-    @patch("scripts.species_kb.Path.read_text", return_value=SAMPLE_KB)
+    @patch("species_kb._KB_PATH", Path("/fake/coilia-nasus.md"))
+    @patch("species_kb.Path.is_file", return_value=True)
+    @patch("species_kb.Path.read_text", return_value=SAMPLE_KB)
     def test_query_theme_by_chinese(self, mock_read, mock_isfile):
         """按中文关键词查询研究方向。"""
         data = skb.load_kb()
@@ -97,9 +102,9 @@ key_research_groups:
         self.assertIsNotNone(t)
         self.assertIn("洄游", t["theme"])
 
-    @patch("scripts.species_kb._KB_PATH", Path("/fake/coilia-nasus.md"))
-    @patch("scripts.species_kb.Path.is_file", return_value=True)
-    @patch("scripts.species_kb.Path.read_text", return_value=SAMPLE_KB)
+    @patch("species_kb._KB_PATH", Path("/fake/coilia-nasus.md"))
+    @patch("species_kb.Path.is_file", return_value=True)
+    @patch("species_kb.Path.read_text", return_value=SAMPLE_KB)
     def test_query_theme_by_english(self, mock_read, mock_isfile):
         """按英文关键词 (migration/otolith/genetic) 查询。"""
         data = skb.load_kb()
@@ -107,18 +112,18 @@ key_research_groups:
         self.assertIsNotNone(t)
         self.assertIn("洄游", t["theme"])
 
-    @patch("scripts.species_kb._KB_PATH", Path("/fake/coilia-nasus.md"))
-    @patch("scripts.species_kb.Path.is_file", return_value=True)
-    @patch("scripts.species_kb.Path.read_text", return_value=SAMPLE_KB)
+    @patch("species_kb._KB_PATH", Path("/fake/coilia-nasus.md"))
+    @patch("species_kb.Path.is_file", return_value=True)
+    @patch("species_kb.Path.read_text", return_value=SAMPLE_KB)
     def test_query_theme_not_found(self, mock_read, mock_isfile):
         """不存在的关键词返回 None。"""
         data = skb.load_kb()
         t = skb.query_theme(data, "量子力学")
         self.assertIsNone(t)
 
-    @patch("scripts.species_kb._KB_PATH", Path("/fake/coilia-nasus.md"))
-    @patch("scripts.species_kb.Path.is_file", return_value=True)
-    @patch("scripts.species_kb.Path.read_text", return_value=SAMPLE_KB)
+    @patch("species_kb._KB_PATH", Path("/fake/coilia-nasus.md"))
+    @patch("species_kb.Path.is_file", return_value=True)
+    @patch("species_kb.Path.read_text", return_value=SAMPLE_KB)
     def test_format_summary(self, mock_read, mock_isfile):
         """format_summary 输出包含关键字段。"""
         data = skb.load_kb()
@@ -128,14 +133,14 @@ key_research_groups:
         self.assertIn("3750t", summary)
         self.assertIn("溯河", summary)
 
-    @patch("scripts.species_kb._KB_PATH", Path("/fake/coilia-nasus.md"))
-    @patch("scripts.species_kb.Path.is_file", return_value=True)
-    @patch("scripts.species_kb.Path.read_text", return_value=SAMPLE_KB)
+    @patch("species_kb._KB_PATH", Path("/fake/coilia-nasus.md"))
+    @patch("species_kb.Path.is_file", return_value=True)
+    @patch("species_kb.Path.read_text", return_value=SAMPLE_KB)
     def test_main_json_output(self, mock_read, mock_isfile):
         """--json 输出有效 JSON。"""
         # Simulate argparse
         with patch.object(sys, "argv", ["species_kb.py", "--json"]):
-            with patch("scripts.species_kb.print") as mock_print:
+            with patch("species_kb.print") as mock_print:
                 skb.main()
                 # Should have called print with JSON string
                 call_args = mock_print.call_args[0]
@@ -167,7 +172,7 @@ class TestFishKBAddSpecies(unittest.TestCase):
     def setUp(self):
         self.entry = fkas.COILIA_NASUS.copy()
 
-    @patch("scripts.fish_kb_add_species._KB_PATH", Path("/fake/fish_species_kb.yaml"))
+    @patch("fish_kb_add_species._KB_PATH", Path("/fake/fish_species_kb.yaml"))
     @patch("yaml.safe_load", return_value=SAMPLE_KB)
     @patch("pathlib.Path.is_file", return_value=True)
     @patch("pathlib.Path.read_text", return_value="")
@@ -177,14 +182,14 @@ class TestFishKBAddSpecies(unittest.TestCase):
         self.assertEqual(len(kb["species"]), 1)
         self.assertEqual(kb["species"][0]["scientific"], "Coilia brachygnathus")
 
-    @patch("scripts.fish_kb_add_species._KB_PATH", Path("/fake/fish_species_kb.yaml"))
+    @patch("fish_kb_add_species._KB_PATH", Path("/fake/fish_species_kb.yaml"))
     @patch("pathlib.Path.is_file", return_value=False)
     def test_load_kb_missing(self, mock_isfile):
         """文件不存在时 sys.exit(1)。"""
         with self.assertRaises(SystemExit):
             fkas.load_kb()
 
-    @patch("scripts.fish_kb_add_species._KB_PATH", Path("/fake/fish_species_kb.yaml"))
+    @patch("fish_kb_add_species._KB_PATH", Path("/fake/fish_species_kb.yaml"))
     def test_add_species_new(self):
         """add_species 添加新物种条目 (去重通过)。"""
         kb = {"species": [{"scientific": "Coilia brachygnathus"}]}
@@ -192,7 +197,7 @@ class TestFishKBAddSpecies(unittest.TestCase):
         self.assertTrue(result)
         self.assertEqual(len(kb["species"]), 2)
 
-    @patch("scripts.fish_kb_add_species._KB_PATH", Path("/fake/fish_species_kb.yaml"))
+    @patch("fish_kb_add_species._KB_PATH", Path("/fake/fish_species_kb.yaml"))
     def test_add_species_duplicate(self):
         """add_species 检测到学名已存在时跳过 (去重)。"""
         kb = {"species": [{"scientific": "Coilia nasus"}]}
@@ -200,7 +205,7 @@ class TestFishKBAddSpecies(unittest.TestCase):
         self.assertFalse(result)
         self.assertEqual(len(kb["species"]), 1)
 
-    @patch("scripts.fish_kb_add_species._KB_PATH", Path("/fake/fish_species_kb.yaml"))
+    @patch("fish_kb_add_species._KB_PATH", Path("/fake/fish_species_kb.yaml"))
     @patch("yaml.safe_load", return_value=SAMPLE_KB)
     @patch("pathlib.Path.is_file", return_value=True)
     @patch("pathlib.Path.read_text", return_value="")
@@ -212,7 +217,7 @@ class TestFishKBAddSpecies(unittest.TestCase):
         except Exception as e:
             self.fail(f"list_species raised {e}")
 
-    @patch("scripts.fish_kb_add_species._KB_PATH", Path("/fake/fish_species_kb.yaml"))
+    @patch("fish_kb_add_species._KB_PATH", Path("/fake/fish_species_kb.yaml"))
     def test_list_species_empty(self):
         """空列表不抛异常。"""
         try:

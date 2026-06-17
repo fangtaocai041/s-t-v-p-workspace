@@ -175,6 +175,7 @@ class ThoughtTreeSearch:
         config = self.config
         current_level = [root]
         nodes_explored = 1
+        depth = 0
 
         for depth in range(config.max_depth):
             if not current_level or nodes_explored >= config.max_nodes:

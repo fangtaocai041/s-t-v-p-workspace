@@ -1,0 +1,34 @@
+# Coilia grayii (七丝鲚) — 鲚属南方河口种
+# 分布于华南沿海至珠江口
+
+species_id: "coilia_grayii"
+species_scientific: "Coilia grayii"
+species_chinese: ["七丝鲚", "白春", "马刀", "Gray's grenadier anchovy"]
+species_variants:
+  - "Coilia grayi"
+  - "Coilia greyii"
+
+profile:
+  family: "Engraulidae (鳀科)"
+  migration_type: "河口半咸水 (estuarine/brackish)"
+  iucn: "未评估 (NE)"
+  economic: "中 (华南地区经济鱼类)"
+  distribution: "南海北部沿海，珠江口、湛江港等河口区域"
+  note: "七丝鲚胸鳍上部具7根游离丝状鳍条，以此得名"
+
+research_themes:
+  migration:
+    label: "河口洄游与栖息地利用"
+    keywords: ["河口", "estuary", "盐度", "salinity", "栖息地", "habitat"]
+  feeding:
+    label: "食性与营养生态"
+    keywords: ["食性", "feeding", "胃含物", "diet", "营养"]
+  genetics:
+    label: "群体遗传与系统发育"
+    keywords: ["遗传", "genetic", "COI", "系统发育", "phylogeny", "grayii"]
+  stock:
+    label: "资源评估"
+    keywords: ["资源", "stock", "cpue", "渔业", "珠江口"]
+  early_life:
+    label: "繁殖生物学"
+    keywords: ["繁殖", "spawning", "仔鱼", "产卵", "larvae", "grayii"]

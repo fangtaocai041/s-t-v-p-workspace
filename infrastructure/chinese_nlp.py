@@ -102,13 +102,8 @@ def ner(text: str) -> List[Dict[str, str]]:
 
 def synonym_search(word: str) -> List[str]:
     """查找生态学术语同义词。"""
-    try:
-        from synonyms import nearby
-    except ImportError:
-        print("⚠️  pip install synonyms")
-        return []
 
-    # 首先检查自定义映射
+    # 首先检查自定义映射 (不依赖 synonyms 包)
     CUSTOM_SYNONYMS = {
         "刀鲚": ["长江刀鱼", "Coilia nasus", "刀鱼", "长颌鲚"],
         "江豚": ["长江江豚", "Neophocaena asiaeorientalis", "江猪"],
@@ -118,6 +113,11 @@ def synonym_search(word: str) -> List[str]:
     if word in CUSTOM_SYNONYMS:
         results = CUSTOM_SYNONYMS[word]
     else:
+        try:
+            from synonyms import nearby
+        except ImportError:
+            print("⚠️  pip install synonyms")
+            return []
         results = nearby(word)[:10]
 
     print(f"  {word} → {', '.join(results)}")

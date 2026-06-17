@@ -1,0 +1,223 @@
+metadata:
+  title: 物种索引
+  version: '3.0'
+  last_updated: '2026-06-16'
+  total_species: 30
+species:
+- id: cyprinus_carpio
+  name: 鲤
+  scientific: Cyprinus carpio
+  family: 鲤科
+  basins:
+  - 长江流域
+  profile: knowledge_base/species/cyprinus_carpio.md
+- id: carassius_auratus
+  name: 鲫
+  scientific: Carassius auratus
+  family: 鲤科
+  basins:
+  - 长江流域
+  profile: knowledge_base/species/carassius_auratus.md
+- id: hypophthalmichthys_molitrix
+  name: 鲢
+  scientific: Hypophthalmichthys molitrix
+  family: 鲤科
+  basins:
+  - 长江流域
+  profile: knowledge_base/species/hypophthalmichthys_molitrix.md
+- id: pelteobagrus_fulvidraco
+  name: 黄颡鱼
+  scientific: Pelteobagrus fulvidraco
+  family: 鲿科
+  basins:
+  - 长江流域
+  profile: knowledge_base/species/pelteobagrus_fulvidraco.md
+- id: coilia_brachygnathus
+  name: 短颌鲚
+  scientific: Coilia brachygnathus
+  family: 鳀科
+  basins:
+  - 长江流域
+  profile: knowledge_base/species/coilia_brachygnathus.md
+- id: silurus_asotus
+  name: 鲇
+  scientific: Silurus asotus
+  family: 鲇科
+  basins:
+  - 长江流域
+  profile: knowledge_base/species/silurus_asotus.md
+- id: saurogobio_dabryi
+  name: 蛇鮈
+  scientific: Saurogobio dabryi
+  family: 鲤科
+  basins:
+  - 长江流域
+  profile: knowledge_base/species/saurogobio_dabryi.md
+- id: ctenopharyngodon_idellus
+  name: 草鱼
+  scientific: Ctenopharyngodon idellus
+  family: 鲤科
+  basins:
+  - 长江流域
+  profile: knowledge_base/species/ctenopharyngodon_idellus.md
+- id: pelteobagrus_nitidus
+  name: 光泽黄颡鱼
+  scientific: Pelteobagrus nitidus
+  family: 鲿科
+  basins:
+  - 长江流域
+  profile: knowledge_base/species/pelteobagrus_nitidus.md
+- id: hemiculter_leucisculus
+  name: 䱗
+  scientific: Hemiculter leucisculus
+  family: 鲤科
+  basins:
+  - 长江流域
+  profile: knowledge_base/species/hemiculter_leucisculus.md
+- id: siniperca_chuatsi
+  name: 鳜
+  scientific: Siniperca chuatsi
+  family: 鳜科
+  basins:
+  - 长江流域
+  profile: knowledge_base/species/siniperca_chuatsi.md
+- id: coreius_heterodon
+  name: 铜鱼
+  scientific: Coreius heterodon
+  family: 鲤科
+  basins:
+  - 长江流域
+  profile: knowledge_base/species/coreius_heterodon.md
+- id: culter_alburnus
+  name: 翘嘴鲌
+  scientific: Culter alburnus
+  family: 鲤科
+  basins:
+  - 长江流域
+  profile: knowledge_base/species/culter_alburnus.md
+- id: parabramis_pekinensis
+  name: 鳊
+  scientific: Parabramis pekinensis
+  family: 鲤科
+  basins:
+  - 长江流域
+  profile: knowledge_base/species/parabramis_pekinensis.md
+- id: aristichthys_nobilis
+  name: 鳙
+  scientific: Aristichthys nobilis
+  family: 鲤科
+  basins:
+  - 长江流域
+  profile: knowledge_base/species/aristichthys_nobilis.md
+- id: acipenser_sinensis
+  name: 中华鲟
+  scientific: Acipenser sinensis
+  family: 鲟科
+  basins:
+  - 长江流域
+  profile: knowledge_base/species/acipenser_sinensis.md
+- id: acipenser_dabryanus
+  name: 长江鲟
+  scientific: Acipenser dabryanus
+  family: 鲟科
+  basins:
+  - 长江流域
+  profile: knowledge_base/species/acipenser_dabryanus.md
+- id: myxocyprinus_asiaticus
+  name: 胭脂鱼
+  scientific: Myxocyprinus asiaticus
+  family: 胭脂鱼科
+  basins:
+  - 长江流域
+  profile: knowledge_base/species/myxocyprinus_asiaticus.md
+- id: trachidermus_fasciatus
+  name: 松江鲈
+  scientific: Trachidermus fasciatus
+  family: 杜父鱼科
+  basins:
+  - 长江流域
+  profile: knowledge_base/species/trachidermus_fasciatus.md
+- id: psephurus_gladius
+  name: 白鲟
+  scientific: Psephurus gladius
+  family: 匙吻鲟科
+  basins:
+  - 长江流域
+  profile: knowledge_base/species/psephurus_gladius.md
+- id: luciobrama_macrocephalus
+  name: 鯮
+  scientific: Luciobrama macrocephalus
+  family: 鲤科
+  basins:
+  - 长江流域
+  profile: knowledge_base/species/luciobrama_macrocephalus.md
+- id: tenualosa_reevesii
+  name: 鲥
+  scientific: Tenualosa reevesii
+  family: 鲱科
+  basins:
+  - 长江流域
+  profile: knowledge_base/species/tenualosa_reevesii.md
+- id: ochetobius_elongatus
+  name: 鳤
+  scientific: Ochetobius elongatus
+  family: 鲤科
+  basins:
+  - 长江流域
+  profile: knowledge_base/species/ochetobius_elongatus.md
+- id: elopichthys_bambusa
+  name: 鳡
+  scientific: Elopichthys bambusa
+  family: 鲤科
+  basins:
+  - 长江流域
+  profile: knowledge_base/species/elopichthys_bambusa.md
+- id: neophocaena_asiaeorientalis
+  name: 长江江豚
+  scientific: Neophocaena asiaeorientalis
+  family: 鼠海豚科
+  basins:
+  - 长江流域
+  profile: knowledge_base/species/neophocaena_asiaeorientalis.md
+- id: tribolodon_brandti
+  name: 三块鱼
+  scientific: Tribolodon brandti
+  family: 鲤科
+  basins:
+  - 图们江流域
+  - 绥芬河流域
+  - 滨海边疆区沿岸
+  - 北海道沿岸
+  - 东海岸
+  profile: knowledge_base/species/tribolodon_brandti.md
+- id: coilia_nasus
+  name: 刀鲚
+  scientific: Coilia nasus
+  family: 鳀科 (Engraulidae)
+  basins:
+  - 长江流域
+  profile: knowledge_base/species/coilia_nasus.md
+- id: culter_mongolicus
+  name: 蒙古鲌
+  scientific: Culter mongolicus
+  family: 鲤科
+  basins:
+  - 长江流域
+  - 黑龙江流域
+  profile: knowledge_base/species/culter_mongolicus.md
+- id: culter_oxycephalus
+  name: 尖头鲌
+  scientific: Culter oxycephalus
+  family: 鲤科
+  basins:
+  - 长江流域
+  - 黑龙江流域
+  profile: knowledge_base/species/culter_oxycephalus.md
+- id: coilia_mystus
+  name: 凤鲚
+  scientific: Coilia mystus
+  family: 鳀科
+  basins:
+  - 长江流域
+  - 东海岸
+  profile: knowledge_base/species/coilia_mystus.md

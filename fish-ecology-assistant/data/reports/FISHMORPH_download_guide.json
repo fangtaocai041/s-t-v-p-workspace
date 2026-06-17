@@ -1,0 +1,25 @@
+{
+  "source": "FISHMORPH (Brosse et al. 2022)",
+  "doi": "10.1111/geb.13604",
+  "records": 10230,
+  "traits": 10,
+  "download_urls": [
+    "https://figshare.com/articles/dataset/FISHMORPH_Database/14891412",
+    "https://www.kaggle.com/datasets/menegidio/fishmorph-dataset",
+    "https://freshwaterfish.sedoo.fr/fishmorph",
+    "R_package: install.packages(\"traitdata\"); data(\"fishmorph\")"
+  ],
+  "traits_list": [
+    "body_size",
+    "head_size",
+    "eye_size",
+    "mouth_size",
+    "pectoral_fin_size",
+    "caudal_fin_size",
+    "body_shape",
+    "mouth_position",
+    "eye_position",
+    "caudal_peduncle_ratio"
+  ],
+  "note": "需手动下载后导入。Figshare需JS浏览器;Kaggle需登录;R包最简便。"
+}

@@ -1,18 +1,22 @@
-# Fish Ecology Assistant 🌊
+﻿# 🐟 Fish Ecology Assistant
 
-> 🌊 Everything Flows · Panta Rhei
->
-> Turn your coding agent into a PhD-level research team
-> with a dynamic worldview.
->
-> 🛠️ **16 MCP Tools** · 🤖 **12 AI Sub-agents** · 🔍 **5 Search Engines** · 📚 **13 Knowledge Bases**
+![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge) ![License](https://img.shields.io/badge/License-MIT-brightgreen?style=for-the-badge) ![Version](https://img.shields.io/badge/Version-v8.1-blueviolet?style=for-the-badge) ![Species](https://img.shields.io/badge/Species-430-success?style=for-the-badge) ![Traits](https://img.shields.io/badge/Traits-289-important?style=for-the-badge) ![FISHMORPH](https://img.shields.io/badge/FISHMORPH-251%20spp-informational?style=for-the-badge) ![Population](https://img.shields.io/badge/Population-26%20records-critical?style=for-the-badge) ![Bilingual](https://img.shields.io/badge/Bilingual-CN%C2%B7EN-ff69b4?style=for-the-badge) ![DB](https://img.shields.io/badge/DB-SQLite-lightgrey?style=for-the-badge) ![Frontier](https://img.shields.io/badge/Frontier-Kalman-red?style=for-the-badge)
 
-[![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
-[![Python](https://img.shields.io/badge/python-3.10+-blue)](https://python.org)
-[![Reasonix](https://img.shields.io/badge/Reasonix-Code-brightgreen)](https://reasonix.ai)
-[![species](https://img.shields.io/badge/species-30-green)]()
+> 🌊 Knowledge Supply Core — 430 Yangtze fish species, 289 morphological traits, population-level variation.
+> Panta Rhei — Everything flows.
 
-[English](README.md) · [中文](README.zh.md) · [Changelog](CHANGELOG.md) · [Architecture](docs/ARCHITECTURE.md)
+[English](README.md) · [中文](README.zh.md) · [CHANGELOG](CHANGELOG.md)
+
+---
+
+## 📖 Table of Contents
+
+- [Philosophy](#-philosophy)
+- [Quick Start](#-quick-start)
+- [Architecture](#-architecture)
+- [Features](#-features)
+- [Project Structure](#-project-structure)
+- [Ecosystem](#-ecosystem)
 
 ---
 
@@ -63,73 +67,105 @@ It integrates **16 MCP tools**, **12 domain-specific AI sub-agents**, **5-engine
 
 ---
 
-## ⚡ Quick Start
+## 📜 Three Tenets
+
+**🌊 The River Flows** — Packages update, species migrate, consensus shifts, climate reshapes. Today's certainty is tomorrow's footnote. We place knowledge on a timeline and view it dynamically.
+
+**🍂 Knowledge Drifts** — The foundation of science is falsifiability (Popper). No discovery is final — only the best current explanation. We speak in calibrated language: evidence suggests, not proves.
+
+**🌟 Emergence Patterns** — Life, consciousness, ecosystems, AI reasoning — all emergent. When three or more independent sources converge on the same unexpected pattern, the system flags emergence — never dismisses it as noise.
+
+### ⚖️ Why This Matters
+
+| Scenario | Traditional | Dynamic Worldview |
+|:---------|:-----------|:-------------------|
+| Citations | Studies prove | Smith (2022) found X; Jones (2024) added Y |
+| Outliers | Dismiss as noise | Three or more sources → emergence signal |
+| Knowledge Decay | Handbook frozen | Review records include next review date |
+| Method | Fixed pipeline | Dynamic selection, dynamic confidence |
+
+> 道生一，一生二，二生三，三生万物。
+
+From One comes Two, from Two comes Three, from Three come all things.
+
+
+## 📜 Three Tenets
+
+**🌍 The world is dynamic** — R packages update, species distributions shift, scientific consensus evolves, climate change reshapes ecosystems. A correct conclusion today may be outdated in six months.
+
+**📖 Knowledge is temporary** — The foundation of science is falsification (Popper). No discovery is ultimate truth—only the best current explanation. We use calibrated language: evidence suggests not proves.
+
+**🌟 Emergence is the norm** — Life, consciousness, ecosystems, AI reasoning—all are emergent phenomena. When >=3 independent sources point to the same unexpected pattern, the system flags it as an emergence signal.
+
+### ⚖️ Why This Matters
+
+| Scenario | Traditional | Dynamic Worldview |
+|:---------|:-----------|:------------------|
+| Citations | Studies prove it | Smith (2022) found X, Jones (2024) added Y |
+| Outliers | Ignore as noise | >=3 sources → emergence signal |
+| Knowledge decay | Handbook frozen | Review records include Next review date |
+
+> 道生一，一生二，二生三，三生万物。
+
+This is the **S-state (V0)** of the Triangle — Knowledge Supply, holding 430 Yangtze fish species.
+
+
+## 🚀 Quick Start
 
 ```bash
-git clone https://github.com/fangtaocai041/fish-ecology-assistant
+# Clone
+git clone git@github.com:fangtaocai041/fish-ecology-assistant.git
 cd fish-ecology-assistant
-powershell -ExecutionPolicy Bypass -File setup.ps1
+
+# Install
+pip install -e .
+
+# Run
+python src/main.py search --species "Coilia nasus"
 ```
 
-🔄 Restart Reasonix. You 🎤 speak, it ⚡ does.
+---
 
-| 🎤 You Say | ⚡ It Does |
-|:-----------|:-----------|
-| "Research the impact of the Yangtze fishing ban on fish communities, run pipeline" | 5-stage: 📋 Plan → 🔍 Search → 🧠 Analyze → ✍️ Write → ✅ Review (bilingual search, auto emergence detection) |
-| "Verify handbook chapter 2.2" | Auto-check CRAN 📦 package versions, diff against handbook, compute 📅 review date |
-| "Search for Ochetobius elongatus literature" | Route to correct knowledge bases, parallel search, synthesize results |
-| "Run a stable isotope analysis" | R code + method selection + diagnostics, tagged with YYYY-MM best practice |
+## 🏗️ Architecture
+
+```
+fish-ecology-assistant/
+  src/           Core Python engine
+  ├── adapter.py     IProjectAdapter (V0 canonical)
+  ├── orchestrator.py    KB-first species search
+  ├── project_hub.py     Cross-project coordination
+  ├── dao_engine.py      Philosophical chain executor
+  ├── types.py           8 dataclasses + 4 enums
+  └── kalman_emergence.py  Kalman Filter emergence detection
+  config/
+  ├── knowledge_base/   30 species .md profiles
+  └── fish_species_kb.yaml  430 species index
+  data/
+  ├── species.db         SQLite (species + traits + literature)
+  ├── FISHMORPH.csv      2.3MB global morphology database
+  └── reports/           HTML/CSV exports
+  scripts/
+  ├── fishbase_pull.py   FishBase API auto-sync
+  ├── trait_network.py   Network Science trait analysis
+  └── gen_report.py      Bilingual HTML report generator
+```
 
 ---
 
-## 🤖 AI Sub-agents
+## ✨ Features
 
-### 🔄 Research Pipeline (5-stage auto-orchestration · 🌊 Dynamic worldview throughout)
-
-| 🤖 Agent | 🎯 Role | ⚙️ Function | 🌊 Philosophical Anchor |
-|:---------|:--------|:------------|:-----------------------|
-| **🎯 research-orchestrator** | Director | Orchestrates all 5 stages | — |
-| **📋 research-planner** | Planner | Bilingual keywords, CN + EN coverage | 🌐 Full coverage |
-| **🔍 research-executor** | Searcher | 5-engine parallel, annotates publication year | ⏳ Timeline-aware |
-| **🧠 research-analyst** | Analyst | Consensus timeline + emergence detection | 🔄 Dynamic consensus · 🌟 emergence |
-| **✍️ research-writer** | Writer | Calibrated language, temporal anchoring, uncertainty marking | 📖 Calibrated language · ⏰ provisional knowledge |
-| **✅ research-reviewer** | Reviewer | 4-dimension scoring, up to 3 revision rounds | 🔄 Quality closed loop |
-
-### 🧪 Domain Expert Agents
-
-| 🤖 Agent | ⚙️ Function | 🌊 Philosophical Anchor |
-|:---------|:------------|:-----------------------|
-| **📄 paper-analyzer** | Deep single-paper analysis | ⏳ Timeline · 🌟 emergence signals |
-| **📊 stats-assistant** | R code + method selection | 📦 Version tagging · ✅ method verification dates |
-| **🔎 stats-method-finder** | Search CRAN/journals for methods | ⏰ "Last verified" timestamps |
-| **💡 ima-smart-search** | Cross-knowledge-base search | 🔄 Dynamic discovery, no hardcoded expiration |
-| **✅ verify-stats-handbook** | Auto-check CRAN versions | 📊 Review cycles based on activity |
-| **🔭 frontier-tracker** | Track frontiers, chronological | 🧪 Latest lab discoveries |
-| **📝 phd-proposal-writer** | PhD proposal generation | 📋 Dynamic CV with timeliness annotations |
-| **📚 zotero-assistant** | Zotero library queries | — |
-| **📓 obsidian-assistant** | Obsidian note export | — |
-
----
-
-## 🛠️ MCP Services (16 Tools)
-
-| 🛠️ Service | 🎯 Purpose |
-|:-----------|:-----------|
-| **🤖 tavily** | AI deep search |
-| **🔍 exa** | Semantic search |
-| **🎓 google-scholar** | Academic papers |
-| **📰 article** | Literature metadata |
-| **🌐 scholarly** | Multi-source aggregation |
-| **🧠 ima** | 13 knowledge bases + IMA notes + OpenAPI (14 tools) |
-| **📊 rplay** | R 4.6.0 (morphometrics, isotopes, community ecology) |
-| **💻 coderunner** | Multi-language sandbox execution |
-| **📈 echarts** | ECharts visualization |
-| **👁️ PaddleOCR** | Chinese/English OCR |
-| **🔤 Tesseract.js fallback** | Offline OCR |
-| **🎭 playwright** | Chromium web scraping |
-| **🔧 git** | Git CLI (version control) |
-| **🐙 github** | GitHub API (repository management) |
-| **📖 Zotero** | SQLite reference library |
+| Feature | Description |
+|---------|-------------|
+| 🗃️ 430 Species | Complete Yangtze River fish species database |
+| 📏 289 Morphology Traits | Sourced from FISHMORPH (251), FishBase, FAO, literature |
+| 🌊 Population-level Data | 26 records with water-body-specific trait variation |
+| 🔬 Trait Catalog | 61 traits in 7 categories (morphology→life history→feeding→...) |
+| 🏛️ Bilingual Conservation | IUCN + China Red List + National Protection + CITES |
+| 📊 Excel/HTML Reports | Double-click reports with 2-level hierarchical headers |
+| 🔄 FishBase Auto-sync | Automated trait pulling with source traceability |
+| 🕸️ Network Science | Trait co-occurrence networks, keystone trait identification |
+| 📡 Kalman Filter | Emergence signal detection from noisy population data |
+| 🔗 KB-First Architecture | Zero-network lookup for 30 core species |
 
 ---
 
@@ -137,54 +173,39 @@ powershell -ExecutionPolicy Bypass -File setup.ps1
 
 ```
 fish-ecology-assistant/
-├── 📄 README.md                       English
-├── 📄 README.zh.md                    Chinese
-├── 📁 .reasonix/
-│   ├── 📁 mcp-servers/              ← 16 MCP services
-│   │   ├── 🧠 ima-server.mjs          IMA knowledge base
-│   │   └── ...                        14 more
-│   ├── 📁 skills/                   ← 12 AI sub-agents
-│   │   ├── 💡 ima-smart-search.md
-│   │   ├── ✅ verify-stats-handbook.md
-│   │   ├── 📄 paper-analyzer.md
-│   │   ├── 🧠 research-analyst.md
-│   │   ├── ✍️ research-writer.md
-│   │   └── ...                        7 more
-│   └── 📁 handbooks/
-│       ├── 📊 stats-methods.md         Statistics handbook
-│       └── 📖 learning-guide.md        Learning guide
-├── 📁 research_output/                 Generated reports
-└── ⚡ setup.ps1                        One-click setup
-```---
-
-
-## 🔗 生态体系
-
-> 🔥 和则无穷力量，分则顶尖专家引擎。
-
-本项目是「三生万物」生态的 V0。
-
-```
-三角核心 (sealed 3):
-  📦 fish-ecology-assistant    → 知识供给 (V0)
-  🔍 cognitive-search-engine   → 搜索验证 (V1)
-  ⚙️ eon-core                  → 协调内核 (Coord)
-
-万物衍生 (open N):
-  🐬 porpoise-agent    → 江豚专研 (P₁)
-  🐟 coilia-agent      → 刀鲚专研 (P₂)
-  🐟 culter-agent      → 鲌类专研 (P₃)
-  🔥 conflict-arbiter  → 冲突仲裁 (C)
+  (see Architecture section above)
 ```
 
-> 🌊 Everything Flows · Panta Rhei
->
-> 🏛️ Heraclitus said: No man ever steps in the same river twice.
->
-> 💻 We say: You can't analyze today's ecological data with last month's code.
->
-> 🔄 This project is not a fixed toolset—it is a living system. Every component has built-in expiration mechanisms, version tracking, and emergence awareness. As your research deepens, R packages update, and new methods emerge, it evolves with you.
->
-> **📅 Last updated: 2026-06-17 · 🖥️ Environment: Reasonix Code · ⚡ Powered by DeepSeek**
+---
 
-[⬆ Back to top](#)
+## 🔗 Ecosystem
+
+This project is the Knowledge Supply Core (V0) in the SanShengWanWu ecosystem.
+
+```
+Triangle Core (sealed 3):
+  📦 fish-ecology-assistant    → Knowledge Supply (V0)
+  🔍 cognitive-search-engine   → Search Verification (V1)
+  ⚙️ eon-core                  → Coordination Hub (Coord)
+
+Derived Projects (open N):
+  🐬 porpoise-agent    → P₁ Porpoise Expert
+  🐟 coilia-agent      → P₂ Coilia Expert
+  🐟 culter-agent      → P₃ Culter Expert
+  🔥 conflict-arbiter  → C  Conflict Arbitration
+```
+
+> 🔥 Together infinite power, apart top expert engines.
+
+---
+
+🌱 **Everything Flows · Panta Rhei**
+
+> Heraclitus said: No man ever steps in the same river twice.
+>
+> We say: You cannot analyze today''s ecological data with last month''s code.
+
+This project is not a fixed toolset — it is a **living system**. Every component has built-in expiration mechanisms, version tracking, and emergence awareness. As your research deepens, packages update, and new methods emerge, it evolves with you.
+
+*Last updated: 2026-06-17　|　Environment: Reasonix Code · DeepSeek Powered*
+

@@ -171,6 +171,8 @@ def test_l1():
 def test_l2():
     print("\n─── L2: Cognitive & Decision ───")
 
+    import asyncio
+
     # ── BDI ──
     from src.cognitive.bdi import (
         BDICoordinator, Belief, Desire, Intention, PlanStep, BDIStatus, StepStatus
@@ -282,7 +284,7 @@ def test_l2():
           lambda: assert_that(not loop._is_done("continue searching")))
 
     # Observe
-    obs = loop._observe({"name": "test_tool", "params": {}, "result": "ok"})
+    obs = asyncio.run(loop._observe({"name": "test_tool", "params": {}, "result": "ok"}))
     check("ReActLoop observe",
           lambda: assert_that(obs["action_name"] == "test_tool"))
 
@@ -290,7 +292,6 @@ def test_l2():
     step = ReActStep(step_id=0)
     step.action = {"name": "test_tool"}
     step.observation = {"result": "ok"}
-    import asyncio
 
     async def _reflect():
         return await loop._reflect(step)
@@ -316,25 +317,25 @@ def test_l2():
     from src.cognitive.decomposer import TaskDecomposer, DecompositionStrategy
 
     decomp = TaskDecomposer()
-    plan = decomp.decompose("搜索江豚文献并分析", strategy=DecompositionStrategy.COT)
+    plan = asyncio.run(decomp.decompose("搜索江豚文献并分析", strategy=DecompositionStrategy.COT))
     check("Decomposer CoT produces steps",
           lambda: assert_that(len(plan.linear_steps) >= 1))
 
-    plan_tot = decomp.decompose("如何保护江豚", strategy=DecompositionStrategy.TOT_BFS)
+    plan_tot = asyncio.run(decomp.decompose("如何保护江豚", strategy=DecompositionStrategy.TOT_BFS))
     check("Decomposer ToT produces plan",
           lambda: assert_that(plan_tot is not None))
 
-    plan_got = decomp.decompose("江豚生态综合分析", strategy=DecompositionStrategy.GOT)
+    plan_got = asyncio.run(decomp.decompose("江豚生态综合分析", strategy=DecompositionStrategy.GOT))
     check("Decomposer GoT produces plan",
           lambda: assert_that(plan_got is not None))
 
     # Edge: empty
-    plan_empty = decomp.decompose("", strategy=DecompositionStrategy.COT)
+    plan_empty = asyncio.run(decomp.decompose("", strategy=DecompositionStrategy.COT))
     check("Decomposer empty query → still returns plan",
           lambda: assert_that(plan_empty is not None))
 
     # Edge: very short
-    plan_short = decomp.decompose("?", strategy=DecompositionStrategy.COT)
+    plan_short = asyncio.run(decomp.decompose("?", strategy=DecompositionStrategy.COT))
     check("Decomposer single char → handles gracefully",
           lambda: assert_that(plan_short is not None))
 
@@ -346,15 +347,15 @@ def test_l2():
     critic = Critic()
     refs = critic.evaluate(0, {"name": "search"}, {"error": "timeout after 30s"})
     check("Critic classifies timeout error",
-          lambda: assert_that(any("timeout" in r.diagnosis.lower() for r in refs)))
+          lambda: assert_that(any("超时" in r.diagnosis for r in refs)))
 
     refs = critic.evaluate(1, {"name": "search"}, {"error": "404 Not Found"})
     check("Critic classifies not-found error",
-          lambda: assert_that(any("not found" in r.diagnosis.lower() for r in refs)))
+          lambda: assert_that(any("未找到" in r.diagnosis for r in refs)))
 
     refs = critic.evaluate(2, {"name": "write_file"}, {"error": "permission denied"})
     check("Critic classifies permission error",
-          lambda: assert_that(any("permission" in r.diagnosis.lower() for r in refs)))
+          lambda: assert_that(any("权限" in r.diagnosis for r in refs)))
 
     # Success case
     refs = critic.evaluate(3, {"name": "search"},
@@ -887,12 +888,14 @@ def test_mas():
 def test_performance():
     print("\n─── Performance Boundaries ───")
 
+    import asyncio
+
     # 1. Deep decomposition (many recursion levels)
     from src.cognitive.decomposer import TaskDecomposer, DecompositionStrategy
     decomp = TaskDecomposer()
     long_query = "分析长江江豚在鄱阳湖、洞庭湖、安庆江段、芜湖江段、南京江段、镇江江段的分布、丰度、栖息地、威胁和保护 " * 5
     t0 = time.time()
-    plan = decomp.decompose(long_query, strategy=DecompositionStrategy.COT)
+    plan = asyncio.run(decomp.decompose(long_query, strategy=DecompositionStrategy.COT))
     elapsed = time.time() - t0
     check(f"Decomposer long query ({len(long_query)} chars) → {elapsed:.3f}s",
           lambda: assert_that(plan is not None and elapsed < 5.0))

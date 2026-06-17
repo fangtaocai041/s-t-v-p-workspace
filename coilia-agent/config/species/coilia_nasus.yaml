@@ -1,0 +1,38 @@
+# Coilia nasus (刀鲚) — 鲚属旗舰种
+# P₂ 物种扩展: 刀鲚 → 鲚属全类群
+
+species_id: "coilia_nasus"
+species_scientific: "Coilia nasus"
+species_chinese: ["刀鲚", "长颌鲚", "长江刀鱼", "刀鱼"]
+species_variants:
+  - "Coilia nasis"
+  - "Coilia nassus"
+  - "Coilia ectenes"
+  - "Coilia brachygnathus"
+
+profile:
+  family: "Engraulidae (鳀科)"
+  migration_type: "溯河洄游 (anadromous)"
+  iucn: "EN (濒危)"
+  economic: "极高 (长江三鲜之首)"
+  distribution: "长江中下游及其附属湖泊、近海"
+  historical_peak: "1973年 3750t"
+  current_status: "资源量仅为历史峰值的1-3%"
+  research_group: "淡水渔业研究中心 刘凯研究员课题组"
+
+research_themes:
+  migration:
+    label: "洄游生态与耳石微化学"
+    keywords: ["洄游", "migration", "耳石", "otolith", "sr/ca", "微化学"]
+  genetics:
+    label: "群体遗传与种群结构"
+    keywords: ["遗传", "genetic", "dna", "微卫星", "snp", "线粒体", "基因组"]
+  stock:
+    label: "资源评估与管理"
+    keywords: ["资源", "stock", "cpue", "评估", "msy", "种群", "捕捞"]
+  feeding:
+    label: "食性与营养生态"
+    keywords: ["食性", "feeding", "营养", "稳定同位素", "胃含物"]
+  early_life:
+    label: "早期资源与繁殖"
+    keywords: ["繁殖", "spawning", "产卵", "仔鱼", "早期资源", "胚胎"]

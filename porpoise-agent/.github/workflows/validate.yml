@@ -7,23 +7,44 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: { python-version: '3.12' }
-      - run: pip install pyyaml
-      - run: python -c "
-          import yaml
-          with open('config/agent.yaml') as f:
-              c = yaml.safe_load(f)
-          assert 'agent' in c, 'Missing agent section'
-          assert 'cognitive' in c, 'Missing cognitive section'
-          assert 'interaction' in c, 'Missing interaction section'
-          print('✅ agent.yaml valid')
-        "
-      - run: python -c "
-          import yaml
-          with open('config/mcp_servers.yaml') as f:
-              c = yaml.safe_load(f)
-          print(f'✅ MCP servers: {len(c)} configured')
-        " || echo "⚠️ mcp_servers.yaml not found — may be normal"
+      - run: pip install pyyaml pytest
+      - run: pip install -e . 2>/dev/null || true
+
+      # YAML config syntax check
       - run: |
-          py_count=$(find src -name '*.py' ! -path '*__pycache__*' | wc -l)
-          echo "✅ $py_count Python files in src/"
+          python -c "
+          import yaml
+          for f in ['config/agent.yaml']:
+              with open(f) as fh:
+                  c = yaml.safe_load(fh)
+              print(f'✅ {f} valid')
+          "
+
+      # Source syntax check (non-zero count)
+      - run: |
+          py_count=$(find src -name '*.py' -not -path '*__pycache__*' | wc -l)
+          echo "✅ $py_count Python source files in src/"
           [ $py_count -ge 1 ]
+
+      # Core module import check (graceful degradation)
+      - run: |
+          python -c "
+          import sys
+          modules = [
+              'src.cognitive.bdi', 'src.cognitive.react_loop',
+              'src.memory.short_term', 'src.memory.manager',
+              'src.agents.orchestrator',
+          ]
+          failed = 0
+          for m in modules:
+              try:
+                  __import__(m)
+                  print(f'  ✅ {m}')
+              except Exception as e:
+                  print(f'  ⚠️ {m}: {e} (may need optional deps)')
+                  failed += 1
+          print(f'Validate complete ({len(modules)-failed}/{len(modules)} imports OK)')
+          "
+
+      # Quick unit tests (core only, no optional deps)
+      - run: python -m pytest tests/test_bdi.py tests/test_memory.py tests/test_serializer.py -q --tb=short

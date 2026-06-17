@@ -124,16 +124,14 @@ def test_kb_first_lookup_partial_genus():
 # ═══════════════════════════════════════════
 
 def test_kb_first_lookup_by_alias():
-    """别名"珠星三块鱼"应匹配到三块鱼 (Tribolodon brandti)。"""
+    """珠星三块鱼 在知识库中有独立条目 (Pseudaspius hakonensis)，精确匹配优先。"""
     orch = get_orchestrator()
     result = orch.kb_first_lookup(query="珠星三块鱼")
     assert isinstance(result, KbFirstResult)
-    assert result.found is True, f"别名匹配应成功，但 found={result.found}"
-    # 在知识库中，珠星三块鱼是 Tribolodon brandti 的别名
-    assert result.chinese_name == "三块鱼"
-    assert result.scientific_name == "Tribolodon brandti"
-    # matched_by_alias 应为 True，表示通过别名而非主名匹配
-    assert result.matched_by_alias is True
+    assert result.found is True, f"精确匹配应成功，但 found={result.found}"
+    # 知识库中珠星三块鱼有独立条目: Pseudaspius hakonensis
+    assert result.chinese_name == "珠星三块鱼"
+    assert result.scientific_name == "Pseudaspius hakonensis"
 
 
 # ═══════════════════════════════════════════

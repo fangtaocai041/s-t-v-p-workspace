@@ -36,35 +36,15 @@ except ImportError:
 
 from .shared import JOURNAL_WHITELIST, build_search_queries, generate_ocr_variants
 
+# fishkb 核心库集成 — 物种匹配委托给独立库
+from fishkb.search import FishSpeciesMatcher as _FishSpeciesMatcher, KbFirstResult
+from fishkb.db import KnowledgeDB as _KnowledgeDB
+
 logger = logging.getLogger(__name__)
 
 
-@dataclass
-class KbFirstResult:
-    """Result from kb_first_lookup() — pure knowledge base query.
-
-    This is the Stage 1 (KB-first) result. The caller should present
-    summary_text to the user and ask: stay in KB or continue to
-    cognitive-search-engine full search?
-    """
-    found: bool                          # Whether species exists in KB
-    scientific_name: str = ""            # Canonical scientific name from KB
-    chinese_name: str = ""              # Chinese name from KB
-    aliases: List[str] = field(default_factory=list)  # Known aliases
-    synonyms: List[str] = field(default_factory=list)  # Taxonomic synonyms
-    family: str = ""                     # Family (e.g. "鲤科")
-    order: str = ""                      # Order (e.g. "鲤形目")
-    conservation: str = ""               # IUCN / protection level
-    ecology: str = ""                    # Ecology notes
-    max_length_cm: str = ""             # Max recorded length
-    economic_value: str = ""            # Economic importance
-    distribution: Dict[str, Any] = field(default_factory=dict)  # {continents, countries, basins}
-    category: str = ""                   # KB category (dominant/diadromous/protected/endangered)
-    matched_by_alias: bool = False       # True if matched via alias, not primary name
-    all_candidates: List[Dict[str, Any]] = field(default_factory=list)  # All fuzzy matches
-    summary_text: str = ""              # Human-readable summary for user presentation
-    search_recommendation: str = ""     # "stay_in_kb" | "continue_to_c" | "not_found"
-    raw_species_data: Dict[str, Any] = field(default_factory=dict)  # Full KB entry
+# KbFirstResult 现已从 fishkb 导入（兼容现有 API）
+# 本地保留别名以确保向后兼容
 
 
 class FishEcologyOrchestrator:
@@ -83,6 +63,9 @@ class FishEcologyOrchestrator:
         self._species_db: Dict[str, Any] = {}
         self._hub = None  # 懒加载 ProjectHub
         self._load_configs()
+        # fishkb 集成: KnowledgeDB + FishSpeciesMatcher
+        self._kb_db: _KnowledgeDB | None = None
+        self._kb_matcher: _FishSpeciesMatcher | None = None
 
     def _load_configs(self) -> None:
         """Load configs: try new index+profiles first, fall back to flat YAML."""
@@ -369,12 +352,27 @@ class FishEcologyOrchestrator:
 
     # ──── KB-First Lookup (Stage 1: knowledge base only) ────
 
+    @property
+    def _kb(self) -> _KnowledgeDB:
+        """懒加载 KnowledgeDB (fishkb)。"""
+        if self._kb_db is None:
+            db_path = self._project_root / "data" / "species.db"
+            self._kb_db = _KnowledgeDB(db_path)
+        return self._kb_db
+
+    @property
+    def _matcher(self) -> _FishSpeciesMatcher:
+        """懒加载 FishSpeciesMatcher (fishkb)。"""
+        if self._kb_matcher is None:
+            self._kb_matcher = _FishSpeciesMatcher(self._kb)
+        return self._kb_matcher
+
     def kb_first_lookup(self, scientific_name: str = "", chinese_name: str = "",
                         query: str = "") -> KbFirstResult:
-        """KB-first search — pure knowledge base lookup, NO external API calls.
+        """KB-first search — 委托给 fishkb.FishSpeciesMatcher。
 
         This is the FIRST stage of the two-stage search workflow:
-          1. kb_first_lookup() → check f项目 knowledge base
+          1. kb_first_lookup() → check knowledge base (fishkb)
           2. [ask user: stay in KB or continue?]
           3. IF continue → cognitive-search-engine full search
 
@@ -386,31 +384,23 @@ class FishEcologyOrchestrator:
         Returns:
             KbFirstResult with found=True/False, species data, and human-readable summary.
         """
-        # Resolve query: use scientific + chinese if provided, else fall back to query string
-        sci = scientific_name.strip() if scientific_name else query.strip()
-        cn = chinese_name.strip() if chinese_name else ""
+        result = self._matcher.kb_first_lookup(
+            scientific_name=scientific_name,
+            chinese_name=chinese_name,
+            query=query,
+        )
 
-        # If only query is provided and looks like Chinese, treat as chinese_name
-        if not scientific_name and not chinese_name and query:
-            if any('\u4e00' <= c <= '\u9fff' for c in query):
-                cn = query
-                sci = ""
-            else:
-                sci = query
+        # Feed to emergence engine (preserving existing behavior)
+        if _EMERGENCE_AVAILABLE and not result.found:
+            try:
+                mon = EmergenceMonitor()
+                mon.record("f_kb_query", 1, DimensionalLevel.D1)
+                mon.record("f_kb_found", 0, DimensionalLevel.D1)
+                mon.record("f_candidates", len(result.all_candidates), DimensionalLevel.D1)
+            except Exception:
+                pass
 
-        # 1. Exact / alias match via existing _find_species
-        species_data = self._find_species(sci, cn)
-
-        # 2. If no match, try listing all species and find fuzzy matches
-        all_candidates = []
-        if not species_data:
-            all_candidates = self._fuzzy_find_all(sci, cn, limit=10)
-
-        # 3. Build result
-        if species_data:
-            return self._build_kb_hit_result(species_data)
-        else:
-            return self._build_kb_miss_result(sci, cn, all_candidates)
+        return result
 
     def _fuzzy_find_all(self, scientific: str, chinese: str, limit: int = 10) -> List[Dict[str, Any]]:
         """Fuzzy search across ALL species entries for near matches."""
