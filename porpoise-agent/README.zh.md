@@ -1,6 +1,17 @@
 ﻿# 🐬 江豚智能体
 
-![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?style=for-the-badge) ![协议](https://img.shields.io/badge/%E5%8D%8F%E8%AE%AE-MIT-brightgreen?style=for-the-badge) ![版本](https://img.shields.io/badge/%E7%89%88%E6%9C%AC-v0.2-blueviolet?style=for-the-badge) ![智能体](https://img.shields.io/badge/%E6%99%BA%E8%83%BD%E4%BD%93-7%E4%BD%93-success?style=for-the-badge) ![架构](https://img.shields.io/badge/%E6%9E%B6%E6%9E%84-%E4%BA%94%E5%B1%82-important?style=for-the-badge) ![BDI](https://img.shields.io/badge/BDI-ReAct-critical?style=for-the-badge) ![GoT](https://img.shields.io/badge/GoT-MCTS-informational?style=for-the-badge) ![SSE](https://img.shields.io/badge/SSE-%E6%B5%81%E5%BC%8F-ff69b4?style=for-the-badge) ![ChromaDB](https://img.shields.io/badge/ChromaDB-RAG-orange?style=for-the-badge) ![StateGraph](https://img.shields.io/badge/StateGraph-LangGraph-red?style=for-the-badge)
+<p align="center">
+  ![Python 3.11+](https://img.shields.io/badge/Python%203.11%2B-3776AB?style=flat-square)
+  ![MIT](https://img.shields.io/badge/MIT-34D058?style=flat-square)
+  ![v0.2](https://img.shields.io/badge/v0.2-8A4FCE?style=flat-square)
+  ![7-agent MAS](https://img.shields.io/badge/7-agent%20MAS-007EC6?style=flat-square)
+  ![5-layer](https://img.shields.io/badge/5-layer-FE7D37?style=flat-square)
+  ![BDI+ReAct](https://img.shields.io/badge/BDI%2BReAct-D73A4A?style=flat-square)
+  ![SSE stream](https://img.shields.io/badge/SSE%20stream-0EA5E9?style=flat-square)
+  ![ChromaDB](https://img.shields.io/badge/ChromaDB-EC4899?style=flat-square)
+  ![MCTS](https://img.shields.io/badge/MCTS-F59E0B?style=flat-square)
+</p>
+
 
 > 🎯 江豚领域专家引擎 — 5层认知架构，BDI+ReAct+Reflexion，7智能体MAS，前沿技术。
 🎯 江豚领域专家引擎 — 五层认知架构，BDI+ReAct+Reflexion，七智能体。
@@ -49,26 +60,6 @@
 此为三角之根，载 430 种长江鱼类。
 
 
-## 📜 三大信条
-
-**🌍 世界是动态的** — R包在更新，物种分布变化，科学共识在演进。今天正确的结论，六个月后可能过时。
-
-**📖 知识是暂时的** — 科学的基石是可证伪（波普尔）。没有发现是终极真理——只有当前最佳解释。我们用校准语言：证据表明，而非证明。
-
-**🌟 涌现是常态** — 生命、意识、生态系统、AI推理——都是涌现现象。当≥3个独立来源指向同一意外模式，系统标记为涌现信号。
-
-### ⚖️ 为什么这对研究很重要
-
-| 场景 | 传统做法 | 动态世界观 |
-|:-----|:--------|:----------|
-| 引用 | 研究证明 | Smith(2022)发现X，Jones(2024)补充Y |
-| 异常值 | 当作噪声 | ≥3来源→涌现信号 |
-| 知识衰减 | 手册冻结 | 含下次审查日期 |
-
-> 道生一，一生二，二生三，三生万物。
-
-这是三角之核心，承载 430 种长江鱼类。
-
 
 ## 🚀 快速开始
 
@@ -106,17 +97,18 @@ porpoise-agent/
 
 ## ✨ 功能特性
 
-| 功能 | 说明 |
-|------|------|
-| 🧠 BDI+ReAct+Reflexion | 形式化认知循环 (MDP对应) |
-| 🌳 CoT/ToT/GoT/MCTS | 多种任务分解和搜索策略 |
-| 🕸️ StateGraph | LangGraph风格条件边路由 |
-| 🔴 SSE 流式 | 实时智能体输出 |
-| 🗄️ ChromaDB RAG | 向量长期记忆+优雅降级 |
-| 🔧 7-Agent MAS | 文献/声学/生态/保护/批判... |
-| 🔀 6种拓扑类型 | 顺序/层级/星形/辩论/DAG/动态 |
-| 🔒 子进程沙盒 | 安全代码执行 |
-| 📚 4项集成 | cognitive-search, Zotero, Obsidian, Neo4j |
+| 功能 | 状态 | 说明 |
+|------|:--:|------|
+| 🧠 BDI+ReAct+Reflexion | ✅ | 完整 MDP 认知循环 |
+| 🌳 CoT/ToT/GoT/MCTS | ✅ | 4 分解 + 5 搜索策略 |
+| 🕸️ StateGraph | ✅ | LangGraph 风格条件路由 |
+| 🔴 SSE 流式 | ✅ | 实时智能体输出 |
+| 🗄️ ChromaDB RAG | ✅ | 向量长期记忆 + 优雅降级 |
+| 🔧 7 体 MAS | ✅ | 6 种拓扑 + 条件边 |
+| 🔒 子进程沙盒 | ✅ | 导入白名单 + 资源限制 |
+| 📚 4 项集成 | ✅ | cognitive-search, Zotero, Obsidian, KG |
+| ⚠️ 声学/生态 Agent | 🟡 | 框架就绪，核心方法存根 |
+| 🐬 领域聚焦 | ✅ | 长江江豚研究 |
 
 ---
 

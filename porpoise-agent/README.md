@@ -1,6 +1,17 @@
 ﻿# 🐬 Porpoise Agent
 
-![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?style=for-the-badge) ![License](https://img.shields.io/badge/License-MIT-brightgreen?style=for-the-badge) ![Version](https://img.shields.io/badge/Version-v0.2-blueviolet?style=for-the-badge) ![Agents](https://img.shields.io/badge/Agents-7-MAS-success?style=for-the-badge) ![Arch](https://img.shields.io/badge/Arch-5-Layer-important?style=for-the-badge) ![BDI](https://img.shields.io/badge/BDI-ReAct-critical?style=for-the-badge) ![GoT](https://img.shields.io/badge/GoT-MCTS-informational?style=for-the-badge) ![SSE](https://img.shields.io/badge/SSE-Streaming-ff69b4?style=for-the-badge) ![ChromaDB](https://img.shields.io/badge/ChromaDB-RAG-orange?style=for-the-badge) ![StateGraph](https://img.shields.io/badge/StateGraph-LangGraph-red?style=for-the-badge)
+<p align="center">
+  ![Python 3.11+](https://img.shields.io/badge/Python%203.11%2B-3776AB?style=flat-square)
+  ![MIT](https://img.shields.io/badge/MIT-34D058?style=flat-square)
+  ![v0.2](https://img.shields.io/badge/v0.2-8A4FCE?style=flat-square)
+  ![7-agent MAS](https://img.shields.io/badge/7-agent%20MAS-007EC6?style=flat-square)
+  ![5-layer](https://img.shields.io/badge/5-layer-FE7D37?style=flat-square)
+  ![BDI+ReAct](https://img.shields.io/badge/BDI%2BReAct-D73A4A?style=flat-square)
+  ![SSE stream](https://img.shields.io/badge/SSE%20stream-0EA5E9?style=flat-square)
+  ![ChromaDB](https://img.shields.io/badge/ChromaDB-EC4899?style=flat-square)
+  ![MCTS](https://img.shields.io/badge/MCTS-F59E0B?style=flat-square)
+</p>
+
 
 > 🎯 Porpoise Domain Expert Engine — 5-layer cognitive architecture with BDI+ReAct+Reflexion, 7-agent MAS, and frontier techniques.
 > A porpoise knows the river — an agent knows the domain.
@@ -48,26 +59,6 @@ This is not a slogan. It is the operating system running through every line of c
 From One comes Two, from Two comes Three, from Three come all things.
 
 
-## 📜 Three Tenets
-
-**🌍 The world is dynamic** — R packages update, species distributions shift, scientific consensus evolves, climate change reshapes ecosystems. A correct conclusion today may be outdated in six months.
-
-**📖 Knowledge is temporary** — The foundation of science is falsification (Popper). No discovery is ultimate truth—only the best current explanation. We use calibrated language: evidence suggests not proves.
-
-**🌟 Emergence is the norm** — Life, consciousness, ecosystems, AI reasoning—all are emergent phenomena. When >=3 independent sources point to the same unexpected pattern, the system flags it as an emergence signal.
-
-### ⚖️ Why This Matters
-
-| Scenario | Traditional | Dynamic Worldview |
-|:---------|:-----------|:------------------|
-| Citations | Studies prove it | Smith (2022) found X, Jones (2024) added Y |
-| Outliers | Ignore as noise | >=3 sources → emergence signal |
-| Knowledge decay | Handbook frozen | Review records include Next review date |
-
-> 道生一，一生二，二生三，三生万物。
-
-This is the **S-state (V0)** of the Triangle — Knowledge Supply, holding 430 Yangtze fish species.
-
 
 ## 🚀 Quick Start
 
@@ -110,17 +101,18 @@ porpoise-agent/
 
 ## ✨ Features
 
-| Feature | Description |
-|---------|-------------|
-| 🧠 BDI+ReAct+Reflexion | Formal cognitive loop with MDP correspondence |
-| 🌳 CoT/ToT/GoT/MCTS | Multiple task decomposition and search strategies |
-| 🕸️ StateGraph | LangGraph-inspired conditional edge routing |
-| 🔴 SSE Streaming | Real-time agent output via Server-Sent Events |
-| 🗄️ ChromaDB RAG | Vector-backed long-term memory with graceful degradation |
-| 🔧 7-Agent MAS | Literature, Acoustic, Ecology, Conservation, Critic... |
-| 🔀 6 Topology Types | Sequential, Hierarchical, Star, Debate, DAG, Dynamic |
-| 🔒 Subprocess Sandbox | Safe code execution with import whitelist |
-| 📚 4 Integrations | cognitive-search, Zotero, Obsidian, Neo4j/KnowledgeGraph |
+| Feature | Status | Description |
+|---------|:------:|-------------|
+| 🧠 BDI+ReAct+Reflexion | ✅ | Full cognitive loop with MDP |
+| 🌳 CoT/ToT/GoT/MCTS | ✅ | 4 decomposition + 5 search strategies |
+| 🕸️ StateGraph | ✅ | LangGraph-style conditional routing |
+| 🔴 SSE Streaming | ✅ | Real-time agent output |
+| 🗄️ ChromaDB RAG | ✅ | Vector LTM with graceful degradation |
+| 🔧 7-Agent MAS | ✅ | 6 topology types + condition edges |
+| 🔒 Subprocess Sandbox | ✅ | Import whitelist + resource limits |
+| 📚 4 Integrations | ✅ | cognitive-search, Zotero, Obsidian, KG |
+| ⚠️ Acoustic/Ecology | 🟡 | Framework ready, core methods stub |
+| 🐬 Domain Focus | ✅ | Yangtze finless porpoise research |
 
 ---
 

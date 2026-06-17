@@ -1,6 +1,17 @@
 ﻿# 🐟 Fish Ecology Assistant
 
-![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge) ![License](https://img.shields.io/badge/License-MIT-brightgreen?style=for-the-badge) ![Version](https://img.shields.io/badge/Version-v8.1-blueviolet?style=for-the-badge) ![Species](https://img.shields.io/badge/Species-430-success?style=for-the-badge) ![Traits](https://img.shields.io/badge/Traits-289-important?style=for-the-badge) ![FISHMORPH](https://img.shields.io/badge/FISHMORPH-251%20spp-informational?style=for-the-badge) ![Population](https://img.shields.io/badge/Population-26%20records-critical?style=for-the-badge) ![Bilingual](https://img.shields.io/badge/Bilingual-CN%C2%B7EN-ff69b4?style=for-the-badge) ![DB](https://img.shields.io/badge/DB-SQLite-lightgrey?style=for-the-badge) ![Frontier](https://img.shields.io/badge/Frontier-Kalman-red?style=for-the-badge)
+<p align="center">
+  ![Python 3.10+](https://img.shields.io/badge/Python%203.10%2B-3776AB?style=flat-square)
+  ![MIT](https://img.shields.io/badge/MIT-34D058?style=flat-square)
+  ![v8.1](https://img.shields.io/badge/v8.1-8A4FCE?style=flat-square)
+  ![430 species](https://img.shields.io/badge/430%20species-007EC6?style=flat-square)
+  ![289 traits](https://img.shields.io/badge/289%20traits-FE7D37?style=flat-square)
+  ![FISHMORPH](https://img.shields.io/badge/FISHMORPH-0EA5E9?style=flat-square)
+  ![population-level](https://img.shields.io/badge/population-level-D73A4A?style=flat-square)
+  ![CN-EN](https://img.shields.io/badge/CN-EN-EC4899?style=flat-square)
+  ![SQLite](https://img.shields.io/badge/SQLite-6B7280?style=flat-square)
+</p>
+
 
 > 🌊 Knowledge Supply Core — 430 Yangtze fish species, 289 morphological traits, population-level variation.
 > Panta Rhei — Everything flows.
@@ -67,27 +78,6 @@ It integrates **16 MCP tools**, **12 domain-specific AI sub-agents**, **5-engine
 
 ---
 
-## 📜 Three Tenets
-
-**🌊 The River Flows** — Packages update, species migrate, consensus shifts, climate reshapes. Today's certainty is tomorrow's footnote. We place knowledge on a timeline and view it dynamically.
-
-**🍂 Knowledge Drifts** — The foundation of science is falsifiability (Popper). No discovery is final — only the best current explanation. We speak in calibrated language: evidence suggests, not proves.
-
-**🌟 Emergence Patterns** — Life, consciousness, ecosystems, AI reasoning — all emergent. When three or more independent sources converge on the same unexpected pattern, the system flags emergence — never dismisses it as noise.
-
-### ⚖️ Why This Matters
-
-| Scenario | Traditional | Dynamic Worldview |
-|:---------|:-----------|:-------------------|
-| Citations | Studies prove | Smith (2022) found X; Jones (2024) added Y |
-| Outliers | Dismiss as noise | Three or more sources → emergence signal |
-| Knowledge Decay | Handbook frozen | Review records include next review date |
-| Method | Fixed pipeline | Dynamic selection, dynamic confidence |
-
-> 道生一，一生二，二生三，三生万物。
-
-From One comes Two, from Two comes Three, from Three come all things.
-
 
 ## 📜 Three Tenets
 
@@ -96,19 +86,6 @@ From One comes Two, from Two comes Three, from Three come all things.
 **📖 Knowledge is temporary** — The foundation of science is falsification (Popper). No discovery is ultimate truth—only the best current explanation. We use calibrated language: evidence suggests not proves.
 
 **🌟 Emergence is the norm** — Life, consciousness, ecosystems, AI reasoning—all are emergent phenomena. When >=3 independent sources point to the same unexpected pattern, the system flags it as an emergence signal.
-
-### ⚖️ Why This Matters
-
-| Scenario | Traditional | Dynamic Worldview |
-|:---------|:-----------|:------------------|
-| Citations | Studies prove it | Smith (2022) found X, Jones (2024) added Y |
-| Outliers | Ignore as noise | >=3 sources → emergence signal |
-| Knowledge decay | Handbook frozen | Review records include Next review date |
-
-> 道生一，一生二，二生三，三生万物。
-
-This is the **S-state (V0)** of the Triangle — Knowledge Supply, holding 430 Yangtze fish species.
-
 
 ## 🚀 Quick Start
 
@@ -154,18 +131,18 @@ fish-ecology-assistant/
 
 ## ✨ Features
 
-| Feature | Description |
-|---------|-------------|
-| 🗃️ 430 Species | Complete Yangtze River fish species database |
-| 📏 289 Morphology Traits | Sourced from FISHMORPH (251), FishBase, FAO, literature |
-| 🌊 Population-level Data | 26 records with water-body-specific trait variation |
-| 🔬 Trait Catalog | 61 traits in 7 categories (morphology→life history→feeding→...) |
-| 🏛️ Bilingual Conservation | IUCN + China Red List + National Protection + CITES |
-| 📊 Excel/HTML Reports | Double-click reports with 2-level hierarchical headers |
-| 🔄 FishBase Auto-sync | Automated trait pulling with source traceability |
-| 🕸️ Network Science | Trait co-occurrence networks, keystone trait identification |
-| 📡 Kalman Filter | Emergence signal detection from noisy population data |
-| 🔗 KB-First Architecture | Zero-network lookup for 30 core species |
+| Feature | Status | Description |
+|---------|:------:|-------------|
+| 🗃️ 430 Species DB | ✅ | Yangtze fish species with bilingual conservation |
+| 📏 289 Morphology | ✅ | FISHMORPH (251) + FishBase + FAO + manual |
+| 🌊 Population-level | ✅ | 26 records with water-body annotation |
+| 🔬 Trait Catalog | ✅ | 61 traits in 7 categories |
+| 🏛️ Conservation | ✅ | IUCN + China Red List + National + CITES |
+| 📊 Excel/HTML | ✅ | Bilingual reports, 2-level headers |
+| 🔗 KB-First | ✅ | SQLite FTS5, zero-network for 30 core spp |
+| 🕸️ Trait Network | ✅ | Jaccard co-occurrence, keystone traits |
+| 📡 Kalman Filter | ✅ | Emergence detection from noisy data |
+| 🔄 FishBase Sync | 🟡 | Script ready, SSL blocked in env |
 
 ---
 

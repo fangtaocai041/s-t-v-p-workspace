@@ -1,6 +1,17 @@
 ﻿# 🐟 鱼类生态学助手
 
-![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge) ![协议](https://img.shields.io/badge/%E5%8D%8F%E8%AE%AE-MIT-brightgreen?style=for-the-badge) ![版本](https://img.shields.io/badge/%E7%89%88%E6%9C%AC-v8.1-blueviolet?style=for-the-badge) ![物种](https://img.shields.io/badge/%E7%89%A9%E7%A7%8D-430-success?style=for-the-badge) ![性状](https://img.shields.io/badge/%E6%80%A7%E7%8A%B6-289-important?style=for-the-badge) ![FISHMORPH](https://img.shields.io/badge/FISHMORPH-251%E7%A7%8D-informational?style=for-the-badge) ![种群级](https://img.shields.io/badge/%E7%A7%8D%E7%BE%A4%E7%BA%A7-26%E6%9D%A1-critical?style=for-the-badge) ![双语](https://img.shields.io/badge/%E5%8F%8C%E8%AF%AD-%E4%B8%AD%C2%B7%E8%8B%B1-ff69b4?style=for-the-badge) ![数据库](https://img.shields.io/badge/%E6%95%B0%E6%8D%AE%E5%BA%93-SQLite-lightgrey?style=for-the-badge) ![前沿](https://img.shields.io/badge/%E5%89%8D%E6%B2%BF-%E5%8D%A1%E5%B0%94%E6%9B%BC-red?style=for-the-badge)
+<p align="center">
+  ![Python 3.10+](https://img.shields.io/badge/Python%203.10%2B-3776AB?style=flat-square)
+  ![MIT](https://img.shields.io/badge/MIT-34D058?style=flat-square)
+  ![v8.1](https://img.shields.io/badge/v8.1-8A4FCE?style=flat-square)
+  ![430 species](https://img.shields.io/badge/430%20species-007EC6?style=flat-square)
+  ![289 traits](https://img.shields.io/badge/289%20traits-FE7D37?style=flat-square)
+  ![FISHMORPH](https://img.shields.io/badge/FISHMORPH-0EA5E9?style=flat-square)
+  ![population-level](https://img.shields.io/badge/population-level-D73A4A?style=flat-square)
+  ![CN-EN](https://img.shields.io/badge/CN-EN-EC4899?style=flat-square)
+  ![SQLite](https://img.shields.io/badge/SQLite-6B7280?style=flat-square)
+</p>
+
 
 > 🌊 知识供给核心 — 430种长江鱼类，289项形态性状，种群级变异。
 🌊 知识供给核心 — 430种长江鱼类，289项形态性状，种群级变异。
@@ -89,27 +100,6 @@
 
 ---
 
-## 📜 三谛
-
-**🌊 万象流转** — R包迭代，物种迁徙，共识更迭，气候重塑生态。今日之确论，半载后或为陈迹。吾辈不视任何知识为永恒真理，而将其置于时间轴上，以动态眼光审之。
-
-**🍂 真知若寄** — 科学之基石，在于可证伪（波普尔）。无发现乃终极真理——唯有「当下最佳解释」。吾辈用校准之语：「证据提示」而非「证明」，「Smith (2022) 发现」而非「研究表明」。每一条输出，皆镌刻时间之锚。
-
-**🌟 涌现成章** — 生命、意识、生态、AI推理——莫非涌现。不可执一隅以窥全豹。当≥3个独立来源指向同一意外模式，系统不以其为噪声而弃之，乃标记为涌现信号而追踪之。
-
-### ⚖️ 何以重要
-
-| 事境 | 旧习 | 新观 |
-|:-----|:----|:----|
-| 引用 | 「研究证明」 | 「Smith(2022) 发现 X，Jones(2024) 补 Y」 |
-| 异常 | 视为噪声弃之 | ≥3 来源 → 涌现信号，持续追踪 |
-| 知识衰减 | 手册尘封不更 | 审查记录含「下次审查日期」 |
-| 方法选择 | 流水线一成不变 | 择法动态，信心动态 |
-
-> 道生一，一生二，二生三，三生万物。
-
-此为三角之根，载 430 种长江鱼类。
-
 
 ## 📜 三大信条
 
@@ -171,18 +161,18 @@ fish-ecology-assistant/
 
 ## ✨ 功能特性
 
-| 功能 | 说明 |
-|------|------|
-| 🗃️ 430 物种 | 完整长江鱼类物种数据库 |
-| 📏 289 形态性状 | FISHMORPH(251种) + FishBase + FAO + 文献 |
-| 🌊 种群级数据 | 26条含水域标注的种内性状变异记录 |
-| 🔬 性状目录 | 61项性状分7大类 (形态→生活史→食性→...) |
-| 🏛️ 双语保护等级 | IUCN + 中国红色名录 + 国家重点 + CITES |
-| 📊 Excel/HTML 报告 | 双击打开，双层表头，中英双语 |
-| 🔄 FishBase 自动同步 | 自动拉取性状，完整溯源 |
-| 🕸️ 网络科学 | 性状共现网络，关键性状识别 |
-| 📡 卡尔曼滤波 | 从噪声种群数据检测涌现信号 |
-| 🔗 KB-First 架构 | 30种核心物种零网络查询 |
+| 功能 | 状态 | 说明 |
+|------|:--:|------|
+| 🗃️ 430 物种库 | ✅ | 长江鱼类 + 双语保护等级 |
+| 📏 289 形态性状 | ✅ | FISHMORPH(251) + FishBase + FAO + 手动 |
+| 🌊 种群级数据 | ✅ | 26条含水域标注 |
+| 🔬 性状目录 | ✅ | 61项性状分7大类 |
+| 🏛️ 保护等级 | ✅ | IUCN + 中国红皮书 + 国家重点 + CITES |
+| 📊 Excel/HTML | ✅ | 双语报告，双层表头 |
+| 🔗 KB-First | ✅ | SQLite FTS5，30种核心零网络 |
+| 🕸️ 性状网络 | ✅ | Jaccard共现，关键性状识别 |
+| 📡 卡尔曼滤波 | ✅ | 噪声数据涌现检测 |
+| 🔄 FishBase同步 | 🟡 | 脚本就绪，SSL环境限制 |
 
 ---
 

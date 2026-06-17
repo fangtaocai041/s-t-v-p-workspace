@@ -1,6 +1,17 @@
 ﻿# 🔍 Cognitive Search Engine
 
-![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge) ![License](https://img.shields.io/badge/License-MIT-brightgreen?style=for-the-badge) ![Version](https://img.shields.io/badge/Version-v5.9-blueviolet?style=for-the-badge) ![Engines](https://img.shields.io/badge/Engines-15%2B-success?style=for-the-badge) ![Thompson](https://img.shields.io/badge/Thompson-Sampling-important?style=for-the-badge) ![PID](https://img.shields.io/badge/PID-Rate%20Limit-critical?style=for-the-badge) ![MPC](https://img.shields.io/badge/MPC-Optimization-informational?style=for-the-badge) ![Async](https://img.shields.io/badge/Async-aiohttp-ff69b4?style=for-the-badge) ![CN/EN](https://img.shields.io/badge/CN%2FEN-Dual-orange?style=for-the-badge) ![Agent](https://img.shields.io/badge/Agent-Judge-red?style=for-the-badge)
+<p align="center">
+  ![Python 3.10+](https://img.shields.io/badge/Python%203.10%2B-3776AB?style=flat-square)
+  ![MIT](https://img.shields.io/badge/MIT-34D058?style=flat-square)
+  ![v5.9](https://img.shields.io/badge/v5.9-8A4FCE?style=flat-square)
+  ![15+ engines](https://img.shields.io/badge/15%2B%20engines-007EC6?style=flat-square)
+  ![Thompson](https://img.shields.io/badge/Thompson-FE7D37?style=flat-square)
+  ![PID control](https://img.shields.io/badge/PID%20control-D73A4A?style=flat-square)
+  ![aiohttp](https://img.shields.io/badge/aiohttp-0EA5E9?style=flat-square)
+  ![CN/EN](https://img.shields.io/badge/CN%2FEN-EC4899?style=flat-square)
+  ![BDI agent](https://img.shields.io/badge/BDI%20agent-F59E0B?style=flat-square)
+</p>
+
 
 > ⚡ Search Verification Core — BDI cognitive search with 15+ engines, Thompson Sampling, and MPC optimization.
 > You cannot answer today's question with yesterday's search.
@@ -48,26 +59,6 @@ This is not a slogan. It is the operating system running through every line of c
 From One comes Two, from Two comes Three, from Three come all things.
 
 
-## 📜 Three Tenets
-
-**🌍 The world is dynamic** — R packages update, species distributions shift, scientific consensus evolves, climate change reshapes ecosystems. A correct conclusion today may be outdated in six months.
-
-**📖 Knowledge is temporary** — The foundation of science is falsification (Popper). No discovery is ultimate truth—only the best current explanation. We use calibrated language: evidence suggests not proves.
-
-**🌟 Emergence is the norm** — Life, consciousness, ecosystems, AI reasoning—all are emergent phenomena. When >=3 independent sources point to the same unexpected pattern, the system flags it as an emergence signal.
-
-### ⚖️ Why This Matters
-
-| Scenario | Traditional | Dynamic Worldview |
-|:---------|:-----------|:------------------|
-| Citations | Studies prove it | Smith (2022) found X, Jones (2024) added Y |
-| Outliers | Ignore as noise | >=3 sources → emergence signal |
-| Knowledge decay | Handbook frozen | Review records include Next review date |
-
-> 道生一，一生二，二生三，三生万物。
-
-This is the **S-state (V0)** of the Triangle — Knowledge Supply, holding 430 Yangtze fish species.
-
 
 ## 🚀 Quick Start
 
@@ -109,19 +100,20 @@ cognitive-search-engine/
 
 ## ✨ Features
 
-| Feature | Description |
-|---------|-------------|
-| 🧠 BDI Cognitive | Belief→Desire→Intention adaptive search loop |
-| 🌐 15+ Search Engines | PubMed, Crossref, OpenAlex, Semantic Scholar, CNKI, Wanfang... |
-| ⚡ Async Search | aiohttp-based AsyncParallelSearch, 3-5x faster |
-| 🎯 Thompson Sampling | Learned engine selection replacing rule-based pruning |
-| 📊 PID Rate Limiting | Adaptive API request rate control |
-| 🎛️ MPC Optimization | Model Predictive Control for search cost optimization |
-| ⚖️ Agent-as-Judge | LLM-based result quality evaluation (4 dimensions) |
-| ✅ 5-level Trust | DOI→PMID→Species→Author→Journal scoring |
-| 🔍 OCR Variants | Systematic scientific name variant generation |
-| 🌊 CN/EN Dual Channel | Chinese + English literature separate routing |
-| 🔄 Self-Evolution | 7 triggers auto-adapt search parameters |
+| Feature | Status | Description |
+|---------|:------:|-------------|
+| 🧠 BDI MesoAgent | ✅ | Belief→Desire→Intention adaptive loop |
+| 🌐 15+ Providers | ✅ | PubMed, Crossref, OpenAlex, Semantic Scholar, CNKI... |
+| ⚡ Async Search | ✅ | aiohttp-based, 3-5x faster |
+| 🎯 Thompson Sampling | ✅ | Learned engine selection |
+| 📊 PID Rate Limiter | ✅ | Adaptive API rate control |
+| 🎛️ MPC World Model | ✅ | Search cost optimization |
+| ⚖️ Agent Judge | ✅ | LLM-based 4-dimension evaluation |
+| ✅ 5-level Trust | ✅ | DOI→PMID→Species→Author→Journal |
+| 🔍 OCR Variants | ✅ | Systematic name variant generation |
+| 🌊 CN/EN Channels | ✅ | Separate ZH/EN literature routing |
+| 🔄 Self-Evolution | ✅ | 7 triggers auto-adapt parameters |
+| 🐛 Error Logging | ✅ | Fixed 25+ silent except:pass |
 
 ---
 
