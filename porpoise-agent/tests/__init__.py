@@ -1,3 +1,0 @@
-"""
-porpoise-agent tests.
-"""

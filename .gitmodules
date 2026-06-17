@@ -1,3 +1,6 @@
 [submodule "eon-core"]
 	path = eon-core
 	url = git@github.com:fangtaocai041/eon-core.git
+[submodule "porpoise-agent"]
+	path = porpoise-agent
+	url = git@gitee.com:caifangtao/porpoise-agent.git
