@@ -4,3 +4,18 @@
 [submodule "porpoise-agent"]
 	path = porpoise-agent
 	url = git@gitee.com:caifangtao/porpoise-agent.git
+[submodule "coilia-agent"]
+	path = coilia-agent
+	url = git@gitee.com:caifangtao/coilia-agent.git
+[submodule "culter-agent"]
+	path = culter-agent
+	url = git@gitee.com:caifangtao/culter-agent.git
+[submodule "cognitive-search-engine"]
+	path = cognitive-search-engine
+	url = git@gitee.com:caifangtao/cognitive-search-engine.git
+[submodule "conflict-arbiter"]
+	path = conflict-arbiter
+	url = git@gitee.com:caifangtao/conflict-arbiter.git
+[submodule "fish-ecology-assistant"]
+	path = fish-ecology-assistant
+	url = git@gitee.com:caifangtao/fish-ecology-assistant.git

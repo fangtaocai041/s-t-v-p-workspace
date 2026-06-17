@@ -1,1 +1,0 @@
-﻿# Culter Agent tests
