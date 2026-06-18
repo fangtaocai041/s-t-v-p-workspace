@@ -26,6 +26,60 @@ from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
+# ── Circuit breaker integration ──
+_CIRCUIT_BREAKER_NAMES = {
+    "fish": "fish-kb",
+    "cognitive": "cognitive-search",
+    "porpoise": "porpoise-agent",
+    "coilia": "coilia-agent",
+    "culter": "culter-agent",
+    "conflict": "conflict-arbiter",
+}
+
+def _get_breaker(name: str):
+    """Lazy-import circuit breaker registry."""
+    try:
+        import sys as _sys2
+        import os as _os2
+        _e = _os2.path.normpath(_os2.path.join(_os2.path.dirname(__file__), '..', 'eon-core', 'src', 'shared'))
+        if _e not in _sys2.path:
+            _sys2.path.insert(0, _e)
+        from circuit_breaker import get_registry as _get_reg
+        _proj = _CIRCUIT_BREAKER_NAMES.get(name, name)
+        return _get_reg().get(_proj)
+    except ImportError:
+        return None
+
+
+# ── Evolution feedback loop (auto-start on first coordinator call) ──
+_FEEDBACK_LOOP_STARTED = False
+
+def _ensure_feedback_loop():
+    """Auto-start the evolution feedback loop (once, thread-safe)."""
+    global _FEEDBACK_LOOP_STARTED
+    if _FEEDBACK_LOOP_STARTED:
+        return
+    try:
+        import sys as _sys3
+        import os as _os3
+        _e3 = _os3.path.normpath(_os3.path.join(_os3.path.dirname(__file__), '..', 'eon-core', 'src', 'shared'))
+        if _e3 not in _sys3.path:
+            _sys3.path.insert(0, _e3)
+        from circuit_breaker import get_registry as _cb_reg
+        from evolution_feedback import EvolutionFeedbackLoop
+        loop = EvolutionFeedbackLoop(log_path=str(
+            Path(__file__).resolve().parent.parent / "logs" / "evolution_feedback.jsonl"
+        ))
+        for proj_key, circuit_name in _CIRCUIT_BREAKER_NAMES.items():
+            cb = _cb_reg().get(circuit_name)
+            loop.attach(circuit_name, cb, min_failures=3, cooldown_sec=120)
+        loop.start(interval_sec=30.0, circuit_registry=_cb_reg())
+        _FEEDBACK_LOOP_STARTED = True
+        logger.info("Evolution feedback loop auto-started")
+    except Exception as e:
+        logger.debug(f"Evolution feedback loop unavailable: {e}")
+
+
 # ── 项目名称 → 适配器 getter 映射 ──
 _PROJECT_GETTERS = {}
 
@@ -72,15 +126,49 @@ class Coordinator:
         """调用单个项目的 adapter.search()。
 
         Args:
-            project: "fish" | "cognitive" | "porpoise" | "coilia" | "conflict"
+            project: "fish" | "cognitive" | "porpoise" | "coilia" | "culter" | "conflict"
             query: 搜索查询 (物种名/问题)
             **kwargs: 传递给 adapter.search() 的额外参数
 
         Returns:
             adapter.search() 的结果字典
+
+        Circuit breaker:
+            - CLOSED → 正常调用
+            - OPEN → 快速失败, 返回 error 字典 (不 cascade)
+            - HALF_OPEN → 限流探测
         """
+        # Auto-start evolution feedback loop on first call
+        _ensure_feedback_loop()
+
+        # Circuit breaker check
+        breaker = _get_breaker(project)
+        if breaker and not breaker.can_pass():
+            logger.warning(f"Circuit [{project}] is OPEN — request blocked")
+            return {
+                "status": "error",
+                "error": f"Circuit [{project}] is OPEN — too many failures, cooling down",
+                "circuit_open": True,
+                "project": project,
+                "query": query,
+            }
+
         adapter = _lazy_getter(project)
-        return adapter.search(query, **kwargs)
+        try:
+            result = adapter.search(query, **kwargs)
+            if breaker:
+                breaker.record_success()
+            return result
+        except Exception as e:
+            if breaker:
+                breaker.record_failure()
+            logger.error(f"Coordinator.call({project}) failed: {e}")
+            return {
+                "status": "error",
+                "error": str(e),
+                "project": project,
+                "query": query,
+            }
 
     def health(self, project: str) -> Dict[str, Any]:
         """查询单个项目的健康状态。"""
@@ -89,6 +177,41 @@ class Coordinator:
     def info(self, project: str) -> Dict[str, Any]:
         """查询单个项目的能力信息。"""
         return _lazy_getter(project).info()
+
+    def circuit_health(self) -> Dict[str, Any]:
+        """查询所有项目的电路熔断器状态.
+
+        Returns:
+            所有项目熔断器的健康摘要。
+        """
+        breaker = _get_breaker("fish")  # Use any to get registry
+        if breaker is None:
+            return {"status": "unavailable", "message": "Circuit breaker not loaded"}
+        try:
+            # Import via same mechanism as _get_breaker
+            import sys as _sys2
+            import os as _os2
+            _e2 = _os2.path.normpath(_os2.path.join(_os2.path.dirname(__file__), '..', 'eon-core', 'src', 'shared'))
+            if _e2 not in _sys2.path:
+                _sys2.path.insert(0, _e2)
+            from circuit_breaker import get_registry as _get_reg
+            return _get_reg().health()
+        except ImportError:
+            return {"status": "unavailable", "message": "eon-core shared not available"}
+
+    def reset_circuits(self) -> Dict[str, Any]:
+        """手动重置所有熔断器。"""
+        try:
+            import sys as _sys2
+            import os as _os2
+            _e2 = _os2.path.normpath(_os2.path.join(_os2.path.dirname(__file__), '..', 'eon-core', 'src', 'shared'))
+            if _e2 not in _sys2.path:
+                _sys2.path.insert(0, _e2)
+            from circuit_breaker import get_registry as _get_reg
+            _get_reg().reset_all()
+            return {"status": "ok", "message": "All circuits reset to CLOSED"}
+        except ImportError:
+            return {"status": "error", "message": "Circuit breaker not available"}
 
     # ── Level 2: 按通路调用 ──
 

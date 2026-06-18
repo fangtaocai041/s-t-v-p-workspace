@@ -33,6 +33,31 @@ from typing import Any, Dict, List, Optional
 _WORKSPACE = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(_WORKSPACE))
 
+# ── Checkpoint manager for crash resilience ──
+_PIPELINE_CHECKPOINT = None  # Lazy init
+
+def _get_checkpoint(query: str) -> Optional[object]:
+    """Get pipeline checkpoint manager for crash-resilient resume."""
+    global _PIPELINE_CHECKPOINT
+    if _PIPELINE_CHECKPOINT is None:
+        try:
+            import sys as _csys
+            import os as _cos
+            _e = _cos.path.normpath(_cos.path.join(_cos.path.dirname(__file__), '..', 'eon-core', 'src', 'shared'))
+            if _e not in _csys.path:
+                _csys.path.insert(0, _e)
+            from checkpoint import CheckpointManager
+            safe_name = re.sub(r'[^a-zA-Z0-9]+', '_', query)[:60]
+            _PIPELINE_CHECKPOINT = CheckpointManager(f"pipeline_{safe_name}")
+        except ImportError:
+            class _NullCheckpoint:
+                def save(self, *a, **kw): pass
+                def restore(self, *a): return None
+                def has_checkpoint(self, *a): return False
+                def complete(self): pass
+            _PIPELINE_CHECKPOINT = _NullCheckpoint()
+    return _PIPELINE_CHECKPOINT
+
 
 # ═══════════════════════════════════════════════════════════════
 # Types
@@ -193,17 +218,53 @@ def phase_kb_lookup(species: str) -> PhaseResult:
 # Phase 2: Cognitive Search (only for SEARCH_LITERATURE)
 # ═══════════════════════════════════════════════════════════════
 
+# PID-controlled adaptive timeout for cognitive search
+_SEARCH_TIMEOUT_LIMITER = None  # Lazy init
+
+def _get_search_timeout() -> float:
+    """Get adaptive timeout using PID controller.
+
+    Starts at 8s baseline, adjusts based on past search success/failure.
+    Successful fast searches → timeout decreases (speed up).
+    Failed/timeout searches → timeout increases (give more time).
+    """
+    global _SEARCH_TIMEOUT_LIMITER
+    if _SEARCH_TIMEOUT_LIMITER is None:
+        try:
+            import sys as _psys
+            import os as _pos
+            _e = _pos.path.normpath(_pos.path.join(_pos.path.dirname(__file__), '..', 'eon-core', 'src', 'shared'))
+            if _e not in _psys.path:
+                _psys.path.insert(0, _e)
+            from pid_limiter import PIDRateLimiter
+            _SEARCH_TIMEOUT_LIMITER = PIDRateLimiter(
+                target_error_rate=0.1,  # Allow 10% timeout rate
+                kp=0.3, ki=0.05, kd=0.1,
+                min_delay=3.0,   # At least 3s
+                max_delay=20.0,  # At most 20s
+                base_delay=8.0,  # Start at 8s
+            )
+        except ImportError:
+            # Fallback to fixed 8s if eon-core not available
+            class _FixedLimiter:
+                def wait(self, *args, **kwargs): return 8.0
+                def get_stats(self): return {}
+            _SEARCH_TIMEOUT_LIMITER = _FixedLimiter()
+    return _SEARCH_TIMEOUT_LIMITER.wait("cognitive_search", success=True)
+
+
 def phase_cognitive_search(species: str, kb_data: dict) -> PhaseResult:
     """Phase 2: 多引擎文献搜索。
 
     MCP-first: scholar/article/ncbi/tavily/exa (用户配置的MCP服务器)
     HTTP-fallback: PubMed/Crossref/OpenAlex direct REST APIs
-    内置 8s 超时保护。
+    内置自适应超时 (PID控制器, 3-20s)。
     """
     import threading
 
     t0 = time.time()
     result_container = {"result": None, "error": None, "mode": "unknown"}
+    timeout = _get_search_timeout()
 
     def _do_search():
         try:
@@ -218,17 +279,25 @@ def phase_cognitive_search(species: str, kb_data: dict) -> PhaseResult:
 
     thread = threading.Thread(target=_do_search, daemon=True)
     thread.start()
-    thread.join(timeout=8.0)  # 8s timeout
+    thread.join(timeout=timeout)
 
     elapsed = (time.time() - t0) * 1000
+    success = True
 
     if thread.is_alive():
+        success = False
+        # Update PID: failure (timeout)
+        if _SEARCH_TIMEOUT_LIMITER is not None:
+            try:
+                _SEARCH_TIMEOUT_LIMITER.wait("cognitive_search", success=False)
+            except Exception:
+                pass
         return PhaseResult(
             phase="cognitive_search",
             status="timeout",
             elapsed_ms=elapsed,
-            error="search timed out after 8s",
-            data={"papers": [], "query_used": species},
+            error=f"search timed out after {timeout:.0f}s (PID-adjusted)",
+            data={"papers": [], "query_used": species, "timeout_sec": timeout},
         )
 
     if result_container["error"]:
@@ -246,6 +315,13 @@ def phase_cognitive_search(species: str, kb_data: dict) -> PhaseResult:
         papers = result.get("papers", result.get("result", {}).get("papers", []))
     if not papers:
         papers = result.get("result", []) if isinstance(result, dict) else []
+
+    # Record search result for PID adaptation
+    if _SEARCH_TIMEOUT_LIMITER is not None:
+        try:
+            _SEARCH_TIMEOUT_LIMITER.wait("cognitive_search", success=bool(papers))
+        except Exception:
+            pass
 
     return PhaseResult(
         phase="cognitive_search",
@@ -352,6 +428,7 @@ def run_pipeline(query: str, force_intent: Optional[str] = None) -> PipelineResu
     t_total = time.time()
 
     result = PipelineResult(query=query)
+    cpm = _get_checkpoint(query)
 
     # ── Phase 0: Parse intent ──
     if force_intent:
@@ -365,8 +442,34 @@ def run_pipeline(query: str, force_intent: Optional[str] = None) -> PipelineResu
     result.species_name = species
     result.phases.append(PhaseResult(phase="parse_intent", data={"intent": intent.value, "species": species}))
 
+    # ── Try checkpoint restore for SEARCH_LITERATURE ──
+    if intent == Intent.SEARCH_LITERATURE and cpm.has_checkpoint("phase_3_conflict"):
+        # Pipeline was previously completed — restore from final state
+        saved = cpm.restore("phase_3_conflict")
+        if saved:
+            result.paper_count = saved.get("paper_count", 0)
+            result.papers = saved.get("papers", [])
+            result.conflict_verdict = saved.get("verdict", "")
+            result.total_elapsed_ms = (time.time() - t_total) * 1000
+            result.phases.append(PhaseResult(phase="checkpoint_restore", data={"from": "full_pipeline"}))
+            return result
+
     # ── Phase 1: KB lookup (always) ──
-    kb = phase_kb_lookup(species)
+    kb_restored = False
+    if cpm.has_checkpoint("phase_1_kb"):
+        saved_kb = cpm.restore("phase_1_kb")
+        if saved_kb:
+            kb = PhaseResult(
+                phase="kb_lookup",
+                status="ok",
+                data=saved_kb
+            )
+            kb_restored = True
+
+    if not kb_restored:
+        kb = phase_kb_lookup(species)
+        cpm.save("phase_1_kb", kb.data)
+
     result.phases.append(kb)
     result.kb_hit = kb.data.get("hit", False)
 
@@ -384,7 +487,25 @@ def run_pipeline(query: str, force_intent: Optional[str] = None) -> PipelineResu
     # ── Branch: SEARCH_LITERATURE → full pipeline ──
     if intent == Intent.SEARCH_LITERATURE:
         # Phase 2: cognitive search
-        cog = phase_cognitive_search(species, kb_data)
+        cog_restored = False
+        if cpm.has_checkpoint("phase_2_cognitive"):
+            saved_cog = cpm.restore("phase_2_cognitive")
+            if saved_cog:
+                cog = PhaseResult(
+                    phase="cognitive_search",
+                    status=saved_cog.get("status", "restored"),
+                    data=saved_cog.get("data", {}),
+                )
+                cog_restored = True
+
+        if not cog_restored:
+            cog = phase_cognitive_search(species, kb_data)
+            cpm.save("phase_2_cognitive", {
+                "status": cog.status,
+                "data": cog.data,
+                "query": species,
+            })
+
         result.phases.append(cog)
         papers = cog.data.get("papers", [])
         result.paper_count = len(papers)
@@ -392,7 +513,20 @@ def run_pipeline(query: str, force_intent: Optional[str] = None) -> PipelineResu
 
         # Phase 3: credibility scoring
         if papers:
-            cred = phase_score_credibility(papers)
+            cred_restored = False
+            if cpm.has_checkpoint("phase_3_credibility"):
+                saved_cred = cpm.restore("phase_3_credibility")
+                if saved_cred:
+                    cred = PhaseResult(
+                        phase="credibility_scoring", status="ok",
+                        data=saved_cred
+                    )
+                    cred_restored = True
+
+            if not cred_restored:
+                cred = phase_score_credibility(papers)
+                cpm.save("phase_3_credibility", cred.data)
+
             result.phases.append(cred)
             result.credibility_scores = cred.data.get("scores", [])
 
@@ -400,6 +534,13 @@ def run_pipeline(query: str, force_intent: Optional[str] = None) -> PipelineResu
         conflict = phase_check_conflicts(species, papers)
         result.phases.append(conflict)
         result.conflict_verdict = conflict.data.get("verdict", "")
+
+        # Final checkpoint
+        cpm.save("phase_3_conflict", {
+            "paper_count": result.paper_count,
+            "papers": result.papers,
+            "verdict": result.conflict_verdict,
+        })
 
     elif intent == Intent.QUERY:
         # KB-only — just return what we have

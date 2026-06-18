@@ -58,6 +58,12 @@ for _proj in [
         sys.path.remove(_proj_path)
     sys.path.insert(0, _proj_path)
 
+# 添加 eon-core shared 模块路径 — 所有项目共享的数学原语
+# (PID控制器, Thompson采样, 熔断器, 变体生成器, 进化引擎, 检查点)
+_EON_SHARED_PATH = str(_WORKSPACE_ROOT / "eon-core" / "src" / "shared")
+if _EON_SHARED_PATH not in sys.path:
+    sys.path.insert(0, _EON_SHARED_PATH)
+
 # 修复: 项目路径插入后会把 scripts/ 挤到后面，
 # 而 cognitive-search-engine/scripts/ 会遮蔽工作区 scripts/project_loader.py，
 # 故重新将 scripts 插入到最前

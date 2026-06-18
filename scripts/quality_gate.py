@@ -149,7 +149,7 @@ EXPECTED_DIRS = {
     "eon-core": ["src/adapter.py", "src/kernel/origin.py", "config/taiji.yaml"],
     "fish-ecology-assistant": ["src/adapter.py", "config/agent.yaml", "config/fish_species_kb.yaml"],
     "cognitive-search-engine": ["src/adapter.py", "config/agent.yaml", "config/search_rules.yaml"],
-    "porpoise-agent": ["src/adapter.py", "config/agent.yaml", "src/agent/orchestrator.py"],
+    "porpoise-agent": ["src/adapter.py", "config/agent.yaml", "src/agents/orchestrator.py"],
     "coilia-agent": ["src/adapter.py", "config/agent.yaml", "src/agent/orchestrator.py"],
     "culter-agent": ["src/adapter.py", "config/agent.yaml", "src/agent/orchestrator.py"],
     "conflict-arbiter": ["src/adapter.py", "config/agent.yaml", "src/arbiter.py"],

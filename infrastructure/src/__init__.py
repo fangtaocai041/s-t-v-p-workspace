@@ -17,6 +17,15 @@ src/__init__.py — 统一集成接口
     )
 """
 
+# Use direct imports to avoid circular dependency with infrastructure/__init__.py
+import sys as _sys
+from pathlib import Path as _Path
+
+_INFRA_SRC = _Path(__file__).resolve().parent
+_INFRA_ROOT = _INFRA_SRC.parent
+if str(_INFRA_ROOT) not in _sys.path:
+    _sys.path.insert(0, str(_INFRA_ROOT))
+
 from infrastructure.unified_emergence import (
     EmergenceType,
     DimensionalLevel,
@@ -31,7 +40,7 @@ from infrastructure.unified_emergence import (
     emerge_domains,
 )
 
-from infrastructure.fish_classifier import (
+from .fish_classifier import (
     MODELS,
     classify_60fish,
     extract_features_dinov2,
@@ -39,14 +48,14 @@ from infrastructure.fish_classifier import (
     benchmark as fish_benchmark,
 )
 
-from infrastructure.chinese_nlp import (
+from .chinese_nlp import (
     ECOLOGY_DICT,
     segment,
     ner,
     synonym_search,
 )
 
-from infrastructure.fish_detector import (
+from .fish_detector import (
     detect_image,
     process_video,
 )
