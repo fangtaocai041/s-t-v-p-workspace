@@ -3,10 +3,12 @@
 backup.py — Reasonix 工作区一键备份
 
 备份所有 git 仓库推送 + 关键配置文件 + MCP 二进制 + Zotero 数据库。
+支持百度网盘同步目录。
 
 用法:
     python scripts/backup.py                    # 备份到默认位置
     python scripts/backup.py --repo-only        # 只推送 git
+    python scripts/backup.py --baidu            # 备份到百度网盘同步目录
     python scripts/backup.py --dest D:\backup   # 指定备份目录
 """
 import json
@@ -19,6 +21,7 @@ from pathlib import Path
 
 WORKSPACE = Path(__file__).resolve().parent.parent
 BACKUP_DIR = Path(os.environ.get("REASONIX_BACKUP_DIR", str(WORKSPACE.parent / "Reasonix_backup")))
+BAIDU_SYNC_DIR = Path("D:/BaiduSyncdisk/百度网盘同步空间/Reasonix_backup")
 TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M")
 
 
@@ -127,8 +130,15 @@ def main():
     import argparse
     p = argparse.ArgumentParser(description="Reasonix workspace backup")
     p.add_argument("--repo-only", action="store_true", help="Only git push")
+    p.add_argument("--baidu", action="store_true", help="Backup to Baidu Netdisk sync dir")
     p.add_argument("--dest", type=str, default="", help="Backup directory")
     args = p.parse_args()
+
+    if args.baidu:
+        global BACKUP_DIR
+        BACKUP_DIR = BAIDU_SYNC_DIR
+        log(f"Baidu Netdisk mode: {BAIDU_SYNC_DIR}")
+        BAIDU_SYNC_DIR.mkdir(parents=True, exist_ok=True)
 
     if args.dest:
         global BACKUP_DIR
