@@ -1,25 +1,25 @@
 @echo off
-REM 百度网盘自动备份 — 文件写入后由百度网盘客户端自动同步到云端
-REM 建议: 每周手动运行一次, 或加入开机启动
+REM 百度网盘整盘镜像同步 — 增量同步整个 Reasonix 工作区到百度网盘
+REM 由 Windows 任务计划程序每天 20:00 自动执行
 
 echo ========================================
-echo  Reasonix 工作区备份  百度网盘
+echo  Reasonix 工作区镜像同步  百度网盘
 echo  %date% %time%
 echo ========================================
 
 cd /d D:\Reasonix
 
-REM 推送所有 git 仓库（代码安全第一）
-echo [1/2] 推送 git 仓库...
+REM 推送所有 git 仓库
+echo [1/3] 推送 git 仓库...
 python scripts\backup.py --repo-only
 
-REM 备份配置到百度网盘同步目录
-echo [2/2] 备份配置文件到百度网盘...
-python scripts\backup.py --baidu
+REM 整盘镜像同步
+echo [2/3] 整盘同步到百度网盘...
+call scripts\sync_to_baidu.bat
 
 echo ========================================
-echo  备份完成
-echo  百度网盘客户端将在有网时自动同步
-echo  备份位置: D:\BaiduSyncdisk\百度网盘同步空间\Reasonix_backup
-echo ========================================
+echo  全部完成
+echo  百度网盘客户端自动同步到云端
+echo  恢复: 下载 Reasonix_full_backup 到 D:\Reasonix
+echo ==========================================
 pause
