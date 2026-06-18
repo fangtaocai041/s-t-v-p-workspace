@@ -20,7 +20,7 @@ from datetime import datetime
 from pathlib import Path
 
 WORKSPACE = Path(__file__).resolve().parent.parent
-BACKUP_DIR = Path(os.environ.get("REASONIX_BACKUP_DIR", str(WORKSPACE.parent / "Reasonix_backup")))
+BACKUP_DIR = Path(os.environ.get("REASONIX_BACKUP_DIR", "D:/BaiduSyncdisk/百度网盘同步空间/Reasonix_backup"))
 BAIDU_SYNC_DIR = Path("D:/BaiduSyncdisk/百度网盘同步空间/Reasonix_backup")
 TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M")
 
@@ -127,6 +127,7 @@ def backup_data():
 # ── 主流程 ──
 
 def main():
+    global BACKUP_DIR
     import argparse
     p = argparse.ArgumentParser(description="Reasonix workspace backup")
     p.add_argument("--repo-only", action="store_true", help="Only git push")
@@ -135,13 +136,11 @@ def main():
     args = p.parse_args()
 
     if args.baidu:
-        global BACKUP_DIR
         BACKUP_DIR = BAIDU_SYNC_DIR
         log(f"Baidu Netdisk mode: {BAIDU_SYNC_DIR}")
         BAIDU_SYNC_DIR.mkdir(parents=True, exist_ok=True)
 
     if args.dest:
-        global BACKUP_DIR
         BACKUP_DIR = Path(args.dest)
 
     log(f"Backup started — workspace: {WORKSPACE}")
