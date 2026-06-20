@@ -1,21 +1,24 @@
 [submodule "eon-core"]
 	path = eon-core
-	url = git@github.com:fangtaocai041/eon-core.git
+	url = https://github.com/fangtaocai041/eon-core.git
 [submodule "porpoise-agent"]
 	path = porpoise-agent
-	url = git@github.com:fangtaocai041/porpoise-agent.git
+	url = https://github.com/fangtaocai041/porpoise-agent.git
 [submodule "coilia-agent"]
 	path = coilia-agent
-	url = git@github.com:fangtaocai041/coilia-agent.git
+	url = https://github.com/fangtaocai041/coilia-agent.git
 [submodule "culter-agent"]
 	path = culter-agent
-	url = git@github.com:fangtaocai041/culter-agent.git
+	url = https://github.com/fangtaocai041/culter-agent.git
 [submodule "cognitive-search-engine"]
 	path = cognitive-search-engine
-	url = git@github.com:fangtaocai041/cognitive-search-engine.git
+	url = https://github.com/fangtaocai041/cognitive-search-engine.git
 [submodule "conflict-arbiter"]
 	path = conflict-arbiter
-	url = git@github.com:fangtaocai041/conflict-arbiter.git
+	url = https://github.com/fangtaocai041/conflict-arbiter.git
+[submodule "san-sheng-wanwu-core"]
+	path = san-sheng-wanwu-core
+	url = https://github.com/fangtaocai041/san-sheng-wanwu-core.git
 [submodule "fish-ecology-assistant"]
 	path = fish-ecology-assistant
-	url = git@github.com:fangtaocai041/fish-ecology-assistant.git
+	url = https://github.com/fangtaocai041/fish-ecology-assistant.git
