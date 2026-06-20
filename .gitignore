@@ -19,11 +19,14 @@ node_modules/
 package-lock.json
 package.json
 
-# Reasonix runtime
+# Reasonix runtime (may contain API keys!)
+.reasonix/config.json*
+.reasonix/backups/
 .reasonix/truncated-results/
 .reasonix/setup-migrate.ps1
 .reasonix/deepseek-tokenizer.json.gz
 .reasonix/skills/reports/
+.reasonix/mcp-servers/
 
 # Logs
 workspace/logs/*.log
