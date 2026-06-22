@@ -2,14 +2,15 @@
 workspace — 五项目统一入口 (Package)
 
 无论从哪个项目目录运行 `reasonix code`，只需:
-    from workspace import search_species
+    from workspace import search_species, synthesize_review
 
     result = search_species("鳤")          # → cognitive-search-engine (V1)
-    result = search_species("珠星三块鱼")   # 中文名直接支持
-    print(result.summary())
+    review = synthesize_review("鳤")       # → 搜索 + 递归思考 → 综述 Markdown
+    print(review.markdown)
 
 专精路由:
     search_species(name)          → cognitive-search-engine   文献搜索
+    synthesize_review(name)       → 搜索 + eon-core 综述合成  一键综述
     lookup_species(name)          → fish-ecology-assistant    知识库查询
     assess_conservation(name)     → porpoise-agent            保护评估 (江豚)
     assess_species(name, context) → coilia-agent              洄游评估 (刀鲚)
@@ -655,3 +656,70 @@ def run_fish_pipeline(
         enable_assessment=enable_assessment,
         verbose=verbose,
     )
+
+
+# ═══════════════════════════════════════════════════════════
+# 综述合成 — 搜索 + 递归思考 + 质量把关 → 结构化 Markdown
+# ═══════════════════════════════════════════════════════════
+
+def synthesize_review(
+    species_name: str,
+    search_group: str = "standard",
+    search_limit: int = 20,
+    max_think_steps: int = 8,
+    verbose: bool = False,
+):
+    """
+    synthesize_review(name) → ReviewResult
+
+    一键综述合成: 自动搜索文献 → 递归推理 → 结构化综述 Markdown。
+
+    流程:
+      Phase 1: 调用 search_species() 搜索文献
+      Phase 2: 转换为 Paper 对象
+      Phase 3: 调用 eon-core ReviewSynthesizer 合成综述
+
+    用法:
+        from workspace import synthesize_review
+
+        # 快速综述
+        review = synthesize_review("鳤")
+        print(review.markdown)
+
+        # 保存到文件
+        with open("鳤_文献综述.md", "w", encoding="utf-8") as f:
+            f.write(review.markdown)
+
+        # 更多搜索结果 + 更深度推理
+        review = synthesize_review("Ochetobius elongatus",
+                                   search_limit=50, max_think_steps=12)
+    """
+    # Step 1: 搜索文献
+    sr = search_species(species_name, group=search_group, limit=search_limit)
+    papers_raw = sr.papers if hasattr(sr, 'papers') else []
+
+    if not papers_raw:
+        raise RuntimeError(
+            f"未找到 '{species_name}' 的文献。请检查物种名拼写或尝试学名。")
+
+    # Step 2: 转换为 Paper 对象
+    try:
+        from eon_core.src.review_synthesizer import ReviewSynthesizer, Paper
+    except ImportError:
+        raise RuntimeError(
+            "eon-core review_synthesizer 未找到。请确认 eon-core 已安装。")
+
+    papers = []
+    for p in papers_raw:
+        papers.append(Paper(
+            title=p.get("title", ""),
+            authors=p.get("authors", ""),
+            year=p.get("year", 0),
+            abstract=p.get("abstract", ""),
+            doi=p.get("doi", ""),
+            source=p.get("source", ""),
+        ))
+
+    # Step 3: 综述合成
+    syn = ReviewSynthesizer(max_think_steps=max_think_steps, verbose=verbose)
+    return syn.synthesize(papers, species=species_name)
