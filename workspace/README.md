@@ -75,6 +75,19 @@ python workspace/scripts/pipeline_search_species.py "珠星三块鱼" --phase lookup
 python -c "from workspace.scripts.coordinator import coordinator; print(coordinator.info('cognitive'))"
 ```
 
+### 🧭 目的模糊？跟我聊聊
+
+当你不知道想做什么的时候，试试这些斜杠命令：
+
+| 命令 | 用途 |
+|------|------|
+| `/explore-workspace` | "不知道能做什么" — 聊聊兴趣，推荐路径 |
+| `/focus-research` | "有个模糊的研究想法" — 逐步聚焦到可执行计划 |
+| `/discover-species` | "不知道研究哪种鱼" — 随机发现/关联发现/主题发现 |
+| `/capabilities` | "还有什么我能用的？" — 全景能力一览 + 场景推荐 |
+
+**用法：** 直接敲 `/explore-workspace` 然后跟我聊天就行。不问"你想做什么"，问"你对什么感兴趣"。
+
 ## 统一入口 API
 
 | 函数 | 路由 | 用途 |
@@ -131,6 +144,70 @@ workspace/
 ## 五项目即五独立仓库
 
 每个项目有独立的 `.git`，可单独开发、部署。`pipeline_search_species.py` 是它们的统一搜索入口。
+
+---
+
+## 🧬 RCCA 集成 (v2.1.0)
+
+**RCCA** (Recursive Convergence Cognitive Architecture) 是本工作空间的递归收敛认知核心，已部署到**所有 7 个子项目**：
+
+| 项目 | 部署状态 |
+|:-----|:--------:|
+| fish-ecology-assistant | ✅ |
+| cognitive-search-engine | ✅ |
+| porpoise-agent | ✅ |
+| coilia-agent | ✅ |
+| culter-agent | ✅ |
+| conflict-arbiter | ✅ |
+| eon-core | ✅ |
+
+### 已部署的核心能力
+
+| 模块 | 类名 | 用途 |
+|:-----|:-----|:-----|
+| 阻尼自我模型 | `SelfModelEngine` | 预测误差滑动窗口 → 稳定性检测 |
+| 资源分配策略 | `EmotionEngine` | 事件驱动策略选择 → 行为倾向 |
+| 概念转座层 | `TranspositionLayer` | 跳跃基因逻辑: 跨域推理模式迁移 |
+| 反思循环 | `ReflectionLoop` | 递归思考→转座→自我适应闭环 |
+
+### 从 workspace 使用
+
+```python
+from workspace import rcca_setup, rcca_health, rcca_health
+
+# 一键初始化全部核心模块
+core = rcca_setup()
+
+# 阻尼自我模型：稳定性自检
+state = core["self_model"].reflect()
+print(f"Stability: {state.stability:.3f}")
+
+# 情绪引擎：事件触发策略切换
+core["emotion"].stimulate("contradiction", 0.9)
+print(f"Tendency: {core['emotion'].behavioral_tendency}")
+
+# 转座层：跨域推理模式迁移
+tl = core["transposition"]
+tl.transpose("search", "verify", {"concept": "cross_domain", "confidence": 0.9})
+
+# 反思循环：多通道协作
+loop = core["reflection"]
+report = loop.run(["scholar", "cnki", "ncbi"], transposition=tl)
+
+# 健康检查（含 RCCA 状态）
+check = rcca_health()
+print(f"RCCA: {check['status']}")
+```
+
+### 从子项目直接使用
+
+```python
+from src.rcca_core import SelfModelEngine, EmotionEngine, TranspositionLayer, ReflectionLoop
+```
+
+核心版本: **RCCA v2.1.0** (2026-06-20) · 零外部依赖 · 即插即用
+
+---
 
 ## 相关文档
 

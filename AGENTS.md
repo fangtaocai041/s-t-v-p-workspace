@@ -211,3 +211,67 @@ flowchart LR
 ---
 
 *2026-06-18 · Reasonix 硅基生命体 v1.0*
+
+---
+
+## 七、Engineering Skills（工程技能）
+
+已安装 [mattpocock/skills](https://github.com/mattpocock/skills) 的 17 个工程工作流技能：
+
+### Issue tracker
+
+GitHub Issues — `fangtaocai041/...`. See docs/agents/issue-tracker.md.
+
+### 技能列表（21 项）
+
+| 技能 | 类别 | 用途 |
+|------|:----:|------|
+| `explore-workspace` | 🧭 | **交互引导**：不知道做什么时，聊聊兴趣推荐路径 |
+| `focus-research` | 🧭 | **交互引导**：模糊研究想法→逐步聚焦到可执行计划 |
+| `discover-species` | 🧭 | **交互引导**：物种发现（随机/关联/主题） |
+| `capabilities` | 🧭 | **交互引导**：全景能力一览 + 场景推荐 |
+| `ask-matt` | 🛠 | 路由导航：询问哪个技能适合当前场景 |
+| `codebase-design` | 🛠 | 深度模块设计：小接口 + 深实现 |
+| `diagnosing-bugs` | 🛠 | Bug 诊断循环：复现→最小化→假设→验证 |
+| `domain-modeling` | 🛠 | 域建模：共享语言 + CONTEXT.md + ADR |
+| `grill-with-docs` | 🛠 | 严苛面审 + 自动生成文档（ADR + 词汇表） |
+| `implement` | 🛠 | 基于 PRD/Issue 的实现执行 |
+| `improve-codebase-architecture` | 🛠 | 代码架构扫描与深度优化 |
+| `prototype` | 🛠 | 可抛弃原型设计（CLI 或 UI 变体） |
+| `to-prd` | 🛠 | 对话→PRD 自动生成 |
+| `to-issues` | 🛠 | PRD→垂直切分 Issue |
+| `triage` | 🛠 | Issue 状态机分诊 |
+| `grill-me` | ⚡ | 严苛面审（无代码库场景） |
+| `grilling` | ⚡ | 面审循环引擎 |
+| `handoff` | ⚡ | 对话压缩→交接文档 |
+| `teach` | ⚡ | 多 Session 教学 |
+| `writing-great-skills` | ⚡ | 技能编写参考 |
+| `setup-matt-pocock-skills` | 🛠 | 首次运行配置：Issue tracker / labels / docs |
+
+### 调用方式
+
+所有技能通过 `/<skill-name>` 调用，例如：
+
+- `/grill-with-docs` — 开始一个新功能的面审+文档流程
+- `/tdd` — 红绿重构 TDD 循环
+- `/triage` — Issue 分诊
+- `/diagnosing-bugs` — Bug 诊断
+- `/improve-codebase-architecture` — 架构优化
+
+首次使用前运行 `/setup-matt-pocock-skills` 完成配置。
+
+---
+
+## 八、交互式引导技能（模糊目标 → 具体行动）
+
+当你不知道想做什么时，这些技能帮你从模糊兴趣聚焦到可执行任务：
+
+| 技能 | 调用方式 | 适用场景 |
+|------|----------|----------|
+| **工作空间漫游** | `/explore-workspace` | "不知道能做什么" — 聊聊兴趣 → 推荐路径 |
+| **研究聚焦** | `/focus-research` | "有个模糊的研究想法" — 逐步聚焦到可执行计划 |
+| **物种发现** | `/discover-species` | "不知道研究哪种鱼" — 随机/关联/主题发现 |
+| **能力漫游** | `/capabilities` | "还有什么我能用的？" — 全景能力一览 + 场景推荐 |
+
+使用建议：任何时候觉得目的模糊，先敲 `/explore-workspace` 聊聊。不一定要有明确目标——聊着聊着就清楚了。
+

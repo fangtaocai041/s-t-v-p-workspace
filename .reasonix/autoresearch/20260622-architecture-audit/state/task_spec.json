@@ -1,0 +1,28 @@
+{
+  "task_id": "20260622-architecture-audit",
+  "goal": "以 DeepSeek 工程思维全面优化 Reasonix 10 项目架构：消除臃肿、修复调用链、统一代码逻辑",
+  "scope": [
+    "所有 10 个项目的代码冗余、重复导入、无用文件",
+    "跨项目调用链正确性和可执行性",
+    "配置文件的代码化（规则必须被实际执行）",
+    "项目间的职责划分清晰化",
+    "反幻觉措施的代码级嵌入"
+  ],
+  "non_goals": [
+    "不修改已正常运行的 MCP 引擎",
+    "不修改核心算法逻辑",
+    "不删除用户数据文件"
+  ],
+  "success_criteria": [
+    "workspace.health_check() 6/6 通过",
+    "search_species() 正常返回结果",
+    "所有跨项目导入通过",
+    "coordination_test.py 13/13 PASS",
+    "消除所有可安全删除的冗余文件",
+    "配置规则在代码中可追踪到执行路径"
+  ],
+  "verification_gates": [
+    "每次修改后运行 coordination_test.py --quick",
+    "每次修改后验证 from workspace import * 可用"
+  ]
+}

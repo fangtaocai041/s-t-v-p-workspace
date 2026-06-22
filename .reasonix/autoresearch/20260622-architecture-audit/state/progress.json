@@ -1,0 +1,22 @@
+{
+  "iteration": 2,
+  "timestamp": "2026-06-22 01:10",
+  "direction": "fix_root_cause_of_cross_import_failure",
+  "findings": [
+    "ROOT CAUSE: cognitive-search-engine/src/unified_search.py:27 used 'from src.parallel_search import' (ABSOLUTE) instead of 'from .parallel_search import' (RELATIVE)",
+    "This caused 'No module named src' when cognitive was imported from outside its own directory",
+    "FIX: changed to relative import '.parallel_search'",
+    "VERIFIED: cross-import works from eon-core, coilia-agent, workspace",
+    "coordination_test: 13/13 PASS",
+    "All 4 core chains verified: health_check, search_species, lookup_species, assess_conflict"
+  ],
+  "actions_taken": [
+    "unified_search.py: from src.parallel_search -> from .parallel_search (relative import)",
+    "This is the actual fix for '调用不了' - the fundamental cross-project import bug"
+  ],
+  "waste_analysis": {
+    "true_waste": "~450KB (san-sheng/workspace species overlap + domains.py copy)",
+    "visual_waste": "1045 files are junction mirrors (0KB actual)",
+    "rcca_core_dupes": "14 copies × 14KB = cannot safely deduplicate due to import chains"
+  }
+}

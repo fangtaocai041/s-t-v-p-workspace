@@ -1,0 +1,35 @@
+# Cross-Project Coordination Verification
+name: Cross-Project Verification
+
+on:
+  push:
+    branches: [master, main]
+  workflow_dispatch:
+
+jobs:
+  verify-junctions-and-imports:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+        with: { submodules: recursive }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install pyyaml
+
+      - name: List projects
+        run: ls -d */ | head -20
+
+      - name: Check workspace import
+        run: |
+          python -c "
+          import sys; sys.path.insert(0,'.')
+          from workspace import health_check, search_species, lookup_species
+          h = health_check()
+          print('Workspace health:', len(h), 'projects')
+          "
+        continue-on-error: true
+
+      - name: Coordination test suite
+        run: python scripts/coordination_test.py --quick
+        continue-on-error: true

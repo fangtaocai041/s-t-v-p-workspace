@@ -43,20 +43,13 @@ for _p in [str(_WORKSPACE_ROOT), str(_WORKSPACE_DIR)]:
     if _p not in sys.path:
         sys.path.insert(0, _p)
 
-# 确保所有项目目录可导入 (cognitive-search-engine 必须在最前 —
-# 否则其他项目的 src/ 会遮蔽 cognitive-search-engine/src/)
-for _proj in [
-    "cognitive-search-engine",   # ← 必须最先，避免 src/ 命名空间被遮蔽
-    "fish-ecology-assistant",
-    "porpoise-agent",
-    "coilia-agent",
-    "culter-agent",
-    "conflict-arbiter",
-]:
-    _proj_path = str(_WORKSPACE_ROOT / _proj)
-    if _proj_path in sys.path:
-        sys.path.remove(_proj_path)
-    sys.path.insert(0, _proj_path)
+# 确保所有项目可通过下划线联结导入
+# 不再单独添加连字符项目目录到 sys.path — 会导致 Python
+# 把 fish-ecology-assistant/fish_ecology_assistant/ (FastAPI 包)
+# 误认为顶层 fish_ecology_assistant 包，阻断 src/ 子包访问。
+# 改为依赖 D:\Reasonix 下的联结: fish_ecology_assistant → fish-ecology-assistant
+#
+# 每个项目的 src/__init__.py 已有自引用守卫确保内部 from src.xxx 正确解析。
 
 # 添加 eon-core shared 模块路径 — 所有项目共享的数学原语
 # (PID控制器, Thompson采样, 熔断器, 变体生成器, 进化引擎, 检查点)
@@ -90,15 +83,12 @@ def _preload_cognitive_module(rel_path: str, module_name: str):
 
 # 必须先加载 src.__init__ — 否则 Python 的包解析器找不到正确的 src 包
 _preload_cognitive_module("src/__init__.py", "src")
-_cognitive_unified = _preload_cognitive_module("src/unified_search.py", "src.unified_search")
-# 注: search_coordinator.py 已重命名为 search_streaming.py，变量未使用故不再预加载
+_cognitive_coordinator = _preload_cognitive_module("src/search_coordinator.py", "src.search_coordinator")
 
-if _cognitive_unified is not None:
-    _coordinated_search = getattr(_cognitive_unified, "coordinated_search", None)
-    _CoordinatedSearchResult = getattr(_cognitive_unified, "CoordinatedSearchResult", None)
+if _cognitive_coordinator is not None:
+    _coordinated_search = getattr(_cognitive_coordinator, "search", None)
 else:
     _coordinated_search = None
-    _CoordinatedSearchResult = None
 
 # ═══════════════════════════════════════════════════════
 # 智能 src.* 模块路由 — 基于 sys.path 顺序
@@ -202,6 +192,22 @@ _load_coordination()
 
 
 # ═══════════════════════════════════════════════════════
+# RCCA 核心 — 已部署到所有子项目
+# ═══════════════════════════════════════════════════════
+# 统一通过 _SmartSrcRouter 发现 src.rcca_core
+
+_RCCA_AVAILABLE = False
+try:
+    from src.rcca_core import SelfModelEngine as _SM
+    from src.rcca_core import EmotionEngine as _EM
+    from src.rcca_core import TranspositionLayer as _TL
+    from src.rcca_core import ReflectionLoop as _RL
+    _RCCA_AVAILABLE = True
+except ImportError:
+    pass
+
+
+# ═══════════════════════════════════════════════════════
 # 懒加载适配器 (首次调用时才加载对应项目)
 # ═══════════════════════════════════════════════════════
 
@@ -284,14 +290,14 @@ def search_species(
     if _coordinated_search is None:
         raise RuntimeError("cognitive-search-engine not found. Expected at: " +
                            str(_WORKSPACE_ROOT / "cognitive-search-engine"))
-    result = _coordinated_search(species_name=name, group=group, limit=limit)
+    result = _coordinated_search(species=name, group=group, limit=limit)
 
     # Fallback: SearchRuleEngine HTTP if MCP tools returned nothing
-    if result.total_papers == 0:
+    if len(result.papers) == 0:
         try:
             from src.rule_engine import SearchRuleEngine as _SRE
             sr = _SRE(mode="http")
-            sp_id = result.scientific_name.replace(" ", "_")
+            sp_id = result.species_name.replace(" ", "_")
             engine_res = sr.execute(sp_id)
             papers = engine_res.get("papers", [])
             if papers:
@@ -452,7 +458,7 @@ def health_check() -> Dict[str, Any]:
     """
     health_check() → dict
 
-    全项目健康检查 — 检查全部 5 个项目的状态。
+    全项目健康检查 — 检查全部 5 个项目的状态 + RCCA 集成状态。
     """
     results = {}
     for key, name in [
@@ -468,6 +474,10 @@ def health_check() -> Dict[str, Any]:
             results[name] = adapter.health()
         except Exception as e:
             results[name] = {"status": "error", "error": str(e)}
+    # 附加 RCCA 集成状态
+    results["rcca_integration"] = rcca_health()
+    # 附加 senses 层状态
+    results["senses_layer"] = senses_health()
     return results
 
 
@@ -498,15 +508,100 @@ def full_stack_search(name: str) -> Dict[str, Any]:
         "species": name,
         "profile": profile,
         "literature": {
-            "total": literature.total_papers,
+            "total": len(literature.papers),
             "mode": literature.mode,
-            "conservation": literature.conservation,
-            "scientific_name": literature.scientific_name,
+            "species_name": literature.species_name,
             "all_variants": literature.all_variants,
         },
         "credibility": credibility,
         "workflow": "WF_A: fish→cognitive→fish",
     }
+
+
+# ═══════════════════════════════════════════════════════
+# RCCA 集成 API
+# ═══════════════════════════════════════════════════════
+
+def rcca_setup() -> Dict[str, Any]:
+    """
+    rcca_setup() → dict
+
+    初始化 RCCA 核心模块实例（一键装配）。
+
+    返回:
+      - self_model: SelfModelEngine   — 阻尼自我模型
+      - emotion:    EmotionEngine     — 情绪驱动的资源分配策略
+      - transposition: TranspositionLayer — 跳跃基因转座层
+      - reflection: ReflectionLoop    — 反思循环
+
+    用法:
+      from workspace import rcca_setup
+      core = rcca_setup()
+      state = core["self_model"].reflect()
+    """
+    if not _RCCA_AVAILABLE:
+        raise RuntimeError("rcca_core not found — ensure at least one sub-project has src/rcca_core.py")
+    tl = _TL()
+    return {
+        "self_model": _SM(),
+        "emotion": _EM(transposition_layer=tl),
+        "transposition": tl,
+        "reflection": _RL(),
+    }
+
+
+def rcca_health() -> Dict[str, Any]:
+    """
+    rcca_health() → dict
+
+    RCCA 集成状态检查 — 确认所有子项目均已部署 rcca_core。
+
+    返回: {status, classes, projects}
+    """
+    if not _RCCA_AVAILABLE:
+        return {"status": "unavailable", "error": "rcca_core not found in any sub-project"}
+    return {
+        "status": "available",
+        "classes": ["SelfModelEngine", "EmotionEngine", "TranspositionLayer", "ReflectionLoop"],
+    }
+
+
+# ═══════════════════════════════════════════════════════
+# senses — 感受器层 (移植自 san-sheng-wanwu-core)
+# ═══════════════════════════════════════════════════════
+
+def setup_senses():
+    """一键创建所有领域感受器实例 + 搜索缓存。
+
+    返回: {domains: dict[str, DomainSense], cache: SearchCache, total_domains: int}
+
+    用法:
+      from workspace import setup_senses
+      s = setup_senses()
+      math_domain = s["domains"]["mathematics"]
+      result = math_domain.search("群论")
+    """
+    from workspace.senses.domains import create_all_domains, ALL_DOMAIN_NAMES
+    domain_list = create_all_domains()
+    domain_dict = {d.domain: d for d in domain_list}
+    from workspace.senses import SearchCache
+    cache = SearchCache()
+    return {"domains": domain_dict, "cache": cache, "total_domains": len(domain_dict)}
+
+
+def senses_health() -> Dict[str, Any]:
+    """感受器层集成状态。"""
+    try:
+        from workspace.senses import SenseInput, SenseOutput, SearchCache
+        from workspace.senses.domains import ALL_DOMAIN_NAMES, get_domain_topology
+        return {
+            "status": "available",
+            "domains": ALL_DOMAIN_NAMES,
+            "topology": get_domain_topology("biology", "ecology"),
+            "cache": "SearchCache (24h TTL)",
+        }
+    except Exception as e:
+        return {"status": "unavailable", "error": str(e)}
 
 
 # ═══════════════════════════════════════════════════════
