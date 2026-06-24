@@ -4,14 +4,14 @@
 
 ## 架构概览
 
-| 项目 | 角色 | 五行 | gRPC 端口 |
-|------|------|:----:|:---------:|
-| **eon-core** | UNIFIED_KERNEL (全层协调) | 全部 | — |
-| **fish-ecology-assistant** | S (State) → V0 SupplyVertex | 土 🟫 | 50051 |
-| **cognitive-search-engine** | V (Validation) → V1 VerifyVertex | 金 ✨ | 50052 |
-| **porpoise-agent** | P₁(衍生, DomainVertex) | 水 💧 | 50053 |
-| **coilia-agent** | P₂(衍生, DomainVertex) | 木 🌳 | 50054 |
-| **culter-agent** | P₃(衍生, DomainVertex) | 火 🔥 | 50055 |
+| 项目 | 角色 | 五行 |
+|------|------|:----:|
+| **eon-core** | 协调内核 + 共享库 | 全部 |
+| **fish-ecology-assistant** | S (State) → V0 SupplyVertex | 土 🟫 |
+| **cognitive-search-engine** | V (Validation) → V1 VerifyVertex | 金 ✨ |
+| **porpoise-agent** | P₁(衍生, DomainVertex) | 水 💧 |
+| **coilia-agent** | P₂(衍生, DomainVertex) | 木 🌳 |
+| **culter-agent** | P₃(衍生, DomainVertex) | 火 🔥 |
 
 ## 搜索协议
 
