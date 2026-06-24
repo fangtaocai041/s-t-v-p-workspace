@@ -77,12 +77,23 @@ def check_project(project: str) -> List[Tuple[str, str, str]]:
         for ref in refs:
             # 去掉可能的 scripts/ 前缀
             script_name = ref.replace("scripts/", "")
+            # 也去掉 src/ 前缀（跨项目引用如 src/search_coordinator.py）
+            bare_name = script_name.replace("src/", "", 1)
             candidates = [
                 proj_root / "scripts" / script_name,
                 proj_root / "src" / script_name,
                 proj_root / "tests" / script_name,
                 proj_root / script_name,
                 ROOT / "scripts" / script_name,
+                # 跨项目引用：在其他子项目的 src/ 和 scripts/ 中查找
+                *(ROOT / p / "src" / bare_name
+                  for p in ["cognitive-search-engine", "conflict-arbiter",
+                            "eon-core", "porpoise-agent", "coilia-agent",
+                            "culter-agent", "san-sheng-wanwu-core"]),
+                *(ROOT / p / "scripts" / bare_name
+                  for p in ["cognitive-search-engine", "conflict-arbiter",
+                            "eon-core", "porpoise-agent", "coilia-agent",
+                            "culter-agent", "san-sheng-wanwu-core"]),
             ]
             if not any(c.exists() for c in candidates):
                 # 可能是计划中尚未实现的脚本 —— 标记为 ⏳ 而非 ❌
