@@ -1157,6 +1157,155 @@ def emerge_domains(
 
 
 # ═══════════════════════════════════════════════════════════
+# Part 6: 递归思考框架 (Recursive Thinker)
+# 参考: Tiny Recursive Model (Jolicoeur-Martineau 2025)
+# ═══════════════════════════════════════════════════════════
+
+class RecursiveThinker:
+    """递归思考框架 — 多步迭代推理。
+
+    受 Tiny Recursive Model (TRM, 2025) 启发:
+      TRM 仅 7M 参数通过 16 步递归思考在 ARC-AGI-1 上达 45%，
+      证明递归深度可以替代参数规模。
+
+    核心循环:
+      think → act → observe → think → ...
+
+    每步:
+      think:   在当前信念状态 B 上推理，生成中间假设
+      act:    基于假设生成搜索/验证行动
+      observe: 获取新经验 e
+      update:  B' = Update(B, e)
+
+    用法:
+        thinker = RecursiveThinker(max_steps=8)
+        result = thinker.solve(initial_query="鳤的分布范围")
+    """
+
+    def __init__(self, max_steps: int = 8,
+                 convergence_threshold: float = 0.01,
+                 verbose: bool = False):
+        self.max_steps = max_steps
+        self.convergence_threshold = convergence_threshold
+        self.verbose = verbose
+
+    @dataclass
+    class ThoughtStep:
+        """一次思考步骤的记录。"""
+        step: int
+        hypothesis: str           # 当前假设
+        action: str               # 生成的行动
+        observation: str          # 观察结果
+        confidence: float         # 当前置信度 0-1
+        delta: float              # 与前一步的变化量
+
+    def solve(self, initial_query: str,
+              knowledge_fn=None) -> Tuple[str, List[ThoughtStep]]:
+        """执行递归思考循环。
+
+        Args:
+            initial_query: 初始查询
+            knowledge_fn: 可选的外部知识获取函数 (query -> str)
+
+        Returns:
+            (final_answer, steps)
+        """
+        steps = []
+        hypothesis = initial_query
+        prev_hypothesis = ""
+        confidence = 0.5  # 初始中性
+
+        for step_num in range(1, self.max_steps + 1):
+            # Step 1: Think — 基于当前状态推理
+            delta = self._compute_delta(hypothesis, prev_hypothesis) if prev_hypothesis else 1.0
+
+            # 收敛检测
+            if delta < self.convergence_threshold and step_num > 2:
+                if self.verbose:
+                    print(f"  [thinker] 在第 {step_num} 步收敛 (delta={delta:.4f})")
+                break
+
+            # Step 2: Act — 生成搜索行动
+            action = self._generate_action(hypothesis, step_num)
+
+            # Step 3: Observe — 获取新信息
+            if knowledge_fn:
+                observation = knowledge_fn(action)
+            else:
+                observation = ""
+
+            # 更新置信度
+            if observation:
+                confidence = min(1.0, confidence + 0.1)
+            else:
+                confidence = max(0.1, confidence - 0.05)
+
+            # 更新假设
+            if observation and len(observation) > len(hypothesis):
+                prev_hypothesis = hypothesis
+                hypothesis = self._refine_hypothesis(hypothesis, observation)
+            else:
+                prev_hypothesis = hypothesis
+
+            step = self.ThoughtStep(
+                step=step_num,
+                hypothesis=hypothesis[:100],
+                action=action[:100],
+                observation=observation[:100] if observation else "(无新信息)",
+                confidence=round(confidence, 3),
+                delta=round(delta, 4),
+            )
+            steps.append(step)
+
+            if self.verbose:
+                print(f"  Step {step_num}: conf={confidence:.2f}, delta={delta:.4f}")
+
+        return hypothesis, steps
+
+    def _compute_delta(self, current: str, previous: str) -> float:
+        """计算当前假设与前一步的变化量。"""
+        if not previous:
+            return 1.0
+        # 使用字符 n-gram Jaccard 距离 (内联实现, 避免跨模块依赖)
+        def _ngrams(text, n=2):
+            clean = ''.join(c for c in text if c.isalpha() or c.isdigit())
+            return {clean[i:i+n] for i in range(len(clean) - n + 1)}
+        current_ngrams = _ngrams(current, 2)
+        previous_ngrams = _ngrams(previous, 2)
+        if not current_ngrams or not previous_ngrams:
+            return 1.0
+        jaccard = len(current_ngrams & previous_ngrams) / max(len(current_ngrams | previous_ngrams), 1)
+        return 1.0 - jaccard
+
+    def _generate_action(self, hypothesis: str, step: int) -> str:
+        """基于当前假设生成下一步行动。"""
+        # 简单策略: 随着步骤深入, 缩小搜索范围
+        if step <= 3:
+            return f"广泛搜索: {hypothesis}"
+        elif step <= 6:
+            return f"聚焦验证: {hypothesis}"
+        else:
+            return f"综合提炼: {hypothesis}"
+
+    def _refine_hypothesis(self, current: str, observation: str) -> str:
+        """根据新观察优化假设。"""
+        # 简单实现: 取较长者
+        if len(observation) > len(current):
+            return observation
+        return current
+
+    def search(self, query: str, **kwargs) -> dict:
+        """兼容 adapter 接口。"""
+        answer, steps = self.solve(query)
+        return {
+            "status": "ok",
+            "answer": answer,
+            "steps": len(steps),
+            "converged": len(steps) < self.max_steps,
+        }
+
+
+# ═══════════════════════════════════════════════════════════
 # CLI 测试
 # ═══════════════════════════════════════════════════════════
 
