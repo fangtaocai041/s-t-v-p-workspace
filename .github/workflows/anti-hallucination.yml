@@ -25,10 +25,11 @@ jobs:
           cd cognitive-search-engine 2>/dev/null || true
           python -c "
           import sys; sys.path.insert(0,'src')
-          from credibility_scorer import CredibilityScorer
-          s = CredibilityScorer()
-          r = s.score(dict(source='PubMed',cross_ref_count=5))
-          print('Scorer OK')
+          from credibility_scorer import score_paper, score_papers, detect_journal_tier
+          r = score_paper(dict(source='PubMed',journal='Nature',citation_count=50))
+          print('Scorer OK:', r)
+          r2 = detect_journal_tier('Nature')
+          print('Tier OK:', r2)
           "
 
       - name: Validator load check
