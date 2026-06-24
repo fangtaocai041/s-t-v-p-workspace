@@ -44,7 +44,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install deps
-        run: pip install pyyaml pytest networkx
+        run: pip install pyyaml pytest networkx && pip install -e fish-ecology-assistant/fishkb
 
       - name: Run fish-ecology-assistant tests
         run: python -m pytest fish-ecology-assistant/tests/ -q --tb=short
@@ -80,7 +80,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install deps
-        run: pip install pyyaml pytest networkx
+        run: pip install pyyaml pytest networkx requests
 
       - name: Run san-sheng-wanwu-core tests
         run: |
