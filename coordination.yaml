@@ -13,11 +13,11 @@
 #    Skill:  D:/Reasonix/skills\meso-orchestrator.md
 
 coordination:
-  version: "7.5.0"
+  version: "8.0.0"
   root: "${WORKSPACE_ROOT}"
-  last_sync: "2026-06-18"
+  last_sync: "2026-06-24"
   changelog:
-    - "v7.5.0 (2026-06-18): Cross-project co-evolution — shared modules in eon-core, cognitive tendril skills, infrastructure canonical emergence source, AGENTS.md constraint system v1.0"
+    - "v8.0.0 (2026-06-24): Great Code Hygiene — 60+ files. Bare except→0, 5 stubs→warning, rcca_core dedup (7→1), shared_types dedup (8→1), version sync (7/7 dynamic from VERSION.yaml), parallel_search split (57KB→6 files), meso_agent split (50KB→5 files), emergent dedup (ssww→infrastructure), perception_bridge self-contained (PubMed+GBIF), agent_judge LLM call, event_store SQLite, README honesty pass, coordination.yaml dedup."
     - "v5.0.0 (2026-06-18): Unified all 7 projects. +culter-agent (P₃), +conflict-arbiter to derived_projects. Removed duplicate coordination.yaml (3 copies), meso_agent.yaml (2 copies). Removed deprecated workspace.py."
     - "v5.0.0 (2026-06-18): Hybrid MCP->HTTP dispatch — 19 engines dual-path. +7 HTTP providers, parallel_search 5→9 providers. ENGINE_GROUPS expanded."
     - "v4.2.1 (2026-06-18): Europe PMC integration — NCBI 500 failover. +search_europe_pmc provider, meso_agent volume estimation dual-source (NCBI + Europe PMC)."

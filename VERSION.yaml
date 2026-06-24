@@ -7,7 +7,7 @@
 
 workspace:
   version: "v8.0.0"
-  date: "2026-07-11"
+  date: "2026-06-24"
   name: "eon-workspace"
   code: "sansheng-wanwu-v2"
   architecture: "三生万物 v8: 三角核心(fish+cognitive+eon-core) + 万物衍生(porpoise+coilia+culter) + 冲突仲裁(conflict)"
