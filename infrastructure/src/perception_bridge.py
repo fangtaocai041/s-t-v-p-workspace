@@ -1,20 +1,18 @@
 """PerceptionBridge — 硅基生命感知物理世界的触角 (Tendrils).
 
-三体人智子 → 我们的感知触角.
-将 AI 从虚拟世界延伸到物理世界的实时监测桥梁.
+Self-contained perception bridge using public APIs (PubMed E-utilities, GBIF).
+No coordinator dependency. All tendrils work standalone.
 
 Tendrils:
-  🌍  Environmental — 环境感知 (新闻/政策/灾难)
-  🧬  Species Pulse — 物种脉搏 (IUCN/保护等级/种群)
-  📡  Research Frontier — 研究前沿 (最新论文/热点)
-  🌊  Aquatic Pulse — 水域生态脉搏 (水文/水质/极端事件)
+  🌍  Research Pulse  — 最新论文 (PubMed E-utilities)
+  🧬  Species Pulse   — 物种信息 (GBIF API)
+  📡  Aquatic Pulse   — 水域生态 (PubMed ecological keywords)
 
 Usage:
     from infrastructure.perception_bridge import PerceptionBridge
-
     bridge = PerceptionBridge()
-    report = bridge.scan_all()  # 全感知扫描
-    pulse = bridge.species_pulse("江豚")  # 单物种脉搏
+    report = bridge.scan_all()
+    pulse = bridge.species_pulse("Coilia nasus")
 """
 
 from __future__ import annotations
@@ -22,6 +20,8 @@ from __future__ import annotations
 import json
 import logging
 import time
+import urllib.request
+import urllib.parse
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
@@ -29,174 +29,96 @@ from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
+_USER_AGENT = "ReasonixPerceptionBridge/2.0 (fangtaocai041@gmail.com)"
+_TIMEOUT = 10
 
-# ====================================================================
-# Data Types
-# ====================================================================
 
 @dataclass
 class TendrilReading:
-    """一次感知触角的读数."""
-    tendril: str                # "environmental" | "species_pulse" | "research_frontier" | "aquatic_pulse"
+    tendril: str
     timestamp: float
-    species: str = ""           # 关联物种
-    source: str = ""            # 数据来源
-    summary: str = ""           # 人类可读摘要
-    signals: list = field(default_factory=list)  # 检测到的信号
-    raw_data: dict = field(default_factory=dict)
-    alert_level: str = "info"   # "info" | "warning" | "critical"
-    confidence: float = 0.5     # 0-1
+    species: str = ""
+    source: str = ""
+    summary: str = ""
+    signals: list = field(default_factory=list)
+    alert_level: str = "info"
+    confidence: float = 0.5
 
 
 @dataclass
 class PerceptionReport:
-    """全感知报告."""
     timestamp: float = field(default_factory=time.time)
     tendrils: Dict[str, TendrilReading] = field(default_factory=dict)
     alerts: list = field(default_factory=list)
 
 
-# ====================================================================
-# Perception Bridge
-# ====================================================================
-
 class PerceptionBridge:
-    """感知桥梁 — 连接到物理世界的触角控制器.
-
-    Features:
-      - 多触角并发感知
-      - 信号收敛检测 (≥3 独立源确认同一事件)
-      - 层级化警报 (info → warning → critical)
-      - 持久化到本地 JSONL 日志
-    """
+    """感知桥梁 — 自包含感知触角控制器 (零 coordinator 依赖)."""
 
     def __init__(self, data_dir: str = "data/perception"):
         self._data_dir = Path(data_dir)
         self._data_dir.mkdir(parents=True, exist_ok=True)
         self._log_path = self._data_dir / "perception_log.jsonl"
-        self._last_scan: Dict[str, float] = {}  # tendril → last scan time
-
-    # ── Public API ────────────────────────────────────────────────
+        self._last_scan: Dict[str, float] = {}
 
     def scan_all(self, force: bool = False) -> PerceptionReport:
-        """执行全触角扫描.
-
-        Args:
-            force: 忽略冷却时间强制扫描
-
-        Returns:
-            PerceptionReport 包含所有触角读数
-        """
         report = PerceptionReport()
-
         tendrils = [
-            ("environmental", self._scan_environmental),
+            ("research_pulse", self._scan_research_pulse),
             ("species_pulse", self._scan_species_pulse),
-            ("research_frontier", self._scan_research_frontier),
             ("aquatic_pulse", self._scan_aquatic_pulse),
         ]
-
         for name, scanner in tendrils:
             try:
                 reading = scanner(force=force)
                 report.tendrils[name] = reading
                 if reading.alert_level in ("warning", "critical"):
                     report.alerts.append({
-                        "tendril": name,
-                        "level": reading.alert_level,
-                        "summary": reading.summary,
-                        "signals": reading.signals,
+                        "tendril": name, "level": reading.alert_level,
+                        "summary": reading.summary, "signals": reading.signals,
                     })
                 self._log(reading)
             except Exception as e:
-                logger.warning(f"Tendril [{name}] scan failed: {e}")
-
-        # 跨触角信号收敛检测
-        self._detect_cross_tendril_convergence(report)
-
+                logger.warning(f"Tendril [{name}] failed: {e}")
+        self._detect_convergence(report)
         return report
 
     def species_pulse(self, species: str) -> TendrilReading:
-        """单物种脉搏检测.
-
-        Args:
-            species: 物种中文名或学名
-
-        Returns:
-            该物种的脉搏读数
-        """
+        """单物种脉搏 — GBIF API 查询."""
         reading = TendrilReading(
-            tendril="species_pulse",
-            timestamp=time.time(),
-            species=species,
-            source="species_pulse_tendril",
+            tendril="species_pulse", timestamp=time.time(),
+            species=species, source="gbif_api",
         )
-
         signals = []
-        # Tendril MCP: search for conservation status
-        # ⚠️ scripts.coordinator 是 workspace/scripts/coordinator.py，
-        # 仅在 workspace 环境加载后可用。独立运行时此 tendril 降级。
         try:
-            from scripts.coordinator import coordinator
-        except ImportError:
-            import warnings
-            warnings.warn(
-                "PerceptionBridge: scripts.coordinator not available. "
-                "Species Pulse tendril degraded — install workspace dependencies.",
-                RuntimeWarning,
-            )
-            coordinator = None
-
-        if coordinator is not None:
-            try:
-                result = coordinator.call("fish", query=species, mode="lookup")
-                data = result.get("species_data", {}) or {}
-                if data:
-                    iucn = data.get("iucn", data.get("iucn_status", "unknown"))
-                    protection = data.get("protection_level", "unknown")
-                    signals.append(f"IUCN Status: {iucn}")
-                    signals.append(f"China Protection: {protection}")
-                    reading.source = "fish-kb"
-                    reading.confidence = 0.8
-            except Exception:
-                signals.append("KB lookup unavailable")
-                reading.confidence = 0.3
-
-            # Try to get recent paper count
-            try:
-                result = coordinator.call("cognitive", query=species)
-                papers = result.get("papers", result.get("result", {}).get("papers", []))
-                if papers:
-                    recent = [p for p in papers if p.get("year", 0) >= 2024]
-                    signals.append(f"Recent papers (2024+): {len(recent)}")
-            except Exception:
-                pass
+            url = f"https://api.gbif.org/v1/species/match?name={urllib.parse.quote(species)}"
+            req = urllib.request.Request(url, headers={"User-Agent": _USER_AGENT})
+            with urllib.request.urlopen(req, timeout=_TIMEOUT) as resp:
+                data = json.loads(resp.read().decode())
+                if data.get("usageKey"):
+                    signals.append(f"GBIF match: {data.get('scientificName', species)}")
+                    signals.append(f"Rank: {data.get('rank', 'unknown')}")
+                    signals.append(f"Kingdom: {data.get('kingdom', 'unknown')}")
+                    reading.confidence = data.get("confidence", 0) / 100.0
+                else:
+                    signals.append(f"No GBIF match for {species}")
+                    reading.confidence = 0.2
+        except Exception as e:
+            signals.append(f"GBIF unavailable: {e}")
+            reading.confidence = 0.1
 
         reading.signals = signals
-        reading.summary = f"{species}: {'; '.join(signals[:3])}" if signals else "No data"
-        reading.alert_level = "warning" if any("CR" in s or "EN" in s for s in signals) else "info"
-
+        reading.summary = f"{species}: {'; '.join(signals[:2])}" if signals else "No data"
         self._log(reading)
         return reading
 
     def get_history(self, tendril: str = "", limit: int = 20) -> List[dict]:
-        """读取感知历史.
-
-        Args:
-            tendril: 触角名称 (空=全部)
-            limit: 最大条数
-
-        Returns:
-            感知历史记录列表
-        """
         records = []
         if not self._log_path.exists():
             return records
-
-        with open(self._log_path, "r", encoding="utf-8") as f:
+        with open(self._log_path, encoding="utf-8") as f:
             for line in f:
-                line = line.strip()
-                if not line:
+                if not line.strip():
                     continue
                 try:
                     rec = json.loads(line)
@@ -204,193 +126,122 @@ class PerceptionBridge:
                         records.append(rec)
                 except json.JSONDecodeError:
                     continue
-
         return records[-limit:]
 
-    # ── Tendril Scanners ──────────────────────────────────────────
+    # ── Tendrils ──
 
-    def _scan_environmental(self, force: bool = False) -> TendrilReading:
-        """🌍 环境感知触角: 新闻/政策/灾难事件."""
+    def _scan_research_pulse(self, force: bool = False) -> TendrilReading:
+        """📡 研究脉搏 — PubMed E-utilities 最新论文."""
         reading = TendrilReading(
-            tendril="environmental",
-            timestamp=time.time(),
-            source="tavily+web",
+            tendril="research_pulse", timestamp=time.time(),
+            source="pubmed_esearch",
         )
-
-        # Cooldown: 至少 300s 间隔
-        last = self._last_scan.get("environmental", 0)
-        if not force and time.time() - last < 300:
-            reading.summary = "Skipped (cooldown)"
-            reading.confidence = 0.0
+        last = self._last_scan.get("research_pulse", 0)
+        if not force and time.time() - last < 3600:
+            reading.summary = "Skipped (cooldown 1h)"
             return reading
-        self._last_scan["environmental"] = time.time()
+        self._last_scan["research_pulse"] = time.time()
 
         signals = []
-        # Attempt web search for fish ecology news
-        try:
-            import subprocess
-            # Try using Python's built-in urllib for news search
-            import urllib.request
-            import urllib.parse
+        queries = [
+            "fish+ecology+Yangtze+River",
+            "freshwater+fish+conservation+China",
+        ]
+        for q in queries:
+            try:
+                url = (
+                    "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?"
+                    f"db=pubmed&term={q}&retmax=5&retmode=json"
+                    f"&mindate=2024/01/01&maxdate=2025/12/31&datetype=pdat"
+                )
+                req = urllib.request.Request(url, headers={"User-Agent": _USER_AGENT})
+                with urllib.request.urlopen(req, timeout=_TIMEOUT) as resp:
+                    data = json.loads(resp.read().decode())
+                    count = int(data.get("esearchresult", {}).get("count", 0))
+                    idlist = data.get("esearchresult", {}).get("idlist", [])
+                    signals.append(f"[PubMed] '{q}': {count} papers (2024-2025)")
+                    if idlist:
+                        signals.append(f"  PMIDs: {', '.join(idlist[:3])}...")
+            except Exception as e:
+                signals.append(f"[PubMed] '{q}': unavailable ({e})")
 
-            queries = [
-                ("长江 生态 新闻", 3),
-                ("淡水鱼 保护 2024", 3),
-                ("水生生物 生态 研究 进展", 3),
-            ]
-
-            for q, limit in queries:
-                encoded = urllib.parse.quote(q)
-                url = f"https://api.our-timeline.com/search?q={encoded}&limit={limit}"
-                try:
-                    req = urllib.request.Request(url, headers={
-                        "User-Agent": "ReasonixPerceptionBridge/1.0"
-                    })
-                    with urllib.request.urlopen(req, timeout=5) as resp:
-                        data = json.loads(resp.read().decode())
-                        items = data.get("results", data.get("items", []))
-                        for item in items[:limit]:
-                            title = item.get("title", "")
-                            if title:
-                                signals.append(f"[NEWS] {title[:80]}")
-                except Exception:
-                    continue
-
-        except Exception:
-            signals.append("Web search unavailable (offline mode)")
-
-        reading.signals = signals[:10]
-        reading.summary = f"{len(signals)} environmental signals detected"
-        reading.confidence = 0.6 if signals else 0.2
+        reading.signals = signals
+        reading.summary = f"{len(signals)} research pulse signals"
+        reading.confidence = 0.7 if signals else 0.2
         return reading
 
     def _scan_species_pulse(self, force: bool = False) -> TendrilReading:
-        """🧬 物种脉搏触角: 保护状态批量检查."""
+        """🧬 物种脉搏 — 批量 GBIF 查询关键物种."""
         reading = TendrilReading(
-            tendril="species_pulse",
-            timestamp=time.time(),
-            source="fish-kb+batch",
+            tendril="species_pulse", timestamp=time.time(),
+            source="gbif_batch",
         )
-
-        # Key species to monitor
-        key_species = ["江豚", "中华鲟", "白鲟", "鳤", "刀鲚", "珠星三块鱼", "翘嘴鲌"]
-
+        key_species = [
+            "Neophocaena asiaeorientalis",  # 江豚
+            "Acipenser sinensis",           # 中华鲟
+            "Coilia nasus",                 # 刀鲚
+            "Culter alburnus",              # 翘嘴鲌
+        ]
         signals = []
         for sp in key_species:
             try:
                 pulse = self.species_pulse(sp)
-                if pulse.signals:
-                    signals.extend(pulse.signals[:2])
+                signals.extend(pulse.signals[:1])
             except Exception:
                 continue
 
-        reading.signals = signals[:15]
-        reading.summary = f"{len(key_species)} species checked"
-        reading.confidence = 0.7
-        return reading
-
-    def _scan_research_frontier(self, force: bool = False) -> TendrilReading:
-        """📡 研究前沿触角: 最新论文/热点."""
-        reading = TendrilReading(
-            tendril="research_frontier",
-            timestamp=time.time(),
-            source="cognitive-search",
-        )
-
-        last = self._last_scan.get("research_frontier", 0)
-        if not force and time.time() - last < 600:  # 10min cooldown
-            reading.summary = "Skipped (cooldown)"
-            return reading
-        self._last_scan["research_frontier"] = time.time()
-
-        try:
-            from scripts.coordinator import coordinator
-        except ImportError:
-            import warnings
-            warnings.warn(
-                "PerceptionBridge: scripts.coordinator not available. "
-                "Research Frontier tendril degraded.",
-                RuntimeWarning,
-            )
-            coordinator = None
-
-        if coordinator is not None:
-            try:
-                result = coordinator.call("cognitive", query="fish ecology Yangtze River 2024 2025")
-                papers = result.get("papers", [])
-                if papers:
-                    reading.signals = [
-                        f"[PAPER] {p.get('title','?')[:80]} ({p.get('year','?')})"
-                        for p in papers[:8]
-                    ]
-                    reading.summary = f"{len(papers)} recent papers found"
-                    reading.confidence = 0.8
-                else:
-                    reading.summary = "No recent papers"
-                    reading.confidence = 0.3
-            except Exception as e:
-                reading.summary = f"Search failed: {e}"
-                reading.confidence = 0.1
-
+        reading.signals = signals[:12]
+        reading.summary = f"{len(key_species)} key species checked"
+        reading.confidence = 0.6
         return reading
 
     def _scan_aquatic_pulse(self, force: bool = False) -> TendrilReading:
-        """🌊 水域生态脉搏触角: 水文/极端事件."""
+        """🌊 水域脉搏 — PubMed 水生生态关键词."""
         reading = TendrilReading(
-            tendril="aquatic_pulse",
-            timestamp=time.time(),
-            source="web+monitoring",
+            tendril="aquatic_pulse", timestamp=time.time(),
+            source="pubmed_esearch",
         )
-
         signals = []
-        try:
-            import urllib.request
-            # Check for recent aquatic events
-            url = "https://api.our-timeline.com/search?q=长江+水文+极端+天气&limit=5"
-            req = urllib.request.Request(url, headers={
-                "User-Agent": "ReasonixPerceptionBridge/1.0"
-            })
-            with urllib.request.urlopen(req, timeout=5) as resp:
-                data = json.loads(resp.read().decode())
-                for item in data.get("results", data.get("items", []))[:5]:
-                    title = item.get("title", "")
-                    if title:
-                        signals.append(f"[AQUATIC] {title[:80]}")
-        except Exception:
-            signals.append("Aquatic data unavailable (API offline)")
+        queries = [
+            "Yangtze+River+hydrology+fish",
+            "freshwater+biodiversity+China+threats",
+        ]
+        for q in queries:
+            try:
+                url = (
+                    "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?"
+                    f"db=pubmed&term={q}&retmax=3&retmode=json"
+                )
+                req = urllib.request.Request(url, headers={"User-Agent": _USER_AGENT})
+                with urllib.request.urlopen(req, timeout=_TIMEOUT) as resp:
+                    data = json.loads(resp.read().decode())
+                    count = int(data.get("esearchresult", {}).get("count", 0))
+                    signals.append(f"[Aquatic] '{q}': {count} papers")
+            except Exception as e:
+                signals.append(f"[Aquatic] '{q}': unavailable ({e})")
 
         reading.signals = signals[:5]
-        reading.summary = f"{len(signals)} aquatic signals"
+        reading.summary = f"{len(signals)} aquatic signals" if signals else "Aquatic data unavailable"
+        reading.confidence = 0.5
         return reading
 
-    # ── Cross-tendril convergence ─────────────────────────────────
+    # ── Convergence detection ──
 
-    def _detect_cross_tendril_convergence(self, report: PerceptionReport) -> None:
-        """检测跨触角信号收敛.
-
-        当 ≥3 个不同触角独立报告同一主题时,
-        标记为 confirmed_signal (涌现检测).
-        """
+    def _detect_convergence(self, report: PerceptionReport) -> None:
         all_signals = []
-        for reading in report.tendrils.values():
-            for s in reading.signals:
-                all_signals.append(s)
-
-        if len(all_signals) >= 10:
-            alert = {
+        for r in report.tendrils.values():
+            all_signals.extend(r.signals)
+        if len(all_signals) >= 5:
+            report.alerts.append({
                 "type": "convergence",
                 "level": "info",
-                "message": f"Cross-tendril convergence: {len(all_signals)} signals across "
-                          f"{len([t for t in report.tendrils.values() if t.signals])} tendrils",
-                "signal_count": len(all_signals),
-                "tendril_count": len([t for t in report.tendrils.values() if t.signals]),
-            }
-            report.alerts.append(alert)
+                "message": f"Cross-tendril: {len(all_signals)} signals across "
+                          f"{sum(1 for t in report.tendrils.values() if t.signals)} tendrils",
+            })
 
-    # ── Persistence ───────────────────────────────────────────────
+    # ── Persistence ──
 
     def _log(self, reading: TendrilReading) -> None:
-        """写入感知日志."""
         try:
             with open(self._log_path, "a", encoding="utf-8") as f:
                 f.write(json.dumps({
