@@ -1,11 +1,21 @@
-# 🚫 重定向至权威版本: eon-core/scripts/shared_types.py
-# 只有 eon-core 版本是权威的
-import sys as _sys
-from pathlib import Path as _Path
-_EON = str(_Path(__file__).resolve().parent.parent / "eon-core" / "scripts")
-if _EON not in _sys.path:
-    _sys.path.insert(0, _EON)
+"""
+shared_types.py — SHIM: canonical source at eon-core/scripts/shared_types.py
 
-from shared_types import (  # noqa: F401
-    VerificationStatus, ContradictionType,
-)
+All imports transparently forwarded via importlib (avoids sys.path conflicts).
+"""
+
+import sys
+import importlib.util
+from pathlib import Path
+
+# Locate and load canonical shared_types.py (this file is at D:\Reasonix\scripts\)
+_EON = Path(__file__).resolve().parent.parent / "eon-core" / "scripts" / "shared_types.py"
+_spec = importlib.util.spec_from_file_location("shared_types", str(_EON))
+_mod = importlib.util.module_from_spec(_spec)
+sys.modules["shared_types"] = _mod
+_spec.loader.exec_module(_mod)
+
+# Copy all public names into this shim's namespace
+for _name in dir(_mod):
+    if not _name.startswith("_"):
+        globals()[_name] = getattr(_mod, _name)

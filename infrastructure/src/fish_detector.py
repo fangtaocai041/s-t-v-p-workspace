@@ -41,8 +41,14 @@ def detect_image(image_path: str, conf: float = 0.25) -> List[dict]:
     from ultralytics import YOLO
 
     print("🔍 加载 FishDet-M YOLO 模型 ...")
-    # 使用预训练 YOLOv8 权重（通用检测）
-    # FishDet-M 的专用权重可从 HF 下载: GE9X/FishDet-M
+    # ⚠️ 当前使用通用 yolov8n.pt，非 FishDet-M 专用权重
+    # FishDet-M 专用权重: GE9X/FishDet-M (HuggingFace)
+    import warnings
+    warnings.warn(
+        "FishDet-M specific weights (GE9X/FishDet-M) not available. "
+        "Falling back to generic yolov8n.pt — species detection accuracy will be reduced.",
+        FutureWarning,
+    )
     model = YOLO("yolov8n.pt")  # 未来可替换为 FishDet-M 专用权重
 
     results = model(image_path, conf=conf)

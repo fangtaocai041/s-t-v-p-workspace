@@ -1,3 +1,5 @@
+# ⚠️ NON-CANONICAL COPY — canonical: fish-ecology-assistant/config/fish_species_kb.yaml
+# This graph is cached from cognitive-search-engine. Authoritative species data at fish-ecology-assistant.
 graph:
   papers:
   - doi: 10.3390/genes17010076

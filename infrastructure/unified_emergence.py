@@ -1032,7 +1032,24 @@ class EmergenceEngine:
             pass  # 反馈记录失败不影响主流程
 
     def signals_summary(self) -> list[dict]:
-        """已检测到的所有涌现信号摘要。"""
+        """⚠️ STUB: 已检测到的所有涌现信号摘要。
+
+        TODO: 实际实现需要从 self.signals 列表中读取并格式化。
+        """
+        # 尝试从内部状态提取实际信号
+        try:
+            if hasattr(self, 'signals') and self.signals:
+                return [s.summary() if hasattr(s, 'summary') else s
+                        for s in self.signals]
+        except Exception:
+            pass
+        import warnings
+        warnings.warn(
+            "EmergenceEngine.signals_summary() is a STUB — returns empty list. "
+            "Signals are tracked internally but not yet exposed via this method.",
+            FutureWarning,
+            stacklevel=2,
+        )
         return []
 
 

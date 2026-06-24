@@ -62,6 +62,9 @@ projects:
     path: "culter-agent/"
 
   conflict-arbiter:
+    version: "v1.0.0"
+    date: "2026-06-10"
+    role: "C(冲突仲裁)"
     status: "merged into cognitive-search-engine T layer"
     note: "conflict-arbiter/src/arbiter.py → cognitive-search-engine/src/arbiter.py"
 

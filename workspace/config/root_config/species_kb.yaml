@@ -1,3 +1,6 @@
+# ⚠️ NON-CANONICAL COPY — canonical: fish-ecology-assistant/config/fish_species_kb.yaml
+# fish-ecology-assistant is the designated species data authority (coordination.yaml §triangle_core.fish_knowledge)
+# This copy may be stale. Use the canonical source for authoritative data.
 metadata:
   title: workspace 物种知识库
   version: '1.0'

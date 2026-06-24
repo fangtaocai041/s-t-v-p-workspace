@@ -134,30 +134,43 @@ class PerceptionBridge:
 
         signals = []
         # Tendril MCP: search for conservation status
+        # ⚠️ scripts.coordinator 是 workspace/scripts/coordinator.py，
+        # 仅在 workspace 环境加载后可用。独立运行时此 tendril 降级。
         try:
             from scripts.coordinator import coordinator
-            result = coordinator.call("fish", query=species, mode="lookup")
-            data = result.get("species_data", {}) or {}
-            if data:
-                iucn = data.get("iucn", data.get("iucn_status", "unknown"))
-                protection = data.get("protection_level", "unknown")
-                signals.append(f"IUCN Status: {iucn}")
-                signals.append(f"China Protection: {protection}")
-                reading.source = "fish-kb"
-                reading.confidence = 0.8
-        except Exception:
-            signals.append("KB lookup unavailable")
-            reading.confidence = 0.3
+        except ImportError:
+            import warnings
+            warnings.warn(
+                "PerceptionBridge: scripts.coordinator not available. "
+                "Species Pulse tendril degraded — install workspace dependencies.",
+                RuntimeWarning,
+            )
+            coordinator = None
 
-        # Try to get recent paper count
-        try:
-            result = coordinator.call("cognitive", query=species)
-            papers = result.get("papers", result.get("result", {}).get("papers", []))
-            if papers:
-                recent = [p for p in papers if p.get("year", 0) >= 2024]
-                signals.append(f"Recent papers (2024+): {len(recent)}")
-        except Exception:
-            pass
+        if coordinator is not None:
+            try:
+                result = coordinator.call("fish", query=species, mode="lookup")
+                data = result.get("species_data", {}) or {}
+                if data:
+                    iucn = data.get("iucn", data.get("iucn_status", "unknown"))
+                    protection = data.get("protection_level", "unknown")
+                    signals.append(f"IUCN Status: {iucn}")
+                    signals.append(f"China Protection: {protection}")
+                    reading.source = "fish-kb"
+                    reading.confidence = 0.8
+            except Exception:
+                signals.append("KB lookup unavailable")
+                reading.confidence = 0.3
+
+            # Try to get recent paper count
+            try:
+                result = coordinator.call("cognitive", query=species)
+                papers = result.get("papers", result.get("result", {}).get("papers", []))
+                if papers:
+                    recent = [p for p in papers if p.get("year", 0) >= 2024]
+                    signals.append(f"Recent papers (2024+): {len(recent)}")
+            except Exception:
+                pass
 
         reading.signals = signals
         reading.summary = f"{species}: {'; '.join(signals[:3])}" if signals else "No data"
@@ -292,22 +305,32 @@ class PerceptionBridge:
 
         try:
             from scripts.coordinator import coordinator
-            # Search for recent fish ecology papers
-            result = coordinator.call("cognitive", query="fish ecology Yangtze River 2024 2025")
-            papers = result.get("papers", [])
-            if papers:
-                reading.signals = [
-                    f"[PAPER] {p.get('title','?')[:80]} ({p.get('year','?')})"
-                    for p in papers[:8]
-                ]
-                reading.summary = f"{len(papers)} recent papers found"
-                reading.confidence = 0.8
-            else:
-                reading.summary = "No recent papers"
-                reading.confidence = 0.3
-        except Exception as e:
-            reading.summary = f"Search failed: {e}"
-            reading.confidence = 0.1
+        except ImportError:
+            import warnings
+            warnings.warn(
+                "PerceptionBridge: scripts.coordinator not available. "
+                "Research Frontier tendril degraded.",
+                RuntimeWarning,
+            )
+            coordinator = None
+
+        if coordinator is not None:
+            try:
+                result = coordinator.call("cognitive", query="fish ecology Yangtze River 2024 2025")
+                papers = result.get("papers", [])
+                if papers:
+                    reading.signals = [
+                        f"[PAPER] {p.get('title','?')[:80]} ({p.get('year','?')})"
+                        for p in papers[:8]
+                    ]
+                    reading.summary = f"{len(papers)} recent papers found"
+                    reading.confidence = 0.8
+                else:
+                    reading.summary = "No recent papers"
+                    reading.confidence = 0.3
+            except Exception as e:
+                reading.summary = f"Search failed: {e}"
+                reading.confidence = 0.1
 
         return reading
 

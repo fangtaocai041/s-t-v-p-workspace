@@ -55,6 +55,9 @@ def run_fish_pipeline(
     """
     _log = logger.info if verbose else lambda _: None
 
+    # 确定工作区根目录 (D:\Reasonix)
+    _WORKSPACE_ROOT = _get_workspace_root()
+
     _log("\n" + "=" * 60)
     _log(f"  🔥 管线启动 — {species_name}")
     _log("=" * 60)
@@ -327,6 +330,17 @@ def run_fish_pipeline(
 # ══════════════════════════════════════════════
 # 辅助函数
 # ══════════════════════════════════════════════
+
+def _get_workspace_root() -> Path:
+    """返回 Reasonix 工作区根目录 D:/Reasonix。
+
+    无论从哪个目录运行此脚本都能正确解析。
+    """
+    from pathlib import Path
+    # pipeline_fish_collab.py 位于 workspace/ 目录下
+    # workspace 目录的父目录就是 D:\Reasonix
+    return Path(__file__).resolve().parent.parent
+
 
 def _phase_tag(phase: str, project: str) -> str:
     """生成阶段标签。"""

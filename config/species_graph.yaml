@@ -1,3 +1,5 @@
+# ⚠️ NON-CANONICAL COPY — canonical: fish-ecology-assistant/config/fish_species_kb.yaml
+# This is a workspace-level duplicate. Use fish-ecology-assistant for authoritative data.
 graph:
   papers:
   - doi: 10.3390/genes17010076
