@@ -6,67 +6,66 @@
 # ═══════════════════════════════════════════════════════════════
 
 workspace:
-  version: "v8.0.0"
-  date: "2026-06-24"
+  version: "v8.2.0"
+  date: "2026-06-25"
   name: "eon-workspace"
   code: "sansheng-wanwu-v2"
-  architecture: "三生万物 v8: 三角核心(fish+cognitive+eon-core) + 万物衍生(porpoise+coilia+culter) + 冲突仲裁(conflict)"
+  architecture: "三生万物 v8.2: 并行搜索重构(retry+RRF+CombMNZ+熔断+缓存混合) + DeepSeek优化 + Token动态预算 + 全周期审计(37文件95处修复)"
   total_projects: 7
   total_modules: 52
 
 projects:
   eon-core:
-    version: "v8.1.0"
-    date: "2026-06-10"
+    version: "v8.1.1"
+    date: "2026-06-25"
     role: "道(协调内核)"
-    description: "轻量协调内核: OriginKernel + project_loader → workspace → 7项目路由。道→S(fish)+T(cognitive)→万物(P₁porpoise+P₂coilia+P₃culter+Cconflict)"
+    description: "EventLoop泄漏修复 + health_pulse优雅关闭 + event_store日志 + thompson种子 + cas_core eval加固"
     path: "eon-core/"
     adapter: "src/adapter.py → EonCoreAdapter"
     adapters: ["fish", "cognitive", "porpoise", "coilia", "culter", "conflict"]
 
   cognitive-search-engine:
-    version: "v5.6.0"
-    date: "2026-06-10"
+    version: "v5.7.0"
+    date: "2026-06-25"
     role: "T(三角·搜索验证)"
-    note: "species_graph 172 papers, lit-search v3.1 集成"
+    note: "并行搜索重构: retry+退避+4层错误分类+RRF+CombMNZ融合+熔断器+缓存混合+DeepSeek优化+动态token预算"
     adapter: "src/adapter.py → CognitiveSearchAdapter"
     path: "cognitive-search-engine/"
 
   fish-ecology-assistant:
-    version: "v6.4.0"
-    date: "2026-06-10"
+    version: "v6.5.0"
+    date: "2026-06-25"
     role: "S(三角·知识供给)"
-    note: "lit-search v3.1, species_graph 33物种172论文, self_evolve, kb_to_graph_sync"
+    note: "evolution.yaml DeepSeek优化, 裸except修复, scrape脚本修复"
     adapter: "src/adapter.py → FishEcologyAdapter"
     path: "fish-ecology-assistant/"
 
   porpoise-agent:
-    version: "v4.3.0"
-    date: "2026-06-08"
+    version: "v4.4.0"
+    date: "2026-06-25"
     role: "P₁(万物·江豚)"
     adapter: "src/adapter.py → PorpoiseAdapter"
     path: "porpoise-agent/"
 
   coilia-agent:
-    version: "v1.2.0"
-    date: "2026-06-08"
+    version: "v1.3.0"
+    date: "2026-06-25"
     role: "P₂(万物·刀鲚)"
     adapter: "src/adapter.py → CoiliaAdapter"
     path: "coilia-agent/"
 
   culter-agent:
-    version: "v2.0.0"
-    date: "2026-07-11"
+    version: "v2.1.0"
+    date: "2026-06-25"
     role: "P₃(万物·鲌类)"
     adapter: "src/adapter.py → CulterAdapter"
     path: "culter-agent/"
 
   conflict-arbiter:
-    version: "v1.0.0"
-    date: "2026-06-10"
+    version: "v1.1.0"
+    date: "2026-06-25"
     role: "C(冲突仲裁)"
-    status: "merged into cognitive-search-engine T layer"
-    note: "conflict-arbiter/src/arbiter.py → cognitive-search-engine/src/arbiter.py"
+    note: "类属性→实例属性, _species_cache线程安全"
 
 # ═══════════════════════════════════════════════════════════════
 # Runtime Invariants
