@@ -72,8 +72,8 @@ for url, params in study_urls:
                 j = r.json()
                 total = j.get('total', j.get('count', j.get('data', {}).get('total', '?')))
                 print(f"    总数: {total}")
-            except:
-                pass
+            except (ValueError, KeyError, TypeError):
+                pass  # r.json() parse or key access failed
     except Exception as e:
         print(f"  ✗ {url}: {e}")
 
@@ -92,8 +92,8 @@ for url in xai_urls:
         if r.status_code == 200:
             try:
                 print(f"    内容: {r.text[:200]}")
-            except:
-                pass
+            except Exception:
+                pass  # print error — non-critical
     except Exception as e:
         print(f"  ✗ {url}: {e}")
 
@@ -109,15 +109,13 @@ for m in re.finditer(r'var\s+(\w+)\s*=\s*(\{.+?\});', r.text, re.DOTALL):
         try:
             j = json.loads(m.group(2))
             print(f"  找到数据: {name} = {json.dumps(j)[:200]}")
-        except:
+        except (json.JSONDecodeError, ValueError):
             pass
-
-# 找pageData/initData等
 for m in re.finditer(r'(pageData|initData|searchData|resultData)\s*[:=]\s*(\{.+?\})(?:;|,|\s*\]|\s*\})', r.text, re.DOTALL):
     try:
         j = json.loads(m.group(2))
         print(f"  找到: {m.group(1)} = {json.dumps(j)[:200]}")
-    except:
+    except (json.JSONDecodeError, ValueError):
         pass
 
 # 找XML/JSON内嵌数据
@@ -125,7 +123,7 @@ for m in re.finditer(r'<script[^>]*type=["\']application/json["\'][^>]*>(.+?)</s
     try:
         j = json.loads(m.group(1))
         print(f"  JSON script data: {type(j).__name__} {json.dumps(j)[:200]}")
-    except:
+    except (json.JSONDecodeError, ValueError):
         print(f"  JSON script (not parseable): {m.group(1)[:100]}")
 
 print(f"\n总页面大小: {len(r.text)} bytes")

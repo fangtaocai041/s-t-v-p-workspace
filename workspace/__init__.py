@@ -38,6 +38,10 @@ _WORKSPACE_ROOT = Path(__file__).resolve().parent.parent  # D:\Reasonix
 _WORKSPACE_DIR = Path(__file__).resolve().parent          # D:\Reasonix\workspace
 _SCRIPTS_DIR = _WORKSPACE_DIR / "scripts"                 # D:\Reasonix\workspace\scripts
 
+# ── 路径初始化 (LEGACY: 全局 sys.path 副作用) ──
+# WARNING: 以下 sys.path 修改是进程级全局副作用。所有依赖此行为的模块
+# (各项目 src/__init__.py) 需同步迁移到 importlib 后此处方可移除。
+# TODO(P3): 迁移所有项目到显式 importlib.util.spec_from_file_location
 # 确保工作区根目录、workspace 目录在 sys.path 中
 # 注意: 不加 _SCRIPTS_DIR，以免 scripts 包被其他项目的 scripts 子目录截胡
 for _p in [str(_WORKSPACE_ROOT), str(_WORKSPACE_DIR)]:
@@ -213,49 +217,152 @@ except ImportError:
 # ═══════════════════════════════════════════════════════
 
 _adapters: Dict[str, Any] = {}
+_adapters_lock = None  # lazily imported to avoid circular import
+
+
+def _get_adapters_lock():
+    """Lazy import threading.Lock to avoid issues at module load time."""
+    global _adapters_lock
+    if _adapters_lock is None:
+        import threading
+        _adapters_lock = threading.Lock()
+    return _adapters_lock
 
 
 def _get_adapter(project_key: str):
-    """懒加载: 获取项目适配器。
+    """懒加载: 获取项目适配器 (线程安全).
 
     通过 importlib 从文件路径直接加载 project_loader，
     避免 scripts 包被其他项目的同名包遮蔽。
     """
+    # Fast path: already cached (lock-free read)
     if project_key in _adapters:
         return _adapters[project_key]
 
-    import importlib.util as _iu
-    _loader_path = _SCRIPTS_DIR / "project_loader.py"
-    _spec = _iu.spec_from_file_location("workspace_project_loader", str(_loader_path))
-    if _spec and _spec.loader:
-        _mod = _iu.module_from_spec(_spec)
-        sys.modules["workspace_project_loader"] = _mod
-        _spec.loader.exec_module(_mod)
-    else:
-        raise RuntimeError(f"project_loader not found at {_loader_path}")
+    lock = _get_adapters_lock()
+    with lock:
+        # Double-check under lock
+        if project_key in _adapters:
+            return _adapters[project_key]
 
-    _loaders_map = {
-        "cognitive": _mod.get_cognitive,
-        "fish": _mod.get_fish,
-        "porpoise": _mod.get_porpoise,
-        "coilia": _mod.get_coilia,
-        "culter": _mod.get_culter,
-        "conflict": _mod.get_conflict,
+        import importlib.util as _iu
+        _loader_path = _SCRIPTS_DIR / "project_loader.py"
+        _spec = _iu.spec_from_file_location("workspace_project_loader", str(_loader_path))
+        if _spec and _spec.loader:
+            _mod = _iu.module_from_spec(_spec)
+            sys.modules["workspace_project_loader"] = _mod
+            _spec.loader.exec_module(_mod)
+        else:
+            raise RuntimeError(f"project_loader not found at {_loader_path}")
+
+        _loaders_map = {
+            "cognitive": _mod.get_cognitive,
+            "fish": _mod.get_fish,
+            "porpoise": _mod.get_porpoise,
+            "coilia": _mod.get_coilia,
+            "culter": _mod.get_culter,
+            "conflict": _mod.get_conflict,
+        }
+
+        loader = _loaders_map.get(project_key)
+        if loader is None:
+            raise ValueError(f"Unknown project: {project_key}. Options: {list(_loaders_map.keys())}")
+
+        adapter = loader()
+        if adapter is None:
+            raise RuntimeError(
+                f"Project '{project_key}' not found. "
+                f"Expected at: {_WORKSPACE_ROOT / {'cognitive-search-engine' if project_key == 'cognitive' else project_key + '-agent' if project_key in ('porpoise', 'coilia') else 'fish-ecology-assistant'}}"
+            )
+
+        _adapters[project_key] = adapter
+        return adapter
+
+
+# ═══════════════════════════════════════════════════════
+# Token 预算管理 — 动态可调，用户随时增减
+# ═══════════════════════════════════════════════════════
+
+_TOKEN_BUDGET_FILE = _WORKSPACE_DIR / "config" / "token_budget.json"
+_DEFAULT_BUDGET = 150000  # DeepSeek 激进档默认值
+
+
+def _load_token_budget() -> dict:
+    """从持久化文件加载 token 预算配置。"""
+    if _TOKEN_BUDGET_FILE.is_file():
+        try:
+            import json
+            return json.loads(_TOKEN_BUDGET_FILE.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+    return {}
+
+
+def _save_token_budget(data: dict) -> None:
+    """持久化 token 预算配置到文件。"""
+    _TOKEN_BUDGET_FILE.parent.mkdir(parents=True, exist_ok=True)
+    import json
+    _TOKEN_BUDGET_FILE.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+
+
+def get_token_budget() -> int:
+    """
+    获取当前 token 总预算。
+    
+    优先级: 环境变量 REASONIX_TOKEN_BUDGET > 持久化文件 > 默认 150000
+    """
+    import os
+    env_val = os.environ.get("REASONIX_TOKEN_BUDGET")
+    if env_val:
+        try:
+            return int(env_val)
+        except ValueError:
+            pass
+    saved = _load_token_budget()
+    return saved.get("total_budget", _DEFAULT_BUDGET)
+
+
+def set_token_budget(total: int, monthly: int = None):
+    """
+    设置 token 预算并持久化。
+    
+    用法:
+        from workspace import set_token_budget
+        set_token_budget(300000)           # 总预算 30万
+        set_token_budget(500000, 50000)    # 总 50万, 月 5万
+    
+    也可以临时覆盖 (仅本次会话):
+        import os; os.environ["REASONIX_TOKEN_BUDGET"] = "500000"
+    """
+    data = _load_token_budget()
+    data["total_budget"] = total
+    data["updated_at"] = __import__("datetime").datetime.now().isoformat()
+    if monthly is not None:
+        data["monthly_limit"] = monthly
+    _save_token_budget(data)
+    return get_token_budget()
+
+
+def show_token_budget() -> dict:
+    """
+    展示当前 token 预算配置详情。
+    
+    用法:
+        from workspace import show_token_budget
+        info = show_token_budget()
+        print(f"总预算: {info['total_budget']:,} tokens")
+    """
+    import os
+    budget = get_token_budget()
+    saved = _load_token_budget()
+    return {
+        "total_budget": budget,
+        "monthly_limit": saved.get("monthly_limit"),
+        "source": "env" if os.environ.get("REASONIX_TOKEN_BUDGET") else 
+                  "file" if _TOKEN_BUDGET_FILE.is_file() else "default",
+        "default": _DEFAULT_BUDGET,
+        "last_updated": saved.get("updated_at"),
     }
-
-    loader = _loaders_map.get(project_key)
-    if loader is None:
-        raise ValueError(f"Unknown project: {project_key}. Options: {list(_loaders_map.keys())}")
-
-    adapter = loader()
-    if adapter is None:
-        raise RuntimeError(
-            f"Project '{project_key}' not found. "
-            f"Expected at: {_WORKSPACE_ROOT / {'cognitive-search-engine' if project_key == 'cognitive' else project_key + '-agent' if project_key in ('porpoise', 'coilia') else 'fish-ecology-assistant'}}"
-        )
-
-    _adapters[project_key] = adapter
-    return adapter
 
 
 # ═══════════════════════════════════════════════════════
@@ -308,7 +415,10 @@ def search_species(
                 result.total_papers = len(papers)
                 result.mode = "http_fallback"
         except Exception:
-            pass
+            import logging
+            logging.getLogger("workspace").debug(
+                "HTTP fallback search failed for %s", name, exc_info=True
+            )
 
     # ── P7 通路: 分类变更 → fish 知识库回写 ──
     _config = _load_coordination()
@@ -323,7 +433,10 @@ def search_species(
                         discrepancy=tw,
                     )
             except Exception:
-                pass  # feedback is best-effort, never block the search result
+                import logging
+                logging.getLogger("workspace").debug(
+                    "P7 taxonomy feedback failed for %s", name, exc_info=True
+                )  # best-effort, never block the search result
 
     return result
 
@@ -358,7 +471,10 @@ def lookup_species(name: str) -> Dict[str, Any]:
                 "verdict": verdict.get("verdict"),
             }
     except Exception:
-        pass
+        import logging
+        logging.getLogger("workspace").debug(
+            "Conflict-arbiter lookup failed for %s", name, exc_info=True
+        )
 
     return result
 

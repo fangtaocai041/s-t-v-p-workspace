@@ -52,6 +52,10 @@ def _load_yaml(path: Path) -> Optional[dict]:
         with open(path, "r", encoding="utf-8") as f:
             return yaml.safe_load(f)
     except Exception:
+        import logging
+        logging.getLogger("workspace.coordinator").debug(
+            "Failed to load YAML: %s", path, exc_info=True
+        )
         return None
 
 
@@ -344,8 +348,10 @@ class Coordinator:
                     if result.get("known_species"):
                         return result
             except Exception:
-                pass
-            # Fallback: workspace 本地 YAML 知识库
+                import logging
+                logging.getLogger("workspace.coordinator").debug(
+                    "Fish sub-project delegation failed for query=%s", query, exc_info=True
+                )
             return _query_fish_kb(query)
 
         if service == "cognitive":
