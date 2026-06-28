@@ -1,7 +1,7 @@
 # 🏛️ D:\Reasonix 统一架构规范 (v8.6)
 
 > **原则**：三角封闭、衍生开放。每个项目有唯一定位，互不替代，互不重复。
-> **单一真相源**：`coordination.yaml`（项目关系）、`taiji.yaml`（DAG 拓扑）、`IProjectAdapter`（代码契约）。
+> **单一真相源**：`coordination.yaml`（项目关系）、`taiji.yaml`（DAG 拓扑配置）、`IProjectAdapter`（代码契约）。
 
 ---
 
@@ -63,7 +63,7 @@
 
 | 规则 | 依据 |
 |:-----|:-----|
-| ✅ 三角可以互调（V0↔V1 双向） | `taiji.yaml` edges: V0→V1 |
+| ✅ 三角可以互调（V0↔V1 双向） | `eon-core/config/taiji.yaml` DAG edges |
 | ✅ 衍生项目**只能**依赖三角，**不能**互相调用 | `coordination.yaml` depends_on: [fish, cognitive] |
 | ✅ 任何项目可以 import infrastructure | `__init__.py`: `from infrastructure import ...` |
 | ✅ 任何项目可以 import eon-core/src/shared | `rcca_core.py` SHIM 模式 |
@@ -92,7 +92,7 @@ from workspace import (
 ```python
 # eon-core/src/kernel/pipeline.py
 pipeline = Pipeline()
-pipeline.load_topology()  # 从 taiji.yaml 读 DAG
+pipeline.load_topology()  # 从 eon-core/config/taiji.yaml 读 DAG
 
 # 默认全管道: V0 → V1 → [V2|V3|V4] → V5
 result = pipeline.run("珠星三块鱼", mode="auto")
@@ -224,7 +224,7 @@ checkpoint.py        → 检查点/恢复
 | P₁ 直接调 P₂ | 通过 V5 (conflict-arbiter) 聚合 |
 | 硬编码项目路径 | 使用 `workspace/_get_adapter()` 懒加载 |
 | 绕过 workspace 直接调子项目 | 统一入口：`from workspace import ...` |
-| 在 taiji.yaml 添加循环边 | DAG 必须无环（Kahn 算法验证） |
+| 在拓扑配置中添加循环边 | DAG 必须无环（Kahn 算法验证） |
 
 ---
 

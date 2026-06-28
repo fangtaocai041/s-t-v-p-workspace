@@ -72,7 +72,7 @@
 | SHIM | Python 透明转发模块 (importlib 重定向) |
 | S/V 三角 | Supply (知识供给) + Verification (搜索验证) |
 | D₀~D₃ | 涌现维度 (Point→Line→Plane→Body) |
-| Taiji | 太极 DAG 拓扑引擎 (taiji.yaml) |
+| DAG Topology | 有向无环图拓扑配置 (eon-core/config/taiji.yaml) |
 
 ## 常见决策记录
 - ADR-001: 为什么用 DirectLoader 而非 pip install — 7 项目共享同一 Python 环境，独立开发/部署
