@@ -22,3 +22,6 @@
 [submodule "fish-ecology-assistant"]
 	path = fish-ecology-assistant
 	url = https://github.com/fangtaocai041/fish-ecology-assistant.git
+[submodule "infrastructure"]
+	path = infrastructure
+	url = https://github.com/fangtaocai041/infrastructure.git
